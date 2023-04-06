@@ -5,7 +5,10 @@
  */
 function add(x, y) {
     //TODO
-    return -1;
+    var summe  = 0;
+    summe = x + y;
+
+    return summe;
 }
 /**
  * Aufgabe 2
@@ -15,7 +18,14 @@ function add(x, y) {
  */
 function returnContainedWord(list, word) {
     //TODO
-    return "";
+    for (let i= 0; i<=list.length; i++){
+    if(list[i].toLowerCase()== word.toLowerCase()){
+    return  list[i];
+    }
+
+    }
+
+    return "Nicht gefunden!";
 }
 /**
  * Aufgabe 3 (entnommen aus https://leetcode.com/)
