@@ -19,7 +19,9 @@ function add(x, y) {
 function returnContainedWord(list, word) {
     //TODO
     for (let i= 0; i<=list.length; i++){
-    if(list[i].toLowerCase()== word.toLowerCase()){
+    var place = String(list[i]);
+    place = place.toLowerCase();
+    if(place == word.toLowerCase() ){
     return  list[i];
     }
 
