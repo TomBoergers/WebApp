@@ -38,7 +38,20 @@ function returnContainedWord(list, word) {
  */
 function amountOfSubarraySum(list, x) {
     //TODO
-    return -1;
+    let count = 0;
+    for (let i = 0; i < list.length; i++){
+        let sum = list[i];
+        if (sum == x){
+            count ++;
+        }
+        for (let j = i+1; j < list.length; j++) {
+            sum += list[j];
+            if (sum == x){
+                count++;
+            }
+        }
+    }
+   return count;
 }
 /**
  * Aufgabe 4 (entnommen aus https://leetcode.com/)
@@ -55,7 +68,21 @@ function amountOfSubarraySum(list, x) {
  */
 function handleOutItems(amountOfItems, amountOfPeople) {
     //TODO
-    return [-1];
+    const sol = new Array (amountOfPeople).fill(0);
+    let current = 1;
+    while (true){
+
+        for(i = 0; i < amountOfPeople; i++) {
+            if (current > amountOfItems){
+                sol[i] += current;
+                return sol;
+            }
+        sol[i] += current;
+        amountOfItems -=current;
+
+        current++;
+        }
+   }
 }
 /**
  * Aufgabe 5 (entnommen aus https://leetcode.com/)
@@ -70,7 +97,37 @@ function handleOutItems(amountOfItems, amountOfPeople) {
  */
 function convertToCorrectStringFormat(stringToBeChecked) {
     //TODO
-    return "";
+
+    stringToBeChecked = stringToBeChecked.split("");
+    let len = stringToBeChecked.length, stack = [];
+
+    for(let i = 0, c = stringToBeChecked[0]; i < len; c = stringToBeChecked[++i]){
+        if (c == ")") {
+            if (stack.length){
+                stack.pop();
+            }
+            else {
+            delete stringToBeChecked[i];
+            }
+        }
+        else if (c == "("){
+            stack.push(i);
+        }
+    }
+
+    for (let i = 0; i < stack.length; i++){
+        delete stringToBeChecked[stack[i]];
+    }
+
+    if (stringToBeChecked.join("").length >= 1){
+
+        return stringToBeChecked.join("");
+    }
+    else {
+    return "(empty)";
+    }
+
+
 }
 /**
  * Aufgabe 1
