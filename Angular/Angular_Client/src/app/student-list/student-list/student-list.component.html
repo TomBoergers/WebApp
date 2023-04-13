@@ -1,0 +1,44 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Vorname</th>
+        <th scope="col">Nachname</th>
+        <th scope="col">Fach</th>
+        <th scope="col">Email</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.id }}</td>
+        <td>{{ student.firstName }}</td>
+        <td>{{ student.lastName }}</td>
+        <td>{{ student.subject }}</td>
+        <td><a href="mailto:{{ student.email }}">{{ student.email }}</a></td>
+        <td><button (click)="deleteStudent(student)" class="deletButton">Löschen</button></td>
+      </tr>
+      </tbody>
+    </table>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Subject</th>
+        <th scope="col">Number of Students</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let subject of subjects">
+        <td>{{ subject.name }}</td>
+        <td>{{ subject.numberOfStudents }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <h2>Säulen Diagramm</h2>
+  <figure id="bar"></figure>
+  <h2>Kuchen Diagramm</h2>
+  <figure id="pie"></figure>
+</div>
