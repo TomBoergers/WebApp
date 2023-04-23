@@ -3,6 +3,7 @@
  * Gegeben: Ein Integer x und ein Integer y
  * Es soll die Summe von x und y zurückgegeben werden
  */
+/* test */
 function add(x, y) {
     //TODO
     var summe  = 0;
