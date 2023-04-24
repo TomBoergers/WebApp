@@ -9,6 +9,8 @@ import { NavbarComponent } from './sharepage/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RegistrierungComponent } from './pages/registrierung/registrierung.component';
+import { AdminComponent } from './pages/admin/admin.component';
+import { UserComponent } from './pages/user/user.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { RegistrierungComponent } from './pages/registrierung/registrierung.comp
     NavbarComponent,
     HomeComponent,
     ProfileComponent,
-    RegistrierungComponent
+    RegistrierungComponent,
+    AdminComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
