@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-
-
+import { Component } from '@angular/core';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-registrierung',
@@ -12,6 +8,4 @@ import { first } from 'rxjs/operators';
 })
 export class RegistrierungComponent {
 
-
-  
 }
