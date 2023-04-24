@@ -11,6 +11,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { RegistrierungComponent } from './pages/registrierung/registrierung.component';
 import { AdminComponent } from './pages/admin/admin.component';
 import { UserComponent } from './pages/user/user.component';
+import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UserComponent } from './pages/user/user.component';
     ProfileComponent,
     RegistrierungComponent,
     AdminComponent,
-    UserComponent
+    UserComponent,
+    ZweiFaktorComponent
   ],
   imports: [
     BrowserModule,

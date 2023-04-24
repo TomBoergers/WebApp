@@ -6,13 +6,17 @@ import { TabellenuebersichtComponent } from './pages/tabellenuebersicht/tabellen
 import { NavbarComponent } from './sharepage/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-
+import { RegistrierungComponent } from './pages/registrierung/registrierung.component';
+import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'tabelle', component: TabellenuebersichtComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent},
+  {path: 'registrierung', component: RegistrierungComponent },
+  {path: 'zwei-faktor', component: ZweiFaktorComponent}
+
 
 
 ];
