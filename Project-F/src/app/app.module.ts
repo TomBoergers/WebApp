@@ -8,6 +8,7 @@ import { TabellenuebersichtComponent } from './pages/tabellenuebersicht/tabellen
 import { NavbarComponent } from './sharepage/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { RegistrierungComponent } from './pages/registrierung/registrierung.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
     TabellenuebersichtComponent,
     NavbarComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    RegistrierungComponent
   ],
   imports: [
     BrowserModule,
