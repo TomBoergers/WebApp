@@ -2,10 +2,10 @@
 
 
 <body>
-    <form>
+    <form (ngSubmit)="userLogin()">
         <h3> User Login </h3>
         <div class="container">
-            <div (ngSubmit)="userLogin()">
+            <div >
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address:</label>
                     <input type="email" [(ngModel)]="user.eMail" [ngModelOptions]="{standalone: true}" class="" id="eMail" placeholder="name@example.com">

@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <body>
-  <form>
+  <form (ngSubmit)="userRegister()">
     <h3> Registration </h3>
-    <div (ngSubmit)="userRegister()">
+    <div >
         <div class="mb-3">
             <label for="vorname" class="form-label">Vorname: </label>
             <input type="name" [(ngModel)]="user.vorname" [ngModelOptions]="{standalone: true}" class="" id="vorname" placeholder="Vorname">
