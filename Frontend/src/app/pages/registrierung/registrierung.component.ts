@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {MatCardModule} from '@angular/material/card';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-registrierung',
@@ -7,5 +9,6 @@ import {MatCardModule} from '@angular/material/card';
   styleUrls: ['./registrierung.component.scss']
 })
 export class RegistrierungComponent {
+  
 
 }
