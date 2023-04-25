@@ -14,8 +14,7 @@ export class LoginComponent {
   
   userLogin(){
     console.log(this.user)
-    this.userService.loginUser(this.user).subscribe(data => {alert("Login successful")
-  },error => alert("Sorry, Please enter correct E-Mail and Password"))
+ 
     
   }
 
