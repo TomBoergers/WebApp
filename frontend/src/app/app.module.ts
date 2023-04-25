@@ -9,6 +9,10 @@ import { HttpClientModule} from '@angular/common/http';
 import { NavbarComponent } from './sharepage/navbar/navbar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { HomeComponent } from './pages/home/home.component';
+import { TableComponent } from './pages/table/table.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
 
 
 @NgModule({
@@ -16,7 +20,11 @@ import { RegisterComponent } from './pages/register/register.component';
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent,
+    TableComponent,
+    ProfileComponent,
+    ZweiFaktorComponent
     
   ],
   imports: [

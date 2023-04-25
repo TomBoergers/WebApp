@@ -1,18 +1,22 @@
 <app-navbar></app-navbar>
 
-<div class="container col-md-6">
-    <h1> User Login </h1>
-    <form (ngSubmit)="userLogin()">
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Email address</label>
-            <input type="email" [(ngModel)]="user.eMail" [ngModelOptions]="{standalone: true}" class="form-control" id="eMail" placeholder="name@example.com">
-        </div>
-        <div class="mb-3">
-            <label for="exampleFormControlInput1" class="form-label">Passwort</label>
-            <input type="password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" class="form-control" id="password" placeholder="Passwort">
-        </div>
-        <button type="submit" class="btn btn-primary">Login</button>
-        <button type="submit" class="btn btn-primary">Register</button>
 
+<body>
+    <form (ngSubmit)="userLogin()">
+        <h3> User Login </h3>
+        <div class="container">
+            <div >
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address:</label>
+                    <input type="email" [(ngModel)]="user.eMail" [ngModelOptions]="{standalone: true}" class="" id="eMail" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Passwort:</label>
+                    <input type="password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" class="" id="password" placeholder="Passwort">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <button onClick="window.location.href = '/register'" class="but2" >Sign up</button>
+            </div>
+    </div>
     </form>
-</div>
+</body>
