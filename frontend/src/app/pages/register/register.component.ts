@@ -14,6 +14,6 @@ export class RegisterComponent {
 
     public userRegister(){
       console.log(this.user);
-
+      
     }
 }
