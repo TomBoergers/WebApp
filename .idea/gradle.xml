@@ -4,15 +4,6 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/Backend" />
-        <option name="gradleJvm" value="corretto-18" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/Backend" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/backend" />
         <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
