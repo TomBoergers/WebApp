@@ -1,0 +1,65 @@
+
+*{
+    text-decoration: none;
+    margin: 0px;
+    background-color: #3F51B5;
+    color: black;
+}
+
+.navbar {
+ 
+    width: 100%;
+    padding: 30px 0;
+    font-family: "Ubuntu", sans-serif;
+    transition: all 0.3s ease;
+}
+
+.navbar .sticky {
+    padding: 20px 0;
+    background: black;
+}
+
+.navbar .max-width {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .logo a {
+    color: black;
+    font-size: 35px;
+    font-weight: 600;
+    display: flex;
+    margin-left: 30px;
+}
+
+.navbar.sticky .logo a{
+    color: aliceblue;
+}
+
+.navbar .logo a span{
+    color: gray;
+}
+
+
+
+.navbar.sticky .logo a span {
+    color: gray;
+
+}
+
+.navbar .menu li{
+    list-style: none;
+    display: inline-block;
+}
+
+.navbar .menu li a {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 10px;
+    transition: color 0.5s ease;
+    margin-right: 30px;
+}
+
+
