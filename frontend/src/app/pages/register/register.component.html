@@ -2,22 +2,22 @@
 
 <div class="container col-md-6">
   <h1> Registration </h1>
-  <form>
+  <form (ngSubmit)="userRegister()">
       <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">Vorname</label>
-          <input type="email"  class="form-control" id="vorname" placeholder="Vorname">
+          <input type="name" [(ngModel)]="user.vorname" [ngModelOptions]="{standalone: true}" class="form-control" id="vorname" placeholder="Vorname">
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Nachname</label>
-        <input type="email"  class="form-control" id="nachname" placeholder="Nachname">
+        <input type="name" [(ngModel)]="user.nachname" [ngModelOptions]="{standalone: true}" class="form-control" id="nachname" placeholder="Nachname">
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email"  class="form-control" id="eMail" placeholder="name@example.com">
+        <input type="email" [(ngModel)]="user.eMail" [ngModelOptions]="{standalone: true}" class="form-control" id="eMail" placeholder="name@example.com">
       </div>
       <div class="mb-3">
           <label for="exampleFormControlInput1" class="form-label">Passwort</label>
-          <input type="password"  class="form-control" id="password" placeholder="Passwort">
+          <input type="password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" class="form-control" id="password" placeholder="Passwort">
       </div>
       <button type="submit" class="btn btn-primary">Register</button>
 
