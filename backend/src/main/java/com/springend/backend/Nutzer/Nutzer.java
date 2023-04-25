@@ -10,7 +10,7 @@ public class Nutzer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long userID;
+    private Long ID;
 
     @Column(name = "vorname")
     private String vorname;
@@ -18,25 +18,25 @@ public class Nutzer {
     @Column(name = "nachname")
     private String nachname;
 
-    @Column(name = "e-mail")
-    private String eMail;
+    @Column(name = "email", unique = true)
+    private String email;
 
     @Column(name = "geburtsdatum")
-    private LocalDate gbd;
+    private LocalDate geburtsdatum;
 
-    @Column(name = "passwort")
-    private String passwort;
+    @Column(name = "password")
+    private String password;
 
     public Nutzer(){
 
     }
 
-    public Nutzer(String vorname, String nachname, String eMail, LocalDate gbd, String passwort) {
+    public Nutzer(String vorname, String nachname, String email, LocalDate geburtsdatum, String password) {
         this.vorname = vorname;
         this.nachname = nachname;
-        this.eMail = eMail;
-        this.gbd = gbd;
-        this.passwort = passwort;
+        this.email = email;
+        this.geburtsdatum = geburtsdatum;
+        this.password = password;
     }
 
     public String getVorname() {
@@ -55,27 +55,27 @@ public class Nutzer {
         this.nachname = nachname;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getemail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setemail(String email) {
+        this.email = email;
     }
 
-    public LocalDate getGbd() {
-        return gbd;
+    public LocalDate getGeburtsdatum() {
+        return geburtsdatum;
     }
 
-    public void setGbd(LocalDate gbd) {
-        this.gbd = gbd;
+    public void setGeburtsdatum(LocalDate geburtsdatum) {
+        this.geburtsdatum = geburtsdatum;
     }
 
-    public String getPasswort() {
-        return passwort;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswort(String passwort) {
-        this.passwort = passwort;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

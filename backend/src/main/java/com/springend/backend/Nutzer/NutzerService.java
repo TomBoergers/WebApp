@@ -1,5 +1,6 @@
 package com.springend.backend.Nutzer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +18,16 @@ public class NutzerService {
         return nutzerRepo.findAll();
     }
 
-    public Nutzer findNutzerByID(Long userID) {
-        return nutzerRepo.findNutzerByuserID(userID);
+    public Nutzer findNutzerByemail(String email) {
+        return nutzerRepo.findNutzerByemail(email);
+    }
+
+    public boolean checkPassword(String password, Nutzer nutzer) {
+        if(password.equals(nutzer.getPassword())){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Nutzer addNutzer(Nutzer nutzer) {
