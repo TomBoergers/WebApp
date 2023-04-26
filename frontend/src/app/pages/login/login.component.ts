@@ -9,14 +9,14 @@ import { LoginuserService } from 'src/app/services/loginuser.service';
 })
 export class LoginComponent {
   user: User = new User();
-  
-  constructor(private userService: LoginuserService){}
-  
+
+  constructor(private loginuserService: LoginuserService){}
+
+
   userLogin(){
     console.log(this.user)
-    
-    
-    
+    this.loginuserService.getUser(this.user).subscribe()
+
   }
 
 
