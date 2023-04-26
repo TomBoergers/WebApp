@@ -9,7 +9,7 @@ import { User } from '../classes/user';
 })
 export class RegisteruserService {
 
-  private baseUrl = 'http://localhost:8081/nutzer/all'
+  private baseUrl = 'http://localhost:8080/nutzer/all'
 
 
   constructor(private httpClient: HttpClient) { }

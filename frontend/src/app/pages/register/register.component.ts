@@ -12,8 +12,24 @@ export class RegisterComponent {
 
     constructor(private registerUserService: RegisteruserService){}
 
+
     public userRegister(){
       console.log(this.user);
-      
+
     }
+
+
+    url: string|null|ArrayBuffer  ="assets/profile/WhatsApp-Profilbild-mit-Fliege.png"
+    onFileSelected(files: FileList | null) {
+      if (files) {
+        var reader = new FileReader()
+        reader.readAsDataURL(files[0])
+        reader.onload = (event:Event) => {
+          let fileReader = event.target as FileReader
+          this.url = fileReader.result;
+        }
+    }
+  }
+
+  protected readonly onselect = onselect;
 }
