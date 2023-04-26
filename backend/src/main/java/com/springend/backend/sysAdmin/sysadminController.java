@@ -1,7 +1,6 @@
 package com.springend.backend.sysAdmin;
 
-import com.springend.backend.Nutzer.Nutzer;
-import com.springend.backend.Nutzer.NutzerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
