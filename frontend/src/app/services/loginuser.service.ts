@@ -8,19 +8,13 @@ import { User } from '../classes/user';
   providedIn: 'root'
 })
 export class LoginuserService {
-  private baseUrl = 'http://localhost:8080/nutzer/all'
+  private baseUrl = 'http://localhost:8080'
 
 
   constructor(private httpClient: HttpClient) { }
 
-  loginUser(user: User): Observable<object>{
-    return this.httpClient.post('${this.baseUrl}', user);
-  }
-
-  getUser(user: User) {
-
-      return this.httpClient.get<User>(this.baseUrl)
-
+  loginUser(user: User): Observable<any>{
+    return this.httpClient.post<any>('http://localhost:8080/nutzer/login', user);
   }
 
 }

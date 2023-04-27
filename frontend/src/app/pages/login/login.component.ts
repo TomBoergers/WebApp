@@ -14,9 +14,14 @@ export class LoginComponent {
 
 
   userLogin(){
-    console.log(this.user)
-    this.loginuserService.getUser(this.user).subscribe()
-
+    this.loginuserService.loginUser(this.user).subscribe(
+      (response) => {
+        console.log("Anmeldung Erfolgreich");
+      },
+      error => {
+        console.log("Anmeldung Fehlgeschlagen");
+      }
+    );
   }
 
 
