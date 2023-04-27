@@ -5,8 +5,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TableComponent } from './pages/table/table.component';
-import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
-
+import {ZweiFaktorComponent} from "./pages/zwei-faktor/zwei-faktor.component";
 
 
 const routes: Routes = [
@@ -14,7 +13,8 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'profile', component: ProfileComponent},
-    {path: 'table', component: TableComponent}
+    {path: 'table', component: TableComponent},
+    {path: 'zweiFaktor', component: ZweiFaktorComponent}
 
 
 ];

@@ -1,16 +1,93 @@
 body {
     background-color: #080710;
-    height: 864px;
+    background-size: cover;
 }
 
 .background{
     width: 430px;
-    height: 520px;
+    height: 820px;
     position: absolute;
     transform: translate(-50%,-50%);
     left: 50%;
     top: 50%;
 }
+
+
+
+
+.profileUpload {
+  height: 670px;
+  width: 350px;
+
+  position: fixed;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  margin-left: 60%;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+  padding: 50px 35px;
+
+}
+
+.pad-profile {
+  padding: 6px;
+  background-color: white;
+}
+
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  cursor: pointer;
+  padding: 6px 12px;
+  text-align: center;
+  background-color: #f09819;
+  margin-top: 50px;
+  color: white;
+  border-radius: 10px;
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+
+.custom-file-upload:hover {
+ color: #080710;
+
+}
+
+
+.login-link {
+  text-decoration: none;
+  text-align: center;
+  margin-left: 40px;
+}
+
+
+.profileUpload h3{
+
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 42px;
+  text-align: center;
+  color: #f09819;
+
+
+}
+
+.profilePicture{
+  margin-top: 30px;
+  height: 200px;
+  border-radius: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  padding: 5px;
+  background-color: #080710;
+
+}
+
 
 
 form{
@@ -20,13 +97,15 @@ form{
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;
-    left: 50%;
+    left: 40%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
 }
+
+
 
 form *{
     font-family: 'Poppins',sans-serif;
@@ -37,13 +116,13 @@ form *{
 }
 
 form h3{
-    
+
     font-size: 32px;
     font-weight: 700;
     line-height: 42px;
     text-align: center;
     color: #f09819;
-    
+
 }
 label{
     display: block;
@@ -75,12 +154,12 @@ button{
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
-    
+
 }
 
 button:hover{
     color: orange;
     background-color:#080710;
-    
+
 
 }

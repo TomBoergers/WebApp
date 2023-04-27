@@ -1,8 +1,33 @@
 <app-navbar></app-navbar>
 <body>
+
+
+<div>
+  <div class="pad-profile">
+    <div class="profileUpload">
+      <h3>Profile Picture</h3>
+      <img [src]="url" class="profilePicture">
+
+      <label class="custom-file-upload">
+        Custom Upload
+        <input #imageInput  value="Upload" class="d-none"
+               type="file"
+               accept="image/*"
+               (change)="onFileSelected(imageInput.files)">
+      </label>
+
+      <a routerLink="/login" class="login-link">Are you already Registered?</a>
+      </div>
+  </div>
+
+
+
   <form (ngSubmit)="userRegister()">
-    <h3> Registration </h3>
-    <div >
+
+
+
+    <div class="register-rechts" >
+        <h3> Registration </h3>
         <div class="mb-3">
             <label for="vorname" class="form-label">Vorname: </label>
             <input type="name" [(ngModel)]="user.vorname" [ngModelOptions]="{standalone: true}" class="" id="vorname" placeholder="Vorname">
@@ -16,14 +41,16 @@
 
         <div class="mb-3">
           <label for="email" class="form-label">Email address: </label>
-          <input type="email" [(ngModel)]="user.eMail" [ngModelOptions]="{standalone: true}" class="" id="eMail" placeholder="name@example.com">
+          <input type="email" [(ngModel)]="user.email" [ngModelOptions]="{standalone: true}" class="" id="eMail" placeholder="name@example.com">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Passwort:</label>
             <input type="password" [(ngModel)]="user.password" [ngModelOptions]="{standalone: true}" class="" id="password" placeholder="Passwort">
         </div>
         <button type="submit" class="btn btn-primary">Register</button>
-
       </div>
     </form>
+
+</div>
 </body>
+

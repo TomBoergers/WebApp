@@ -9,14 +9,19 @@ import { LoginuserService } from 'src/app/services/loginuser.service';
 })
 export class LoginComponent {
   user: User = new User();
-  
-  constructor(private userService: LoginuserService){}
-  
+
+  constructor(private loginuserService: LoginuserService){}
+
+
   userLogin(){
-    console.log(this.user)
-    
-    
-    
+    this.loginuserService.loginUser(this.user).subscribe(
+      (response) => {
+        console.log("Anmeldung Erfolgreich");
+      },
+      error => {
+        console.log("Anmeldung Fehlgeschlagen");
+      }
+    );
   }
 
 
