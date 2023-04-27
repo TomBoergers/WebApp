@@ -19,13 +19,12 @@ public class NutzerController {
         }
 
         @PostMapping("/login")
-        public ResponseEntity<String> login(@RequestBody Map<String, String> credentials) {
-            String email = credentials.get("email");
-            String password = credentials.get("password");
-            Nutzer nutzer = nutzerService.findNutzerByemail(email);
-            if (nutzer != null && nutzerService.checkPassword(password, nutzer)) {
-                return ResponseEntity.ok("Der Login war erfolgreich");
-            } else {
+        public ResponseEntity<Object> login(@RequestBody Nutzer nutzer) {
+            System.out.println(nutzer);
+            try {
+                Nutzer authenticatedNutzer = nutzerService.authenticateNutzer(nutzer.getEmail(), nutzer.getPassword());
+                return ResponseEntity.ok().build();
+            } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
@@ -36,12 +35,6 @@ public class NutzerController {
             return new ResponseEntity<>(nutzers, HttpStatus.OK);
         }
 
-
-        //@GetMapping("/find/{id}")
-        //public ResponseEntity<Nutzer> getNutzerById(@PathVariable("id") Long nutzerID) {
-            //Nutzer nutzer = nutzerService.findNutzerByID(nutzerID);
-            //return new ResponseEntity<>(nutzer, HttpStatus.OK);
-        //}
 
         @PostMapping("/add")
         public ResponseEntity<Nutzer> addNutzer(@RequestBody Nutzer nutzer) {

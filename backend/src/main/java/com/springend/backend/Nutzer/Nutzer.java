@@ -6,25 +6,22 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "users")
 public class Nutzer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ID;
+    private long ID;
 
-    @Column(name = "vorname")
     private String vorname;
 
-    @Column(name = "nachname")
     private String nachname;
 
-    @Column(name = "email", unique = true)
+    @Column(unique = true)
     private String email;
 
-    @Column(name = "geburtsdatum")
     private LocalDate geburtsdatum;
 
-    @Column(name = "password")
     private String password;
 
     public Nutzer(){
@@ -37,6 +34,14 @@ public class Nutzer {
         this.email = email;
         this.geburtsdatum = geburtsdatum;
         this.password = password;
+    }
+
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     public String getVorname() {
@@ -55,11 +60,11 @@ public class Nutzer {
         this.nachname = nachname;
     }
 
-    public String getemail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setemail(String email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -77,5 +82,17 @@ public class Nutzer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Nutzer{" +
+                "ID=" + ID +
+                ", vorname='" + vorname + '\'' +
+                ", nachname='" + nachname + '\'' +
+                ", email='" + email + '\'' +
+                ", geburtsdatum=" + geburtsdatum +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

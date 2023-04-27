@@ -8,5 +8,5 @@ public interface NutzerRepo extends JpaRepository<Nutzer, Long> {
 
     Nutzer findNutzerByID(Long ID);
 
-    Nutzer findNutzerByemail(String email);
+    Nutzer findNutzerByEmail(String email);
 }
