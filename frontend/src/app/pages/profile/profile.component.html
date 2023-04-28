@@ -7,11 +7,48 @@
 </head>
 <body>
 
-<div>
-  <h1> Name </h1>
-  <p> Email: </p>
-  <p> Geburtsdatum: </p>
-  <p> Sonstiges: </p>
+<div class="section" id="profilblockTitel" style="text-align:left; display: flex; flex-direction: row; align-items: center;">
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <img [src]="url" class="profilePicture" alt="" height="100px" width="auto">
+
+    <label class="custom-file-upload" style="font-size: 14px; margin-top: 10px;">
+      Profilbild hochladen
+      <input #imageInput  value="Upload" class="d-none"
+             type="file"
+             accept="image/*"
+             (change)="onFileSelected(imageInput.files)">
+    </label>
+  </div>
+  <h1 style="transform:translateY(-30%) translateX(+75%); margin-top: 20px;"> Nutzername </h1>
 </div>
+
+
+<div class="section" id="profilblock">
+  <div class="input-container">
+    <p>Email:</p>
+    <div>
+      <span id="email">deine@mail.com</span>
+      <button (click)="editEmail()">Ändern..</button>
+    </div>
+  </div>
+  <div class="input-container">
+    <p>Geburtsdatum:</p>
+    <div>
+      <span id="birthdate">01.01.1901</span>
+      <button (click)="editDateOfBirth()">Ändern..</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="section" id="favDatensatzTitel" >
+  <h4> Mein Lieblingsdatensatz: </h4>
+</div>
+
+<div class="section" id="favDatensatzBlock" >
+  <p> Input </p>
+</div>
+
 </body>
 </html>
+

@@ -1,31 +1,95 @@
-body {
-  background-color: #080710;
-  height: 1024px;
+ body {
+    background-image: url(Pictures/architecture-building-religion-landmark-facade-church-591946-pxhere.com.jpg);
+    background-repeat: no-repeat;
+    height: 100%;
+    overflow: hidden;
+    background-size: cover;
+  }
+
+.section {
+  background-color: rgba(255,255,255,0.13);
+  position: absolute;
+  transform: translate(-50%,-50%);
+  border-radius: 10px;
+  backdrop-filter: blur(50px);
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
 }
 
-div h1 {
-  text-align: center;
-  color: #f09819;
-}
-
-div * {
+.section * {
   font-family: 'Poppins',sans-serif;
-  color: white;
+  color: black;
   letter-spacing: 0.5px;
   outline: none;
   border: none;
 }
-div {
-    height: 320px;
-    width: 800px;
-    background-color: rgba(255,255,255,0.13);
-    position: absolute;
-    transform: translate(-50%,-50%);
-    top: 25%;
-    left: 25%;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+
+.section h1 {
+  text-align: justify;
 }
+
+.section h4 {
+  text-align: left;
+}
+
+#profilblockTitel {
+  height: 155px;
+  width: 800px;
+  top: 20%;
+  left: 25%;
+  padding: 15px 35px;
+  border-radius: 10px 10px 0 0;
+}
+
+#profilblock {
+  height: 120px;
+  width: 800px;
+  top: 33%;
+  left: 25%;
+  padding: 25px 0 0 50px;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items:normal;
+}
+
+#favDatensatzTitel {
+   height: 50px;
+   width: 600px;
+   top: 15%;
+   left: 70%;
+   padding: 7px 35px;
+   border-radius: 10px 10px 0 0;
+ }
+
+#favDatensatzBlock {
+  height: 157px;
+  width: 600px;
+  top: 25%;
+  left: 70%;
+  padding: 5px 35px;
+  border-radius: 0 0 10px 10px;
+}
+
+ .input-container {
+   display: flex;
+   align-items:center;
+   margin-left: 1px;
+ }
+
+ .input-container p {
+   margin-right: 100px;
+ }
+
+ .input-container div {
+   display: flex;
+   align-items: center;
+ }
+
+ .input-container button {
+   margin-left: 350px;
+ }
+
+
+
