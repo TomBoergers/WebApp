@@ -2,8 +2,6 @@
 
 <html>
 <head>
-  <style>
-  </style>
 </head>
 <body>
 
@@ -24,19 +22,15 @@
 
 
 <div class="section" id="profilblock">
-  <div class="input-container">
-    <p>Email:</p>
-    <div>
-      <span id="email">deine@mail.com</span>
-      <button (click)="editEmail()">Ändern..</button>
-    </div>
+  <div class="profile-input">
+    <p class="prompt">Email:</p>
+    <p class="displayed-input" id="email">deine@mail.com</p>
+    <button class="edit-button" (click)="editEmail()">Ändern..</button>
   </div>
-  <div class="input-container">
-    <p>Geburtsdatum:</p>
-    <div>
-      <span id="birthdate">01.01.1901</span>
-      <button (click)="editDateOfBirth()">Ändern..</button>
-    </div>
+  <div class="profile-input">
+    <p class="prompt">Geburtsdatum:</p>
+    <p class="displayed-input" id="birthdate">01.01.1901</p>
+    <button class="edit-button" (click)="editDateOfBirth()">Ändern..</button>
   </div>
 </div>
 
@@ -46,7 +40,7 @@
 </div>
 
 <div class="section" id="favDatensatzBlock" >
-  <p> Input </p>
+  <button>Datensatz auswählen</button>
 </div>
 
 </body>

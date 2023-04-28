@@ -46,12 +46,11 @@
   width: 800px;
   top: 33%;
   left: 25%;
-  padding: 25px 0 0 50px;
+  padding: 25px 0 0 0;
   border-radius: 0 0 10px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items:normal;
+  align-items: center;
 }
 
 #favDatensatzTitel {
@@ -68,28 +67,50 @@
   width: 600px;
   top: 25%;
   left: 70%;
-  padding: 5px 35px;
+  padding: 25px 35px;
   border-radius: 0 0 10px 10px;
 }
-
- .input-container {
-   display: flex;
-   align-items:center;
-   margin-left: 1px;
- }
-
- .input-container p {
-   margin-right: 100px;
- }
-
- .input-container div {
+ .profile-input {
    display: flex;
    align-items: center;
+   margin-top: 0;
+   margin-bottom: 0;
  }
 
- .input-container button {
-   margin-left: 350px;
+ .prompt {
+   margin-right: 100px;
+   margin-bottom: 10px;
+   width: 180px;
+   text-align: left;
  }
 
+ .displayed-input {
+   margin-right: 20px;
+   width: 200px;
+   text-align: left;
 
+ }
+
+ .edit-button {
+   background-color: #f09819;
+   border: #080710 medium;
+   border-radius: 8px;
+   color: white;
+   padding: 3px 16px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;
+ }
+
+ button {
+   background-color: #f09819;
+   color: #fff;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 4px;
+   cursor: pointer;
+ }
 

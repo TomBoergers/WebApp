@@ -36,5 +36,6 @@ export class ProfileComponent {
   }
 
   protected readonly onselect = onselect;
+  user: any;
 
 }
