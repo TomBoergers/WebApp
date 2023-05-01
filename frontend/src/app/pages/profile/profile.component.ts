@@ -23,7 +23,7 @@ export class ProfileComponent {
     }
   }
 
-  url: string|null|ArrayBuffer  ="assets/profile/Profilbild final.png"
+  url: string|null|ArrayBuffer  ="assets/profile/WhatsApp-Profilbild-mit-Fliege.png"
   onFileSelected(files: FileList | null) {
     if (files) {
       var reader = new FileReader()
