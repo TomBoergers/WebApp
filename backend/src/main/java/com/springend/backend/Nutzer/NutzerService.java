@@ -34,6 +34,15 @@ public class NutzerService {
         }
     }
 
+    public Nutzer registerNutzer(Nutzer nutzer) {
+        if (nutzerRepo.findNutzerByEmail(nutzer.getEmail()) != null) {
+            throw new RuntimeException("Nutzer existiert bereits");
+        } else {
+            nutzerRepo.save(nutzer);
+            return nutzer;
+        }
+    }
+
     public List<Nutzer> findAllNutzers() {
         return nutzerRepo.findAll();
     }

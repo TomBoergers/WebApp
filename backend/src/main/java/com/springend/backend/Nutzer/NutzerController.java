@@ -29,6 +29,17 @@ public class NutzerController {
             }
         }
 
+        @PostMapping("/register")
+        public ResponseEntity<Object> register(@RequestBody Nutzer nutzer) {
+            System.out.println(nutzer);
+            try {
+                Nutzer registeredNutzer = nutzerService.registerNutzer(nutzer);
+                return ResponseEntity.ok().build();
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+
         @GetMapping("/all")
         public ResponseEntity<List<Nutzer>> getNutzers() {
             List<Nutzer> nutzers = nutzerService.findAllNutzers();
