@@ -3,24 +3,24 @@ body {
   background-size: cover;
 
 
-.button{
-  border: 1px solid white;
-  border-radius: 30px;
-  color: white;
-  background-color: black;
-  padding:7px;
-  margin-top:10px;
-  margin-left: auto;
-  margin-right: auto;
-  border: unset;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  .button {
+    border: 1px solid white;
+    border-radius: 30px;
+    color: white;
+    background-color: black;
+    padding: 7px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border: unset;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
 
-  &:hover{
-    background-color: orange;
-    text-decoration: underline;
+    &:hover {
+      background-color: orange;
+      text-decoration: underline;
+    }
+
   }
-
-}
 
 
   .topnav input[type=text] {
@@ -28,23 +28,23 @@ body {
     padding: 6px;
     border: #080710;
     border-radius: 30px;
-    margin-top: 15%;
+    margin-top: 10%;
     margin-right: 16px;
     font-size: 17px;
   }
 
-table {
-  display: table;
-  vertical-align: middle;
-  margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 70%;
-  border: 1px solid black;;
-  box-shadow: 0 0 40px grey;
-}
+  table {
+    display: table;
+    vertical-align: middle;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 70%;
+    border: 1px solid black;;
+    box-shadow: 0 0 40px grey;
+  }
 
   th, td {
     text-align: left;
@@ -56,15 +56,15 @@ table {
     background-color: dimgrey;
   }*/
 
-  .container{
+  .container {
     border: 1px solid orange;
     border-radius: 10px;
-    margin-left:70%;
+    margin-left: 70%;
     width: 15%;
-    padding:20px;
+    padding: 15px;
     background-color: orange;
     overflow: hidden;
-    position:relative;
+    position: relative;
     box-shadow: 0 0 40px grey;
     display: flex;
     align-items: center;
@@ -84,6 +84,30 @@ table {
         text-decoration: underline;
       }
     }
+  }
+
+
+    .bUpload {
+      padding: 10px;
+      margin-right: 2px;
+      border: 1px solid orange;
+      border-radius: 10px;
+      color: white;
+      margin-top: 20px;
+      margin-left: 72.5%;
+      width: 9%;
+      background-color: black;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 40px dimgrey;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: orange;
+        text-decoration: underline;
+      }
   }
 }
 
