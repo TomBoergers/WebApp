@@ -3,12 +3,23 @@ body {
   background-size: cover;
 
 
-
 .button{
+  border: dimgrey;
   border-radius: 30px;
   color: orange;
-  background-color: grey;
+  background-color: dimgrey;
   margin-left: 20px;
+
 }
+
+  .topnav input[type=text] {
+    margin-left: 30px;
+    padding: 6px;
+    border: #080710;
+    border-radius: 30px;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
 }
 
