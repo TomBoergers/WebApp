@@ -2,4 +2,45 @@ body {
   background-color: #080710 ;
   background-size: cover;
 
+
+.button{
+  border: dimgrey;
+  border-radius: 30px;
+  color: orange;
+  background-color: dimgrey;
+  margin-left: 20px;
+  padding:5px;
+  margin-top:10px;
+
 }
+
+  .topnav input[type=text] {
+    margin-left: 30px;
+    padding: 6px;
+    border: #080710;
+    border-radius: 30px;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  }
+
+table {
+  margin-top:40px;
+  margin-left: 30px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 80%;
+  border: 1px solid dimgrey;
+}
+
+  th, td {
+    text-align: left;
+    color: white;
+    padding: 16px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f09819;
+  }
+}
+
