@@ -1,0 +1,37 @@
+<body>
+  <app-navbar></app-navbar>
+
+<div>
+
+
+<form (ngSubmit)="sysAdminRegister()">
+
+    <div class="register-rechts" >
+        <h3> Admin Registration </h3>
+        <div class="mb-3">
+            <label for="vorname" class="form-label">Vorname: </label>
+            <input type="name" [(ngModel)]="SysAdmin.vorname" [ngModelOptions]="{standalone: true}" class="" id="vorname" placeholder="Vorname">
+        </div>
+        <div class="mb-3">
+          <label for="nachname" class="form-label">Nachname: </label>
+          <input type="name" [(ngModel)]="SysAdmin.nachname" [ngModelOptions]="{standalone: true}" class="" id="nachname" placeholder="Nachname">
+        </div>
+        <label for="birthday">Birthday:</label>
+        <input type="date" [(ngModel)]="SysAdmin.geburtsdatum" [ngModelOptions]="{standalone: true}" class=""id="birthday" name="birthday">
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address: </label>
+          <input type="email" [(ngModel)]="SysAdmin.email" [ngModelOptions]="{standalone: true}" class="" id="eMail" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Passwort:</label>
+            <input type="password" [(ngModel)]="SysAdmin.password" [ngModelOptions]="{standalone: true}" class="" id="password" placeholder="Passwort">
+        </div>
+      <div>
+        <button type="submit" class="btn btn-primary">Register</button>
+
+        <a href="/register" class="link-to-user">register as user?</a>
+      </div>
+      </div>
+    </form>
+

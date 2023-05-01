@@ -1,0 +1,93 @@
+body {
+    background-color: #080710;
+  
+  
+  }
+  
+  
+  form{
+    height: 680px;
+    width: 500px;
+    background-color: black;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+  }
+  
+  
+  form *{
+    font-family: 'Poppins',sans-serif;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+    color: white;
+  }
+
+  
+  form h3{
+  
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 42px;
+    text-align: center;
+    color: #f09819;
+  
+  }
+  label{
+    display: block;
+    margin-top: 0px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  input{
+      display: block;
+      height: 50px;
+      width: 100%;
+      background-color: rgba(255,255,255,0.07);
+      border-radius: 3px;
+      padding: 0 10px;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 300;
+      color: black;
+  }
+  
+  button{
+      margin-top: 10px;
+      width: 100%;
+      background-color: #080710;
+      color: #080710;
+      padding: 10px 0;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+  
+  }
+  
+  button:hover{
+      color: orange;
+      background-color:#080710;
+  
+  
+  }
+
+  .link-to-user a {
+    margin-top: 10px;
+    text-decoration: none;
+    text-align: right;
+    color: blue;
+    
+  }
+
+  .link-to-user:hover {
+    text-decoration: none;
+    color: orange;}
+  

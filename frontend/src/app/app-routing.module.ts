@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { TableComponent } from './pages/table/table.component';
 import {ZweiFaktorComponent} from "./pages/zwei-faktor/zwei-faktor.component";
+import { RegisterAdminComponent } from './pages/register-admin/register-admin.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
     {path: 'register', component: RegisterComponent},
     {path: 'profile', component: ProfileComponent},
     {path: 'table', component: TableComponent},
-    {path: 'zweiFaktor', component: ZweiFaktorComponent}
+    {path: 'zweiFaktor', component: ZweiFaktorComponent},
+    {path: 'registerAdmin', component:RegisterAdminComponent}
 
 
 ];

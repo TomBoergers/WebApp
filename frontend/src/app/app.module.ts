@@ -13,6 +13,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { TableComponent } from './pages/table/table.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
+import { RegisterAdminComponent } from './pages/register-admin/register-admin.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
     HomeComponent,
     TableComponent,
     ProfileComponent,
-    ZweiFaktorComponent
+    ZweiFaktorComponent,
+    RegisterAdminComponent
     
   ],
   imports: [
