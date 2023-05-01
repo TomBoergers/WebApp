@@ -3,5 +3,6 @@ export class User {
     password!: string;
     vorname!: string;
     nachname!: string;
-    birthdate!: String;
+    geburtsdatum!: Date;
 }
+

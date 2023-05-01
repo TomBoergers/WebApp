@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from 'src/app/classes/user';
 import { RegisteruserService } from 'src/app/services/registeruser.service';
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-register',
@@ -14,8 +15,14 @@ export class RegisterComponent {
 
 
     public userRegister(){
-      console.log(this.user);
-
+      this.registerUserService.registerUser(this.user).subscribe(
+        response => {
+          console.log("Registrierung erfolgreich")
+        },
+        error => {
+          console.log("Registrierung fehlgeschalgen")
+        }
+      );
     }
 
 

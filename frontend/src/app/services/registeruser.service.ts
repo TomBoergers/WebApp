@@ -9,12 +9,12 @@ import { User } from '../classes/user';
 })
 export class RegisteruserService {
 
-  private baseUrl = 'http://localhost:8080/nutzer/all'
+  private baseUrl = 'http://localhost:8080'
 
 
   constructor(private httpClient: HttpClient) { }
 
   registerUser(user: User): Observable<object>{
-    return this.httpClient.post('${this.baseUrl}', user);
+    return this.httpClient.post('http://localhost:8080/nutzer/register', user);
   }
 }
