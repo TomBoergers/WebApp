@@ -1,6 +1,7 @@
 body {
-  background-color: black;
+  background-color: #080710;
   background-size: cover;
+}
 
 
   .button {
@@ -21,14 +22,21 @@ body {
     }
 
   }
+.topnav {
+
+margin-top: 5%;
+
+
+}
+
 
 
   .topnav input[type=text] {
-    margin-left: 340px;
+    margin-left: 10%;
     padding: 7px;
     border: black;
     border-radius: 30px;
-    margin-top: 10%;
+    
     margin-right: 16px;
     font-size: 17px;
     width: 30%;
@@ -36,7 +44,7 @@ body {
 
   table {
     display: table;
-    background-color: black;
+    background-color: white;
     vertical-align: middle;
     margin-top: 35px;
     margin-left: auto;
@@ -45,32 +53,28 @@ body {
     border-spacing: 0;
     width: 70%;
     border: 1px solid black;
-    border-radius: 10px;
+    
     box-shadow: 0 0 40px dimgrey;
   }
 
   th, td {
     text-align: left;
-    color: white;
+    color: black;
     padding: 16px;
     border: 1px solid orange;
   }
+ 
+.container-content {
+  margin-top:5%;
+  margin-left: 70%;
+  
+}
 
-  .container {
-    border: 1px solid orange;
-    border-radius: 10px;
-    margin-left: 70%;
-    width: 15%;
-    padding: 15px;
-    background-color: orange;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 0 40px grey;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
+
+ 
     .b {
+      
       padding: 10px;
       margin-right: 2px;
       border: 1px solid orange;
@@ -78,36 +82,42 @@ body {
       box-shadow: black;
       background-color: black;
       color: white;
-
+      
       &:hover {
         background-color: grey;
         text-decoration: underline;
       }
     }
-  }
-
+  
+    .custom-file-upload {
+      border: 1px solid #ccc;
+      cursor: pointer;
+      padding: 6px 12px;
+      text-align: center;
+      background-color: #f09819;
+      margin-top: 50px;
+      color: white;
+      border-radius: 10px;
+      margin-right: 40px;
+      margin-left: 40px;
+    }
 
     .bUpload {
       padding: 10px;
-      margin-right: 2px;
       border: 1px solid orange;
       border-radius: 10px;
       color: white;
-      margin-top: 20px;
-      margin-left: 72.5%;
-      width: 9%;
       background-color: black;
-      overflow: hidden;
-      position: relative;
       box-shadow: 0 0 40px dimgrey;
+      cursor: pointer;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 35%;
+      
 
       &:hover {
         background-color: orange;
         text-decoration: underline;
       }
   }
-}
+
 

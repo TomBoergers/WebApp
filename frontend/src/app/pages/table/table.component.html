@@ -1,20 +1,30 @@
-<app-navbar></app-navbar>
+
 
 <body>
+  <app-navbar></app-navbar>
+
 
 <div class="container">
-  <button class="b">CSV</button>
+    <div class="topnav">
+      <input type="text" placeholder="Search..">
+      <button class="button">Datensatz verlinken</button>
+    </div>
+  <div class="container-content">
+
+  
+  <button class="b" style="background-color: Orange;">CSV</button>
   <button class="b">XML</button>
-</div>
-<div class="containerUpload">
-  <button class="bUpload">Upload</button>
+  <label class="bUpload">Choose CSV File
+    <input   value="Upload" class="d-none" type="file">
+  </label>
+
+  </div>
 </div>
 
 
-<div class="topnav">
-  <input type="text" placeholder="Search..">
-  <button class="button">Datensatz verlinken</button>
-</div>
+
+
+
 
   <table>
     <tr>
