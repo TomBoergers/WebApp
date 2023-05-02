@@ -8,17 +8,8 @@
     <div class="topnav">
       <input type="text" placeholder="Search..">
       <button class="button">Datensatz verlinken</button>
+      <button class="button"><a routerLink="/table">Back to Home</a></button>
     </div>
-  <div class="container-content">
-
-  
-  <button class="b" style="background-color: Orange;">CSV</button>
-  <button class="b">XML</button>
-  <label class="bUpload">Choose CSV File
-    <input   value="Upload" class="d-none" type="file">
-  </label>
-
-  </div>
 </div>
 
 
@@ -28,24 +19,27 @@
 
   <table>
     <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Sort by</th>
+      <th>Tablename</th>
+      <th>Years</th>
+      <th>Options</th>
     </tr>
     <tr>
-      <td>a</td>
-      <td>b</td>
-      <td>50</td>
+      <td>Vornamen von Neugeborenen in der Stadt Aachen</td>
+      <td></td>
+      <td><button class="btn btn-primary"><a href="/table/1">open</a></button></td>
     </tr>
     <tr>
-      <td>c</td>
-      <td>d</td>
-      <td>94</td>
+      <td>Anzahl der Arbeitssuchenden in der Städteregion Aachen</td>
+      <td></td>
+      <td><button class="btn btn-primary"><a href="/table/2">open</a></button></td>
     </tr>
     <tr>
-      <td>e</td>
-      <td>f</td>
-      <td>67</td>
+      <td>Anzahl der Arbeitslosen in der Städteregion Aachen</td>
+      <td></td>
+      <td><button class="btn btn-primary"><a href="/table/3">open</a></button></td>
+    </tr>
+    <tr>
+      
     </tr>
   </table>
 </body>

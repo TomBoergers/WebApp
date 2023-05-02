@@ -14,6 +14,7 @@ import { TableComponent } from './pages/table/table.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
 import { RegisterAdminComponent } from './pages/register-admin/register-admin.component';
+import { TableVornameComponent } from './pages/table/table-pages/table-vorname/table-vorname.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RegisterAdminComponent } from './pages/register-admin/register-admin.co
     TableComponent,
     ProfileComponent,
     ZweiFaktorComponent,
-    RegisterAdminComponent
+    RegisterAdminComponent,
+    TableVornameComponent
     
   ],
   imports: [

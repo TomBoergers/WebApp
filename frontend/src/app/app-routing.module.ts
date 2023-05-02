@@ -7,6 +7,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { TableComponent } from './pages/table/table.component';
 import {ZweiFaktorComponent} from "./pages/zwei-faktor/zwei-faktor.component";
 import { RegisterAdminComponent } from './pages/register-admin/register-admin.component';
+import { TableVornameComponent } from './pages/table/table-pages/table-vorname/table-vorname.component';
 
 
 const routes: Routes = [
@@ -14,9 +15,11 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'profile', component: ProfileComponent},
-    {path: 'table', component: TableComponent},
     {path: 'zweiFaktor', component: ZweiFaktorComponent},
-    {path: 'registerAdmin', component:RegisterAdminComponent}
+    {path: 'registerAdmin', component:RegisterAdminComponent},
+    {path: 'table', component: TableComponent},
+    {path: 'table/1', component: TableVornameComponent}
+
 
 
 ];

@@ -1,0 +1,154 @@
+body {
+    background-color: #080710;
+    background-size: cover;
+  }
+  
+  
+  a {
+    text-decoration: none;
+  }
+  
+  button {
+    background-color: orange;
+    text-decoration: none;
+  
+    &:hover{
+      background-color: #080710;
+  
+    }
+  
+  
+  }
+  
+  
+  button a {
+    text-decoration: none;
+    color: white;
+  
+    &:hover {
+      color: white;
+  
+  
+    }
+  }
+  
+    .button {
+      border: 1px solid white;
+      border-radius: 30px;
+      color: white;
+      background-color: orange;
+      padding: 7px;
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      border: unset;
+      text-decoration: none;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      display: space-between;
+  
+      &:hover {
+        background-color: orange;
+        text-decoration: underline;
+      }
+  
+    }
+  .topnav {
+  
+  margin-top: 2%;
+  
+  
+  }
+  
+  
+  
+    .topnav input[type=text] {
+      margin-left: 10%;
+      padding: 7px;
+      border: black;
+      border-radius: 30px;
+      
+      margin-right: 16px;
+      font-size: 17px;
+      width: 30%;
+    }
+  
+    table {
+      display: table;
+      background-color: white;
+      vertical-align: middle;
+      margin-top: 35px;
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 70%;
+      border: 1px solid black;
+      
+      box-shadow: 0 0 40px dimgrey;
+    }
+  
+    th, td {
+      text-align: left;
+      color: black;
+      padding: 16px;
+      border: 1px solid orange;
+    }
+   
+  .container-content {
+    margin-top:5%;
+    margin-left: 70%;
+    
+  }
+  
+  
+  
+   
+      .b {
+        
+        padding: 10px;
+        margin-right: 2px;
+        border: 1px solid orange;
+        border-radius: 10px;
+        box-shadow: black;
+        background-color: black;
+        color: white;
+        
+        &:hover {
+          background-color: grey;
+          text-decoration: underline;
+        }
+      }
+    
+      .custom-file-upload {
+        border: 1px solid #ccc;
+        cursor: pointer;
+        padding: 6px 12px;
+        text-align: center;
+        background-color: #f09819;
+        margin-top: 50px;
+        color: white;
+        border-radius: 10px;
+        margin-right: 40px;
+        margin-left: 40px;
+      }
+  
+      .bUpload {
+        padding: 10px;
+        border: 1px solid orange;
+        border-radius: 10px;
+        color: white;
+        background-color: black;
+        box-shadow: 0 0 40px dimgrey;
+        cursor: pointer;
+        display: flex;
+        width: 35%;
+        
+  
+        &:hover {
+          background-color: orange;
+          text-decoration: underline;
+        }
+    }
+  
+  
+  

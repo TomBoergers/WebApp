@@ -4,17 +4,47 @@ body {
 }
 
 
+a {
+  text-decoration: none;
+}
+
+button {
+  background-color: orange;
+  text-decoration: none;
+
+  &:hover{
+    background-color: #080710;
+
+  }
+
+
+}
+
+
+button a {
+  text-decoration: none;
+  color: white;
+
+  &:hover {
+    color: white;
+
+
+  }
+}
+
   .button {
     border: 1px solid white;
     border-radius: 30px;
     color: white;
-    background-color: black;
+    background-color: orange;
     padding: 7px;
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
     border: unset;
+    text-decoration: none;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    display: space-between;
 
     &:hover {
       background-color: orange;
@@ -24,7 +54,7 @@ body {
   }
 .topnav {
 
-margin-top: 5%;
+margin-top: 2%;
 
 
 }
