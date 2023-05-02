@@ -1,5 +1,8 @@
 package com.springend.backend;
 
+import com.springend.backend.CSVReader.CSVController;
+import com.springend.backend.CSVReader.CSVRepo;
+import com.springend.backend.CSVReader.CSVService;
 import com.springend.backend.Nutzer.Nutzer;
 import com.springend.backend.Nutzer.NutzerRepo;
 import com.springend.backend.sysAdmin.SysAdmin;
@@ -8,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
 
 import java.time.LocalDate;
 
@@ -32,4 +36,19 @@ public class BackendApplication {
           sysAdminRepo.save(new SysAdmin("Test1","Name1","test1@gmail.com","123456"));
       };
     }
+
+    @Bean
+    CommandLineRunner init3(CSVService csvService, CSVRepo csvRepo){
+
+        return args -> {
+          csvService.addCSV("C:\\Users\\Slenk\\IdeaProjects\\gruppe-f2\\backend\\src\\main\\java\\com\\springend\\backend\\Datentabellen\\aachenvornamen2021-commasep-decimalpoint.csv",4,",","Vornamen der Stadt Aachen","2021");
+          csvService.addCSV("C:\\Users\\Slenk\\IdeaProjects\\gruppe-f2\\backend\\src\\main\\java\\com\\springend\\backend\\Datentabellen\\strassennamen.csv",4,",","Strassenliste der Stadt Aachen","2021");
+
+
+        };
+
+    }
+
+
+
 }
