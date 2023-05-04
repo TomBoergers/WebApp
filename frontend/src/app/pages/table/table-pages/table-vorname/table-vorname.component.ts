@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {TableService} from "../../../../services/table.service";
 
 @Component({
   selector: 'app-table-vorname',
@@ -9,13 +10,13 @@ import {HttpClient} from "@angular/common/http";
 export class TableVornameComponent {
 
   tableData!: any[][];
+  loadTableId = this.tableService.loadTableId;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private tableService: TableService) {
   }
 
   ngOnInit() {
-    const tableId = 2;
-    this.http.get<any[][]>('http://localhost:8080/CSV/' + tableId).subscribe(data => {
+    this.http.get<any[][]>('http://localhost:8080/CSV/' + this.loadTableId).subscribe(data => {
       this.tableData = data;
     });
   }

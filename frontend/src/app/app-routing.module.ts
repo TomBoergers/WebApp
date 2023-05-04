@@ -18,7 +18,7 @@ const routes: Routes = [
     {path: 'zweiFaktor', component: ZweiFaktorComponent},
     {path: 'registerAdmin', component:RegisterAdminComponent},
     {path: 'table', component: TableComponent},
-    {path: 'table/1', component: TableVornameComponent}
+    {path: 'table/:id', component: TableVornameComponent}
 
 
 
