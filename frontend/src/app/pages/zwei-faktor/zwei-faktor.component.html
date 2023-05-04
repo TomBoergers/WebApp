@@ -3,19 +3,20 @@
 
 <body>
   <app-navbar></app-navbar>
-  <form>
+  <form (ngSubmit)="userZweiFaktor()">
     <h3> Code eingeben </h3>
     <div class="container">
       <div class="code-beschreibung">
         Ein Code wurde verschickt.
       </div>
+
       <div class="mb-3">
         <label for ="code">Code </label>
         <input type ="text" id="code" name="code" placeholder="12345">
       </div>
       <button type="submit"> Bestätigen</button>
       <div class="code-nicht-erhalten">
-        Code nicht erhalten? <a href="#">Erneut senden.</a>
+        Code nicht erhalten? <a href="/zweiFaktor">Erneut senden.</a>
       </div>
 
     </div>
