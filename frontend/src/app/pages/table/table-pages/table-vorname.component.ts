@@ -1,6 +1,6 @@
 import {Component, Output} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {TableService} from "../../../../services/table.service";
+import {TableService} from "../../../services/table.service";
 
 @Component({
   selector: 'app-table-vorname',
