@@ -38,8 +38,6 @@ public class CSVController {
         }
     }
 
-
-
     @GetMapping ("/{ID}")
     public ResponseEntity<String[][]> showDataByID(@PathVariable long ID) {
         try {
@@ -51,6 +49,4 @@ public class CSVController {
             throw new RuntimeException(e);
         }
     }
-
-
 }
