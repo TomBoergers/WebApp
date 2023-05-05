@@ -1,4 +1,4 @@
-import {Component, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../../services/table.service";
 
@@ -9,8 +9,11 @@ import {TableService} from "../../../services/table.service";
 })
 export class TablePagesComponent {
 
-  tableData!: any[][];
+  tableData: any[][] = [];
+  filteredTableData: any[][] = [];
   loadTableId = this.tableService.loadTableId;
+  searchTerm: String = "";
+  headers: string[] = [];
 
   constructor(private http: HttpClient, private tableService: TableService) {
   }
@@ -18,6 +21,18 @@ export class TablePagesComponent {
   ngOnInit() {
     this.http.get<any[][]>('http://localhost:8080/CSV/' + this.loadTableId).subscribe(data => {
       this.tableData = data;
+      this.headers = this.tableData[0];
+      this.filteredTableData = this.tableData.slice(1);
     });
+  }
+
+  applyFilter() {
+    if(this.searchTerm) {
+      this.filteredTableData = this.tableData.slice(1).filter(row =>
+        row.some(cell => cell.toString().toLowerCase().includes(this.searchTerm.toLowerCase()))
+      );
+    } else {
+      this.filteredTableData = this.tableData.slice(1);
+    }
   }
 }
