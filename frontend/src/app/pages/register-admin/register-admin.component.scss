@@ -1,12 +1,12 @@
 body {
     background-color: #080710;
-  
-  
+
+
   }
-  
-  
+
+
   form{
-    height: 680px;
+    height: 600px;
     width: 500px;
     background-color: black;
     position: absolute;
@@ -19,8 +19,8 @@ body {
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
   }
-  
-  
+
+
   form *{
     font-family: 'Poppins',sans-serif;
     letter-spacing: 0.5px;
@@ -29,15 +29,15 @@ body {
     color: white;
   }
 
-  
+
   form h3{
-  
+
     font-size: 32px;
     font-weight: 700;
     line-height: 42px;
     text-align: center;
     color: #f09819;
-  
+
   }
   label{
     display: block;
@@ -45,7 +45,7 @@ body {
     font-size: 16px;
     font-weight: 500;
   }
-  
+
   input{
       display: block;
       height: 50px;
@@ -58,7 +58,7 @@ body {
       font-weight: 300;
       color: black;
   }
-  
+
   button{
       margin-top: 10px;
       width: 100%;
@@ -69,14 +69,14 @@ body {
       font-weight: 600;
       border-radius: 5px;
       cursor: pointer;
-  
+
   }
-  
+
   button:hover{
       color: orange;
       background-color:#080710;
-  
-  
+
+
   }
 
   .link-to-user a {
@@ -84,10 +84,9 @@ body {
     text-decoration: none;
     text-align: right;
     color: blue;
-    
+
   }
 
   .link-to-user:hover {
     text-decoration: none;
     color: orange;}
-  
