@@ -41,10 +41,12 @@ public class BackendApplication {
     CommandLineRunner init3(CSVService csvService, CSVRepo csvRepo){
 
         return args -> {
-          csvService.addCSV("C:\\Users\\Tom\\IdeaProjects\\gruppe-f-git\\backend\\src\\main\\java\\com\\springend\\backend\\Datentabellen\\aachenvornamen2021-commasep-decimalpoint.csv",4,",","Vornamen der Stadt Aachen","2021");
-          csvService.addCSV("C:\\Users\\Tom\\IdeaProjects\\gruppe-f-git\\backend\\src\\main\\java\\com\\springend\\backend\\Datentabellen\\strassennamen.csv",4,",","Strassenliste der Stadt Aachen","2021");
-
-
+          csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/aachenvornamen2021-commasep-decimalpoint.csv",4,",","Vornamen der Stadt Aachen","2021");
+          csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/sterbefalle-monatlich-2015_2022.csv", 9, ",", "Sterbefälle", "2015-2022");
+          csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/anzahl-der-arbeitslosen-in-der-stadteregion-aachen22.csv", 5, ";","Anzahl der Arbeitslosen", "2022");
+          csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/anzahl-der-arbeitssuchenden-in-der-stadteregion-aachen22.csv", 5, ";", "Anzahl der Arbeitssuchenden", "2022");
+          csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/geburten-monatlich-2015_2022.csv", 9, ",", "Geburten", "2015-2022");
+          csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/strassennamen.csv",4,",","Strassenliste der Stadt Aachen","2021");
         };
 
     }
