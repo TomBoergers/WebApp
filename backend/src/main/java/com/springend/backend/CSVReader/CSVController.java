@@ -27,6 +27,17 @@ public class CSVController {
         return new ResponseEntity<>(files, HttpStatus.OK);
     }
 
+    @GetMapping("/allNamesAndYears")
+    public ResponseEntity<String[][]> getNamesAndYears() {
+        try {
+            String[][] namesAndYears = csvService.namesAndYears();
+            return new ResponseEntity<>(namesAndYears, HttpStatus.OK);
+        }
+        catch (Exception e){
+            throw new RuntimeException();
+        }
+    }
+
 
 
     @GetMapping ("/{ID}")
