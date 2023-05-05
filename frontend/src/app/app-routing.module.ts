@@ -7,7 +7,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { TableComponent } from './pages/table/table.component';
 import {ZweiFaktorComponent} from "./pages/zwei-faktor/zwei-faktor.component";
 import { RegisterAdminComponent } from './pages/register-admin/register-admin.component';
-import { TableVornameComponent } from './pages/table/table-pages/table-vorname.component';
+import { TablePagesComponent } from './pages/table/table-pages/table-pages.component';
 
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
     {path: 'zweiFaktor', component: ZweiFaktorComponent},
     {path: 'registerAdmin', component:RegisterAdminComponent},
     {path: 'table', component: TableComponent},
-    {path: 'table/:id', component: TableVornameComponent}
+    {path: 'table/:id', component: TablePagesComponent}
 
 
 

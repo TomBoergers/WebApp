@@ -4,10 +4,10 @@ import {TableService} from "../../../services/table.service";
 
 @Component({
   selector: 'app-table-vorname',
-  templateUrl: './table-vorname.component.html',
-  styleUrls: ['./table-vorname.component.scss']
+  templateUrl: './table-pages.component.html',
+  styleUrls: ['./table-pages.component.scss']
 })
-export class TableVornameComponent {
+export class TablePagesComponent {
 
   tableData!: any[][];
   loadTableId = this.tableService.loadTableId;
