@@ -1,32 +1,32 @@
-
-
 <body>
     <app-navbar></app-navbar>
 
 
   <div class="container">
       <div class="topnav">
-        <input type="text" placeholder="Search..">
-        <button class="button">Datensatz verlinken</button>
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (input)="applyFilter()">
         <button class="button"><a routerLink="/table">Back to Home</a></button>
       </div>
-  </div>
-
-
-
-
 
 
     <table>
       <thead>
-      <tr>
-        <th *ngFor="let header of tableData[0]">{{ header }}</th>
-      </tr>
+        <tr>
+          <th *ngFor="let header of headers">{{ header }}</th>
+        </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let row of tableData.slice(1)">
-        <td *ngFor="let cell of row">{{ cell }}</td>
-      </tr>
+        <ng-container *ngIf="filteredTableData.length > 0; else noData">
+          <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData).slice(1)">
+            <td *ngFor="let cell of row">{{ cell }}</td>
+          </tr>
+        </ng-container>
+        <ng-template #noData>
+          <tr>
+            <td [attr.colspan]="headers.length">No data available</td>
+          </tr>
+        </ng-template>
       </tbody>
     </table>
-  </body>
+  </div>
+</body>

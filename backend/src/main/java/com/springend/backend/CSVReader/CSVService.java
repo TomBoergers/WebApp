@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -63,5 +64,19 @@ public class CSVService {
         catch (Exception e) {
             throw new Exception("Kaputt");
         }
+    }
+    public String[][] namesAndYears() {
+            List<CSVFile> files = csvRepo.findAll();
+            CSVFile csvfile;
+            String[][] namesAndYears = new String[files.size()][3];
+            for (int i = 0; i < files.size(); i++) {
+                csvfile = files.get(i);
+
+
+                namesAndYears[i][0] = String.valueOf(csvfile.getID());
+                namesAndYears[i][1] = csvfile.getName();
+                namesAndYears[i][2] = csvfile.getJahr();
+        }
+            return namesAndYears;
     }
 }
