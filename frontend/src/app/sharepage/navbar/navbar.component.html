@@ -2,14 +2,23 @@
     <div class="max-width">
         <div class="logo"><a href="">Project<span>F</span></a></div>
 
-    <ul class="menu">
+    <ul *ngIf="menuType==='default'" class="menu">
+        <li><a routerLink="">Home</a></li>
+        <li><a routerLink="/login">Login</a></li>
+        <li><a routerLink="/register">Registrierung</a></li>
+
+    </ul>
+
+      <ul *ngIf="menuType==='user'" class="menu">
         <li><a routerLink="">Home</a></li>
         <li><a routerLink="/table">Tabelle</a></li>
         <li><a routerLink="/profile">Profile</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/register">Registrierung</a></li>
         <li><a routerLink="/zweiFaktor">Zwei-Faktor</a></li>
         <li><a routerLink="/registerAdmin">AdminRegister</a></li>
+        <button  (click)="logout()">Logout</button>
     </ul>
+
+
+
     </div>
 </nav>

@@ -6,7 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./zwei-faktor.component.scss']
 })
 export class ZweiFaktorComponent {
-  userZweiFaktor(){
-
+  userZweiFaktor() {
+    
   }
+
+
 }
