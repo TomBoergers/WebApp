@@ -18,10 +18,12 @@ export class LoginComponent {
     this.loginuserService.loginUser(this.user).subscribe(
       (response) => {
         console.log("Anmeldung Erfolgreich");
+        alert("Anmeldung Erfolgreich")
         this.router.navigate(['/zweiFaktor']);
       },
       error => {
         console.log("Anmeldung Fehlgeschlagen");
+        alert("Anmeldung Fehlgeschlagen. E-Mail oder Passwort falsch")
       }
     );
   }
