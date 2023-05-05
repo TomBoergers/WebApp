@@ -27,19 +27,13 @@ public class CSVController {
         return new ResponseEntity<>(files, HttpStatus.OK);
     }
 
-
-
-    @GetMapping ("/{ID}")
+    @GetMapping("/{ID}")
     public ResponseEntity<String[][]> showDataByID(@PathVariable long ID) {
         try {
             String[][] data = csvService.showCSV(ID);
             return new ResponseEntity<>(data, HttpStatus.OK);
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
-
 }
