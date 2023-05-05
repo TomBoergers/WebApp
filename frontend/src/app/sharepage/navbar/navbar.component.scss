@@ -7,7 +7,7 @@
 }
 
 .navbar {
-    
+
     width: 100%;
     padding: 10px 0;
     font-family: "Ubuntu", sans-serif;
@@ -63,4 +63,21 @@
 
 .navbar .menu li a:hover {
     color: orange;
+}
+
+button  {
+
+  cursor: pointer;
+  padding: 6px;
+  background-color: #f09819;
+  color: white;
+  border-radius: 10px;
+
+ &:hover{
+   background-color: black
+ ;
+   color: orange;
+ }
+
+
 }

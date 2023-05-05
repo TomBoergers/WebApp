@@ -31,7 +31,7 @@ export class RegisterComponent {
     }
 
 
-    url: string|null|ArrayBuffer  ="assets/"
+    url: string|null|ArrayBuffer  ="assets/profile/WhatsApp-Profilbild-mit-Fliege.png"
     onFileSelected(files: FileList | null) {
       if (files) {
         var reader = new FileReader()
