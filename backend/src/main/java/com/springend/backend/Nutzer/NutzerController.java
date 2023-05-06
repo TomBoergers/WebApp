@@ -45,6 +45,16 @@ public class NutzerController {
             }
         }
 
+        @PostMapping("/findUser")
+        public ResponseEntity<Object> findNutzer(@RequestBody Nutzer nutzer) {
+            try {
+                Nutzer foundNutzer = nutzerService.findNutzerByEmail(nutzer.getEmail());
+                return new ResponseEntity<>(foundNutzer, HttpStatus.OK);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+
         @GetMapping("/all")
         public ResponseEntity<List<Nutzer>> getNutzers() {
             List<Nutzer> nutzers = nutzerService.findAllNutzers();
