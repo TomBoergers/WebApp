@@ -8,7 +8,9 @@ import {Router} from "@angular/router";
 })
 export class NavbarComponent implements OnInit{
 
-  menuType:String = 'default';
+  menuType:string = 'default';
+
+
 
 constructor(private route:Router)  {}
 
@@ -16,7 +18,6 @@ constructor(private route:Router)  {}
 ngOnInit() {
   this.route.events.subscribe((val:any)=>{
       if(localStorage.getItem('user')){
-        console.warn("Logged in")
         this.menuType ="user"
       }
       else {

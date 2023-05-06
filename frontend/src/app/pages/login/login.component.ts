@@ -24,6 +24,8 @@ ngOnInit() {
     console.warn(data);
     this.loginuserService.loginUser(data)
 
+
+
   }
 
 
