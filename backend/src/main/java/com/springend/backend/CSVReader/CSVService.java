@@ -13,6 +13,7 @@ public class CSVService {
     private final CSVRepo csvRepo;
 
     public CSVService(CSVRepo csvRepo){this.csvRepo = csvRepo;}
+
     public List<CSVFile> findAllCSV() {
         return csvRepo.findAll();
     }
@@ -29,12 +30,10 @@ public class CSVService {
 
         String line = "";
 
-
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filepath));
             while ((line = reader.readLine()) != null) {
                 records.add(line);
-
             }
         }
         catch (Exception e) {
@@ -58,25 +57,24 @@ public class CSVService {
                     arrayToReturn[i][j] = data[j];
                 }
             }
-
          return arrayToReturn;
         }
         catch (Exception e) {
             throw new Exception("Kaputt");
         }
     }
+
     public String[][] namesAndYears() {
-            List<CSVFile> files = csvRepo.findAll();
-            CSVFile csvfile;
-            String[][] namesAndYears = new String[files.size()][3];
-            for (int i = 0; i < files.size(); i++) {
-                csvfile = files.get(i);
+        List<CSVFile> files = csvRepo.findAll();
+        CSVFile csvfile;
+        String[][] namesAndYears = new String[files.size()][3];
+        for (int i = 0; i < files.size(); i++) {
+            csvfile = files.get(i);
 
-
-                namesAndYears[i][0] = String.valueOf(csvfile.getID());
-                namesAndYears[i][1] = csvfile.getName();
-                namesAndYears[i][2] = csvfile.getJahr();
+            namesAndYears[i][0] = csvfile.getName();
+            namesAndYears[i][1] = csvfile.getJahr();
+            namesAndYears[i][2] = String.valueOf(csvfile.getID());
         }
-            return namesAndYears;
+        return namesAndYears;
     }
 }

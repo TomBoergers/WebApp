@@ -1,28 +1,33 @@
 package com.springend.backend.Nutzer;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.springend.backend.ZweiFaktor.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
 @RequestMapping("/nutzer")
 public class NutzerController {
 
         private final NutzerService nutzerService;
+    private final EmailService emailService;
 
-        public NutzerController(NutzerService nutzerService) {
+    public NutzerController(NutzerService nutzerService, EmailService emailService) {
             this.nutzerService = nutzerService;
-        }
+        this.emailService = emailService;
+    }
 
         @PostMapping("/login")
         public ResponseEntity<Object> login(@RequestBody Nutzer nutzer) {
             System.out.println(nutzer);
             try {
                 Nutzer authenticatedNutzer = nutzerService.authenticateNutzer(nutzer.getEmail(), nutzer.getPassword());
+                int code = ThreadLocalRandom.current().nextInt(100000, 999999);
+                emailService.codeVerschicken(nutzer.getEmail(), String.valueOf(code));
                 return ResponseEntity.ok().build();
             } catch (Exception e) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -58,4 +63,8 @@ public class NutzerController {
             nutzerService.deleteNutzer(ID);
             return new ResponseEntity<>(HttpStatus.OK);
         }
-}
+
+
+    }
+
+

@@ -1,57 +1,33 @@
-
-
 <body>
   <app-navbar></app-navbar>
 
 
 <div class="container">
     <div class="topnav">
-      <input type="text" placeholder="Search..">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (input)="applyFilter()">
       <button class="button">Datensatz verlinken</button>
       <button class="button"><a routerLink="/table">Back to Home</a></button>
     </div>
 </div>
 
 
-
-
-
-
   <table>
-    <tr>
-      <th>Tablename</th>
-      <th>Years</th>
-      <th>Options</th>
-    </tr>
-    <tr>
-      <td>Vornamen von Neugeborenen in der Stadt Aachen</td>
-      <td></td>
-      <td><button (click)="openTable(1)" >open</button></td>
-    </tr>
-    <tr>
-      <td>Sterbefälle</td>
-      <td></td>
-      <td><button (click)="openTable(2)" >open</button></td>
-    </tr>
-    <tr>
-      <td>Anzahl der Arbeitslosen</td>
-      <td></td>
-      <td><button (click)="openTable(3)" >open</button></td>
-    </tr>
-    <tr>
-      <td>Anzahl der Arbeitssuchenden</td>
-      <td></td>
-      <td><button (click)="openTable(4)" >open</button></td>
-    </tr>
-    <tr>
-      <td>Geburten</td>
-      <td></td>
-      <td><button (click)="openTable(5)" >open</button></td>
-    </tr>
-    <tr>
-      <td>Strassennamen</td>
-      <td></td>
-      <td><button (click)="openTable(6)" >open</button></td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Tablename</th>
+        <th>Years</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td><button (click)="openTable(row[2])">Open</button></td>
+      </tr>
+      <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">
+        <td colspan="3">No data available</td>
+      </tr>
+    </tbody>
   </table>
 </body>
