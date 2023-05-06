@@ -48,9 +48,5 @@ public class BackendApplication {
           csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/geburten-monatlich-2015_2022.csv", 9, ",", "Geburten", "2015-2022");
           csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/strassennamen.csv",4,",","Strassenliste der Stadt Aachen","2021");
         };
-
     }
-
-
-
 }
