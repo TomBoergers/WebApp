@@ -14,7 +14,8 @@ import {LoginuserService} from "../../services/loginuser.service";
 export class ProfileComponent implements OnInit{
   email: string = '';
   dateOfBirth: string = '';
-  userName: string = '';
+  userVorname: string = '';
+  userNachname: string = '';
 
   foundUser : User = new User();
 
@@ -26,7 +27,10 @@ export class ProfileComponent implements OnInit{
     if(localStorage.getItem('user')) {
       let userStore = localStorage.getItem('user');
       let userData = userStore && JSON.parse(userStore);
-      this.userName = userData.email;
+      this.userVorname = userData.vorname;
+      this.userNachname = userData.nachname;
+      this.email = userData.email;
+      this.dateOfBirth = userData.geburtsdatum;
       this.user = this.loginuserService.user
 
 

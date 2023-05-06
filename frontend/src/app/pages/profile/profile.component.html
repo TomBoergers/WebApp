@@ -1,8 +1,9 @@
 <body>
   <app-navbar></app-navbar>
-<div class="section" id="profilblockTitel" style="text-align:left; display: flex; flex-direction: row; align-items: center;">
-  <div style="display: flex; flex-direction: column; align-items: center;">
-    <img [src]="url" class="profilePicture" alt="" height="100px" width="auto">
+<div class="section" id="profilblockTitel"    >
+
+  <div class="upper-card">
+    <img [src]="url" class="profilePicture"  height="100px" width="auto">
 
     <label class="custom-file-upload" >
       Profilbild hochladen
@@ -11,20 +12,24 @@
              accept="image/*"
              (change)="onFileSelected(imageInput.files)">
     </label>
+    <h1 class="name-header"> {{userVorname +" " + userNachname}} </h1>
+
+
+
   </div>
-  <h1 style="transform:translateY(-30%) translateX(+75%); margin-top: 20px; "> Nutzername </h1>
+
 </div>
 
 
 <div class="section" id="profilblock">
   <div class="profile-input">
     <p class="prompt">Email:</p>
-    <p class="displayed-input" id="email">{{userName}}</p>
+    <p class="displayed-input" id="email">{{email}}</p>
     <button class="edit-button" (click)="editEmail()">Ändern..</button>
   </div>
   <div class="profile-input">
     <p class="prompt">Geburtsdatum:</p>
-    <p class="displayed-input" id="birthdate">01.01.1901</p>
+    <p class="displayed-input" id="birthdate">{{dateOfBirth}}</p>
     <button class="edit-button" (click)="editDateOfBirth()">Ändern..</button>
   </div>
 </div>

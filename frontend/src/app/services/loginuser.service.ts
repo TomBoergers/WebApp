@@ -19,11 +19,11 @@ export class LoginuserService {
   constructor(private httpClient: HttpClient, private router:Router) { }
 
   loginUser(user: User) {
-        this.httpClient.post('http://localhost:8080/nutzer/login', user, {observe:'response'}).subscribe((result)=> {
+        this.httpClient.post('http://localhost:8080/nutzer/login', user, {observe:"response"}).subscribe((result)=> {
 
             if (result) {
               this.isLoggedIn.next(true);
-              localStorage.setItem('user', JSON.stringify(user))
+              this.userData(user);
               alert("Login Erfolgreich. Sie werden nun zur Zwei-Faktor Authentifizierung weitergeleitet")
               this.router.navigate(['zweiFaktor'])
             }
@@ -33,6 +33,14 @@ export class LoginuserService {
         );
 
   }
+
+  userData(user:User){
+      this.httpClient.post('http://localhost:8080/nutzer/findUser', user).subscribe((result)=>{
+        localStorage.setItem('user', JSON.stringify(result))
+      });
+    }
+
+
 
 
   reloadPage() {
