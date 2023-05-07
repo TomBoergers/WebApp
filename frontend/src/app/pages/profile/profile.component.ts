@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import { User } from 'src/app/classes/user';
 import {HttpClient} from "@angular/common/http";
 import {LoginuserService} from "../../services/loginuser.service";
+import {TableService} from "../../services/table.service";
+import {Router} from "@angular/router";
 
 
 
@@ -11,15 +12,16 @@ import {LoginuserService} from "../../services/loginuser.service";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
   email: string = '';
   dateOfBirth: string = '';
   userVorname: string = '';
   userNachname: string = '';
 
-  foundUser : User = new User();
+  tableData: any[][] = []
+  tableID!: number;
 
-  constructor(private httpClient: HttpClient, private loginuserService: LoginuserService){
+  constructor(private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
   }
 
 
@@ -33,18 +35,9 @@ export class ProfileComponent implements OnInit{
       this.dateOfBirth = userData.geburtsdatum;
       this.user = this.loginuserService.user
 
-
-
-
-
-
-
+      this.favoriteTable();
     }
-
-
-
-    }
-
+  }
 
   editEmail(): void {
     const newEmail = prompt('Deine Email:');
@@ -70,6 +63,19 @@ export class ProfileComponent implements OnInit{
         this.url = fileReader.result;
       }
     }
+  }
+
+  favoriteTable() {
+    this.tableID = parseInt(localStorage.getItem('favoriteTable') || '0');
+    console.log(this.tableID);
+    return this.httpClient.get<any[][]>(`http://localhost:8080/CSV/${this.tableID}`).subscribe(data => {
+      this.tableData = data;
+    });
+  }
+
+  openTable(tableId: number) {
+    this.tableID = tableId;
+    this.router.navigate(['/table', tableId]);
   }
 
   protected readonly onselect = onselect;

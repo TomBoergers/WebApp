@@ -44,9 +44,7 @@ public class CSVController {
         try {
             String[][] data = csvService.showCSV(ID);
             return new ResponseEntity<>(data, HttpStatus.OK);
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

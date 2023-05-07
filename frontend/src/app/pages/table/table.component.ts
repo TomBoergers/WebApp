@@ -10,10 +10,11 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-  tableData: any[][] =[];
+  tableData: any[][] = [];
   filteredTableData: any[][] = [];
   searchTerm: String = "";
   tableID!: number;
+  favorites: any[] = [];
 
   constructor(private http: HttpClient, private tableService: TableService, private router: Router) {
   }
@@ -61,5 +62,25 @@ export class TableComponent implements OnInit {
       this.tableData = data;
       this.filteredTableData = data;
     })
+  }
+
+  addToFavorites(tableId: number) {
+    if (!localStorage.getItem('favoriteTable')) {
+      localStorage.setItem('favoriteTable', tableId.toString());
+      this.favorites = [tableId];
+    } else {
+      const favorites = JSON.parse(localStorage.getItem('favoriteTable')!);
+      if (favorites.length === 1) {
+        alert('Es kann nur ein Favorit gespeichert werden.');
+      } else {
+        favorites.push(tableId);
+        localStorage.setItem('favoriteTable', tableId.toString());
+        this.favorites = favorites;
+      }
+    }
+  }
+
+  removeFavorites() {
+    localStorage.removeItem('favoriteTable');
   }
 }

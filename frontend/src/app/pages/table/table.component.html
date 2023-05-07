@@ -5,8 +5,7 @@
 <div class="container">
     <div class="topnav">
       <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (input)="applyFilter()">
-      <button class="button">Datensatz verlinken</button>
-
+      <button (click)="removeFavorites()">Favorit löschen</button>
     </div>
 </div>
 
@@ -23,7 +22,9 @@
       <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
         <td>{{ row[0] }}</td>
         <td>{{ row[1] }}</td>
-        <td><button (click)="openTable(row[2])">Open</button></td>
+        <td>
+          <button (click)="openTable(row[2])">Open</button>
+        </td>
         <td>
           <ng-container *ngIf="!row[3]">
             <button (click)="editRow(row)">Edit</button>
@@ -36,9 +37,15 @@
             </form>
           </ng-container>
         </td>
+        <td>
+          <button (click)="addToFavorites(row[2])">
+            <i class="far fa-heart" *ngIf="!favorites.includes(row[2])"></i>
+            <i class="fas fa-heart" *ngIf="favorites.includes(row[2])"></i>
+          </button>
+        </td>
       </tr>
       <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">
-        <td colspan="4">No data available</td>
+        <td colspan="5">No data available</td>
       </tr>
     </tbody>
   </table>
