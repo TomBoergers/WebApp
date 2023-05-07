@@ -1,6 +1,8 @@
 package com.springend.backend.sysAdmin;
 
+
 import com.springend.backend.Nutzer.Nutzer;
+import com.springend.backend.Nutzer.NutzerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/SysAdmin")
 public class SysAdminController {
+
+
 
     private final SysAdminService SysAdminService;
 
@@ -26,6 +30,18 @@ public class SysAdminController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+    @PostMapping("/findAdmin")
+    public ResponseEntity<Object> findAdmin(@RequestBody SysAdmin sysAdmin) {
+        try {
+            SysAdmin foundAdmin = SysAdminService.findAdminByEmail(sysAdmin.getEmail());
+            return new ResponseEntity<>(foundAdmin, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+
 
     @GetMapping("/all")
     public ResponseEntity<List<SysAdmin>> getSysAdmin() {

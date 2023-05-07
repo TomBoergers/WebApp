@@ -8,12 +8,14 @@ import { TableComponent } from './pages/table/table.component';
 import {ZweiFaktorComponent} from "./pages/zwei-faktor/zwei-faktor.component";
 import { RegisterAdminComponent } from './pages/register-admin/register-admin.component';
 import { TablePagesComponent } from './pages/table/table-pages/table-pages.component';
+import {LoginAdminComponent} from "./pages/login-admin/login-admin/login-admin.component";
 import {AuthGuard} from "./services/auth.guard";
 
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'login', component: LoginComponent},
+    {path: 'login-admin', component:LoginAdminComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
     {path: 'zweiFaktor', component: ZweiFaktorComponent},
