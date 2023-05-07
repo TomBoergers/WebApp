@@ -1,22 +1,19 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {Router} from "@angular/router";
 import { User } from '../classes/user';
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginuserService {
-  private baseUrl = 'http://localhost:8080'
-  isLoggedIn = new BehaviorSubject<boolean>(false);
 
+  isLoggedIn = new BehaviorSubject<boolean>(false);
   user: User = new User();
 
-
-
-  constructor(private httpClient: HttpClient, private router:Router) { }
+  constructor(private httpClient: HttpClient, private router:Router) {
+  }
 
   loginUser(user: User) {
         this.httpClient.post('http://localhost:8080/nutzer/login', user, {observe:"response"}).subscribe((result)=> {
@@ -29,7 +26,6 @@ export class LoginuserService {
             }
           },
             error => { alert("Anmeldung fehlgeschlagen")}
-
         );
 
   }
@@ -48,6 +44,4 @@ export class LoginuserService {
       this.isLoggedIn.next(true)
     }
   }
-
-
 }
