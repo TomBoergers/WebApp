@@ -1,8 +1,7 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {Router} from "@angular/router";
-import { User } from '../classes/user';
 import {SysAdmin} from "../classes/sys-admin";
 
 
@@ -10,29 +9,27 @@ import {SysAdmin} from "../classes/sys-admin";
   providedIn: 'root'
 })
 export class LoginadminService {
-  private baseUrl = 'http://localhost:8080'
-  isLoggedIn = new BehaviorSubject<boolean>(false);
 
-  user: User = new User();
+  isLoggedIn = new BehaviorSubject<boolean>(false);
   admin: SysAdmin = new SysAdmin();
 
 
 
-  constructor(private httpClient: HttpClient, private router:Router) { }
+  constructor(private httpClient: HttpClient, private router:Router) {
 
-  loginAdmin(user: User) {
+  }
 
+  loginAdmin(admin: SysAdmin) {
 
-    this.httpClient.post('http://localhost:8080/SysAdmin/login', user, {observe:"response"}).subscribe((result)=> {
+    this.httpClient.post('http://localhost:8080/SysAdmin/login', admin, {observe:"response"}).subscribe((result)=> {
         if (result) {
           this.isLoggedIn.next(true);
-          this.adminData(user);
+          this.adminData(admin);
           alert("Login Erfolgreich. Sie werden nun zur Zwei-Faktor Authentifizierung weitergeleitet")
           this.router.navigate(['zweiFaktor'])
         }
       },
       error => { alert("Anmeldung fehlgeschlagen")}
-
     );
 
   }
@@ -48,8 +45,5 @@ export class LoginadminService {
       this.isLoggedIn.next(true)
     }
   }
-
-
-
 }
 

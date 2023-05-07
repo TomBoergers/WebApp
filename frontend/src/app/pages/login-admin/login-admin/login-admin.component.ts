@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/classes/user';
-import { LoginuserService } from 'src/app/services/loginuser.service';
-import {Router} from "@angular/router";
 import {LoginadminService} from "../../../services/loginadmin.service";
 import {SysAdmin} from "../../../classes/sys-admin";
 
@@ -16,7 +13,9 @@ export class LoginAdminComponent implements  OnInit{
 
 
 
-  constructor(private loginadminService: LoginadminService, private router: Router){}
+  constructor(private loginadminService: LoginadminService) {
+
+  }
   ngOnInit() {
     this.loginadminService.reloadPage()
   }
@@ -24,9 +23,6 @@ export class LoginAdminComponent implements  OnInit{
   adminLogin(data: SysAdmin){
     console.warn(data);
     this.loginadminService.loginAdmin(data)
-
-
-
   }
 
   protected readonly SysAdmin = SysAdmin;
