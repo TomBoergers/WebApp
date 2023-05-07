@@ -17,7 +17,7 @@ const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'login-admin', component:LoginAdminComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+    {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]  },
     {path: 'zweiFaktor', component: ZweiFaktorComponent},
     {path: 'registerAdmin', component:RegisterAdminComponent},
     {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
