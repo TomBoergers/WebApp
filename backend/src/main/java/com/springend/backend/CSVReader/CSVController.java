@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/CSV")
@@ -47,6 +48,19 @@ public class CSVController {
 
         catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @PostMapping("/editTable/{ID}")
+    public ResponseEntity<String[][]> editTableByID(@PathVariable long ID, @RequestBody Map<String, String> requestData) {
+        String newName = requestData.get("newName");
+        String newYear = requestData.get("newYear");
+
+        try {
+            String[][] updatedTable = csvService.updateTable(ID, newName, newYear);
+            return new ResponseEntity<>(updatedTable, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
     }
 }

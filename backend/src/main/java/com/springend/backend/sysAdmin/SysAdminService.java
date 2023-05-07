@@ -39,6 +39,10 @@ public class SysAdminService {
         }
     }
 
+    public SysAdmin findAdminByEmail(String email) {
+        return SysAdminRepo.findSysAdminByEmail(email);
+    }
+
     public void deleteSysAdmin(Long userID) {
         SysAdminRepo.deleteById(userID);
     }

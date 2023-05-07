@@ -1,7 +1,7 @@
 <body>
   <app-navbar></app-navbar>
 
-<div>
+
 
 
 <form (ngSubmit)="sysAdminRegister()">
@@ -16,8 +16,6 @@
           <label for="nachname" class="form-label">Nachname: </label>
           <input type="name" [(ngModel)]="SysAdmin.nachname" [ngModelOptions]="{standalone: true}" class="" id="nachname" placeholder="Nachname">
         </div>
-        <label for="birthday">Birthday:</label>
-        <input type="date" [(ngModel)]="SysAdmin.geburtsdatum" [ngModelOptions]="{standalone: true}" class=""id="birthday" name="birthday">
 
         <div class="mb-3">
           <label for="email" class="form-label">Email address: </label>
@@ -34,4 +32,3 @@
       </div>
       </div>
     </form>
-

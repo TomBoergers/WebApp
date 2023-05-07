@@ -8,24 +8,29 @@ import {Router} from "@angular/router";
 })
 export class NavbarComponent implements OnInit{
 
-  menuType:String = 'default';
+  menuType:string = 'default';
+
+
 
 constructor(private route:Router)  {}
 
 
 ngOnInit() {
   this.route.events.subscribe((val:any)=>{
-      if(localStorage.getItem('user')){
-        console.warn("Logged in")
+
+      if(localStorage.getItem('admin')){
+        this.menuType ="admin"
+      }
+      else if(localStorage.getItem('user')){
         this.menuType ="user"
       }
       else {
-        console.warn("Default")
         this.menuType ="default"
       }
   })
 }
   logout(){
+    localStorage.removeItem('admin')
     localStorage.removeItem('user')
     this.route.navigate([''])
 

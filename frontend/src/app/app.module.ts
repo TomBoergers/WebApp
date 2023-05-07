@@ -15,6 +15,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
 import { RegisterAdminComponent } from './pages/register-admin/register-admin.component';
 import { TablePagesComponent } from './pages/table/table-pages/table-pages.component';
+import { LoginAdminComponent } from './pages/login-admin/login-admin/login-admin.component';
+
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { TablePagesComponent } from './pages/table/table-pages/table-pages.compo
     ProfileComponent,
     ZweiFaktorComponent,
     RegisterAdminComponent,
-    TablePagesComponent
+    TablePagesComponent,
+    LoginAdminComponent
 
   ],
   imports: [

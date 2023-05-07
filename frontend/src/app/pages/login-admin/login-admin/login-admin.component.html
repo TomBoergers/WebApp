@@ -1,0 +1,24 @@
+
+
+
+<body>
+<app-navbar></app-navbar>
+<form (ngSubmit)="adminLogin(admin)">
+  <h3> Admin Login </h3>
+  <div class="container">
+    <div >
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address:</label>
+        <input type="email" [(ngModel)]="admin.email" [ngModelOptions]="{standalone: true}" class="" id="eMail" placeholder="name@example.com">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Passwort:</label>
+        <input type="password" [(ngModel)]="admin.password" [ngModelOptions]="{standalone: true}" class="" id="password" placeholder="Passwort">
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+      <button onClick="window.location.href = '/register'" class="but2" >Sign up</button>
+      <a routerLink="/login"> Login as User</a>
+    </div>
+  </div>
+</form>
+</body>

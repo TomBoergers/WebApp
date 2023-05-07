@@ -9,9 +9,9 @@ import { SysAdmin } from '../classes/sys-admin';
 export class RegisteradminService {
   private baseUrl = 'http://localhost:8080'
   constructor(private httpClient: HttpClient) { }
-  
+
   registerSystemAdmin(sysAdmin: SysAdmin): Observable<object>{
-    return this.httpClient.post('http://localhost:8080/nutzer/register', sysAdmin);
+    return this.httpClient.post('http://localhost:8080/SysAdmin/add', sysAdmin);
   }
 
 

@@ -1,13 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { User } from 'src/app/classes/user';
+import {HttpClient} from "@angular/common/http";
+import {LoginuserService} from "../../services/loginuser.service";
+
+
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
   email: string = '';
   dateOfBirth: string = '';
+  userVorname: string = '';
+  userNachname: string = '';
+
+  foundUser : User = new User();
+
+  constructor(private httpClient: HttpClient, private loginuserService: LoginuserService){
+  }
+
+
+  ngOnInit() {
+    if(localStorage.getItem('user')) {
+      let userStore = localStorage.getItem('user');
+      let userData = userStore && JSON.parse(userStore);
+      this.userVorname = userData.vorname;
+      this.userNachname = userData.nachname;
+      this.email = userData.email;
+      this.dateOfBirth = userData.geburtsdatum;
+      this.user = this.loginuserService.user
+
+
+
+
+
+
+
+    }
+
+
+
+    }
+
 
   editEmail(): void {
     const newEmail = prompt('Deine Email:');

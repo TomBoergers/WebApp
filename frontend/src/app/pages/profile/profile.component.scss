@@ -1,5 +1,5 @@
  body {
-    background-image: url("Pictures/architecture-building-religion-landmark-facade-church-591946-pxhere.com.jpg");
+    background-color: #080710;
     background-repeat: no-repeat;
     height: 100%;
     overflow: hidden;
@@ -25,15 +25,25 @@
   border: none;
 }
 
-.section h1 {
-  text-align: justify;
+.section .name-header{
   color: orange;
+  margin-top: 20px;
+}
+
+.section h1 {
 
 }
 
 .section h4 {
   text-align: left;
   color: orange;
+}
+
+
+.upper-card{
+  display: flex;
+
+
 }
 
 #profilblockTitel {
@@ -76,7 +86,7 @@
 }
 
 .profilePicture{
-  border-radius: 50px;
+  border-radius: 2%;
   padding: 2px;
   background-color: orange;
 
@@ -127,12 +137,17 @@
  }
 
  .custom-file-upload {
-  margin-top: 0;
-  font-size: 14px;
 
-  padding: 10px;
+   padding: 10px;
   background-color: orange;
   border-radius: 4px;
+   text-align: center;
+   width: 15%;
+   height: 10%;
+   margin-right: 70px;
+   margin-left: 10px;
+   margin-top: 2%;
+
  }
 
  .custom-file-upload:hover {

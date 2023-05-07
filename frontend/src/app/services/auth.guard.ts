@@ -9,16 +9,20 @@ import {LoginuserService} from "./loginuser.service";
 })
 export class AuthGuard implements CanActivate {
 
+
   constructor(private loginService: LoginuserService) {
   }
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (localStorage.getItem("user")){
+    if (localStorage.getItem("user")) {
       return true;
     }
+    else if (localStorage.getItem("admin")){
+      return true;
+    }
+
     return this.loginService.isLoggedIn;
   }
-
 }
