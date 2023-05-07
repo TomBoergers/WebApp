@@ -8,7 +8,6 @@ import java.util.List;
 
 
 @Entity
-
 public class CSVFile {
 
 
@@ -30,11 +29,9 @@ public class CSVFile {
     private String jahr;
 
 
-
-
     public CSVFile() {
-
     }
+
     public CSVFile(String filepath, List<String> records,int amountOfFields, String delimiter, String name, String jahr) {
     this.filepath = filepath;
     this.records = records;

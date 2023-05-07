@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-table',
@@ -12,18 +13,18 @@ export class TableComponent implements OnInit {
   tableData: any[][] =[];
   filteredTableData: any[][] = [];
   searchTerm: String = "";
+  tableID!: number;
 
   constructor(private http: HttpClient, private tableService: TableService, private router: Router) {
   }
 
   ngOnInit() {
-    this.http.get<any[][]>("http://localhost:8080/CSV/allNamesAndYears").subscribe(data => {
-      this.tableData = data;
-    });
+    this.refreshTableData();
   }
 
   openTable(tableId: number) {
     this.tableService.loadTableId = tableId;
+    this.tableID = tableId;
     this.router.navigate(['/table', tableId]);
   }
 
@@ -37,5 +38,28 @@ export class TableComponent implements OnInit {
     }
   }
 
-  protected readonly length = length;
+  editRow(row: any[]) {
+    row[3] = true;
+    this.tableID = row[2];
+  }
+
+  submitEditRow(form: NgForm, tableId: number) {
+    const newName = form.value.newName;
+    const newYear = form.value.newYear;
+
+    this.http.post<any[][]>("http://localhost:8080/CSV/editTable/" + tableId, { newName: newName, newYear: newYear }).subscribe(response => {
+      const updatedRowIndex = this.tableData.findIndex(row => row[2] === tableId);
+      this.tableData[updatedRowIndex][0] = newName;
+      this.tableData[updatedRowIndex][1] = newYear;
+
+      this.refreshTableData();
+    });
+  }
+
+  private refreshTableData() {
+    this.http.get<any[][]>("http://localhost:8080/CSV/allNamesAndYears").subscribe(data => {
+      this.tableData = data;
+      this.filteredTableData = data;
+    })
+  }
 }
