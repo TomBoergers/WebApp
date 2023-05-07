@@ -10,5 +10,7 @@ public interface CSVRepo extends JpaRepository<CSVFile, Long> {
 
 
     CSVFile findCSVByID(long ID);
+    CSVFile findByJahr(String jahr);
+    CSVFile findByName(String name);
 
 }

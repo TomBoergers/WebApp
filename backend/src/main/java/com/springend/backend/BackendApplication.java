@@ -5,6 +5,8 @@ import com.springend.backend.CSVReader.CSVRepo;
 import com.springend.backend.CSVReader.CSVService;
 import com.springend.backend.Nutzer.Nutzer;
 import com.springend.backend.Nutzer.NutzerRepo;
+import com.springend.backend.XMLReader.XMLRepo;
+import com.springend.backend.XMLReader.XMLService;
 import com.springend.backend.sysAdmin.SysAdmin;
 import com.springend.backend.sysAdmin.SysAdminRepo;
 import org.springframework.boot.CommandLineRunner;
@@ -49,6 +51,13 @@ public class BackendApplication {
           csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/strassennamen.csv",4,",","Strassenliste der Stadt Aachen","2021");
         };
 
+    }
+
+    @Bean
+    CommandLineRunner init4(XMLService xmlService, XMLRepo xmlRepo){
+        return args -> {
+            xmlService.addXML("C:\\Users\\Slenk\\IdeaProjects\\gruppe-f2\\backend\\src\\main\\java\\com\\springend\\backend\\Datentabellen\\12411-14iz.xml", "SS", "1999");
+        };
     }
 
 
