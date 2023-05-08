@@ -32,37 +32,50 @@ export class ZweiFaktorComponent implements OnInit{
   }
 
   public userZweiFaktor() {
-    if(localStorage.getItem('admin')){
+    if(this.code === "1234"){
+      this.router.navigate([''])
+      console.log("Zwei-Faktor-Authentifizierung erfolgreich");
+    }
+    else if(localStorage.getItem('admin')){
     let adminStore=localStorage.getItem('admin');
     let adminData = adminStore && JSON.parse(adminStore);
     this.email = adminData.email;
+      this.zweiFaktorSerivce.codePruefenAdmin(this.email,this.code).subscribe(
+        (response: any) => {
+
+
+          this.router.navigate([''])
+          console.log("Zwei-Faktor-Authentifizierung erfolgreich");
+
+        },
+        (error:any) => {
+          console.log("Zwei-Faktor-Authentifizierung fehlgeschlagen");
+          alert("Zwei-Faktor-Authentifizierung fehlgeschlagen");
+        }
+      );
     }
 
     else if(localStorage.getItem('user')){
     let userStore=localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
     this.email = userData.email;
+      this.zweiFaktorSerivce.codePruefenUser(this.email,this.code).subscribe(
+        (response: any) => {
+
+
+          this.router.navigate([''])
+          console.log("Zwei-Faktor-Authentifizierung erfolgreich");
+
+        },
+        (error:any) => {
+          console.log("Zwei-Faktor-Authentifizierung fehlgeschlagen");
+          alert("Zwei-Faktor-Authentifizierung fehlgeschlagen");
+        }
+      );
     }
 
-    if(this.code === "1234"){
-      this.router.navigate([''])
-      console.log("Zwei-Faktor-Authentifizierung erfolgreich");
-    }
-    else{
-    this.zweiFaktorSerivce.codePruefen(this.email,this.code).subscribe(
-      (response: any) => {
 
 
-        this.router.navigate([''])
-        console.log("Zwei-Faktor-Authentifizierung erfolgreich");
-
-      },
-      (error:any) => {
-        console.log("Zwei-Faktor-Authentifizierung fehlgeschlagen");
-        alert("Zwei-Faktor-Authentifizierung fehlgeschlagen");
-      }
-    );
-    }
 
 
   }

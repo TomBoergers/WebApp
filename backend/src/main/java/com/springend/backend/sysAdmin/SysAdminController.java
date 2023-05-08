@@ -34,6 +34,7 @@ public class SysAdminController {
             SysAdmin authenticatedSysAdmin = SysAdminService.authenticateSysAdmin(sysAdmin.getEmail(), sysAdmin.getPassword());
             String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 999999));
             emailService.codeVerschicken(sysAdmin.getEmail(), code);
+            sysAdminCodes.put(sysAdmin.getEmail(), code);
             System.out.println(code);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
