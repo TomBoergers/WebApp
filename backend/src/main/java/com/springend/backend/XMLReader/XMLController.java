@@ -2,6 +2,7 @@ package com.springend.backend.XMLReader;
 
 import com.springend.backend.CSVReader.CSVFile;
 import com.springend.backend.CSVReader.CSVService;
+import jakarta.persistence.Id;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,16 @@ public class XMLController {
             String[][] namesAndYears = xmlService.xmlNamesAndYears();
             return new ResponseEntity<>(namesAndYears, HttpStatus.OK);
         } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+    @GetMapping("/{ID}")
+    public ResponseEntity<List<ArrayList<String>>> getRecordsByID (@PathVariable long ID){
+        try {
+            List<ArrayList<String>> data = xmlService.getRecordByID(ID);
+            return new ResponseEntity<>(data, HttpStatus.OK);
+        }
+        catch (Exception e){
             throw new RuntimeException();
         }
     }
