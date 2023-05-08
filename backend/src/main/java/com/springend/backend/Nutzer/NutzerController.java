@@ -1,10 +1,12 @@
 package com.springend.backend.Nutzer;
-
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import com.springend.backend.ZweiFaktor.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -15,24 +17,26 @@ public class NutzerController {
 
     private final NutzerService nutzerService;
     private final EmailService emailService;
+    private final HashMap<String, String> nutzerCodes = new HashMap<>();
 
     public NutzerController(NutzerService nutzerService, EmailService emailService) {
-            this.nutzerService = nutzerService;
+        this.nutzerService = nutzerService;
         this.emailService = emailService;
     }
 
-        @PostMapping("/login")
-        public ResponseEntity<Object> login(@RequestBody Nutzer nutzer) {
-            System.out.println(nutzer);
-            try {
-                Nutzer authenticatedNutzer = nutzerService.authenticateNutzer(nutzer.getEmail(), nutzer.getPassword());
-                int code = ThreadLocalRandom.current().nextInt(100000, 999999);
-                emailService.codeVerschicken(nutzer.getEmail(), String.valueOf(code));
-                return ResponseEntity.ok().build();
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestBody Nutzer nutzer, HttpServletResponse response, HttpSession session) {
+        try {
+            Nutzer authenticatedNutzer = nutzerService.authenticateNutzer(nutzer.getEmail(), nutzer.getPassword());
+            String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 999999));
+            emailService.codeVerschicken(nutzer.getEmail(), code);
+            nutzerCodes.put(nutzer.getEmail(),code);
+            System.out.println(code);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+    }
 
         @PostMapping("/register")
         public ResponseEntity<Object> register(@RequestBody Nutzer nutzer) {
@@ -73,6 +77,23 @@ public class NutzerController {
             nutzerService.deleteNutzer(ID);
             return new ResponseEntity<>(HttpStatus.OK);
         }
+
+        @PostMapping("/zweiFaktor")
+        public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
+            String email = body.get("email");
+            String eingabeCode = body.get("code");
+            System.out.println(email);
+            System.out.println(nutzerCodes.get(email));
+            System.out.println(eingabeCode);
+            // Überprüfe, ob der Code in der HashMap gespeichert wurde und ob er mit dem eingegebenen Code übereinstimmt
+            if (nutzerCodes.containsKey(email) && nutzerCodes.get(email).equals(eingabeCode)) {
+                return ResponseEntity.ok().build();
+            } else {
+                System.out.println("Code ist falsch");
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 
 
     }
