@@ -78,6 +78,15 @@ public class CSVService {
         return namesAndYears;
     }
 
+    public String[] nameAndYear(Long ID) {
+        CSVFile files = csvRepo.findCSVByID(ID);
+        String[] nameAndYear = new String[2];
+        nameAndYear[0] = files.getName();
+        nameAndYear[1] = files.getJahr();
+        return nameAndYear;
+    }
+
+
     public String[][] updateTable(Long ID, String newName, String newYear) {
         CSVFile csvFile = csvRepo.findCSVByID(ID);
         System.out.println(csvFile);

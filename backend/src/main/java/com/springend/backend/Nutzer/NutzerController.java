@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @RequestMapping("/nutzer")
 public class NutzerController {
 
-        private final NutzerService nutzerService;
+    private final NutzerService nutzerService;
     private final EmailService emailService;
 
     public NutzerController(NutzerService nutzerService, EmailService emailService) {

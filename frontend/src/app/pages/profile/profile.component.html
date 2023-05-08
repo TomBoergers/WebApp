@@ -3,7 +3,7 @@
 <div class="section" id="profilblockTitel"    >
 
   <div class="upper-card">
-    <img [src]="url" class="profilePicture"  height="100px" width="auto">
+    <img [src]="profileImageUrl" class="profilePicture"  height="100px" width="auto">
 
     <label class="custom-file-upload" >
       Profilbild hochladen
@@ -53,10 +53,9 @@
       </thead>
       <tbody>
       <tr *ngFor="let row of tableData">
-        <td>{{ row[0] }}</td>
-        <td>{{ row[1] }}</td>
+        <td>{{ row }}</td>
         <td>
-          <button (click)="openTable(row[2])">Open</button>
+          <button (click)="openTable(row[1])">Open</button>
         </td>
       </tr>
       <tr *ngIf="tableData.length === 0">

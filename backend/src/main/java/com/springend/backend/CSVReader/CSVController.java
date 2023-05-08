@@ -33,8 +33,17 @@ public class CSVController {
         try {
             String[][] namesAndYears = csvService.namesAndYears();
             return new ResponseEntity<>(namesAndYears, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
-        catch (Exception e){
+    }
+
+    @GetMapping("/nameAndYear/{ID}")
+    public ResponseEntity<String []> getNameAndYear(@PathVariable long ID) {
+        try {
+            String[] nameAndYear = csvService.nameAndYear(ID);
+            return new ResponseEntity<>(nameAndYear, HttpStatus.OK);
+        } catch (Exception e) {
             throw new RuntimeException();
         }
     }
