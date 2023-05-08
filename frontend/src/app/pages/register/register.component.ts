@@ -39,6 +39,9 @@ export class RegisterComponent {
         reader.onload = (event:Event) => {
           let fileReader = event.target as FileReader
           this.url = fileReader.result;
+          if(this.url != null) {
+            localStorage.setItem("picture", this.url.toString());
+          }
         }
     }
   }

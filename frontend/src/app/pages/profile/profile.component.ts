@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {LoginuserService} from "../../services/loginuser.service";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
+import {parseJson} from "@angular/cli/src/utilities/json-file";
 
 
 
@@ -21,6 +22,9 @@ export class ProfileComponent implements OnInit {
   tableData: any[][] = []
   tableID!: number;
 
+  profileImageUrl!: string;
+
+
   constructor(private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
   }
 
@@ -34,6 +38,7 @@ export class ProfileComponent implements OnInit {
       this.email = userData.email;
       this.dateOfBirth = userData.geburtsdatum;
       this.user = this.loginuserService.user
+      this.showImage();
 
       this.favoriteTable();
     }
@@ -68,7 +73,7 @@ export class ProfileComponent implements OnInit {
   favoriteTable() {
     this.tableID = parseInt(localStorage.getItem('favoriteTable') || '0');
     console.log(this.tableID);
-    return this.httpClient.get<any[][]>(`http://localhost:8080/CSV/${this.tableID}`).subscribe(data => {
+    return this.httpClient.get<any[][]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
       this.tableData = data;
     });
   }
@@ -76,6 +81,16 @@ export class ProfileComponent implements OnInit {
   openTable(tableId: number) {
     this.tableID = tableId;
     this.router.navigate(['/table', tableId]);
+  }
+
+  showImage() {
+    const imageUrl = localStorage.getItem('picture');
+
+    if(imageUrl) {
+      this.profileImageUrl = imageUrl;
+    } else {
+      this.profileImageUrl = "frontend/src/assets/profile/WhatsApp-Profilbild-mit-Fliege.png";
+    }
   }
 
   protected readonly onselect = onselect;
