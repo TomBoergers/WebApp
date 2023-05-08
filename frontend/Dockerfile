@@ -1,18 +1,20 @@
 ######################
 # Build the Frontend #
 ######################
-FROM node:latest as build
+FROM node:16 as build
 
 WORKDIR /app
 COPY  package.json ./
 RUN npm install
 COPY . .
 RUN npm install -g @angular/cli
+RUN npm install rxjs
+RUN ng build --configuration production --output-path=/dist/frontend
 
 ################
 # Run in NGINX #
 ################
 FROM nginx:alpine
-COPY --from=build dist/frontend /usr/share/nginx/html
+COPY --from=build /dist/frontend /usr/share/nginx/html
 
 EXPOSE 80
