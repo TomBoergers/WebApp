@@ -140,7 +140,7 @@
 
    padding: 10px;
   background-color: orange;
-  border-radius: 4px;
+  border-radius: 7px;
    text-align: center;
    width: 15%;
    height: 10%;
@@ -152,6 +152,8 @@
 
  .custom-file-upload:hover {
   background-color: #fff;
+   text-decoration: underline;
+   cursor: crosshair;
  }
 
  .section .prompt {
