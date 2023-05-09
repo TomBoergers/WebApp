@@ -5,7 +5,7 @@
   <div class="container">
       <div class="topnav">
         <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (input)="applyFilter()">
-        <button class="button"><a routerLink="/table">Back to Home</a></button>
+        <button (click)="closeTable()">Back to Tables</button>
       </div>
 
 
@@ -17,8 +17,13 @@
       </thead>
       <tbody>
         <ng-container *ngIf="filteredTableData.length > 0; else noData">
-          <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData).slice(1)">
-            <td *ngFor="let cell of row">{{ cell }}</td>
+          <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData).slice(1); let rowIndex=index">
+            <td *ngFor="let cell of row; let colIndex=index"
+                (click)="editCell(rowIndex, colIndex)"
+                [attr.contenteditable]="editingCell[rowIndex][colIndex]"
+                (keydown.enter)="saveCell(rowIndex, colIndex, $event)"
+                (keydown.escape)="cancelCell(rowIndex, colIndex)">
+                {{ cell }}</td>
           </tr>
         </ng-container>
         <ng-template #noData>
