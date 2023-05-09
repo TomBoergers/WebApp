@@ -60,7 +60,7 @@ public class CSVService {
          return arrayToReturn;
         }
         catch (Exception e) {
-            throw new Exception("Kaputt");
+            throw new Exception("Inhalt onnte nicht in ein Array aumgwandelt werden.");
         }
     }
 

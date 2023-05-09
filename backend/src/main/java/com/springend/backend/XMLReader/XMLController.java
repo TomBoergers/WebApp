@@ -39,9 +39,9 @@ public class XMLController {
         }
     }
     @GetMapping("/{ID}")
-    public ResponseEntity<List<ArrayList<String>>> getRecordsByID (@PathVariable long ID){
+    public ResponseEntity<String[][]> getRecordsByID (@PathVariable long ID){
         try {
-            List<ArrayList<String>> data = xmlService.getRecordByID(ID);
+            String[][] data = xmlService.showXML(ID);
             return new ResponseEntity<>(data, HttpStatus.OK);
         }
         catch (Exception e){

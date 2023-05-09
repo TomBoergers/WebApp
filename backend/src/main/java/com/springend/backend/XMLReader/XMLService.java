@@ -82,9 +82,22 @@ public class XMLService {
         return xmlNamesAndYears;
     }
 
-    public List<ArrayList<String>> getRecordByID (long ID){
-        XMLFile xmlFile = xmlRepo.findByID(ID);
-        return xmlFile.getRecords();
+    public String[][] showXML (long ID) throws Exception {
+        try {
+            XMLFile xmlfile = xmlRepo.findXMLByID(ID);
+            int length = xmlfile.getRecords().size();
+            int width = xmlfile.getRecords().get(1).size();
+            String[] data;
+            String arrayToReturn[][] = new String[length][width];
+            int i = 0;
+            for (List<String> l: xmlfile.getRecords()) {
+                arrayToReturn[i++] = l.toArray(new String[l.size()]);
+            }
+            return arrayToReturn;
+        }
+        catch (Exception e) {
+            throw new Exception("Inhalt onnte nicht in ein Array aumgwandelt werden.");
+        }
     }
 
 }

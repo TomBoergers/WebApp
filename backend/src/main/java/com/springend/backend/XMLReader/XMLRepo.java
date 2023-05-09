@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface XMLRepo extends JpaRepository<XMLFile, Long> {
-    XMLFile findByID(long ID);
-    XMLFile findByJahr(String jahr);
-    XMLFile findByName(String name);
+    XMLFile findXMLByID(long ID);
+    XMLFile findXMLByJahr(String jahr);
+    XMLFile findXMLByName(String name);
 }
