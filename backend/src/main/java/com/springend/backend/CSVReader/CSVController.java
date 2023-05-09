@@ -70,4 +70,14 @@ public class CSVController {
             throw new RuntimeException();
         }
     }
+
+    @PutMapping("/editContent/{ID}")
+    public ResponseEntity editContent(@PathVariable long ID, @RequestBody String[][] csvFileRecords) {
+        try {
+            csvService.editContent(ID, csvFileRecords);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

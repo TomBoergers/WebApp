@@ -26,6 +26,7 @@ export class TableComponent implements OnInit {
   openTable(tableId: number) {
     this.tableService.loadTableId = tableId;
     this.tableID = tableId;
+    localStorage.setItem("tableID", tableId.toString());
     this.router.navigate(['/table', tableId]);
   }
 
@@ -61,7 +62,12 @@ export class TableComponent implements OnInit {
     this.http.get<any[][]>("http://localhost:8080/CSV/allNamesAndYears").subscribe(data => {
       this.tableData = data;
       this.filteredTableData = data;
-    })
+
+      this.http.get<any[][]>("http://localhost:8080/XML/allNamesAndYears").subscribe(data => {
+        this.tableData = this.filteredTableData.concat(data);
+        this.filteredTableData = this.tableData;
+      });
+    });
   }
 
   addToFavorites(tableId: number) {

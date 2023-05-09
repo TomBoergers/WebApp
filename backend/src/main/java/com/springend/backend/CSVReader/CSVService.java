@@ -1,11 +1,9 @@
 package com.springend.backend.CSVReader;
 
-import com.springend.backend.Nutzer.Nutzer;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -100,5 +98,17 @@ public class CSVService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void editContent(Long ID, String[][] csvFileRecords) {
+        CSVFile newCsvFile = csvRepo.getById(ID);
+        newCsvFile.getRecords().clear();
+
+        for (int i = 0; i < csvFileRecords.length; i++) {
+            for (int j = 0; j < csvFileRecords[i].length; j++) {
+                newCsvFile.records.add(csvFileRecords[i][j]);
+            }
+        }
+        csvRepo.save(newCsvFile);
     }
 }
