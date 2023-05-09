@@ -48,14 +48,16 @@
       <tr>
         <th>Tabellenname</th>
         <th>Jahr</th>
-        <th></th>
+        <th>Options</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let row of tableData">
-        <td>{{ row }}</td>
+      <tr>
+        <td>{{ tableData[0] }}</td>
+        <td>{{ tableData[1] }}</td>
+
         <td>
-          <button (click)="openTable(row[1])">Open</button>
+          <button (click)="openTable(tableData[2])">Open</button>
         </td>
       </tr>
       <tr *ngIf="tableData.length === 0">

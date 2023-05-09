@@ -80,9 +80,11 @@ public class CSVService {
 
     public String[] nameAndYear(Long ID) {
         CSVFile files = csvRepo.findCSVByID(ID);
-        String[] nameAndYear = new String[2];
+        System.out.println(files);
+        String[] nameAndYear = new String[3];
         nameAndYear[0] = files.getName();
         nameAndYear[1] = files.getJahr();
+        nameAndYear[2] = String.valueOf(files.getID());
         return nameAndYear;
     }
 
