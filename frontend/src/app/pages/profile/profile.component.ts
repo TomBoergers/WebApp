@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   userVorname: string = '';
   userNachname: string = '';
 
-  tableData: any[][] = []
+  tableData: any[] = []
   tableID!: number;
 
   profileImageUrl!: string;
@@ -71,14 +71,16 @@ export class ProfileComponent implements OnInit {
   }
 
   favoriteTable() {
-    this.tableID = parseInt(localStorage.getItem('favoriteTable') || '0');
+    this.tableID = parseInt(localStorage.getItem("favoriteTable") || "0");
     console.log(this.tableID);
-    return this.httpClient.get<any[][]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
+    return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
+      console.log(data);
       this.tableData = data;
     });
   }
 
   openTable(tableId: number) {
+    this.tableService.loadTableId = tableId;
     this.tableID = tableId;
     this.router.navigate(['/table', tableId]);
   }
