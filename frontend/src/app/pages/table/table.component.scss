@@ -9,11 +9,20 @@ a {
 }
 
 button {
-  background-color: orange;
-  text-decoration: none;
 
+  transition: color 0.5s ease;
+
+  width: 100px;
+  background-color: orange;
+  color: #080710;
+
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
   &:hover{
     background-color: #080710;
+    color: white;
 
   }
 
@@ -47,8 +56,8 @@ button a {
     display: space-between;
 
     &:hover {
-      background-color: orange;
-      text-decoration: underline;
+      background-color: #080710;
+
     }
 
   }
@@ -66,7 +75,7 @@ margin-top: 2%;
     padding: 7px;
     border: black;
     border-radius: 30px;
-    
+
     margin-right: 16px;
     font-size: 17px;
     width: 30%;
@@ -83,7 +92,7 @@ margin-top: 2%;
     border-spacing: 0;
     width: 70%;
     border: 1px solid black;
-    
+
     box-shadow: 0 0 40px dimgrey;
   }
 
@@ -93,18 +102,18 @@ margin-top: 2%;
     padding: 16px;
     border: 1px solid orange;
   }
- 
+
 .container-content {
   margin-top:5%;
   margin-left: 70%;
-  
+
 }
 
 
 
- 
+
     .b {
-      
+
       padding: 10px;
       margin-right: 2px;
       border: 1px solid orange;
@@ -112,13 +121,13 @@ margin-top: 2%;
       box-shadow: black;
       background-color: black;
       color: white;
-      
+
       &:hover {
         background-color: grey;
         text-decoration: underline;
       }
     }
-  
+
     .custom-file-upload {
       border: 1px solid #ccc;
       cursor: pointer;
@@ -142,7 +151,7 @@ margin-top: 2%;
       cursor: pointer;
       display: flex;
       width: 35%;
-      
+
 
       &:hover {
         background-color: orange;
