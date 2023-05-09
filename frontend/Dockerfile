@@ -16,5 +16,3 @@ RUN ng build --configuration production --output-path=/dist/frontend
 ################
 FROM nginx:alpine
 COPY --from=build /dist/frontend /usr/share/nginx/html
-
-EXPOSE 80
