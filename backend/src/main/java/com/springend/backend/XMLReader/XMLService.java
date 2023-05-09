@@ -96,7 +96,7 @@ public class XMLService {
             return arrayToReturn;
         }
         catch (Exception e) {
-            throw new Exception("Inhalt onnte nicht in ein Array aumgwandelt werden.");
+            throw new Exception("Inhalt konnte nicht in ein Array umgwandelt werden.");
         }
     }
 
