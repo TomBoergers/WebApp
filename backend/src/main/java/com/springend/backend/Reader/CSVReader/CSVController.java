@@ -1,15 +1,10 @@
-package com.springend.backend.CSVReader;
+package com.springend.backend.Reader.CSVReader;
 
-import com.springend.backend.Nutzer.Nutzer;
-import com.springend.backend.Nutzer.NutzerService;
-import com.springend.backend.sysAdmin.SysAdminService;
-import jakarta.persistence.Table;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

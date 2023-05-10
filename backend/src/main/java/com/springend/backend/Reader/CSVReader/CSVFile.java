@@ -1,6 +1,7 @@
-package com.springend.backend.CSVReader;
+package com.springend.backend.Reader.CSVReader;
 
 
+import com.springend.backend.Reader.AbstractFile;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -8,12 +9,10 @@ import java.util.List;
 
 
 @Entity
-public class CSVFile {
+public class CSVFile extends AbstractFile {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long ID;
+
 
     private String filepath;
 
@@ -27,6 +26,8 @@ public class CSVFile {
     private String name;
 
     private String jahr;
+
+    private String identifier = "csv";
 
 
     public CSVFile() {
@@ -65,13 +66,7 @@ public class CSVFile {
         this.amountOfFields = amountOfFields;
     }
 
-    public long getID() {
-        return ID;
-    }
 
-    public void setID(long ID) {
-        this.ID = ID;
-    }
 
     public String getDelimiter() {
         return delimiter;
@@ -95,6 +90,10 @@ public class CSVFile {
 
     public void setJahr(String jahr) {
         this.jahr = jahr;
+    }
+
+    public String getIdentifier(){
+        return identifier;
     }
 }
 

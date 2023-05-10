@@ -1,4 +1,4 @@
-package com.springend.backend.CSVReader;
+package com.springend.backend.Reader.CSVReader;
 
 import org.springframework.stereotype.Service;
 
@@ -65,13 +65,14 @@ public class CSVService {
     public String[][] namesAndYears() {
         List<CSVFile> files = csvRepo.findAll();
         CSVFile csvfile;
-        String[][] namesAndYears = new String[files.size()][3];
+        String[][] namesAndYears = new String[files.size()][4];
         for (int i = 0; i < files.size(); i++) {
             csvfile = files.get(i);
 
             namesAndYears[i][0] = csvfile.getName();
             namesAndYears[i][1] = csvfile.getJahr();
             namesAndYears[i][2] = String.valueOf(csvfile.getID());
+            namesAndYears[i][3] = csvfile.getIdentifier();
         }
         return namesAndYears;
     }

@@ -1,7 +1,8 @@
-package com.springend.backend.XMLReader;
+package com.springend.backend.Reader.XMLReader;
 
 
-import com.springend.backend.CSVReader.CSVFile;
+import com.springend.backend.Reader.XMLReader.XMLFile;
+import com.springend.backend.Reader.XMLReader.XMLRepo;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -71,13 +72,14 @@ public class XMLService {
     public String[][] xmlNamesAndYears() {
         List<XMLFile> files = xmlRepo.findAll();
         XMLFile xmlFile;
-        String[][] xmlNamesAndYears = new String[files.size()][3];
+        String[][] xmlNamesAndYears = new String[files.size()][4];
         for (int i = 0; i < files.size(); i++) {
             xmlFile = files.get(i);
 
             xmlNamesAndYears[i][0] = xmlFile.getName();
             xmlNamesAndYears[i][1] = xmlFile.getJahr();
             xmlNamesAndYears[i][2] = String.valueOf(xmlFile.getID());
+            xmlNamesAndYears[i][3] = xmlFile.getIdentifier();
         }
         return xmlNamesAndYears;
     }

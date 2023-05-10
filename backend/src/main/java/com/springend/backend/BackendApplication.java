@@ -1,11 +1,10 @@
 package com.springend.backend;
 
-import com.springend.backend.CSVReader.CSVController;
-import com.springend.backend.CSVReader.CSVRepo;
-import com.springend.backend.CSVReader.CSVService;
+import com.springend.backend.Reader.CSVReader.CSVRepo;
+import com.springend.backend.Reader.CSVReader.CSVService;
 import com.springend.backend.Nutzer.Nutzer;
 import com.springend.backend.Nutzer.NutzerRepo;
-import com.springend.backend.XMLReader.XMLService;
+import com.springend.backend.Reader.XMLReader.XMLService;
 import com.springend.backend.sysAdmin.SysAdmin;
 import com.springend.backend.sysAdmin.SysAdminRepo;
 import org.springframework.boot.CommandLineRunner;
@@ -39,7 +38,7 @@ public class BackendApplication {
     }
 
     @Bean
-    CommandLineRunner init3(CSVService csvService, CSVRepo csvRepo){
+    CommandLineRunner init3(CSVService csvService, XMLService xmlService){
 
         return args -> {
           csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/aachenvornamen2021-commasep-decimalpoint.csv",4,",","Vornamen der Stadt Aachen","2021");
@@ -48,17 +47,8 @@ public class BackendApplication {
           csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/anzahl-der-arbeitssuchenden-in-der-stadteregion-aachen22.csv", 5, ";", "Anzahl der Arbeitssuchenden", "2022");
           csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/geburten-monatlich-2015_2022.csv", 9, ",", "Geburten", "2015-2022");
           csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/strassennamen.csv",4,",","Strassenliste der Stadt Aachen","2021");
+          xmlService.addXML("backend/src/main/java/com/springend/backend/Datentabellen/Test.xml", "Test1","2000");
+          xmlService.addXML("backend/src/main/java/com/springend/backend/Datentabellen/12411-14iz.xml","Kreisfreiestädte der Stadt Aachen","2000");
         };
     }
-    @Bean
-    CommandLineRunner init4(XMLService xmlService){
-
-        return args -> {
-            xmlService.addXML("backend/src/main/java/com/springend/backend/Datentabellen/Test.xml", "Test1","2000");
-            xmlService.addXML("backend/src/main/java/com/springend/backend/Datentabellen/12411-14iz.xml","Kreisfreiestädte der Stadt Aachen","2000");
-        };
-    }
-
-
-
 }

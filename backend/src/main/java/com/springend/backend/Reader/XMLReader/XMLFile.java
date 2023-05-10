@@ -1,22 +1,23 @@
-package com.springend.backend.XMLReader;
+package com.springend.backend.Reader.XMLReader;
 
+import com.springend.backend.Reader.AbstractFile;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class XMLFile {
+public class XMLFile extends AbstractFile {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    long ID;
 
-    String filepath;
 
-    String name;
+    private String filepath;
 
-    String jahr;
+    private String name;
+
+    private String jahr;
+
+    private String identifier = "xml";
 
     @ElementCollection
     List<ArrayList<String>> records = new ArrayList<>();
@@ -31,13 +32,6 @@ public class XMLFile {
         this.records = records;
     }
 
-    public long getID() {
-        return ID;
-    }
-
-    public void setID(long ID) {
-        this.ID = ID;
-    }
 
     public String getFilepath() {
         return filepath;
@@ -69,5 +63,9 @@ public class XMLFile {
 
     public void setRecords(List<ArrayList<String>> records) {
         this.records = records;
+    }
+
+    public String getIdentifier(){
+        return identifier;
     }
 }

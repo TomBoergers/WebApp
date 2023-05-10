@@ -1,5 +1,6 @@
-package com.springend.backend.XMLReader;
+package com.springend.backend.Reader.XMLReader;
 
+import com.springend.backend.Reader.XMLReader.XMLFile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
