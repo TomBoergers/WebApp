@@ -16,6 +16,10 @@ public class CSVService {
         return csvRepo.findAll();
     }
 
+    public CSVFile findCSVByID(Long ID) {
+        return csvRepo.findCSVByID(ID);
+    }
+
     public CSVFile addCSV(String filepath, int amountOfFields, String delimiter, String name, String jahr) {
         CSVFile toSave = new CSVFile();
         toSave.setFilepath(filepath);
@@ -80,10 +84,11 @@ public class CSVService {
     public String[] nameAndYear(Long ID) {
         CSVFile files = csvRepo.findCSVByID(ID);
         System.out.println(files);
-        String[] nameAndYear = new String[3];
+        String[] nameAndYear = new String[4];
         nameAndYear[0] = files.getName();
         nameAndYear[1] = files.getJahr();
         nameAndYear[2] = String.valueOf(files.getID());
+        nameAndYear[3] = files.getIdentifier();
         return nameAndYear;
     }
 
@@ -101,15 +106,22 @@ public class CSVService {
         }
     }
 
-    public void editContent(Long ID, String[][] csvFileRecords) {
-        CSVFile newCsvFile = csvRepo.getById(ID);
-        newCsvFile.getRecords().clear();
+    public CSVFile editContent(Long ID, String[][] csvRecords) {
+        CSVFile csvFile = csvRepo.findCSVByID(ID);
+        List<String> newRecords = new ArrayList<>();
 
-        for (int i = 0; i < csvFileRecords.length; i++) {
-            for (int j = 0; j < csvFileRecords[i].length; j++) {
-                newCsvFile.records.add(csvFileRecords[i][j]);
+        for (String[] row : csvRecords) {
+            String newRecord = String.join(",", row);
+                newRecords.add(newRecord);
             }
+
+        csvFile.setRecords(newRecords);
+        csvRepo.save(csvFile);
+
+        try {
+            return csvFile;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        csvRepo.save(newCsvFile);
     }
 }

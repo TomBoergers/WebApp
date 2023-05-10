@@ -66,8 +66,6 @@ public class CSVFile extends AbstractFile {
         this.amountOfFields = amountOfFields;
     }
 
-
-
     public String getDelimiter() {
         return delimiter;
     }
@@ -94,6 +92,19 @@ public class CSVFile extends AbstractFile {
 
     public String getIdentifier(){
         return identifier;
+    }
+
+    @Override
+    public String toString() {
+        return "CSVFile{" +
+                "filepath='" + filepath + '\'' +
+                ", records=" + records +
+                ", amountOfFields=" + amountOfFields +
+                ", delimiter='" + delimiter + '\'' +
+                ", name='" + name + '\'' +
+                ", jahr='" + jahr + '\'' +
+                ", identifier='" + identifier + '\'' +
+                '}';
     }
 }
 

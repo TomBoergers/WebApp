@@ -1,6 +1,7 @@
 package com.springend.backend.Reader.XMLReader;
 
 
+import com.springend.backend.Reader.CSVReader.CSVFile;
 import com.springend.backend.Reader.XMLReader.XMLFile;
 import com.springend.backend.Reader.XMLReader.XMLRepo;
 import org.jdom2.Document;
@@ -84,6 +85,17 @@ public class XMLService {
         return xmlNamesAndYears;
     }
 
+    public String[] getNameAndYear(Long ID) {
+        XMLFile file = xmlRepo.findXMLByID(ID);
+        System.out.println(file);
+        String[] nameAndYear = new String[4];
+        nameAndYear[0] = file.getName();
+        nameAndYear[1] = file.getJahr();
+        nameAndYear[2] = String.valueOf(file.getID());
+        nameAndYear[3] = file.getIdentifier();
+        return nameAndYear;
+    }
+
     public String[][] showXML (long ID) throws Exception {
         try {
             XMLFile xmlfile = xmlRepo.findXMLByID(ID);
@@ -102,4 +114,35 @@ public class XMLService {
         }
     }
 
+    public String[][] updateTable(Long ID, String newName, String newYear) {
+        XMLFile xmlFile = xmlRepo.findXMLByID(ID);
+        System.out.println(xmlFile);
+        xmlFile.setName(newName);
+        xmlFile.setJahr(newYear);
+        xmlRepo.save(xmlFile);
+        try {
+            return showXML(ID);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public XMLFile editContent(Long ID, String[][] xmlRecords) {
+        XMLFile xmlFile = xmlRepo.findXMLByID(ID);
+        List<ArrayList<String>> newRecords = new ArrayList<>();
+
+        for (String[] row : xmlRecords) {
+            String newRecord = String.join(",", row);
+            //newRecords.add(newRecord);
+        }
+
+        xmlFile.setRecords(newRecords);
+        xmlRepo.save(xmlFile);
+
+        try {
+            return xmlFile;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
 
   tableData: any[] = []
   tableID!: number;
+  identifier!: string;
 
   profileImageUrl!: string;
 
@@ -72,16 +73,26 @@ export class ProfileComponent implements OnInit {
 
   favoriteTable() {
     this.tableID = parseInt(localStorage.getItem("favoriteTable") || "0");
-    console.log(this.tableID);
-    return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
-      console.log(data);
-      this.tableData = data;
-    });
+    if(localStorage.getItem("favoriteTableIdentifier") === "csv") {
+      return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
+        console.log(data);
+        this.tableData = data;
+      });
+    } else if(localStorage.getItem("favoriteTableIdentifier") === "xml") {
+      return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
+        console.log(data);
+        this.tableData = data;
+      });
+    } else {
+      return console.log("Tabelle nicht gefunden");
+    }
   }
 
-  openTable(tableId: number) {
+  openTable(tableId: number, identifier: string) {
     this.tableService.loadTableId = tableId;
     this.tableID = tableId;
+    localStorage.setItem("tableID", tableId.toString());
+    localStorage.setItem("identifier", identifier);
     this.router.navigate(['/table', tableId]);
   }
 

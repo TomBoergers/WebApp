@@ -1,13 +1,12 @@
 package com.springend.backend.Reader.XMLReader;
 
+import com.springend.backend.Reader.CSVReader.CSVFile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/XML")
@@ -33,6 +32,40 @@ public class XMLController {
             throw new RuntimeException();
         }
     }
+
+    @GetMapping("/nameAndYear/{ID}")
+    public ResponseEntity<String[]> getNameAndYear(@PathVariable long ID) {
+        try {
+            String[] nameAndYear = xmlService.getNameAndYear(ID);
+            return new ResponseEntity<>(nameAndYear, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    @PostMapping("/editTable/{ID}")
+    public ResponseEntity<String[][]> editTableByID(@PathVariable long ID, @RequestBody Map<String, String> requestData) {
+        String newName = requestData.get("newName");
+        String newYear = requestData.get("newYear");
+
+        try {
+            String[][] updatedTable = xmlService.updateTable(ID, newName, newYear);
+            return new ResponseEntity<>(updatedTable, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    @PutMapping("/editContent/{ID}")
+    public ResponseEntity<CSVFile> editContent(@PathVariable long ID, @RequestBody String[][] xmlFileRecords) {
+        try {
+            XMLFile xmlFile = xmlService.editContent(ID, xmlFileRecords);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @GetMapping("/{ID}")
     public ResponseEntity<String[][]> getRecordsByID (@PathVariable long ID){
         try {

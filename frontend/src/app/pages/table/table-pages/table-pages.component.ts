@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../../services/table.service";
 import {Router} from "@angular/router";
+import {tsCastToAny} from "@angular/compiler-cli/src/ngtsc/typecheck/src/ts_util";
 
 @Component({
   selector: 'app-table-vorname',
@@ -26,17 +27,28 @@ export class TablePagesComponent {
 
   refreshTableData() {
     this.tableId = parseInt(localStorage.getItem("tableID") || "0");
-    console.log(this.tableId);
-    this.http.get<any[][]>('http://localhost:8080/CSV/' + this.tableId).subscribe(data => {
-      this.tableData = data;
-      this.headers = this.tableData[0];
-      this.filteredTableData = this.tableData.slice(1);
-      this.initializeEditingCell();
-    });
+    if (localStorage.getItem("identifier") === "csv") {
+      this.http.get<any[][]>('http://localhost:8080/CSV/' + this.tableId).subscribe(data => {
+        this.tableData = data;
+        this.headers = this.tableData[0];
+        this.filteredTableData = this.tableData.slice(1);
+        this.initializeEditingCell();
+      });
+    } else if (localStorage.getItem("identifier") === "xml") {
+      this.http.get<any[][]>('http://localhost:8080/XML/' + this.tableId).subscribe(data => {
+        this.tableData = data;
+        this.headers = this.tableData[0];
+        this.filteredTableData = this.tableData.slice(1);
+        this.initializeEditingCell();
+      });
+    } else {
+      console.log("Tabelle nicht gefunden");
+    }
   }
 
   closeTable() {
     localStorage.removeItem("tableID");
+    localStorage.removeItem("identifier")
     this.router.navigate(['/table']);
   }
 
@@ -65,14 +77,21 @@ export class TablePagesComponent {
     const target = event.target as HTMLElement;
     this.filteredTableData[rowIndex][colIndex] = target.innerText;
     this.editingCell[rowIndex][colIndex] = false;
-    this.saveChanges(this.filteredTableData, rowIndex, colIndex);
+    this.saveChanges(this.filteredTableData);
     this.refreshTableData();
   }
 
-  saveChanges(filteredTableData: any[][], rowIndex: number, colIndex: number) {
-    this.http.put<String[][]>("http://localhost:8080/CSV/editContent/" + this.tableId, filteredTableData.slice(1)).subscribe(response => {
-      console.log("OK")
-    });
+  saveChanges(filteredTableData: any[][]) {
+    if (localStorage.getItem("identifier") === "csv") {
+      this.http.put<String[][]>("http://localhost:8080/CSV/editContent/" + this.tableId, filteredTableData).subscribe(response => {
+        console.log("OK")
+      });
+    } else if (localStorage.getItem("identifier") === "xml") {
+      this.http.put<String[][]>("http://localhost:8080/XML/editContent/" + this.tableId, filteredTableData).subscribe(response => {
+        console.log("OK")
+      });
+    }
+    this.refreshTableData();
   }
 
   cancelCell(rowIndex: number, colIndex: number) {

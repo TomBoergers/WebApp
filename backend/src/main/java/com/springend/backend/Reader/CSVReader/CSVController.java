@@ -67,9 +67,9 @@ public class CSVController {
     }
 
     @PutMapping("/editContent/{ID}")
-    public ResponseEntity editContent(@PathVariable long ID, @RequestBody String[][] csvFileRecords) {
+    public ResponseEntity<CSVFile> editContent(@PathVariable long ID, @RequestBody String[][] csvFileRecords) {
         try {
-            csvService.editContent(ID, csvFileRecords);
+            CSVFile csvFile = csvService.editContent(ID, csvFileRecords);
             return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
             throw new RuntimeException(e);
