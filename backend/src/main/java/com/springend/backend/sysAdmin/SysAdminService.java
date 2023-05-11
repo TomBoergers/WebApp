@@ -1,7 +1,6 @@
 package com.springend.backend.sysAdmin;
 
-import com.springend.backend.Nutzer.Nutzer;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
