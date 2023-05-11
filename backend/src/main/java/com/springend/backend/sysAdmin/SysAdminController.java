@@ -1,8 +1,4 @@
 package com.springend.backend.sysAdmin;
-
-
-import com.springend.backend.Nutzer.Nutzer;
-import com.springend.backend.Nutzer.NutzerService;
 import com.springend.backend.ZweiFaktor.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +12,6 @@ import java.util.concurrent.ThreadLocalRandom;
 @RestController
 @RequestMapping("/SysAdmin")
 public class SysAdminController {
-
-
     private final SysAdminService SysAdminService;
     private final EmailService emailService;
     private final HashMap<String, String> sysAdminCodes = new HashMap<>();
@@ -84,6 +78,19 @@ public class SysAdminController {
         } else {
             System.out.println("Code ist falsch");
 
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @PostMapping("/erneutSenden")
+    public ResponseEntity<Object> erneutSenden(@RequestBody Map<String, String> body) {
+        try {
+            String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 999999));
+            emailService.codeVerschicken(body.get("email"), code);
+            sysAdminCodes.put(body.get("email"),code);
+            System.out.println(code);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
