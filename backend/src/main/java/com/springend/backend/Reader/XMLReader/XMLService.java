@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -131,9 +133,14 @@ public class XMLService {
         XMLFile xmlFile = xmlRepo.findXMLByID(ID);
         List<ArrayList<String>> newRecords = new ArrayList<>();
 
-        for (String[] row : xmlRecords) {
-            String newRecord = String.join(",", row);
-            //newRecords.add(newRecord);
+        for (int i = 0; i < xmlRecords[0].length; i++) {
+            newRecords.add(new ArrayList<String>());
+        }
+
+        for (int j = 0; j < xmlRecords.length; j++) {
+            for (int i = 0; i < xmlRecords[j].length; i++) {
+                newRecords.get(i).add(xmlRecords[i][j]);
+            }
         }
 
         xmlFile.setRecords(newRecords);

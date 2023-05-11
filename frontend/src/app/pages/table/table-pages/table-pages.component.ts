@@ -63,12 +63,13 @@ export class TablePagesComponent {
   }
 
   editCell(rowIndex: number, collIndex: number) {
-    if (!this.editingCell[rowIndex]) {
-      this.editingCell[rowIndex] = [];
-    }
+    if(localStorage.getItem('admin')){
+      if (!this.editingCell[rowIndex]) {
+        this.editingCell[rowIndex] = [];
+      }
     this.editingCell[rowIndex][collIndex] = true;
+    }
   }
-
   initializeEditingCell() {
     this.editingCell = new Array(this.tableData.length).fill(null).map(() => new Array(this.headers.length).fill(false));
   }
@@ -77,21 +78,21 @@ export class TablePagesComponent {
     const target = event.target as HTMLElement;
     this.filteredTableData[rowIndex][colIndex] = target.innerText;
     this.editingCell[rowIndex][colIndex] = false;
-    this.saveChanges(this.filteredTableData);
-    this.refreshTableData();
+    this.saveChanges(this.tableData);
   }
 
-  saveChanges(filteredTableData: any[][]) {
+  saveChanges(tableData: any[][]) {
     if (localStorage.getItem("identifier") === "csv") {
-      this.http.put<String[][]>("http://localhost:8080/CSV/editContent/" + this.tableId, filteredTableData).subscribe(response => {
+      this.http.put<String[][]>("http://localhost:8080/CSV/editContent/" + this.tableId, tableData).subscribe(response => {
+        this.refreshTableData()
         console.log("OK")
       });
     } else if (localStorage.getItem("identifier") === "xml") {
-      this.http.put<String[][]>("http://localhost:8080/XML/editContent/" + this.tableId, filteredTableData).subscribe(response => {
+      this.http.put<String[][]>("http://localhost:8080/XML/editContent/" + this.tableId, tableData).subscribe(response => {
+        this.refreshTableData()
         console.log("OK")
       });
     }
-    this.refreshTableData();
   }
 
   cancelCell(rowIndex: number, colIndex: number) {

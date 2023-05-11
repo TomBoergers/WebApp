@@ -42,9 +42,15 @@ export class TableComponent implements OnInit {
   }
 
   editRow(row: any[]) {
-    row[4] = true;
-    this.tableID = row[2];
-    localStorage.setItem("identifier", row[3]);
+    if(!localStorage.getItem('admin')){
+      alert("Keine Berechtigung")
+    }
+    else{
+      row[4] = true;
+      this.tableID = row[2];
+      localStorage.setItem("identifier", row[3]);
+    }
+
   }
 
   submitEditRow(form: NgForm, tableId: number) {

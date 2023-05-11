@@ -60,6 +60,7 @@ public class XMLController {
     public ResponseEntity<CSVFile> editContent(@PathVariable long ID, @RequestBody String[][] xmlFileRecords) {
         try {
             XMLFile xmlFile = xmlService.editContent(ID, xmlFileRecords);
+            xmlService.editContent(ID,xmlFileRecords);
             return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
             throw new RuntimeException(e);
