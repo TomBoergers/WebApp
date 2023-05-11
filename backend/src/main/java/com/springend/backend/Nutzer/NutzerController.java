@@ -25,13 +25,13 @@ public class NutzerController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody Nutzer nutzer, HttpServletResponse response, HttpSession session) {
+    public ResponseEntity<Object> login(@RequestBody Nutzer nutzer) {
         try {
             Nutzer authenticatedNutzer = nutzerService.authenticateNutzer(nutzer.getEmail(), nutzer.getPassword());
             String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 999999));
             emailService.codeVerschicken(nutzer.getEmail(), code);
             nutzerCodes.put(nutzer.getEmail(),code);
-            System.out.println(code);
+            System.out.println("Der Code für " + nutzer.getEmail()+ " lautet "+code);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -82,10 +82,6 @@ public class NutzerController {
         public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
             String email = body.get("email");
             String eingabeCode = body.get("code");
-            System.out.println(email);
-            System.out.println(nutzerCodes.get(email));
-            System.out.println(eingabeCode);
-            // Überprüfe, ob der Code in der HashMap gespeichert wurde und ob er mit dem eingegebenen Code übereinstimmt
             if (nutzerCodes.containsKey(email) && nutzerCodes.get(email).equals(eingabeCode)) {
                 return ResponseEntity.ok().build();
             } else {
@@ -94,8 +90,20 @@ public class NutzerController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+        @PostMapping("/erneutSenden")
+        public ResponseEntity<Object> erneutSenden(@RequestBody Map<String, String> body) {
+            try {
+                String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 999999));
+                emailService.codeVerschicken(body.get("email"), code);
+                nutzerCodes.put(body.get("email"),code);
+                System.out.println(code);
+                return ResponseEntity.ok().build();
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
 
 
-    }
+}
 
 

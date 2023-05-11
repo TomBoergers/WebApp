@@ -73,6 +73,11 @@ button{
   color: #ffffff;
   font-size: 12px;
 }
-a{
+.erneut-senden{
+  cursor: pointer;
+  text-decoration: underline;
   color: white;
+}
+.erneut-senden:hover {
+  text-decoration: none;
 }
