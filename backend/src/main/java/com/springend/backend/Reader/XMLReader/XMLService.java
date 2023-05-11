@@ -133,14 +133,12 @@ public class XMLService {
         XMLFile xmlFile = xmlRepo.findXMLByID(ID);
         List<ArrayList<String>> newRecords = new ArrayList<>();
 
-        for (int i = 0; i < xmlRecords[0].length; i++) {
-            newRecords.add(new ArrayList<String>());
-        }
-
-        for (int j = 0; j < xmlRecords.length; j++) {
-            for (int i = 0; i < xmlRecords[j].length; i++) {
-                newRecords.get(i).add(xmlRecords[i][j]);
+        for (int i = 0; i < xmlRecords.length; i++) {
+            ArrayList<String> row = new ArrayList<>();
+            for (int j = 0; j < xmlRecords[i].length; j++){
+                row.add(xmlRecords[i][j]);
             }
+            newRecords.add(row);
         }
 
         xmlFile.setRecords(newRecords);
