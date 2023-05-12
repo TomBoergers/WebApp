@@ -1,6 +1,5 @@
 package com.springend.backend.Nutzer;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+
 import com.springend.backend.ZweiFaktor.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
