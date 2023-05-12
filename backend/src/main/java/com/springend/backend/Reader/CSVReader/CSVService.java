@@ -8,8 +8,8 @@ import java.util.List;
 
 @Service
 public class CSVService {
-    private final CSVRepo csvRepo;
 
+    private final CSVRepo csvRepo;
     public CSVService(CSVRepo csvRepo){this.csvRepo = csvRepo;}
 
     public List<CSVFile> findAllCSV() {
@@ -91,7 +91,6 @@ public class CSVService {
         nameAndYear[3] = files.getIdentifier();
         return nameAndYear;
     }
-
 
     public String[][] updateTable(Long ID, String newName, String newYear) {
         CSVFile csvFile = csvRepo.findCSVByID(ID);

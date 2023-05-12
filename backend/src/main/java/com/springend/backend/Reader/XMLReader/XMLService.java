@@ -1,6 +1,5 @@
 package com.springend.backend.Reader.XMLReader;
 
-
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -13,9 +12,11 @@ import java.util.List;
 
 @Service
 public class XMLService {
+
     private final XMLRepo xmlRepo;
 
     public XMLService(XMLRepo xmlRepo){this.xmlRepo = xmlRepo;}
+
     public List<XMLFile> findAllXML() {
         return xmlRepo.findAll();
     }
@@ -25,7 +26,6 @@ public class XMLService {
         List<ArrayList<String>> dataList = new ArrayList<>();
         File f = new File(filepath);
         Document doc = null;
-
 
         try {
             // Create Doc

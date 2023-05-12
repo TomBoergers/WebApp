@@ -9,8 +9,6 @@ import java.util.List;
 @Entity
 public class XMLFile extends AbstractFile {
 
-
-
     private String filepath;
 
     private String name;
@@ -25,13 +23,13 @@ public class XMLFile extends AbstractFile {
     public XMLFile(){
 
     }
+
     public XMLFile(String filepath, String name, String jahr, List<ArrayList<String>> records){
         this.filepath = filepath;
         this.name = name;
         this.jahr = jahr;
         this.records = records;
     }
-
 
     public String getFilepath() {
         return filepath;

@@ -2,64 +2,64 @@ package com.springend.backend.sysAdmin;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.*;
+
 @Entity
 @Table (name = "admins")
 
+public class SysAdmin {
 
-      public class SysAdmin {
+      @Id
+      @GeneratedValue(strategy = GenerationType.AUTO)
+      private Long ID;
 
-            @Id
-            @GeneratedValue(strategy = GenerationType.AUTO)
-            private Long ID;
+      @Column(name = "vorname")
+      private String vorname;
 
-            @Column(name = "vorname")
-            private String vorname;
+      @Column(name = "nachname")
+      private String nachname;
 
-            @Column(name = "nachname")
-            private String nachname;
+      @Column(name = "email", unique = true)
+      private String email;
 
-            @Column(name = "email", unique = true)
-            private String email;
+      @Column(name = "password")
+      private String password;
 
-            @Column(name = "password")
-            private String password;
+      public SysAdmin(){
 
-            public SysAdmin(){
+      }
 
-            }
+      public SysAdmin(String vorname, String nachname, String email, String password) {
+            this.vorname = vorname;
+            this.nachname = nachname;
+            this.email = email;
+            this.password = password;
+      }
 
-            public SysAdmin(String vorname, String nachname, String email, String password) {
-                  this.vorname = vorname;
-                  this.nachname = nachname;
-                  this.email = email;
-                  this.password = password;
-            }
-
-            public String getVorname() {
+      public String getVorname() {
                   return vorname;
             }
 
-            public void setVorname(String vorname) {
+      public void setVorname(String vorname) {
                   this.vorname = vorname;
             }
 
-            public String getNachname() {
+      public String getNachname() {
                   return nachname;
             }
 
-            public void setNachname(String nachname) {
+      public void setNachname(String nachname) {
                   this.nachname = nachname;
             }
 
-            public String getEmail() {
+      public String getEmail() {
                   return email;
             }
 
-            public void setEmail(String email) {
+      public void setEmail(String email) {
                   this.email = email;
             }
 
-            public String getPassword() {
+      public String getPassword() {
                   return password;
             }
 
@@ -81,5 +81,4 @@ import jakarta.persistence.*;
                     ", password='" + password + '\'' +
                     '}';
       }
-
-      }
+}

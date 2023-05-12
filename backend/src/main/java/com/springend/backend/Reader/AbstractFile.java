@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public abstract class AbstractFile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long ID;

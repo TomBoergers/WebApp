@@ -3,6 +3,7 @@ import { SysAdmin } from 'src/app/classes/sys-admin';
 
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import { RegisteradminService } from 'src/app/services/registeradmin.service';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -13,7 +14,9 @@ import { RegisteradminService } from 'src/app/services/registeradmin.service';
 export class RegisterAdminComponent {
   SysAdmin: SysAdmin = new SysAdmin();
 
-  constructor(private registeradminService: RegisteradminService){}
+  constructor(private registeradminService: RegisteradminService, private router: Router) {
+
+  }
 
 
   public sysAdminRegister(){
@@ -21,6 +24,7 @@ export class RegisterAdminComponent {
       response => {
         console.log("Registrierung erfolgreich")
         alert("Registrierung erfolgreich")
+        this.router.navigate(['/login-admin'])
       },
       error => {
         console.log("Registrierung fehlgeschalgen")

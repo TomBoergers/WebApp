@@ -6,7 +6,7 @@ services:
     depends_on:
       - "spring-boot"
     ports:
-      - "4200:4200"
+      - "4200:80"
     image: projectf/frontend:frontend
     restart: unless-stopped
     environment:

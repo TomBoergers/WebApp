@@ -11,9 +11,6 @@ import java.util.List;
 @Entity
 public class CSVFile extends AbstractFile {
 
-
-
-
     private String filepath;
 
     @ElementCollection
@@ -31,6 +28,7 @@ public class CSVFile extends AbstractFile {
 
 
     public CSVFile() {
+
     }
 
     public CSVFile(String filepath, List<String> records,int amountOfFields, String delimiter, String name, String jahr) {
@@ -107,6 +105,3 @@ public class CSVFile extends AbstractFile {
                 '}';
     }
 }
-
-
-

@@ -4,7 +4,6 @@ COPY pom.xml /usr/src/app
 RUN mvn -f /usr/src/app/pom.xml clean install -Dmaven.test.skip=true
 
 FROM openjdk:18-jdk-alpine
-ENV IN_CONTAINER=true
 RUN mkdir -p /usr/src/app/Datentabellen
 VOLUME /tmp
 COPY --from=build /usr/src/app/target/* /usr/app/

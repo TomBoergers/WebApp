@@ -11,8 +11,6 @@ export class RegisteradminService {
   constructor(private httpClient: HttpClient) { }
 
   registerSystemAdmin(sysAdmin: SysAdmin): Observable<object>{
-    return this.httpClient.post('http://localhost:8080/SysAdmin/add', sysAdmin);
+    return this.httpClient.post('http://localhost:8080/SysAdmin/register', sysAdmin);
   }
-
-
 }

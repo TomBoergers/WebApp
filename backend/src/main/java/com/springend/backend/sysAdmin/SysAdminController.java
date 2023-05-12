@@ -1,4 +1,6 @@
 package com.springend.backend.sysAdmin;
+
+import com.springend.backend.Nutzer.Nutzer;
 import com.springend.backend.ZweiFaktor.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 @RestController
 @RequestMapping("/SysAdmin")
 public class SysAdminController {
+
     private final SysAdminService SysAdminService;
     private final EmailService emailService;
     private final HashMap<String, String> sysAdminCodes = new HashMap<>();
@@ -29,7 +32,16 @@ public class SysAdminController {
             String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 999999));
             emailService.codeVerschicken(sysAdmin.getEmail(), code);
             sysAdminCodes.put(sysAdmin.getEmail(), code);
-            System.out.println(code);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Object> register(@RequestBody SysAdmin sysAdmin) {
+        try {
+            SysAdmin registeredSysAdmin = SysAdminService.registerSysAdmin(sysAdmin);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -45,7 +57,6 @@ public class SysAdminController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
 
     @GetMapping("/all")
     public ResponseEntity<List<SysAdmin>> getSysAdmin() {
@@ -69,15 +80,10 @@ public class SysAdminController {
     public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
         String email = body.get("email");
         String eingabeCode = body.get("code");
-        System.out.println(email);
-        System.out.println(sysAdminCodes.get(email));
-        System.out.println(eingabeCode);
         // Überprüfe, ob der Code in der HashMap gespeichert wurde und ob er mit dem eingegebenen Code übereinstimmt
         if (sysAdminCodes.containsKey(email) && sysAdminCodes.get(email).equals(eingabeCode)) {
             return ResponseEntity.ok().build();
         } else {
-            System.out.println("Code ist falsch");
-
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }

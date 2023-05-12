@@ -13,7 +13,6 @@ import java.util.Map;
 public class XMLController {
 
     private final XMLService xmlService;
-
     public XMLController(XMLService xmlService) {
         this.xmlService = xmlService;
     }
@@ -23,6 +22,7 @@ public class XMLController {
         List<XMLFile> files = xmlService.findAllXML();
         return new ResponseEntity<>(files, HttpStatus.OK);
     }
+
     @GetMapping("/allNamesAndYears")
     public ResponseEntity<String[][]> getNamesAndYears() {
         try {
@@ -77,7 +77,4 @@ public class XMLController {
             throw new RuntimeException();
         }
     }
-
-
-
 }

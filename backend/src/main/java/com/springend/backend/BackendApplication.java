@@ -45,7 +45,8 @@ public class BackendApplication {
             csvService.addCSV("usr/src/app/Datentabellen/anzahl-der-arbeitssuchenden-in-der-stadteregion-aachen22.csv", 5, ";", "Anzahl der Arbeitssuchenden", "2022");
             csvService.addCSV("usr/src/app/Datentabellen/geburten-monatlich-2015_2022.csv", 9, ",", "Geburten", "2015-2022");
             csvService.addCSV("usr/src/app/Datentabellen/strassennamen.csv", 4, ",", "Strassenliste der Stadt Aachen", "2021");
-            xmlService.addXML("usr/src/app/Datentabellen/Test.xml", "Test1", "2000");
+            xmlService.addXML("usr/src/app/Datentabellen/CDTest.xml", "CDTest", "2000");
+            xmlService.addXML("usr/src/app/Datentabellen/FoodMenuTest.xml", "Food Menu", "2000");
         };
     }
 }

@@ -8,7 +8,6 @@ import java.util.Optional;
 public class NutzerService {
 
     private final NutzerRepo nutzerRepo;
-
     public NutzerService(NutzerRepo nutzerRepo) {
         this.nutzerRepo = nutzerRepo;
     }
