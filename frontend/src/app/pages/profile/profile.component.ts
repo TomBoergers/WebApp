@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   tableData: any[] = []
   tableID!: number;
   identifier!: string;
-
+  menuType : string ='default';
   profileImageUrl!: string;
 
 
@@ -31,6 +31,15 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit() {
+    if(localStorage.getItem('admin')){
+      this.menuType ="admin"
+    }
+    else if(localStorage.getItem('user')){
+      this.menuType ="user"
+    }
+    else {
+      this.menuType ="default"
+    }
     if(localStorage.getItem('user')) {
       let userStore = localStorage.getItem('user');
       let userData = userStore && JSON.parse(userStore);
@@ -42,6 +51,19 @@ export class ProfileComponent implements OnInit {
       this.showImage();
 
       this.favoriteTable();
+    }
+    if(localStorage.getItem('admin')){
+      let adminStore = localStorage.getItem('admin');
+      let adminData = adminStore && JSON.parse(adminStore);
+      this.userVorname = adminData.vorname;
+      this.userNachname = adminData.nachname;
+      this.email = adminData.email;
+      this.dateOfBirth = adminData.geburtsdatum;
+
+      this.user = this.loginuserService.user
+      this.showImage();
+      this.favoriteTable();
+
     }
   }
 

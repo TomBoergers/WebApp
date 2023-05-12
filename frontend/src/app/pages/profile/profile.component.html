@@ -4,14 +4,11 @@
 
   <div class="upper-card">
     <img [src]="profileImageUrl" class="profilePicture"  height="100px" width="auto">
-
-    <label class="custom-file-upload" >
-      Profilbild hochladen
       <input #imageInput  value="Upload" class="d-none"
              type="file"
              accept="image/*"
              (change)="onFileSelected(imageInput.files)">
-    </label>
+
 
 
     <h1 class="name-header"> {{userVorname +" " + userNachname}} </h1>
@@ -27,12 +24,12 @@
   <div class="profile-input">
     <p class="prompt">Email:</p>
     <p class="displayed-input" id="email">{{email}}</p>
-    <button class="edit-button" (click)="editEmail()">Ändern..</button>
+
   </div>
-  <div class="profile-input">
+  <div class="profile-input" *ngIf="menuType==='user'">
     <p class="prompt">Geburtsdatum:</p>
     <p class="displayed-input" id="birthdate">{{dateOfBirth}}</p>
-    <button class="edit-button" (click)="editDateOfBirth()">Ändern..</button>
+
   </div>
 </div>
 
@@ -58,9 +55,6 @@
         <td>
           <button (click)="openTable(tableData[2], tableData[3])">Open</button>
         </td>
-      </tr>
-      <tr *ngIf="tableData.length === 0">
-        <td colspan="3">No data available</td>
       </tr>
       </tbody>
     </table>

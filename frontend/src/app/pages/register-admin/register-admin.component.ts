@@ -20,9 +20,11 @@ export class RegisterAdminComponent {
     this.registeradminService.registerSystemAdmin(this.SysAdmin).subscribe(
       response => {
         console.log("Registrierung erfolgreich")
+        alert("Registrierung erfolgreich")
       },
       error => {
         console.log("Registrierung fehlgeschalgen")
+        alert("Registrierung fehlgeschlagen")
       }
     );
 
