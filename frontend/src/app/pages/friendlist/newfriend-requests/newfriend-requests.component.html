@@ -1,0 +1,54 @@
+<body>
+<app-navbar></app-navbar>
+
+<div class="frame">
+  <h1>new Friendships?</h1>
+  <div class="container">
+    <div class="topnav">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (input)="applyFilter()">
+      <button (click)="toFriendList()">Friendlist</button>
+      <button (click)="toFriendAdd()">Add Friends</button>
+      <button >Friend Requests</button>
+    </div>
+  </div>
+
+
+  <table>
+    <thead>
+    <tr>
+      <th>Friends</th>
+      <th>options</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
+      <td>{{ row[0] }}</td>
+      <td>{{ row[1] }}</td>
+      <td>
+        <button (click)="openTable(row[2], row[3])">Open</button>
+      </td>
+      <td>
+        <ng-container *ngIf="!row[4]">
+          <button (click)="editRow(row)">Edit</button>
+        </ng-container>
+        <ng-container *ngIf="row[4]">
+          <form #editForm="ngForm" (submit)="submitEditRow(editForm, tableID)">
+            <input type="text" name="newName" placeholder="Neuer Tabellenname" [(ngModel)]="row[0]">
+            <input type="text" name="newYear" placeholder="Neues Jahr" [ngModel]="row[1]">
+            <button type="submit">Save</button>
+          </form>
+        </ng-container>
+      </td>
+      <td>
+        <button (click)="addToFavorites(row[2], row[3])">Favorit</button>
+      </td>
+    </tr>
+    <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">
+      <td colspan="5">Nothing new...</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>

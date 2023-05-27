@@ -16,6 +16,9 @@ import { ZweiFaktorComponent } from './pages/zwei-faktor/zwei-faktor.component';
 import { RegisterAdminComponent } from './pages/register-admin/register-admin.component';
 import { TablePagesComponent } from './pages/table/table-pages/table-pages.component';
 import { LoginAdminComponent } from './pages/login-admin/login-admin/login-admin.component';
+import { FriendlistComponent } from './pages/friendlist/friendlist.component';
+import { NewfriendRequestsComponent } from './pages/friendlist/newfriend-requests/newfriend-requests.component';
+import { FriendAddComponent } from './pages/friendlist/friend-add/friend-add.component';
 
 
 
@@ -31,7 +34,10 @@ import { LoginAdminComponent } from './pages/login-admin/login-admin/login-admin
     ZweiFaktorComponent,
     RegisterAdminComponent,
     TablePagesComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    FriendlistComponent,
+    NewfriendRequestsComponent,
+    FriendAddComponent
 
   ],
   imports: [
