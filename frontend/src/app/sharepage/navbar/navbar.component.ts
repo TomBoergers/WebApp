@@ -32,6 +32,8 @@ ngOnInit() {
   logout(){
     localStorage.removeItem('admin')
     localStorage.removeItem('user')
+    localStorage.removeItem('picture')
+    localStorage.removeItem('table')
     this.route.navigate([''])
 
   }

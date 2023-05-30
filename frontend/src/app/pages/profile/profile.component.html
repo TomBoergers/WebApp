@@ -2,7 +2,7 @@
   <app-navbar></app-navbar>
 <div class="section" id="profilblockTitel"    >
   <div class="upper-card">
-    <img [src]="profileImageUrl" class="profilePicture"  height="100px" width="auto">
+    <img [src]="profileImageUrl" class="profilePicture"  height="100px" width="auto"*ngIf="menuType==='user'">
     <h1 class="name-header"> {{userVorname +" " + userNachname}} </h1>
   </div>
 </div>
