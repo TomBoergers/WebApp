@@ -1,1 +1,17 @@
-<p>chat works!</p>
+<body>
+<app-navbar></app-navbar>
+<div
+  class="section" id="favDatensatzTitel" >
+  <h4> Chat: </h4>
+</div>
+<div class="section" id="favDatensatzBlock">
+  <div *ngFor="let message of messages">
+    <span class="message-sender">{{ message.sender}}</span>
+    <span class="message-content">{{ message.content }}</span>
+  </div>
+  <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Enter message" />
+  <button (click)="sendMessage()">Send</button>
+</div>
+</body>
+
+

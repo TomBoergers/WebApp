@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { webSocket } from "rxjs/webSocket";
+import {webSocket, WebSocketSubject} from "rxjs/webSocket";
 import {error} from "@angular/compiler-cli/src/transformers/util";
+import {Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService {
-  private socket$;
+  private readonly socket$: WebSocketSubject<any>;
+  private messageSubject: Subject<any> = new Subject<any>();
 
   constructor() {
-    this.socket$ = webSocket("localhost:8080/websocket/chat");
+    this.socket$ = webSocket('ws://localhost:8080/websocket/chat');
   }
 
   connect() {
@@ -26,7 +28,17 @@ export class WebsocketService {
     );
   }
 
-  sendMessage(message: string) {
+  disconnect() {
+    if (this.socket$) {
+      this.socket$.complete();
+    }
+  }
+
+  sendMessage(message: { sender: string; content: string }) {
     this.socket$.next({ content: message });
+  }
+
+  getMessage(): Observable<any> {
+    return this.messageSubject.asObservable();
   }
 }
