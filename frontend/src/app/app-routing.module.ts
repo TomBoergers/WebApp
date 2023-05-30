@@ -13,6 +13,7 @@ import {FriendlistComponent} from "./pages/friendlist/friendlist.component";
 import {NewfriendRequestsComponent} from "./pages/friendlist/newfriend-requests/newfriend-requests.component";
 import {FriendAddComponent} from "./pages/friendlist/friend-add/friend-add.component";
 import {AuthGuard} from "./services/auth.guard";
+import {ChatComponent} from "./pages/chat/chat.component";
 
 
 
@@ -26,7 +27,7 @@ const routes: Routes = [
     {path: 'registerAdmin', component:RegisterAdminComponent},
     {path: 'table', component: TableComponent, canActivate: [AuthGuard]},
     {path: 'table/:id', component: TablePagesComponent, canActivate: [AuthGuard]},
-
+    {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
     {path: 'friendList', component: FriendlistComponent},
     {path: 'friendRequest', component: NewfriendRequestsComponent},
     {path: 'friendAdd', component: FriendAddComponent}

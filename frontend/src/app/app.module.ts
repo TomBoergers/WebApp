@@ -19,6 +19,7 @@ import { LoginAdminComponent } from './pages/login-admin/login-admin/login-admin
 import { FriendlistComponent } from './pages/friendlist/friendlist.component';
 import { NewfriendRequestsComponent } from './pages/friendlist/newfriend-requests/newfriend-requests.component';
 import { FriendAddComponent } from './pages/friendlist/friend-add/friend-add.component';
+import { ChatComponent } from './pages/chat/chat.component';
 
 
 
@@ -37,7 +38,8 @@ import { FriendAddComponent } from './pages/friendlist/friend-add/friend-add.com
     LoginAdminComponent,
     FriendlistComponent,
     NewfriendRequestsComponent,
-    FriendAddComponent
+    FriendAddComponent,
+    ChatComponent
 
   ],
   imports: [
