@@ -34,6 +34,8 @@ ngOnInit() {
     localStorage.removeItem('user')
     localStorage.removeItem('picture')
     localStorage.removeItem('table')
+    localStorage.removeItem('favoriteTable');
+    localStorage.removeItem('favoriteTableIdentifier')
     this.route.navigate([''])
 
   }
