@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -20,6 +20,7 @@ import { FriendlistComponent } from './pages/friendlist/friendlist.component';
 import { NewfriendRequestsComponent } from './pages/friendlist/newfriend-requests/newfriend-requests.component';
 import { FriendAddComponent } from './pages/friendlist/friend-add/friend-add.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import {DiagramComponent} from "./pages/diagram/diagram.component";
 
 
 
@@ -39,14 +40,16 @@ import { ChatComponent } from './pages/chat/chat.component';
     FriendlistComponent,
     NewfriendRequestsComponent,
     FriendAddComponent,
-    ChatComponent
+    ChatComponent,
+    DiagramComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CanvasJSAngularChartsModule
 
   ],
   providers: [],
