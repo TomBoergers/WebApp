@@ -7,28 +7,17 @@ import {WebsocketService} from "../../services/websocket.service";
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent {
-  messages: any[] = [];
-  newMessage: string = '';
 
   constructor(private webSocketService: WebsocketService) {
   }
 
-  ngOnInit() {
+  connectClient() {
     this.webSocketService.connect();
-    this.webSocketService.getMessage().subscribe((message: string) => {
-      this.messages.push(message);
-    });
+    console.log("Connecting...");
   }
 
-  sendMessage() {
-    if (this.newMessage.trim() !== '') {
-      const message = {
-        sender: 'Test',
-        content: this.newMessage
-      };
-
-      this.webSocketService.sendMessage(message);
-      this.newMessage = '';
-    }
+  disconnectClient() {
+    this.webSocketService.disconnect();
+    console.log("Disconnecting...");
   }
 }

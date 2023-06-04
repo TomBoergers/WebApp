@@ -5,12 +5,12 @@
   <h4> Chat: </h4>
 </div>
 <div class="section" id="favDatensatzBlock">
-  <div *ngFor="let message of messages">
+  <div *ngFor="let message">
     <span class="message-sender">{{ message.sender}}</span>
     <span class="message-content">{{ message.content }}</span>
   </div>
-  <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()" placeholder="Enter message" />
-  <button (click)="sendMessage()">Send</button>
+  <button (click)="connectClient()">Connect</button>
+  <button (click)="disconnectClient()">Disconnect</button>
 </div>
 </body>
 

@@ -14,7 +14,7 @@ import {NewfriendRequestsComponent} from "./pages/friendlist/newfriend-requests/
 import {FriendAddComponent} from "./pages/friendlist/friend-add/friend-add.component";
 import {AuthGuard} from "./services/auth.guard";
 import {ChatComponent} from "./pages/chat/chat.component";
-import {DiagramComponent} from "./pages/diagram/diagram.component";
+
 
 
 
@@ -32,7 +32,7 @@ const routes: Routes = [
     {path: 'friendList', component: FriendlistComponent},
     {path: 'friendRequest', component: NewfriendRequestsComponent},
     {path: 'friendAdd', component: FriendAddComponent},
-    {path: 'diagram', component: DiagramComponent}
+
 
 
 
