@@ -83,7 +83,8 @@ public class NutzerService {
         }
     }
 
-    public String[][] showFriendlist(Nutzer nutzerFriendlist) throws Exception {
+    public String[][] showFriendlist(long ID) throws Exception {
+        Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
         List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
         String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][3];
         if (nutzerFriendlist.isPrivacy()){
@@ -100,7 +101,8 @@ public class NutzerService {
         }
     }
 
-    public String[][] showFriendrequests(Nutzer nutzerFriendRequest) throws Exception {
+    public String[][] showFriendrequests(long ID) throws Exception {
+        Nutzer nutzerFriendRequest = nutzerRepo.findNutzerByID(ID);
         List<Long> friendrequestalt = nutzerFriendRequest.getFriendrequests();
         String[][] friendrequests = new String[nutzerFriendRequest.getFriendrequests().size()][3];
             for (int i = 0; i < nutzerFriendRequest.getFriendrequests().size(); i++) {

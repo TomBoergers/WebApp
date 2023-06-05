@@ -97,7 +97,7 @@ public class NutzerController {
             }
         }
 
-        @PutMapping("/addFriend")
+        @PutMapping("/acceptFriend")
         public ResponseEntity<Nutzer> acceptFriend(@RequestBody Nutzer nutzerToAdd, Nutzer nutzerFriendlist){
             try{
             nutzerService.acceptFriend(nutzerToAdd,nutzerFriendlist);
@@ -107,7 +107,7 @@ public class NutzerController {
             }
         }
 
-        @PutMapping
+        @PutMapping("/deleteFriend")
         public ResponseEntity<Nutzer> deleteFriend(@RequestBody Nutzer nutzerToDelete, Nutzer nutzerFriendList){
         try{
             nutzerService.deleteFriend(nutzerToDelete, nutzerFriendList);
@@ -117,15 +117,24 @@ public class NutzerController {
         }
         }
 
-        @GetMapping
-        public ResponseEntity<String[][]> getNutzersFriends(@RequestBody Nutzer nutzerFriendlist) {
+        @GetMapping("/getFriendlist/{ID}")
+        public ResponseEntity<String[][]> getNutzersFriends(@RequestBody long ID) {
         try {
-            String[][] friendlist = nutzerService.showFriendlist(nutzerFriendlist);
+            String[][] friendlist = nutzerService.showFriendlist(ID);
             return new ResponseEntity<>(friendlist, HttpStatus.OK);
             } catch (Exception e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         }
+    @GetMapping("/getFriendRequests/{ID}")
+    public ResponseEntity<String[][]> getNutzersRequests(@RequestBody long ID) {
+        try {
+            String[][] friendrequests = nutzerService.showFriendrequests(ID);
+            return new ResponseEntity<>(friendrequests, HttpStatus.OK);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }
 
 

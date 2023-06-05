@@ -25,6 +25,7 @@ public class BackendApplication {
     CommandLineRunner init(NutzerRepo nutzerRepo) {
         return args -> {
             nutzerRepo.save(new Nutzer("Test","Name","test@gmail.com", LocalDate.of(1999,1,1),"12345", null, null, false));
+            nutzerRepo.save(new Nutzer("Test2","Name2","test2@gmail.com", LocalDate.of(1999,1,1),"12345", null, null, false));
         };
     }
 
