@@ -24,7 +24,7 @@ public class BackendApplication {
     @Bean
     CommandLineRunner init(NutzerRepo nutzerRepo) {
         return args -> {
-            nutzerRepo.save(new Nutzer("Test","Name","test@gmail.com", LocalDate.of(1999,1,1),"12345"));
+            nutzerRepo.save(new Nutzer("Test","Name","test@gmail.com", LocalDate.of(1999,1,1),"12345", null, null, false));
         };
     }
 

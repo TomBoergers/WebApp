@@ -71,11 +71,6 @@ public class NutzerController {
             return new ResponseEntity<>(newNutzer, HttpStatus.OK);
         }
 
-        @DeleteMapping("/delete/{ID}")
-        public ResponseEntity<?> deleteNutzer(@PathVariable("ID") long ID) {
-            nutzerService.deleteNutzer(ID);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
 
         @PostMapping("/zweiFaktor")
         public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
@@ -102,7 +97,35 @@ public class NutzerController {
             }
         }
 
+        @PutMapping("/addFriend")
+        public ResponseEntity<Nutzer> acceptFriend(@RequestBody Nutzer nutzerToAdd, Nutzer nutzerFriendlist){
+            try{
+            nutzerService.acceptFriend(nutzerToAdd,nutzerFriendlist);
+            return new ResponseEntity<>(nutzerFriendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
 
+        @PutMapping
+        public ResponseEntity<Nutzer> deleteFriend(@RequestBody Nutzer nutzerToDelete, Nutzer nutzerFriendList){
+        try{
+            nutzerService.deleteFriend(nutzerToDelete, nutzerFriendList);
+            return new ResponseEntity<>(nutzerFriendList, HttpStatus.OK);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        }
+
+        @GetMapping
+        public ResponseEntity<String[][]> getNutzersFriends(@RequestBody Nutzer nutzerFriendlist) {
+        try {
+            String[][] friendlist = nutzerService.showFriendlist(nutzerFriendlist);
+            return new ResponseEntity<>(friendlist, HttpStatus.OK);
+            } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        }
 }
 
 
