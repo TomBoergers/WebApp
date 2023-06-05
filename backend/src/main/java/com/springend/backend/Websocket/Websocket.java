@@ -1,5 +1,6 @@
 package com.springend.backend.Websocket;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -10,6 +11,12 @@ public class Websocket {
     @Id
     @GeneratedValue
     private Long sessionId;
+
+    @Column(name = "sender")
+    private String sender;
+
+    @Column(name = "content")
+    private String content;
 
     private Long userId;
 
