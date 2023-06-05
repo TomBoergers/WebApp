@@ -1,7 +1,5 @@
 import { Component, OnInit, AfterViewInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import Chart from "chart.js";
-
 
 @Component({
   selector: 'diagram',
