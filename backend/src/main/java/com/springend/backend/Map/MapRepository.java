@@ -1,8 +1,10 @@
-package com.springend.backend.Websocket;
+package com.springend.backend.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WebsocketRepo extends JpaRepository<Websocket, Long> {
+public interface MapRepository extends JpaRepository<MapFile, Long> {
+
+
 }

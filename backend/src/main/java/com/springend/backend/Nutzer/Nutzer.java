@@ -2,8 +2,8 @@ package com.springend.backend.Nutzer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -24,16 +24,26 @@ public class Nutzer {
 
     private String password;
 
+    @ElementCollection
+    private List<Long> friendrequests;
+    @ElementCollection
+    private List<Long> friendlist;
+
+    private boolean privacy;
+
     public Nutzer(){
 
     }
 
-    public Nutzer(String vorname, String nachname, String email, LocalDate geburtsdatum, String password) {
+    public Nutzer(String vorname, String nachname, String email, LocalDate geburtsdatum, String password, List<Long> friendlist, List<Long> friendrequests, boolean privacy) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.email = email;
         this.geburtsdatum = geburtsdatum;
         this.password = password;
+        this.friendlist = friendlist;
+        this.privacy = privacy;
+        this.friendrequests = friendrequests;
     }
 
     public long getID() {
@@ -82,6 +92,31 @@ public class Nutzer {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+
+    public List<Long> getFriendlist() {
+        return friendlist;
+    }
+
+    public void setFriendlist(List<Long> friendlist) {
+        this.friendlist = friendlist;
+    }
+
+    public boolean isPrivacy() {
+        return privacy;
+    }
+
+    public void setPrivacy(boolean privacy) {
+        this.privacy = privacy;
+    }
+
+    public List<Long> getFriendrequests() {
+        return friendrequests;
+    }
+
+    public void setFriendrequests(List<Long> friendrequests) {
+        this.friendrequests = friendrequests;
     }
 
     @Override

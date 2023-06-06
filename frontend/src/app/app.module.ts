@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { NavbarComponent } from './sharepage/navbar/navbar.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -21,6 +21,8 @@ import { NewfriendRequestsComponent } from './pages/friendlist/newfriend-request
 import { FriendAddComponent } from './pages/friendlist/friend-add/friend-add.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { GeoDataComponent } from './pages/geo-data/geo-data.component';
+import {DiagramComponent} from "./pages/diagram/diagram.component";
+
 
 
 
@@ -41,16 +43,21 @@ import { GeoDataComponent } from './pages/geo-data/geo-data.component';
     NewfriendRequestsComponent,
     FriendAddComponent,
     ChatComponent,
-    GeoDataComponent
+    GeoDataComponent,
+    ChatComponent,
+    DiagramComponent
+
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        CanvasJSAngularChartsModule,
+        ReactiveFormsModule
 
-  ],
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

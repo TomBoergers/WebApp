@@ -71,11 +71,6 @@ public class NutzerController {
             return new ResponseEntity<>(newNutzer, HttpStatus.OK);
         }
 
-        @DeleteMapping("/delete/{ID}")
-        public ResponseEntity<?> deleteNutzer(@PathVariable("ID") long ID) {
-            nutzerService.deleteNutzer(ID);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
 
         @PostMapping("/zweiFaktor")
         public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
@@ -102,7 +97,44 @@ public class NutzerController {
             }
         }
 
+        @PutMapping("/acceptFriend")
+        public ResponseEntity<Nutzer> acceptFriend(@RequestBody Nutzer nutzerToAdd, Nutzer nutzerFriendlist){
+            try{
+            nutzerService.acceptFriend(nutzerToAdd,nutzerFriendlist);
+            return new ResponseEntity<>(nutzerFriendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
 
+        @PutMapping("/deleteFriend")
+        public ResponseEntity<Nutzer> deleteFriend(@RequestBody Nutzer nutzerToDelete, Nutzer nutzerFriendList){
+        try{
+            nutzerService.deleteFriend(nutzerToDelete, nutzerFriendList);
+            return new ResponseEntity<>(nutzerFriendList, HttpStatus.OK);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        }
+
+        @GetMapping("/getFriendlist/{ID}")
+        public ResponseEntity<String[][]> getNutzersFriends(@RequestBody long ID) {
+        try {
+            String[][] friendlist = nutzerService.showFriendlist(ID);
+            return new ResponseEntity<>(friendlist, HttpStatus.OK);
+            } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        }
+    @GetMapping("/getFriendRequests/{ID}")
+    public ResponseEntity<String[][]> getNutzersRequests(@RequestBody long ID) {
+        try {
+            String[][] friendrequests = nutzerService.showFriendrequests(ID);
+            return new ResponseEntity<>(friendrequests, HttpStatus.OK);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }
 
 

@@ -15,6 +15,9 @@ import {FriendAddComponent} from "./pages/friendlist/friend-add/friend-add.compo
 import {AuthGuard} from "./services/auth.guard";
 import {ChatComponent} from "./pages/chat/chat.component";
 import {GeoDataComponent} from "./pages/geo-data/geo-data.component";
+import {DiagramComponent} from "./pages/diagram/diagram.component";
+
+
 
 
 const routes: Routes = [
@@ -30,6 +33,8 @@ const routes: Routes = [
     {path: 'chat', component: ChatComponent, canActivate: [AuthGuard]},
     {path: 'friendList', component: FriendlistComponent},
     {path: 'friendRequest', component: NewfriendRequestsComponent},
+    {path: 'friendAdd', component: FriendAddComponent},
+    {path: 'diagram', component: DiagramComponent},
     {path: 'friendAdd', component: FriendAddComponent},
     {path: 'geoData', component: GeoDataComponent}
 

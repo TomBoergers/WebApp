@@ -27,21 +27,23 @@ export class LoginuserService {
           },
             error => { alert("Anmeldung fehlgeschlagen")}
         );
-
   }
 
   userData(user:User){
       this.httpClient.post('http://localhost:8080/nutzer/findUser', user).subscribe((result)=>{
         localStorage.setItem('user', JSON.stringify(result))
       });
-    }
-
-
-
+  }
 
   reloadPage() {
     if(localStorage.getItem('user')){
       this.isLoggedIn.next(true)
     }
+  }
+
+  getAllUsers() {
+    this.httpClient.get('http://localhost:8080/nutzer/all').subscribe((result) => {
+      return result;
+    })
   }
 }
