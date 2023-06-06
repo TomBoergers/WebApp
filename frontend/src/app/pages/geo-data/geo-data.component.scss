@@ -1,0 +1,83 @@
+body {
+  background-color: grey;
+
+
+}
+
+
+button {
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  padding: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin-top: 30px;
+
+  &:hover {
+    background-color: #080710;
+
+  }
+
+}
+
+.frame{
+  background-color: #86511F;
+
+
+}
+
+.huetten-button {
+  background-color: orange ;
+}
+
+.rettung-button{
+  background-color: red;
+}
+
+.knoten-button{
+background-color: darkblue;
+}
+
+.frame .left-frame {
+
+  height: 300px;
+  top: 100%;
+  left: 20%;
+  width: 30%;
+  background: black;
+  box-shadow: 0 3px 25px hsla(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: block;
+  border-bottom-right-radius: 50px;
+}
+
+.frame .right-frame{
+  height: 92%;
+  background: white;
+}
+
+
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 30px;
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
+
+

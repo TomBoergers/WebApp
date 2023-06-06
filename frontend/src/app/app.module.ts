@@ -20,6 +20,7 @@ import { FriendlistComponent } from './pages/friendlist/friendlist.component';
 import { NewfriendRequestsComponent } from './pages/friendlist/newfriend-requests/newfriend-requests.component';
 import { FriendAddComponent } from './pages/friendlist/friend-add/friend-add.component';
 import { ChatComponent } from './pages/chat/chat.component';
+import { GeoDataComponent } from './pages/geo-data/geo-data.component';
 
 
 
@@ -39,7 +40,8 @@ import { ChatComponent } from './pages/chat/chat.component';
     FriendlistComponent,
     NewfriendRequestsComponent,
     FriendAddComponent,
-    ChatComponent
+    ChatComponent,
+    GeoDataComponent
 
   ],
   imports: [
