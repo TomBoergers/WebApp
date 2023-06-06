@@ -14,8 +14,8 @@ export class GeoDataComponent implements AfterViewInit{
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [ 39.8282, -98.5795 ],
-      zoom: 3
+      center: [  50.7753, 6.0839 ],
+      zoom: 13
     });
 
 

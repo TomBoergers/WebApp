@@ -6,28 +6,31 @@ body {
 
 
 button {
-  border: 1px solid white;
+  border: 1px solid black;
   border-radius: 5px;
   color: white;
   padding: 7px;
-  margin-left: auto;
+  margin-left: 10%;
   margin-right: auto;
   overflow: hidden;
   text-decoration: none;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   display: block;
   margin-top: 30px;
+  font-weight: 500;
+  width: 310px;
 
   &:hover {
-    background-color: #080710;
+    background-color: white;
+    color: orange;
 
   }
 
 }
 
 .frame{
-  background-color: #86511F;
-
+  background-color: black;
+  height: 100%;
 
 }
 
@@ -45,9 +48,9 @@ background-color: darkblue;
 
 .frame .left-frame {
 
-  height: 300px;
+
   top: 100%;
-  left: 20%;
+  left: 10%;
   width: 30%;
   background: black;
   box-shadow: 0 3px 25px hsla(0, 0, 0, 0.2);
@@ -64,11 +67,11 @@ background-color: darkblue;
 
 .map-container {
   position: absolute;
-  top: 20%;
-  left: 0;
+  top: 8%;
+  left: 22%;
   right: 0;
   bottom: 0;
-  margin: 30px;
+
 }
 
 .map-frame {
