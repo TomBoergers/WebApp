@@ -5,6 +5,7 @@ import {Message} from "../../classes/message";
 import {ChatService} from "../../services/chat.service";
 import {Router} from "@angular/router";
 import {LoginuserService} from "../../services/loginuser.service";
+import {User} from "../../classes/user";
 
 @Component({
   selector: 'app-chat',
@@ -22,17 +23,17 @@ export class ChatComponent implements OnInit {
   replymessage: String = "checking";
   public chatData: any;
   msg = "Good work";
-  chatId: any = sessionStorage.getItem('chatId');
+  chatId: any = localStorage.getItem('chatId');
   color = "";
   secondUserName = "";
   public alluser: any = [];
-  check = sessionStorage.getItem('username');
+  check = localStorage.getItem('username');
   timesRun = 0;
   timesRun2 = 0;
 
-  firstUserName = sessionStorage.getItem('username') || "";
-  senderEmail = sessionStorage.getItem('username');
-  senderCheck = sessionStorage.getItem('username');
+  firstUserName = localStorage.getItem('username') || "";
+  senderEmail = localStorage.getItem('username');
+  senderCheck = localStorage.getItem('username');
 
   constructor(private chatService: ChatService, private router: Router, private userService: LoginuserService) {
     this.chatForm = new FormGroup({
@@ -42,17 +43,19 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     setInterval(() => {
-      this.chatService.getChatById(sessionStorage.getItem('chatId')).subscribe(data => {
+      this.chatService.getChatById(localStorage.getItem('chatId')).subscribe(data => {
         this.chatData = data;
         this.messageList = this.chatData.messageList;
         this.secondUserName = this.chatData.secondUserName; //Ändern
         this.firstUserName = this.chatData.firstUserName; //Ändern
       });
-    }, 1000);
+    }, 10000);
 
     let getByName: number = setInterval(() => {
       // For getting all the chat list whose ever is logged in.
-      this.chatService.getChatByFirstUserNameOrSecondUserName(sessionStorage.getItem('username')).subscribe(data => {
+      let user = new User();
+      user = JSON.parse(localStorage.getItem("user") || "");
+      this.chatService.getChatByFirstUserNameOrSecondUserName(user.email).subscribe(data => {
         // console.log(data);
         this.chatData = data;
         this.chatList = this.chatData
@@ -62,30 +65,32 @@ export class ChatComponent implements OnInit {
       if (this.timesRun2 === 2) {
         clearInterval(getByName);
       }
-    }, 1000);
+    }, 10000);
 
     let all: number = setInterval(() => {
-      this.alluser = this.userService.getAllUsers();
+      this.userService.getAllUsers().subscribe((result => {
+        this.alluser = result;
+      }));
 
       this.timesRun += 1;
       if (this.timesRun === 2) {
         clearInterval(all);
       }
-    }, 1000);
+    }, 10000);
   }
 
   loadChatByEmail(event: string, event1: string) {
     console.log(event, event1);
     // For removing the previous chatId
-    sessionStorage.removeItem("chatId");
+    localStorage.removeItem("chatId");
 
     // For checking the chat room by both the emails , if there is present then it will give the chat Id in sessionStorage
-    this.chatService.getChatByFirstUserNameAndSecondUserName(event, event1).subscribe(data => {
+    this.chatService.getChatByFirstAndSecondUser(event, event1).subscribe(data => {
       // console.log(data);
       this.chatData = data;
       this.chatId = this.chatData[0].chatId;
       console.log(this.chatId);
-      sessionStorage.setItem('chatId', this.chatId)
+      localStorage.setItem('chatId', this.chatId)
 
 
       setInterval(() => {
@@ -95,7 +100,7 @@ export class ChatComponent implements OnInit {
           this.secondUserName = this.chatData.secondUserName;
           this.firstUserName = this.chatData.firstUserName;
         });
-      }, 1000)
+      }, 10000)
 
     });
 
@@ -125,20 +130,20 @@ export class ChatComponent implements OnInit {
   }
 
   goToChat(username: any) {
-    this.chatService.getChatByFirstUserNameAndSecondUserName(username, sessionStorage.getItem("username") || "").subscribe(
+    this.chatService.getChatByFirstAndSecondUser(username, localStorage.getItem("username") || "").subscribe(
       (data) => {
         this.chatId = data.chatId;
-        sessionStorage.setItem("chatId", this.chatId);
+        localStorage.setItem("chatId", this.chatId);
       },
       (error) => {
         if (error.status == 404) {
-          this.chatObj.firstUserName = sessionStorage.getItem("username") || "";
+          this.chatObj.firstUserName = localStorage.getItem("username") || "";
           this.chatObj.secondUserName = username;
           this.chatService.createChatRoom(this.chatObj).subscribe(
             (data) => {
               this.chatData = data;
               this.chatId = this.chatData.chatId;
-              sessionStorage.setItem("chatId", this.chatData.chatId);
+              localStorage.setItem("chatId", this.chatData.chatId);
             })
         } else {
 

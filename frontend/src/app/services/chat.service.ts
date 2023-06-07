@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Message} from "../classes/message";
 import {Observable} from "rxjs";
 import {Chat} from "../classes/chat";
@@ -25,11 +25,14 @@ export class ChatService {
     return this.httpClient.post(this.baseUrl + "/chats/add", chat);
   }
 
-  getChatByFirstUserNameAndSecondUserName(firstUserName: String, secondUserName: String) { //Ändern zu Email oder ID
-    return this.httpClient.get<Chat>(this.baseUrl + "/chats/getChatByFirstUserNameAndSecondUserName" + '?firstUserName=' + firstUserName + '&secondUserName=' + secondUserName)
+  getChatByFirstAndSecondUser(firstUserEmail: string, secondUserEmail: string) { //Ändern zu Email oder ID
+    const params = new HttpParams()
+      .set('firstUserEmail', firstUserEmail)
+      .set('secondUserEmail', secondUserEmail);
+    return this.httpClient.get<Chat>(this.baseUrl + "/chats/getChatByFirstAndSecondUser", {params})
   }
 
-  getChatByFirstUserNameOrSecondUserName(username: any) {
-    return this.httpClient.get<Chat>(this.baseUrl + "/chats/getChatByFirstUserNameOrSecondUserName/" + username)
+  getChatByFirstUserNameOrSecondUserName(userEmail: any) {
+    return this.httpClient.get<Chat>(this.baseUrl + "/chats/getChatByFirstOrSecondUserEmail/" + userEmail)
   }
 }

@@ -29,17 +29,18 @@ public class ChatService {
             return chatRepo.findAll();
         }
     }
-    public Chat getById(long id) throws Exception {
-        Optional<Chat> chatid = chatRepo.findById(id);
-        if (chatid.isPresent()) {
-            return chatid.get();
+    public Chat getById(long chatId) throws Exception {
+        Optional<Chat> chat = chatRepo.findById(chatId);
+
+        if (chat.isPresent()) {
+            return chat.get();
         } else {
             throw new Exception();
         }
     }
 
-    public HashSet<Chat> getChatByFirstUserName(String username) throws Exception {
-        HashSet<Chat> chat = chatRepo.getChatByFirstUserName(username);
+    public HashSet<Chat> getChatByFirstUserEmail(String email) throws Exception {
+        HashSet<Chat> chat = chatRepo.getChatByFirstUserEmail(email);
 
         if (chat.isEmpty()) {
             throw new Exception();
@@ -48,8 +49,8 @@ public class ChatService {
         }
     }
 
-    public HashSet<Chat> getChatBySecondUserName(String username) throws Exception {
-        HashSet<Chat> chat = chatRepo.getChatBySecondUserName(username);
+    public HashSet<Chat> getChatBySecondUserEmail(String email) throws Exception {
+        HashSet<Chat> chat = chatRepo.getChatBySecondUserEmail(email);
         if (chat.isEmpty()) {
             throw new Exception();
         } else {
@@ -57,20 +58,47 @@ public class ChatService {
         }
     }
 
-    public Chat addMessage(Message add, long chatId) throws Exception {
-        Optional<Chat> chat=chatRepo.findById(chatId);
-        Chat abc=chat.get();
+    public HashSet<Chat> getChatByFirstOrSecondUserEmail(String userEmail) throws Exception {
+        HashSet<Chat> chat = chatRepo.getChatByFirstUserEmail(userEmail);
+        HashSet<Chat> chat1 = chatRepo.getChatBySecondUserEmail(userEmail);
 
-        if(abc.getMessageList()==null){
-            List<Message> msg=new ArrayList<>();
-            msg.add(add);
-            abc.setMessageList(msg);
-            return chatRepo.save(abc);
-        }else{
-            List<Message> rates=abc.getMessageList();
-            rates.add(add);
-            abc.setMessageList(rates);
-            return chatRepo.save(abc);
+        chat1.addAll(chat);
+
+        if (chat.isEmpty() && chat1.isEmpty()) {
+            throw new Exception();
+        } else if (chat1.isEmpty()) {
+            return chat;
+        } else {
+            return chat1;
+        }
+    }
+
+    public HashSet<Chat> getChatByFirstAndSecondUser(String firstUserEmail, String secondUserEmail) throws Exception {
+        HashSet<Chat> chat = chatRepo.getChatByFirstUserEmailAndSecondUserEmail(firstUserEmail, secondUserEmail);
+        HashSet<Chat> chat1 = chatRepo.getChatBySecondUserEmailAndFirstUserEmail(firstUserEmail, secondUserEmail);
+        if (chat.isEmpty() && chat1.isEmpty()) {
+            throw new Exception();
+        } else if (chat.isEmpty()) {
+            return chat1;
+        } else {
+            return chat;
+        }
+    }
+
+    public Chat addMessage(Message message, long chatId) throws Exception {
+        Optional<Chat> chat = chatRepo.findById(chatId);
+        Chat tempChat = chat.get();
+
+        if(tempChat.getMessageList() == null) {
+            List<Message> newMessages = new ArrayList<>();
+            newMessages.add(message);
+            tempChat.setMessageList(newMessages);
+            return chatRepo.save(tempChat);
+        } else {
+            List<Message> addMessages = tempChat.getMessageList();
+            addMessages.add(message);
+            tempChat.setMessageList(addMessages);
+            return chatRepo.save(tempChat);
         }
     }
 }

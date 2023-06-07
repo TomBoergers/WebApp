@@ -11,9 +11,9 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long chatId;
 
-    private String firstUserName;
+    private String firstUserEmail;
 
-    private String secondUserName;
+    private String secondUserEmail;
 
     @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
     private List<Message> messageList;
@@ -22,9 +22,9 @@ public class Chat {
 
     }
 
-    public Chat(String firstUserName, String secondUserName, List<Message> messageList) {
-        this.firstUserName = firstUserName;
-        this.secondUserName = secondUserName;
+    public Chat(String firstUserEmail, String secondUserEmail, List<Message> messageList) {
+        this.firstUserEmail = firstUserEmail;
+        this.secondUserEmail = secondUserEmail;
         this.messageList = messageList;
     }
 
@@ -36,20 +36,20 @@ public class Chat {
         this.chatId = chatId;
     }
 
-    public String getFirstUserName() {
-        return firstUserName;
+    public String getFirstUserEmail() {
+        return firstUserEmail;
     }
 
-    public void setFirstUserName(String firstUserName) {
-        this.firstUserName = firstUserName;
+    public void setFirstUserEmail(String firstUserName) {
+        this.firstUserEmail = firstUserName;
     }
 
-    public String getSecondUserName() {
-        return secondUserName;
+    public String getSecondUserEmail() {
+        return secondUserEmail;
     }
 
-    public void setSecondUserName(String secondUserName) {
-        this.secondUserName = secondUserName;
+    public void setSecondUserEmail(String secondUserName) {
+        this.secondUserEmail = secondUserName;
     }
 
     public List<Message> getMessageList() {

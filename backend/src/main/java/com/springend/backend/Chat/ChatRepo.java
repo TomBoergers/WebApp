@@ -8,11 +8,11 @@ import java.util.HashSet;
 @Repository
 public interface ChatRepo extends JpaRepository<Chat, Long> {
 
-    HashSet<Chat> getChatByFirstUserName(String username);
+    HashSet<Chat> getChatByFirstUserEmail(String email);
 
-    HashSet<Chat> getChatBySecondUserName(String username);
+    HashSet<Chat> getChatBySecondUserEmail(String email);
 
-    HashSet<Chat> getChatByFirstUserNameAndSecondUserName(String firstUserName, String secondUserName);
+    HashSet<Chat> getChatByFirstUserEmailAndSecondUserEmail(String firstUserEmail, String secondUserEmail);
 
-    HashSet<Chat> getChatBySecondUserNameAndFirstUserName(String firstUserName, String secondUserName);
+    HashSet<Chat> getChatBySecondUserEmailAndFirstUserEmail(String firstUserEmail, String secondUserEmail);
 }

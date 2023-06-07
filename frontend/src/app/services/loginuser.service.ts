@@ -32,6 +32,7 @@ export class LoginuserService {
   userData(user:User){
       this.httpClient.post('http://localhost:8080/nutzer/findUser', user).subscribe((result)=>{
         localStorage.setItem('user', JSON.stringify(result))
+        this.user = user;
       });
   }
 
@@ -42,8 +43,6 @@ export class LoginuserService {
   }
 
   getAllUsers() {
-    this.httpClient.get('http://localhost:8080/nutzer/all').subscribe((result) => {
-      return result;
-    })
+    return this.httpClient.get('http://localhost:8080/nutzer/all');
   }
 }

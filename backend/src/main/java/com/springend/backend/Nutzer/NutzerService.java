@@ -1,7 +1,8 @@
 package com.springend.backend.Nutzer;
 
-import com.springend.backend.sysAdmin.SysAdmin;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
