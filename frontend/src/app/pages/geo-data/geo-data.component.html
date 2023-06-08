@@ -6,9 +6,10 @@
 <div class="frame">
   <app-navbar></app-navbar>
   <div class="left-frame">
-    <button class="huetten-button">Schutzhütten im Aachener Wald</button>
-    <button class="rettung-button">Rettungspunkte im Aachener Wald</button>
-    <button class="knoten-button">Knotenpunkte im Aachener Wald</button>
+    <button class="huetten-button" (click)="huettenAnzeige()">Schutzhütten im Aachener Wald</button>
+    <button class="rettung-button" (click)="rettungAnzeige()">Rettungspunkte im Aachener Wald</button>
+    <button class="knoten-button"  (click)="knotenAnzeige()">Knotenpunkte im Aachener Wald</button>
+<!--    <button class="delete-button"  (click)="deleteAllMarkers()">Lösche alle Punkte</button>-->
     <div class="map-container">
       <div class="map-frame">
         <div id="map"></div>
