@@ -1,22 +1,23 @@
 body,
 html {
-  height: 100%;
+
   margin: 0;
   /* background: radial-gradient(circle, hsla(196, 63%, 61%, 1) 0%, hsla(240, 40%, 57%, 1) 100%); */
+  background-color: #080710;
 
 }
 
 .chat {
-  margin-top: 1rem;
-  margin-bottom: auto;
+  margin-top: 1px;
+  margin-bottom: 1px;
 
 }
 
 .card {
-  height: 550px;
-  border-radius: 15px !important;
-  /* background: linear-gradient(90deg, rgb(140, 200, 253) 0%, rgb(93, 226, 241) 100%); */
-  border: 1px solid rgb(140, 200, 253);
+  height: 750px;
+  border-radius: 15px ;
+  background-color: white;
+  border: 1px solid black;
 }
 
 .contacts_body {
@@ -48,7 +49,7 @@ html {
 .card-header {
   border-radius: 15px 15px 0 0 !important;
   border-bottom: 0 !important;
-  background: linear-gradient(90deg, rgb(140, 200, 253) 0%, rgb(93, 226, 241) 100%);
+  background: orange;
 }
 
 .card-footer {
@@ -62,7 +63,7 @@ html {
 
 .search {
   border-radius: 15px 0 0 15px !important;
-  background: linear-gradient(90deg, rgb(97, 151, 198) 0%, rgb(77, 190, 203) 100%) !important;
+  background: blue !important;
   border: 0 !important;
   color: white !important;
 }
@@ -73,7 +74,7 @@ html {
 }
 
 .type_msg {
-  background: linear-gradient(90deg, rgb(97, 151, 198) 0%, rgb(77, 190, 203) 100%) !important;
+  background: orange !important;
   border: 0 !important;
   color: white !important;
   height: 60px !important;
@@ -87,27 +88,23 @@ html {
 
 .attach_btn {
   border-radius: 15px 0 0 15px !important;
-  background: rgb(97, 151, 198) !important;
+  background: orange !important;
   border: 0 !important;
   color: white !important;
   cursor: pointer;
+  font-size: 32px;
 }
 
 .send_btn {
   border-radius: 0 15px 15px 0 !important;
-  background-color: rgb(66, 170, 182) !important;
+  background-color: orange !important;
   border: 0 !important;
   color: white !important;
   cursor: pointer;
+  font-size: 32px;
 }
 
-.search_btn {
-  border-radius: 0 15px 15px 0 !important;
-  background-color: rgba(0, 0, 0, 0.3) !important;
-  border: 0 !important;
-  color: white !important;
-  cursor: pointer;
-}
+
 
 .contacts {
   list-style: none;
@@ -163,7 +160,7 @@ html {
 .user_img {
   height: 70px;
   width: 70px;
-  border: 1.5px solid #f5f6fa;
+  border: 1.5px solid #080710;
 
 }
 
@@ -183,10 +180,11 @@ html {
 .img_cont_msg {
   height: 40px;
   width: 40px;
+
 }
 
 .chatList:hover {
-  background-color: #91fea9;
+  background-color: black;
   cursor: pointer;
 }
 
@@ -208,7 +206,7 @@ html {
 .user_info {
   margin-top: auto;
   margin-bottom: auto;
-  margin-left: 15px;
+  margin-left: 40px;
 }
 
 .user_info span {
@@ -217,21 +215,13 @@ html {
 }
 
 .user_info p {
-  font-size: 10px;
+  font-size: 50px;
   color: rgba(255, 255, 255, 0.6);
 }
 
-.video_cam {
-  margin-left: 50px;
-  margin-top: 5px;
-}
 
-.video_cam span {
-  color: white;
-  font-size: 20px;
-  cursor: pointer;
-  margin-right: 20px;
-}
+
+
 
 .msg_cotainer {
   margin-top: auto;
