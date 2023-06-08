@@ -23,19 +23,19 @@ public class NutzerController {
         this.emailService = emailService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody Nutzer nutzer) {
-        try {
-            Nutzer authenticatedNutzer = nutzerService.authenticateNutzer(nutzer.getEmail(), nutzer.getPassword());
-            String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 999999));
-            emailService.codeVerschicken(nutzer.getEmail(), code);
-            nutzerCodes.put(nutzer.getEmail(),code);
-            System.out.println("Der Code für " + nutzer.getEmail()+ " lautet "+code);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        @PostMapping("/login")
+        public ResponseEntity<Object> login(@RequestBody Nutzer nutzer) {
+            try {
+                Nutzer authenticatedNutzer = nutzerService.authenticateNutzer(nutzer.getEmail(), nutzer.getPassword());
+                String code = String.valueOf(ThreadLocalRandom.current().nextInt(100000, 999999));
+                emailService.codeVerschicken(nutzer.getEmail(), code);
+                nutzerCodes.put(nutzer.getEmail(),code);
+                System.out.println("Der Code für " + nutzer.getEmail()+ " lautet "+code);
+                return ResponseEntity.ok().build();
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
         }
-    }
 
         @PostMapping("/register")
         public ResponseEntity<Object> register(@RequestBody Nutzer nutzer) {
@@ -107,7 +107,8 @@ public class NutzerController {
             }
         }
 
-        @PutMapping ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Nutzer nutzerToAdd, Nutzer nutzerRequestlist) {
+        @PutMapping ("/sendRequest")
+        public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Nutzer nutzerToAdd, Nutzer nutzerRequestlist) {
             try{
                 nutzerService.sendRequest(nutzerToAdd,nutzerRequestlist);
                 return new ResponseEntity<>(nutzerRequestlist, HttpStatus.OK);
@@ -119,32 +120,32 @@ public class NutzerController {
 
         @PutMapping("/deleteFriend")
         public ResponseEntity<Nutzer> deleteFriend(@RequestBody Nutzer nutzerToDelete, Nutzer nutzerFriendList){
-        try{
-            nutzerService.deleteFriend(nutzerToDelete, nutzerFriendList);
-            return new ResponseEntity<>(nutzerFriendList, HttpStatus.OK);
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+            try{
+                nutzerService.deleteFriend(nutzerToDelete, nutzerFriendList);
+                return new ResponseEntity<>(nutzerFriendList, HttpStatus.OK);
+            }catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
         }
 
         @GetMapping("/getFriendlist/{ID}")
         public ResponseEntity<String[][]> getNutzersFriends(@RequestBody long ID) {
-        try {
-            String[][] friendlist = nutzerService.showFriendlist(ID);
-            return new ResponseEntity<>(friendlist, HttpStatus.OK);
+            try {
+                String[][] friendlist = nutzerService.showFriendlist(ID);
+                return new ResponseEntity<>(friendlist, HttpStatus.OK);
+                } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+        @GetMapping("/getFriendRequests/{ID}")
+        public ResponseEntity<String[][]> getNutzersRequests(@RequestBody long ID) {
+            try {
+                String[][] friendrequests = nutzerService.showFriendrequests(ID);
+                return new ResponseEntity<>(friendrequests, HttpStatus.OK);
             } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
         }
-        }
-    @GetMapping("/getFriendRequests/{ID}")
-    public ResponseEntity<String[][]> getNutzersRequests(@RequestBody long ID) {
-        try {
-            String[][] friendrequests = nutzerService.showFriendrequests(ID);
-            return new ResponseEntity<>(friendrequests, HttpStatus.OK);
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
 }
 
 
