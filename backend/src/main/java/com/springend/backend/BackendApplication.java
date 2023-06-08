@@ -1,5 +1,6 @@
 package com.springend.backend;
 
+import com.springend.backend.Nutzer.NutzerService;
 import com.springend.backend.Reader.CSVReader.CSVService;
 import com.springend.backend.Nutzer.Nutzer;
 import com.springend.backend.Nutzer.NutzerRepo;
@@ -22,22 +23,16 @@ public class BackendApplication {
     }
 
     @Bean
-    CommandLineRunner init(NutzerRepo nutzerRepo) {
+    CommandLineRunner init(NutzerRepo nutzerRepo, SysAdminRepo sysAdminRepo) {
         return args -> {
             nutzerRepo.save(new Nutzer("Test","Name","test@gmail.com", LocalDate.of(1999,1,1),"12345", null, null, false));
             nutzerRepo.save(new Nutzer("Test2","Name2","test2@gmail.com", LocalDate.of(1999,1,1),"12345", null, null, false));
+            sysAdminRepo.save(new SysAdmin("Test1","Name1","test1@gmail.com","123456"));
         };
     }
 
     @Bean
-    CommandLineRunner init2(SysAdminRepo sysAdminRepo) {
-      return args -> {
-          sysAdminRepo.save(new SysAdmin("Test1","Name1","test1@gmail.com","123456"));
-      };
-    }
-
-    @Bean
-    CommandLineRunner init3(CSVService csvService, XMLService xmlService) {
+    CommandLineRunner init2(CSVService csvService, XMLService xmlService) {
         return args -> {
             csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/aachenvornamen2021-commasep-decimalpoint.csv", 4, ",", "Vornamen der Stadt Aachen", "2021");
             csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/sterbefalle-monatlich-2015_2022.csv", 9, ",", "Sterbefälle", "2015-2022");
@@ -49,4 +44,6 @@ public class BackendApplication {
             xmlService.addXML("backend/src/main/java/com/springend/backend/Datentabellen/FoodMenuTest.xml", "Food Menu", "2000");
         };
     }
+
+
 }

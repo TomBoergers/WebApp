@@ -54,30 +54,27 @@ public class NutzerService {
         return nutzerRepo.save(nutzer);
     }
 
-    public Nutzer acceptFriend(Nutzer nutzerToAdd, Nutzer nutzerFriendlist) throws Exception{
-        if(nutzerFriendlist.getFriendlist().contains(nutzerToAdd.getID()) == false){
+    public void acceptFriend(Nutzer nutzerToAdd, Nutzer nutzerFriendlist) throws Exception{
+        if(!nutzerFriendlist.getFriendlist().contains(nutzerToAdd.getID())){
             nutzerFriendlist.getFriendlist().add(nutzerToAdd.getID());
-            return nutzerFriendlist;
         }
         else{
             throw new Exception("Nutzer ist bereits dein Freund!");
         }
     }
 
-    public Nutzer sendRequest(Nutzer nutzerToAdd, Nutzer nutzerFriendrequest) throws Exception{
-        if(nutzerFriendrequest.getFriendrequests().contains(nutzerToAdd.getID()) == false){
+    public void sendRequest(Nutzer nutzerToAdd, Nutzer nutzerFriendrequest) throws Exception{
+        if(!nutzerFriendrequest.getFriendrequests().contains(nutzerToAdd.getID())){
             nutzerFriendrequest.getFriendrequests().add(nutzerToAdd.getID());
-            return nutzerFriendrequest;
         }
         else{
             throw new Exception("Nutzer hat deine Anfrage bereits erhalten!");
         }
     }
 
-    public Nutzer deleteFriend(Nutzer nutzerToDelete, Nutzer nutzerFriendlist) throws Exception {
-        if(nutzerFriendlist.getFriendlist().contains(nutzerToDelete.getID()) == true){
+    public void deleteFriend(Nutzer nutzerToDelete, Nutzer nutzerFriendlist) throws Exception {
+        if(nutzerFriendlist.getFriendlist().contains(nutzerToDelete.getID())){
             nutzerFriendlist.getFriendlist().remove(nutzerToDelete.getID());
-        return nutzerFriendlist;
         }
         else{
             throw new Exception("Dieser Nutzer ist nicht dein Freund!");

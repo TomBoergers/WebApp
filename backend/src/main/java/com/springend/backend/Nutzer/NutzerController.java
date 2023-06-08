@@ -107,6 +107,16 @@ public class NutzerController {
             }
         }
 
+        @PutMapping ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Nutzer nutzerToAdd, Nutzer nutzerRequestlist) {
+            try{
+                nutzerService.sendRequest(nutzerToAdd,nutzerRequestlist);
+                return new ResponseEntity<>(nutzerRequestlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+
+
         @PutMapping("/deleteFriend")
         public ResponseEntity<Nutzer> deleteFriend(@RequestBody Nutzer nutzerToDelete, Nutzer nutzerFriendList){
         try{
