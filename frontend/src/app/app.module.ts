@@ -44,7 +44,6 @@ import {DiagramComponent} from "./pages/diagram/diagram.component";
     FriendAddComponent,
     ChatComponent,
     GeoDataComponent,
-    ChatComponent,
     DiagramComponent
 
 

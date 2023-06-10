@@ -15,10 +15,9 @@
         <li><a routerLink="/profile">Profile</a></li>
         <li><a routerLink="/friendList">friends </a></li>
         <li><a routerLink="/geoData">GeoDaten</a></li>
-
+        <li><a routerLink="/chat">Chat</a></li>
         <li><a routerLink="/diagram">Diagramme</a></li>
         <button  (click)="logout()">Logout</button>
-        <button  (click)="goToChat(user.email)">Chat</button>
       </ul>
 
       <ul *ngIf="menuType==='user'" class="menu">
@@ -27,14 +26,9 @@
         <li><a routerLink="/profile">Profile</a></li>
         <li><a routerLink="/friendList">friends </a></li>
         <li><a routerLink="/geoData">GeoDaten</a></li>
+        <li><a routerLink="/chat">Chat</a></li>
         <li><a routerLink="/diagram">Diagramme</a></li>
         <button  (click)="logout()">Logout</button>
-        <button  (click)="goToChat(test)">Chat</button>
     </ul>
-
-
-
-
-
     </div>
 </nav>
