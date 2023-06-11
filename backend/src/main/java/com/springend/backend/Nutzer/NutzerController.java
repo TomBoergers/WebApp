@@ -71,6 +71,16 @@ public class NutzerController {
             return new ResponseEntity<>(newNutzer, HttpStatus.OK);
         }
 
+        @GetMapping("/find/{email}")
+        public Nutzer findNutzerByEmail(@RequestParam String email) {
+            try {
+                System.out.println("Controller: gefunden");
+                return nutzerService.findNutzerByEmail(email);
+            } catch (Exception e) {
+                System.out.println("error");
+                return null;
+            }
+        }
 
         @PostMapping("/zweiFaktor")
         public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {

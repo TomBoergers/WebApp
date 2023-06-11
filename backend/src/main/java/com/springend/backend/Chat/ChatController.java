@@ -1,70 +1,52 @@
 package com.springend.backend.Chat;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/chats")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ChatController {
 
-    @Autowired
-    private ChatService chatService;
+    private final ChatService chatService;
 
-    @PostMapping("/add")
-    public ResponseEntity<Chat> createChat(@RequestBody Chat chat) throws Exception {
+    public ChatController(ChatService chatService) {
+        this.chatService = chatService;
+    }
+
+    @MessageMapping("/chat/{to}")
+    public void sendMessage(@DestinationVariable String to, Message message) {
+        System.out.println("handling send message: " + message + " to: " + to);
         try {
-            return new ResponseEntity<Chat>(chatService.addChat(chat), HttpStatus.CREATED);
+            chatService.handleMessage(to, message);
         } catch (Exception e) {
-            return new ResponseEntity("Chat Already Exists", HttpStatus.CONFLICT);
+            System.out.println("Controller: Couldn't send message");
         }
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Chat>> getAllChats() {
+    @PostMapping("/getMessages")
+    public List<Message> getMessages(@RequestBody String chat) {
         try {
-            return new ResponseEntity<List<Chat>>(chatService.findallchats(), HttpStatus.OK);
+            return chatService.getMessages(chat);
         } catch (Exception e) {
-            return new ResponseEntity("List not found", HttpStatus.CONFLICT);
+            System.out.println("Controller: Couldn't get Messages");
+            return null;
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Chat> getChatById(@PathVariable long chatId) {
+    @PostMapping("/getChats")
+    public List<Chat> getChats(@RequestBody String user) {
         try {
-            return new ResponseEntity<Chat>(chatService.getById(chatId), HttpStatus.OK);
+            return chatService.getChats(user);
         } catch (Exception e) {
-            return new ResponseEntity("Chat Not Found", HttpStatus.NOT_FOUND);
+            System.out.println("Controller: Couldn't getChat");
+            return new ArrayList<Chat>();
         }
-    }
-
-    @GetMapping("/getChatByFirstOrSecondUserEmail/{userEmail}")
-    public ResponseEntity<?> getChatByFirstUserNameOrSecondUserName(@PathVariable String userEmail) {
-        try {
-            HashSet<Chat> byChat = this.chatService.getChatByFirstOrSecondUserEmail(userEmail);
-            return new ResponseEntity<>(byChat, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity("Chat Not Exits", HttpStatus.CONFLICT);
-        }
-    }
-
-    @GetMapping("/getChatByFirstAndSecondUser")
-    public ResponseEntity<?> getChatByFirstUserAndSecondUser(@RequestParam("firstUserEmail") String firstUserEmail, @RequestParam("secondUserEmail") String secondUserEmail) {
-        try {
-            HashSet<Chat> chatByBothEmail = this.chatService.getChatByFirstAndSecondUser(firstUserEmail, secondUserEmail);
-            return new ResponseEntity<>(chatByBothEmail, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity("Chat Not Exits", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PutMapping("/message/{chatId}")
-    public ResponseEntity<Chat> addMessage(@RequestBody Message message, @PathVariable long chatId) throws Exception {
-        return new ResponseEntity<Chat>(chatService.addMessage(message, chatId), HttpStatus.OK);
     }
 }

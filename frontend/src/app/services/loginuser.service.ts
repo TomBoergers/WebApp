@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Router} from "@angular/router";
 import { User } from '../classes/user';
 
@@ -42,7 +42,12 @@ export class LoginuserService {
     }
   }
 
-  getAllUsers() {
+  getAllUsers(): Observable<any> {
     return this.httpClient.get('http://localhost:8080/nutzer/all');
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    console.log(email);
+    return this.httpClient.get<User>("http://localhost:8080/nutzer/find/" + email);
   }
 }

@@ -94,7 +94,6 @@ public class CSVService {
 
     public String[][] updateTable(Long ID, String newName, String newYear) {
         CSVFile csvFile = csvRepo.findCSVByID(ID);
-        System.out.println(csvFile);
         csvFile.setName(newName);
         csvFile.setJahr(newYear);
         csvRepo.save(csvFile);
