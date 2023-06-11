@@ -1,0 +1,44 @@
+<body>
+<app-navbar></app-navbar>
+
+<div class="frame">
+  <h1>Your Friends!</h1>
+  <div class="container">
+    <div class="topnav">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (input)="applyFilter()">
+      <button  (click)="toHome()">Back to Friendlist</button>
+    </div>
+  </div>
+
+
+  <table>
+    <thead>
+    <tr>
+      <th>Friends</th>
+
+      <th>Options</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
+      <td>{{ row[2] }}</td>
+
+      <td>
+        <button>Open Chat</button>
+      </td>
+      <td>
+        <button >Delete Friend</button>
+      </td>
+      <td>
+        <button >Open Friendlist</button>
+      </td>
+    </tr>
+    <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">
+      <td colspan="5">You have no friends right now :(</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
