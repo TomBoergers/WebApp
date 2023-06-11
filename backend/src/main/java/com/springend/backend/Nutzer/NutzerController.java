@@ -195,6 +195,16 @@ public class NutzerController {
                 throw new RuntimeException();
             }
         }
+
+        @PutMapping("/togglePrivacy")
+        public ResponseEntity<Nutzer> togglePrivacy(@RequestBody Nutzer nutzer){
+            try{
+                nutzerService.togglePrivacy(nutzer.getID());
+                return new ResponseEntity<>(nutzer, HttpStatus.OK);
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
+        }
 }
 
 

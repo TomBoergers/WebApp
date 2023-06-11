@@ -155,4 +155,16 @@ public class NutzerService {
 
         return users;
     }
+
+    public void togglePrivacy(long ID){
+        Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
+        if(nutzer.isPrivacy()){
+            nutzer.setPrivacy(false);
+            nutzerRepo.save(nutzer);
+        }
+        else{
+            nutzer.setPrivacy(true);
+            nutzerRepo.save(nutzer);
+        }
+    }
 }
