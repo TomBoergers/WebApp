@@ -56,25 +56,22 @@ public class NutzerService {
     }
 
     public void acceptFriend(Nutzer nutzerToAdd, Nutzer nutzerFriendlist) throws Exception {
-        if (!nutzerFriendlist.getFriendlist().contains(nutzerToAdd.getID())) {
-            nutzerFriendlist.getFriendlist().add(nutzerToAdd.getID());
+        if (!nutzerFriendlist.getFriendlist().contains(nutzerToAdd.getID()) && nutzerFriendlist.getFriendrequests().contains(nutzerToAdd.getID())) {
+            List<Long> neueListe = nutzerFriendlist.getFriendlist();
+            neueListe.add(nutzerToAdd.getID());
+            nutzerFriendlist.setFriendrequests(neueListe);
+            nutzerRepo.save(nutzerFriendlist);
         } else {
             throw new Exception("Nutzer ist bereits dein Freund!");
         }
     }
 
-    /*public void sendRequest(Nutzer nutzerToAdd, Nutzer nutzerFriendrequest) throws Exception {
-        if (!nutzerFriendrequest.getFriendrequests().contains(nutzerToAdd.getID())) {
-            nutzerFriendrequest.getFriendrequests().add(nutzerToAdd.getID());
-        } else {
-            throw new Exception("Nutzer hat deine Anfrage bereits erhalten!");
-        }
-    }*/
-    public void sendRequest(Nutzer nutzerToAdd, Nutzer nutzerFriendrequest) throws Exception {
-        if (!nutzerFriendrequest.getFriendrequests().contains(nutzerToAdd.getID())&& !nutzerToAdd.getFriendrequests().contains(nutzerFriendrequest.getID())) {
-            List<Long> neueListe = nutzerToAdd.getFriendrequests();
-            neueListe.add(nutzerFriendrequest.getID());
-            nutzerToAdd.setFriendrequests(neueListe);
+    public void sendRequest(Nutzer nutzerSendingRequest, Nutzer nutzerReceivingRequest) throws Exception {
+        if (!nutzerReceivingRequest.getFriendrequests().contains(nutzerSendingRequest.getID())&& !nutzerSendingRequest.getFriendrequests().contains(nutzerReceivingRequest.getID())) {
+            List<Long> neueListe = nutzerReceivingRequest.getFriendrequests();
+            neueListe.add(nutzerSendingRequest.getID());
+            nutzerReceivingRequest.setFriendrequests(neueListe);
+            nutzerRepo.save(nutzerReceivingRequest);
         } else {
             throw new Exception("Nutzer hat deine Anfrage bereits erhalten!");
         }

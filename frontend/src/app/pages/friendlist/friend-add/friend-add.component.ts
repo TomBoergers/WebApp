@@ -15,8 +15,8 @@ export class FriendAddComponent {
   user: User = new User();
   tableData: any[][] = [];
   filteredTableData: any[][] = [];
-  searchTerm: String = "";
-  email: String ="";
+  searchTerm: string = "";
+  email: string ="";
   tableID!: number;
   favorites: any[] = [];
 
@@ -33,6 +33,7 @@ export class FriendAddComponent {
       let userStore = localStorage.getItem('user');
       let userData = userStore && JSON.parse(userStore);
       this.email = userData.email;
+      console.log(this.email);
       this.friendlistService.freundHinzufügen(friendEmail,this.email).subscribe(
         (response: any)=>{
           console.log(response);

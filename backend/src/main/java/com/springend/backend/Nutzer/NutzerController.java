@@ -126,16 +126,16 @@ public class NutzerController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }*/
-        @PutMapping ("/sendRequest")
+        @PutMapping  ("/sendRequest")
         public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Map<String, String> body) {
             try{
-                Nutzer nutzerToAdd = nutzerService.findNutzerByEmail(body.get("friendEmail"));
-                Nutzer nutzerRequestlist = nutzerService.findNutzerByEmail(body.get("ownEmail"));
+                Nutzer nutzerReceivingRequest = nutzerService.findNutzerByEmail(body.get("friendEmail"));
+                Nutzer nutzerSendingRequest = nutzerService.findNutzerByEmail(body.get("ownEmail"));
 
-                if (nutzerToAdd != null) {
-                    nutzerService.sendRequest(nutzerToAdd,nutzerRequestlist);
-                    emailService.freundschaftsanfrageVerschicken(nutzerToAdd.getEmail());
-                    return new ResponseEntity<>(nutzerRequestlist, HttpStatus.OK);
+                if (nutzerReceivingRequest != null) {
+                    nutzerService.sendRequest(nutzerSendingRequest,nutzerReceivingRequest);
+                    emailService.freundschaftsanfrageVerschicken(nutzerReceivingRequest.getEmail());
+                    return new ResponseEntity<>(nutzerReceivingRequest, HttpStatus.OK);
                 } else {
                     System.out.println("Nutzer nicht gefunden");
                     return ResponseEntity.notFound().build();
