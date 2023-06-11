@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
-import {friendListService} from "../../services/friendlist.service";
 
 @Component({
   selector: 'app-friendlist',
@@ -18,9 +17,9 @@ export class FriendlistComponent {
   favorites: any[] = [];
   userID!: number;
   email: string = "";
+  privacy: boolean = false;
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router,
-              private friendListService: friendListService) {
+  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
   }
 
   ngOnInit() {
@@ -39,6 +38,9 @@ export class FriendlistComponent {
     }
   }
 
+
+
+
   private refreshTableData() {
     if (localStorage.getItem('user')) {
       let userStore = localStorage.getItem('user');
@@ -55,7 +57,7 @@ export class FriendlistComponent {
       let userStore = localStorage.getItem('user');
       let userData = userStore && JSON.parse(userStore);
       this.email = userData.email;
-      this.friendListService.deleteFriend(friendEmail, this.email).subscribe(
+      this.friendlistService.deleteFriend(friendEmail, this.email).subscribe(
         (response: any)=>{
           alert('Freund wurde entfernt');
           this.refreshTableData();
@@ -66,6 +68,24 @@ export class FriendlistComponent {
         }
         )
     }
+  }
+
+
+  setPrivacy(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.email = userData.email;
+    console.log(this.email);
+    this.friendlistService.getPrivacy(this.email)
+    // if(this.friendlistService.getPrivacy(this.email)){
+    //   this.friendlistService.setPrivacy()
+    //   alert('')
+    // }
+    // else {
+    //   this.friendlistService.setPrivacy()
+    //   alert('')
+    // }
+
   }
 
   toFriendRequest() {

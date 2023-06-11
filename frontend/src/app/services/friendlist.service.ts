@@ -7,6 +7,7 @@ import {User} from "../classes/user";
   providedIn: 'root'
 })
 export class friendListService {
+  user!: object ;
 
   private baseUrl = 'http://localhost:8080'
 
@@ -26,4 +27,18 @@ export class friendListService {
   deleteFriend(friendEmail: String, ownEmail: String ): Observable<object> {
     return this.httpClient.put('http://localhost:8080/nutzer/deleteFriend',{friendEmail, ownEmail});
   }
+
+  getPrivacy(userEmail: String){
+    this.httpClient.get<object>('http://localhost:8080/nutzer/find/' + {userEmail}).subscribe(data =>{
+      this.user = data;
+      console.log(data)    })
+  }
+
+  setPrivacy(){
+    this.httpClient.put('http://localhost:8080/nutzer/togglePrivacy', this.user)
+  }
+
+
+
+
 }
