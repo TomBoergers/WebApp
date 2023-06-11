@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 
@@ -31,14 +31,13 @@ export class DiagramComponent {
       indexLabel: "{name}: {y}",
       yValueFormatString: "#,###.##'%'",
       dataPoints: [
-        {y: 30, name: "Women"},
-        {y: 20, name: "Men"}
+        {y: 50, name: "Women"},
+        {y: 50, name: "Men"}
       ]
     }]
   }
 
   ngOnInit() {
-
   }
 
 
@@ -65,9 +64,7 @@ export class DiagramComponent {
       this.gender = data;
     });
 
-    //let women = "w";
     let men = "m";
-    //let countW= 0;
     let countM = 0;
     for(let i = 0; i < this.gender.length; i++){
 
