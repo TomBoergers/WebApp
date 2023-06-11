@@ -82,7 +82,7 @@ button a {
 
 
 .topnav input[type=text] {
-  margin-left: 10%;
+  margin-left: 50px;
   padding: 7px;
   border: black 3px;
   border-radius: 30px;
@@ -91,7 +91,7 @@ button a {
 
   margin-right: 16px;
   font-size: 17px;
-  width: 30%;
+  width: 20%;
 }
 
 table {
@@ -122,6 +122,22 @@ table {
   border-radius: 50px;
   cursor: pointer;
   margin-right: 20px;
+
+}
+
+.privacy-button {
+  transition: color 0.5s ease;
+
+  width: 150px;
+  background-color: White;
+  color: Black;
+
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+
 
 }
 

@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {friendListService} from "../../services/friendlist.service";
 
 @Component({
   selector: 'app-friendlist',
@@ -14,9 +15,11 @@ export class FriendlistComponent {
   filteredTableData: any[][] = [];
   searchTerm: String = "";
   tableID!: number;
+  email: string ="";
   favorites: any[] = [];
+  privacy: boolean = false;
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router) {
+  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
   }
 
   ngOnInit() {
@@ -46,7 +49,22 @@ export class FriendlistComponent {
   }
 
 
+  setPrivacy(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.email = userData.email;
+    console.log(this.email);
+    this.friendlistService.getPrivacy(this.email)
+    // if(this.friendlistService.getPrivacy(this.email)){
+    //   this.friendlistService.setPrivacy()
+    //   alert('')
+    // }
+    // else {
+    //   this.friendlistService.setPrivacy()
+    //   alert('')
+    // }
 
+  }
 
   toFriendRequest() {
     this.router.navigate(['/friendRequest']);

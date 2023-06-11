@@ -4,5 +4,9 @@ export class User {
     vorname!: string;
     nachname!: string;
     geburtsdatum!: Date;
+    friendrequests!: number[];
+    friendlist!: number[];
+    privacy!: boolean;
+
 }
 
