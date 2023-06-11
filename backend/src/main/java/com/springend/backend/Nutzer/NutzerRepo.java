@@ -9,4 +9,5 @@ public interface NutzerRepo extends JpaRepository<Nutzer, Long> {
     Nutzer findNutzerByID(Long ID);
 
     Nutzer findNutzerByEmail(String email);
+
 }

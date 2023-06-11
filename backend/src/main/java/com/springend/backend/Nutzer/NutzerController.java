@@ -71,6 +71,16 @@ public class NutzerController {
             return new ResponseEntity<>(newNutzer, HttpStatus.OK);
         }
 
+        @GetMapping("/find/{email}")
+        public Nutzer findNutzerByEmail(@RequestParam String email) {
+            try {
+                System.out.println("Controller: gefunden");
+                return nutzerService.findNutzerByEmail(email);
+            } catch (Exception e) {
+                System.out.println("error");
+                return null;
+            }
+        }
 
         @PostMapping("/zweiFaktor")
         public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
@@ -106,12 +116,30 @@ public class NutzerController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
-
-        @PutMapping ("/sendRequest")
-        public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Nutzer nutzerToAdd, Nutzer nutzerRequestlist) {
+        @PutMapping("/denyFriend")
+        public ResponseEntity<Nutzer> denyFriend(@RequestBody Nutzer nutzerToDeny, Nutzer nutzerFriendlist){
             try{
-                nutzerService.sendRequest(nutzerToAdd,nutzerRequestlist);
-                return new ResponseEntity<>(nutzerRequestlist, HttpStatus.OK);
+                nutzerService.denyFriend(nutzerToDeny, nutzerFriendlist);
+                return new ResponseEntity<>(nutzerFriendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+
+        @PutMapping  ("/sendRequest")
+        public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Map<String, String> body) {
+            try{
+                Nutzer nutzerReceivingRequest = nutzerService.findNutzerByEmail(body.get("friendEmail"));
+                Nutzer nutzerSendingRequest = nutzerService.findNutzerByEmail(body.get("ownEmail"));
+
+                if (nutzerReceivingRequest != null) {
+                    nutzerService.sendRequest(nutzerSendingRequest,nutzerReceivingRequest);
+                    emailService.freundschaftsanfrageVerschicken(nutzerReceivingRequest.getEmail());
+                    return new ResponseEntity<>(nutzerReceivingRequest, HttpStatus.OK);
+                } else {
+                    System.out.println("Nutzer nicht gefunden");
+                    return ResponseEntity.notFound().build();
+                }
             } catch (Exception e){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
@@ -137,6 +165,18 @@ public class NutzerController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
+        /*@GetMapping("/ownFriendlist")
+        public ResponseEntity<String[][]> getOwnFriends(@RequestBody String email) {
+            try {
+                Nutzer nutzer = nutzerService.findNutzerByEmail(email);
+                String[][] friendlist = nutzerService.showOwnFriendlist(nutzer);
+                return new ResponseEntity<>(friendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }*/
+
+
         @GetMapping("/getFriendRequests/{ID}")
         public ResponseEntity<String[][]> getNutzersRequests(@RequestBody long ID) {
             try {
@@ -144,6 +184,25 @@ public class NutzerController {
                 return new ResponseEntity<>(friendrequests, HttpStatus.OK);
             } catch (Exception e){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+        @GetMapping("/allUsers")
+        public ResponseEntity<String[][]> getUsers() {
+            try {
+                String[][] users = nutzerService.getAllUsers();
+                return new ResponseEntity<>(users, HttpStatus.OK);
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
+        }
+
+        @PutMapping("/togglePrivacy")
+        public ResponseEntity<Nutzer> togglePrivacy(@RequestBody Nutzer nutzer){
+            try{
+                nutzerService.togglePrivacy(nutzer.getID());
+                return new ResponseEntity<>(nutzer, HttpStatus.OK);
+            } catch (Exception e) {
+                throw new RuntimeException();
             }
         }
 }

@@ -1,62 +1,48 @@
 package com.springend.backend.Chat;
 
-import jakarta.persistence.*;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 import java.util.List;
 
 @Entity
 public class Chat {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long chatId;
+    @GeneratedValue
+    private Long chatID;
 
-    private String firstUserEmail;
+    private String chatName;
 
-    private String secondUserEmail;
+    @ElementCollection
+    private List<String> partecipants;
 
-    @OneToMany(mappedBy = "chat", cascade = CascadeType.ALL)
-    private List<Message> messageList;
-
-    public Chat () {
-
+    public Chat() {
     }
 
-    public Chat(String firstUserEmail, String secondUserEmail, List<Message> messageList) {
-        this.firstUserEmail = firstUserEmail;
-        this.secondUserEmail = secondUserEmail;
-        this.messageList = messageList;
+    public Chat(String chatName, List<String> partecipants) {
+        this.chatName = chatName;
+        this.partecipants = partecipants;
     }
 
-    public long getChatId() {
-        return chatId;
+    public Chat(String chatName) {
+        this.chatName = chatName;
     }
 
-    public void setChatId(long chatId) {
-        this.chatId = chatId;
+    public void setChatID(Long chatID) {
+        this.chatID = chatID;
     }
 
-    public String getFirstUserEmail() {
-        return firstUserEmail;
+    public Long getChatID() {
+        return chatID;
     }
 
-    public void setFirstUserEmail(String firstUserName) {
-        this.firstUserEmail = firstUserName;
+    public String getChatName() {
+        return chatName;
     }
 
-    public String getSecondUserEmail() {
-        return secondUserEmail;
-    }
-
-    public void setSecondUserEmail(String secondUserName) {
-        this.secondUserEmail = secondUserName;
-    }
-
-    public List<Message> getMessageList() {
-        return messageList;
-    }
-
-    public void setMessageList(List<Message> messageList) {
-        this.messageList = messageList;
+    public void setChatName(String chatName) {
+        this.chatName = chatName;
     }
 }

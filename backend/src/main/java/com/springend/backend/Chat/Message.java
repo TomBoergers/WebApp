@@ -1,65 +1,81 @@
 package com.springend.backend.Chat;
 
-import jakarta.persistence.*;
-
-import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity
 public class Message {
-
     @Id
     @GeneratedValue
-    private Long messageId;
+    private Long messageID;
 
-    private String senderEmail;
+    private long chatID;
 
-    private Date time = new Date(System.currentTimeMillis());
+    private String sender;
 
-    private String replyMessage;
+    private String timestamp;
 
-    @ManyToOne
-    @JoinColumn(name = "chat_id")
-    private Chat chat;
+    private String content;
 
     public Message() {
-
     }
 
-    public Message(String senderEmail, Date time, String replyMessage) {
-        this.senderEmail = senderEmail;
-        this.time = time;
-        this.replyMessage = replyMessage;
+    public Message(long chatID, String sender, String timestamp, String content) {
+        this.chatID = chatID;
+        this.sender = sender;
+        this.timestamp = timestamp;
+        this.content = content;
     }
 
-    public String getSenderEmail() {
-        return senderEmail;
+    public void setMessageID(Long messageID) {
+        this.messageID = messageID;
     }
 
-    public void setSenderEmail(String senderEmail) {
-        this.senderEmail = senderEmail;
+    public Long getMessageID() {
+        return messageID;
     }
 
-    public Date getTime() {
-        return time;
+    public long getChatID() {
+        return chatID;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setChatID(long chatID) {
+        this.chatID = chatID;
     }
 
-    public String getReplyMessage() {
-        return replyMessage;
+    public String getSender() {
+        return sender;
     }
 
-    public void setReplyMessage(String replyMessage) {
-        this.replyMessage = replyMessage;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public Long getMessageId() {
-        return messageId;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "messageID=" + messageID +
+                ", chatID=" + chatID +
+                ", sender='" + sender + '\'' +
+                ", timestamp='" + timestamp + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }
