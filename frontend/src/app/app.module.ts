@@ -22,6 +22,7 @@ import { FriendAddComponent } from './pages/friendlist/friend-add/friend-add.com
 import { ChatComponent } from './pages/chat/chat.component';
 import { GeoDataComponent } from './pages/geo-data/geo-data.component';
 import {DiagramComponent} from "./pages/diagram/diagram.component";
+import { FriendsTableComponent } from './pages/friendlist/friends-table/friends-table.component';
 
 
 
@@ -44,7 +45,8 @@ import {DiagramComponent} from "./pages/diagram/diagram.component";
     FriendAddComponent,
     ChatComponent,
     GeoDataComponent,
-    DiagramComponent
+    DiagramComponent,
+    FriendsTableComponent
 
 
   ],
