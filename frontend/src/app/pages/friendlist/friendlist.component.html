@@ -24,13 +24,13 @@
   </thead>
   <tbody>
   <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
-    <td>{{ row[0] }}</td>
+    <td>{{ row[3] }}</td>
 
     <td>
       <button>Open Chat</button>
     </td>
     <td>
-        <button >Delete Friend</button>
+        <button (click)="deleteFriend(row[4])">Delete Friend</button>
     </td>
     <td>
       <button >Open Friendlist</button>

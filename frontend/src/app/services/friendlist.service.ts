@@ -17,12 +17,13 @@ export class friendListService {
   freundHinzufügen(friendEmail: String, ownEmail: String ): Observable<object> {
     return this.httpClient.put('http://localhost:8080/nutzer/sendRequest', {friendEmail, ownEmail});
   }
-
-  /*eigeneFreundeAnzeigen(email: string): Observable<object> {
-    const params = { email: email }; // Parameter als Objekt erstellen
-    return this.httpClient.get('http://localhost:8080/nutzer/ownFriendlist', { params: params });
-  }*/
-
-
-
+  acceptFriend(friendEmail: String, ownEmail: String ): Observable<object> {
+    return this.httpClient.put('http://localhost:8080/nutzer/acceptFriend',{friendEmail, ownEmail});
+  }
+  diclineFriend(friendEmail: String, ownEmail: String ):Observable<object>{
+    return this.httpClient.put('http://localhost:8080/nutzer/denyFriend',{friendEmail, ownEmail});
+  }
+  deleteFriend(friendEmail: String, ownEmail: String ): Observable<object> {
+    return this.httpClient.put('http://localhost:8080/nutzer/deleteFriend',{friendEmail, ownEmail});
+  }
 }

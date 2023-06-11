@@ -23,13 +23,12 @@
     </thead>
     <tbody>
     <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
-      <td>{{ row[0] }}</td>
-
+      <td>{{ row[3] }}</td>
       <td>
-        <button >Accept</button >
+        <button (click)="acceptFriend(row[4])" >Accept</button >
       </td>
       <td>
-        <button >Decline</button>
+        <button (click)="declineFriend(row[4])">Decline</button>
       </td>
     </tr>
     <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">
