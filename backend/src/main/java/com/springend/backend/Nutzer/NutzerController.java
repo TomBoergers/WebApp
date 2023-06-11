@@ -116,16 +116,16 @@ public class NutzerController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
-
-        /*@PutMapping ("/sendRequest")
-        public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Nutzer nutzerToAdd, Nutzer nutzerRequestlist) {
+        @PutMapping("/denyFriend")
+        public ResponseEntity<Nutzer> denyFriend(@RequestBody Nutzer nutzerToDeny, Nutzer nutzerFriendlist){
             try{
-                nutzerService.sendRequest(nutzerToAdd,nutzerRequestlist);
-                return new ResponseEntity<>(nutzerRequestlist, HttpStatus.OK);
+                nutzerService.denyFriend(nutzerToDeny, nutzerFriendlist);
+                return new ResponseEntity<>(nutzerFriendlist, HttpStatus.OK);
             } catch (Exception e){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
-        }*/
+        }
+
         @PutMapping  ("/sendRequest")
         public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Map<String, String> body) {
             try{

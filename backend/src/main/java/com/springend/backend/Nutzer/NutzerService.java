@@ -66,6 +66,17 @@ public class NutzerService {
         }
     }
 
+    public void denyFriend(Nutzer nutzerToDeny, Nutzer nutzerFriendlist) throws Exception {
+        if (!nutzerFriendlist.getFriendlist().contains(nutzerToDeny.getID()) && nutzerFriendlist.getFriendrequests().contains(nutzerToDeny.getID())) {
+            List<Long> neueListe = nutzerFriendlist.getFriendlist();
+            neueListe.remove(nutzerToDeny.getID());
+            nutzerFriendlist.setFriendrequests(neueListe);
+            nutzerRepo.save(nutzerFriendlist);
+        } else {
+            throw new Exception("Nutzer ist bereits dein Freund!");
+        }
+    }
+
     public void sendRequest(Nutzer nutzerSendingRequest, Nutzer nutzerReceivingRequest) throws Exception {
         if (!nutzerReceivingRequest.getFriendrequests().contains(nutzerSendingRequest.getID())&& !nutzerSendingRequest.getFriendrequests().contains(nutzerReceivingRequest.getID())) {
             List<Long> neueListe = nutzerReceivingRequest.getFriendrequests();
@@ -80,6 +91,7 @@ public class NutzerService {
         public void deleteFriend(Nutzer nutzerToDelete, Nutzer nutzerFriendlist) throws Exception {
         if (nutzerFriendlist.getFriendlist().contains(nutzerToDelete.getID())) {
             nutzerFriendlist.getFriendlist().remove(nutzerToDelete.getID());
+            nutzerRepo.save(nutzerFriendlist);
         } else {
             throw new Exception("Dieser Nutzer ist nicht dein Freund!");
         }
