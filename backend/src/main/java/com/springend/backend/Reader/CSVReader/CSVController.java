@@ -75,4 +75,14 @@ public class CSVController {
             throw new RuntimeException(e);
         }
     }
+
+    @GetMapping("/getCount")
+    public ResponseEntity<Integer> getCount() {
+        try {
+            Integer count = csvService.getCount();
+            return new ResponseEntity<>(count, HttpStatus.OK);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

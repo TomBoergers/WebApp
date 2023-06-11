@@ -122,4 +122,22 @@ public class CSVService {
             throw new RuntimeException(e);
         }
     }
+
+    public Integer getCount() throws Exception{
+        CSVFile csvFile = csvRepo.findCSVByID(1);
+        String[][] records = showCSV(1);
+        int countM = 0;
+        int countW = 0;
+
+        for (int i = 1; i < records.length; i++) {
+            if (records[i][2] == "m") {
+                countM++;
+            }
+            else if (records[i][2] == "w") {
+                countW++;
+            }
+        }
+
+        return countM;
+    }
 }
