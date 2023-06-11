@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {friendListService} from "../../services/friendlist.service";
 
 @Component({
   selector: 'app-friendlist',
