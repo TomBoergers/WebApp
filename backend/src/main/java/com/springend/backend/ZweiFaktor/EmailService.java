@@ -23,5 +23,17 @@ public class EmailService {
 
         mailSender.send(message);
     }
+
+    public void freundschaftsanfrageVerschicken(String email) throws MessagingException{
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setFrom("your-email@example.com");
+        helper.setTo(email);
+        helper.setSubject("Neue Freundschaftsanfrage");
+        helper.setText("Sie haben eine Freundschaftsanfrage erhalten");
+
+        mailSender.send(message);
+    }
 }
 

@@ -39,15 +39,10 @@ export class FriendlistComponent {
 
 
   private refreshTableData() {
-    this.http.get<any[][]>("http://localhost:8080/CSV/allNamesAndYears").subscribe(data => {
+    /*this.http.get<any[][]>("http://localhost:8080/nutzer/ownFriendlist").subscribe(data => {
       this.tableData = data;
       this.filteredTableData = data;
-
-      this.http.get<any[][]>("http://localhost:8080/XML/allNamesAndYears").subscribe(data => {
-        this.tableData = this.filteredTableData.concat(data);
-        this.filteredTableData = this.tableData;
-      });
-    });
+    });*/
   }
 
 

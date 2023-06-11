@@ -3,6 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {User} from "../../../classes/user";
+import {friendListService} from "../../../services/friendlist.service";
 
 @Component({
   selector: 'app-friend-add',
@@ -10,26 +12,41 @@ import {NgForm} from "@angular/forms";
   styleUrls: ['./friend-add.component.scss']
 })
 export class FriendAddComponent {
+  user: User = new User();
   tableData: any[][] = [];
   filteredTableData: any[][] = [];
-  searchTerm: String = "";
+  searchTerm: string = "";
+  email: string ="";
   tableID!: number;
   favorites: any[] = [];
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router) {
+  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
+
   }
 
   ngOnInit() {
     this.refreshTableData();
   }
 
-  openTable(tableId: number, tableIdentifier: string) {
-    this.tableService.loadTableId = tableId;
-    this.tableID = tableId;
-    localStorage.setItem("tableID", tableId.toString());
-    localStorage.setItem("identifier", tableIdentifier);
-    this.router.navigate(['/table', tableId]);
+  addFriend(friendEmail:String) {
+    if(localStorage.getItem('user')){
+      let userStore = localStorage.getItem('user');
+      let userData = userStore && JSON.parse(userStore);
+      this.email = userData.email;
+      console.log(this.email);
+      this.friendlistService.freundHinzufügen(friendEmail,this.email).subscribe(
+        (response: any)=>{
+          console.log(response);
+          alert('Freundscahftsandrage erfolgreich gesendet')
+        },
+        (error: any) =>{
+          console.log(error);
+          alert('Fehler beim Verschicken der Freundschaftsanfrage');
+        }
+      )
+    }
   }
+
 
   applyFilter() {
     if(this.searchTerm) {
@@ -42,14 +59,9 @@ export class FriendAddComponent {
   }
 
   private refreshTableData() {
-    this.http.get<any[][]>("http://localhost:8080/CSV/allNamesAndYears").subscribe(data => {
+    this.http.get<any[][]>("http://localhost:8080/nutzer/allUsers").subscribe(data => {
       this.tableData = data;
       this.filteredTableData = data;
-
-      this.http.get<any[][]>("http://localhost:8080/XML/allNamesAndYears").subscribe(data => {
-        this.tableData = this.filteredTableData.concat(data);
-        this.filteredTableData = this.tableData;
-      });
     });
   }
 

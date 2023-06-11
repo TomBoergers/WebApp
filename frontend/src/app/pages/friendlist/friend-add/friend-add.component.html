@@ -24,10 +24,10 @@
     </thead>
     <tbody>
     <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
-      <td>{{ row[0] }}</td>
+      <td>{{ row[0] }} </td>
 
       <td>
-        <button (click)="openTable(row[2], row[3])">Add</button>
+        <button (click)="addFriend(row[1])">Add</button>
       </td>
       <td>
           <button >See Friendlist</button>
