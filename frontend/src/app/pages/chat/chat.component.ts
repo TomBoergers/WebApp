@@ -18,7 +18,7 @@ import SockJS from "sockjs-client";
 export class ChatComponent implements OnInit, AfterViewInit {
   url = "http://localhost:8080";
   thisUser!: User;
-  channelName?: string;
+  channelName!: string;
   socket?: WebSocket;
   stompClient?: Client; //Funktioniert wahrscheinlich nicht
   newMessage = new FormControl('');
@@ -56,6 +56,8 @@ export class ChatComponent implements OnInit, AfterViewInit {
     const nick1 = this.thisUser.vorname;
     const id2 = this.selectedUser.email;
     const nick2 = this.selectedUser.vorname!;
+    console.log(nick1);
+    console.log(nick2);
 
     if (id1 > id2) {
       this.channelName = nick1 + '&' + nick2;
@@ -63,7 +65,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
       this.channelName = nick2 + '&' + nick1;
     }
 
-    this.loadChat()
+    this.loadChat(this.channelName)
     console.log("connecting to chat");
     this.socket = new SockJS(this.url + '/chat');
     this.stompClient = Stomp.over(this.socket);
@@ -74,25 +76,27 @@ export class ChatComponent implements OnInit, AfterViewInit {
     } else {
       this.stompClient.onConnect = (frame) => {
         console.log('Connected to the server: ' + frame);
+        console.log(this.channelName);
         this.stompClient?.subscribe(
           '/topic/messages/' + this.channelName,
           (response) => {
-            this.loadChat();
+            this.loadChat(this.channelName);
           }
         );
       };
-      this.stompClient.activate();
     }
   }
 
-  loadChat() {
-    this.messages = this.httpClient.post<Array<MessageIo>>(this.url + '/getMessages', this.channelName);
+  loadChat(channelName: string) {
+    console.log(channelName);
+    this.messages = this.httpClient.post<Array<MessageIo>>(this.url + '/getMessages', channelName);
     this.messages.subscribe(data => {
       let mgs: Array<MessageIo> = data;
       mgs.sort((a, b) => (a.messageID > b.messageID) ? 1 : -1)
       this.messages = of(mgs);
+      console.log("Messages:", mgs);
+      this.scrollDown();
     })
-    console.log(this.messages);
   }
 
   sendMsg() {
