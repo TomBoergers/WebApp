@@ -33,6 +33,7 @@ public class ChatController {
     @PostMapping("/getMessages")
     public List<Message> getMessages(@RequestBody String chat) {
         try {
+            System.out.println("Controller:" + chat);
             return chatService.getMessages(chat);
         } catch (Exception e) {
             System.out.println("Controller: Couldn't get Messages");

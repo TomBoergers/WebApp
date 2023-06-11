@@ -26,8 +26,10 @@ public class ChatService {
 
     public void handleMessage(String to, Message message) {
         try {
+            messageRepo.save(message);
             message.setChatID(createAndOrGetChat(to));
             message.setTimestamp(generateTimeStamp());
+            messageRepo.save(message);
             simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
             System.out.println("Service: Message sent");
         } catch (Exception e) {
@@ -40,7 +42,9 @@ public class ChatService {
             Chat chat = chatRepo.findChatByChatName(chatName);
 
             if(chat != null) {
-                return messageRepo.findAllByChatID(chat.getChatID());
+                List<Message> chatMessages = new ArrayList<>();
+                chatMessages = messageRepo.findAllByChatID(chat.getChatID());
+                return chatMessages;
             } else {
                 return new ArrayList<Message>();
             }
@@ -63,9 +67,11 @@ public class ChatService {
         Chat chat = chatRepo.findChatByChatName(name);
 
         if(chat != null) {
+            System.out.println(chat.getChatID());
             return chat.getChatID();
         } else {
             Chat newChat = new Chat(name);
+            System.out.println(chatRepo.save(newChat).getChatID());
             return chatRepo.save(newChat).getChatID();
         }
     }

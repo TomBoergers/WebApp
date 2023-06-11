@@ -12,7 +12,7 @@
   <div>
     <label for="userSelect">Wähle einen Benutzer:</label>
     <select id="userSelect" [(ngModel)]="selectedUser" (change)="selectUser(selectedUser)">
-      <option *ngFor="let user of allUsers" [value]="user">{{ user.vorname }}</option>
+      <option *ngFor="let user of allUsers" [ngValue]="user">{{ user.vorname }}</option>
     </select>
   </div>
   <div class="col-md-8 col-xl-6 chat" *ngIf="selectedUser">
