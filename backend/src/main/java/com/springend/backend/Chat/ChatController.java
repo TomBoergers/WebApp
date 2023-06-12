@@ -2,10 +2,7 @@ package com.springend.backend.Chat;
 
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +45,24 @@ public class ChatController {
         } catch (Exception e) {
             System.out.println("Controller: Couldn't getChat");
             return new ArrayList<Chat>();
+        }
+    }
+
+    @PostMapping("/editMessage")
+    public void editMessage(@RequestBody Message message) {
+        try {
+            chatService.editMessage(message);
+        } catch (Exception e) {
+            System.out.println("Controller: Couldn't edit message");
+        }
+    }
+
+    @DeleteMapping("/deleteMessage/{id}")
+    public void deleteMessage(@PathVariable("id") Long messageId) {
+        try {
+            chatService.deleteMessage(messageId);
+        } catch (Exception e) {
+            System.out.println("Controller: Couldn't delete message");
         }
     }
 }

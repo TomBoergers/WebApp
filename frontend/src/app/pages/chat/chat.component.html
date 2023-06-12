@@ -29,15 +29,10 @@
       <div #chat id="chat" class="card-body msg_card_body">
         <!--messages - start> -->
         <div *ngFor="let msg of messages | async">
-          <div
-            class="d-flex justify-content-start mb-4"
-            *ngIf="msg.sender === selectedUser?.vorname; else thisUserMsg"
-          >
+          <div class="d-flex justify-content-start mb-4" *ngIf="msg.sender === selectedUser?.vorname; else thisUserMsg">
             <div class="msg_cotainer">
               {{ msg.content }}
-              <span class="msg_time">{{
-                whenWasItPublished(msg.timestamp)
-                }}</span>
+              <span class="msg_time">{{ whenWasItPublished(msg.timestamp) }}</span>
             </div>
           </div>
 
@@ -45,9 +40,9 @@
             <div class="d-flex justify-content-end mb-4">
               <div class="msg_cotainer_send">
                 {{ msg.content }}
-                <span class="msg_time_send">{{
-                  whenWasItPublished(msg.timestamp)
-                  }}</span>
+                <span class="msg_time_send">{{ whenWasItPublished(msg.timestamp) }}</span>
+                <i class="material-icons" (click)="editMessage(msg)">edit</i>
+                <i class="material-icons" (click)="deleteMessage(msg)">delete</i>
               </div>
             </div>
           </ng-template>

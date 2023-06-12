@@ -1,10 +1,9 @@
- import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {friendListService} from "../../services/friendlist.service";
- import {User} from "../../classes/user";
 
 @Component({
   selector: 'app-friendlist',
@@ -15,7 +14,7 @@ export class FriendlistComponent {
   tableData: any[][] = [];
   filteredTableData: any[][] = [];
   searchTerm: String = "";
-  tableID: number = 0;
+  tableID!: number;
   favorites: any[] = [];
   userID!: number;
   email: string = "";

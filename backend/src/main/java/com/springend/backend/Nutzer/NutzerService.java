@@ -1,11 +1,5 @@
 package com.springend.backend.Nutzer;
-
-import com.springend.backend.Reader.CSVReader.CSVFile;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -82,16 +76,6 @@ public class NutzerService {
         }
     }
 
-    /*public void denyFriend(Nutzer nutzerToDeny, Nutzer nutzerFriendlist) throws Exception {
-        try {
-            List<Long> neueListe = nutzerFriendlist.getFriendrequests();
-            neueListe.remove(nutzerToDeny.getID());
-            nutzerFriendlist.setFriendrequests(neueListe);
-            nutzerRepo.save(nutzerFriendlist);
-        } catch (Exception e){
-            throw new Exception("Blabla");
-        }
-    }*/
         public void denyFriend(Nutzer nutzerToDeny, Nutzer nutzerFriendlist) throws Exception {
             //Wenn der Nutzer nicht in der eigenen Freundesliste ist und der Nutzer in der eigenen Liste der Freundschaftsanfrage vorhanden ist
             if (!nutzerFriendlist.getFriendlist().contains(nutzerToDeny.getID()) && nutzerFriendlist.getFriendrequests().contains(nutzerToDeny.getID())) {
@@ -136,7 +120,7 @@ public class NutzerService {
         Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
         List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
         String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][5];
-        if (nutzerFriendlist.isPrivacy()){
+        if (!nutzerFriendlist.isPrivacy()){
             for (int i = 0; i < nutzerFriendlist.getFriendlist().size(); i++) {
                 Nutzer friend = nutzerRepo.findNutzerByID(friendlistalt.get(i));
                 friendlist [i][0] = String.valueOf(friend.getID());
