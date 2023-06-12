@@ -18,9 +18,7 @@ export class FriendlistComponent {
   favorites: any[] = [];
   userID!: number;
   email: string = "";
-  privacy!: boolean;
-  user!: User;
-
+  privacy: boolean = false;
 
   constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
   }
@@ -28,8 +26,6 @@ export class FriendlistComponent {
   ngOnInit() {
     this.refreshTableData();
   }
-
-
 
   applyFilter() {
     if(this.searchTerm) {
@@ -40,9 +36,6 @@ export class FriendlistComponent {
       this.filteredTableData = this.tableData;
     }
   }
-
-
-
 
   private refreshTableData() {
     if (localStorage.getItem('user')) {
@@ -72,39 +65,26 @@ export class FriendlistComponent {
         )
     }
   }
+  showFriendslist(friendsID: number){
+    localStorage.setItem("friendsID",friendsID.toString());
+      this.router.navigate(['/friends-list/',friendsID]);
+  }
 
 
   setPrivacy(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.userID = userData.id;
     this.email = userData.email;
-    console.log(userData)
-
-    this.friendlistService.setPrivacy(userData)
-    console.log(this.friendlistService.setPrivacy(userData))
-    /*this.friendlistService.getUserByEmail(this.email).subscribe(user =>{
-      this.user = user;
-      console.log(this.user)
-    })*/
-    this.friendlistService.getPrivacy(this.userID).subscribe(data => {
-      this.privacy = data;
-      if(this.privacy){
-
-        alert('true')
-
-      }
-      else {
-
-        this.friendlistService.setPrivacy(userData)
-        alert('false')
-
-      }
-    });
-
-
-
-
+    console.log(this.email);
+    //this.friendlistService.getPrivacy(this.email)
+    // if(this.friendlistService.getPrivacy(this.email)){
+    //   this.friendlistService.setPrivacy()
+    //   alert('')
+    // }
+    // else {
+    //   this.friendlistService.setPrivacy()
+    //   alert('')
+    // }
   }
 
   toFriendRequest() {
