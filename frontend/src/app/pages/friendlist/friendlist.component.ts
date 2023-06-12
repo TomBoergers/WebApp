@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
+import {friendListService} from "../../services/friendlist.service";
 
 @Component({
   selector: 'app-friendlist',
@@ -15,8 +16,11 @@ export class FriendlistComponent {
   searchTerm: String = "";
   tableID!: number;
   favorites: any[] = [];
+  userID!: number;
+  email: string = "";
+  privacy: boolean = false;
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router) {
+  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
   }
 
   ngOnInit() {
@@ -39,14 +43,51 @@ export class FriendlistComponent {
 
 
   private refreshTableData() {
-    /*this.http.get<any[][]>("http://localhost:8080/nutzer/ownFriendlist").subscribe(data => {
-      this.tableData = data;
-      this.filteredTableData = data;
-    });*/
+    if (localStorage.getItem('user')) {
+      let userStore = localStorage.getItem('user');
+      let userData = userStore && JSON.parse(userStore);
+      this.userID = userData.id;
+      this.http.get<any[][]>("http://localhost:8080/nutzer/getFriendlist/" + this.userID).subscribe(data => {
+        this.tableData = data;
+        this.filteredTableData = data;
+      });
+    }
+  }
+  deleteFriend(friendEmail: string) {
+    if (localStorage.getItem('user')) {
+      let userStore = localStorage.getItem('user');
+      let userData = userStore && JSON.parse(userStore);
+      this.email = userData.email;
+      this.friendlistService.deleteFriend(friendEmail, this.email).subscribe(
+        (response: any)=>{
+          alert('Freund wurde entfernt');
+          this.refreshTableData();
+        },
+        (error: any) => {
+          console.log(error);
+          alert('Fehler beim Löschen des Freundes');
+        }
+        )
+    }
   }
 
 
+  setPrivacy(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.email = userData.email;
+    console.log(this.email);
+    this.friendlistService.getPrivacy(this.email)
+    // if(this.friendlistService.getPrivacy(this.email)){
+    //   this.friendlistService.setPrivacy()
+    //   alert('')
+    // }
+    // else {
+    //   this.friendlistService.setPrivacy()
+    //   alert('')
+    // }
 
+  }
 
   toFriendRequest() {
     this.router.navigate(['/friendRequest']);

@@ -7,6 +7,7 @@ import {User} from "../classes/user";
   providedIn: 'root'
 })
 export class friendListService {
+  user!: object ;
 
   private baseUrl = 'http://localhost:8080'
 
@@ -17,11 +18,26 @@ export class friendListService {
   freundHinzufügen(friendEmail: String, ownEmail: String ): Observable<object> {
     return this.httpClient.put('http://localhost:8080/nutzer/sendRequest', {friendEmail, ownEmail});
   }
+  acceptFriend(friendEmail: String, ownEmail: String ): Observable<object> {
+    return this.httpClient.put('http://localhost:8080/nutzer/acceptFriend',{friendEmail, ownEmail});
+  }
+  diclineFriend(friendEmail: String, ownEmail: String ):Observable<object>{
+    return this.httpClient.put('http://localhost:8080/nutzer/denyFriend',{friendEmail, ownEmail});
+  }
+  deleteFriend(friendEmail: String, ownEmail: String ): Observable<object> {
+    return this.httpClient.put('http://localhost:8080/nutzer/deleteFriend',{friendEmail, ownEmail});
+  }
 
-  /*eigeneFreundeAnzeigen(email: string): Observable<object> {
-    const params = { email: email }; // Parameter als Objekt erstellen
-    return this.httpClient.get('http://localhost:8080/nutzer/ownFriendlist', { params: params });
-  }*/
+  getPrivacy(userEmail: String){
+    this.httpClient.get<object>('http://localhost:8080/nutzer/find/' + {userEmail}).subscribe(data =>{
+      this.user = data;
+      console.log(data)    })
+  }
+
+  setPrivacy(){
+    this.httpClient.put('http://localhost:8080/nutzer/togglePrivacy', this.user)
+  }
+
 
 
 
