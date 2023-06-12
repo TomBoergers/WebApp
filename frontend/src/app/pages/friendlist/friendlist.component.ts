@@ -27,8 +27,6 @@ export class FriendlistComponent {
     this.refreshTableData();
   }
 
-
-
   applyFilter() {
     if(this.searchTerm) {
       this.filteredTableData = this.tableData.filter(row =>
@@ -38,9 +36,6 @@ export class FriendlistComponent {
       this.filteredTableData = this.tableData;
     }
   }
-
-
-
 
   private refreshTableData() {
     if (localStorage.getItem('user')) {
@@ -70,6 +65,10 @@ export class FriendlistComponent {
         )
     }
   }
+  showFriendslist(friendsID: number){
+    localStorage.setItem("friendsID",friendsID.toString());
+      this.router.navigate(['/friends-list/',friendsID]);
+  }
 
 
   setPrivacy(){
@@ -86,7 +85,6 @@ export class FriendlistComponent {
     //   this.friendlistService.setPrivacy()
     //   alert('')
     // }
-
   }
 
   toFriendRequest() {
