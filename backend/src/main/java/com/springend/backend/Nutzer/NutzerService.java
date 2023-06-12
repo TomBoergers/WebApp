@@ -165,23 +165,34 @@ public class NutzerService {
         return users;
     }
 
-    public void togglePrivacy(long ID){
-        Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
+    public void togglePrivacy(String email){
+        System.out.println("In Service");
+        Nutzer nutzer = nutzerRepo.findNutzerByEmail(email);
         System.out.println(nutzer.toString());
-        if(nutzer.isPrivacy() == true){
+        if(nutzer.isPrivacy()){
             nutzer.setPrivacy(false);
             nutzerRepo.save(nutzer);
-            System.out.println(nutzerRepo.findNutzerByID(ID));
         }
         else{
             nutzer.setPrivacy(true);
             nutzerRepo.save(nutzer);
-            System.out.println(nutzerRepo.findNutzerByID(ID));
+            System.out.println(nutzerRepo.findNutzerByEmail(email));
         }
     }
 
+
     public Boolean getPrivacy (long ID){
             Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
+            System.out.println("getter");
             return nutzer.isPrivacy();
+
     }
+
+    public Nutzer getUserbyID(long ID){
+        Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
+        return nutzer;
+
+    }
+
+
 }

@@ -3,6 +3,8 @@
   href="https://fonts.googleapis.com/icon?family=Material+Icons"
   rel="stylesheet"
 />
+<body>
+<app-navbar></app-navbar>
 <div class="component">
   <div class="container-fluid h-100">
     <div class="row justify-content-center h-100">
@@ -10,7 +12,7 @@
     </div>
   </div>
   <div>
-    <label for="userSelect">Wähle einen Benutzer:</label>
+    <label class="user_select" for="userSelect">Wähle einen Benutzer:</label>
     <select id="userSelect" [(ngModel)]="selectedUser" (change)="selectUser(selectedUser)">
       <option *ngFor="let user of allUsers" [ngValue]="user">{{ user.vorname }}</option>
     </select>
@@ -19,12 +21,12 @@
     <div class="card">
       <div class="card-header msg_head">
         <div class="d-flex bd-highlight">
-          <div class="img_cont">
+<!--          <div class="img_cont">-->
           </div>
           <div class="user_info">
             <span>Chat mit {{ selectedUser.vorname }}</span>
           </div>
-        </div>
+<!--        </div>-->
       </div>
       <div #chat id="chat" class="card-body msg_card_body">
         <!--messages - start> -->
@@ -54,7 +56,7 @@
           <div class="input-group-append">
             <span class="input-group-text attach_btn"
             ><i class="fas fa-paperclip"></i
-            ></span>
+            >O</span>
           </div>
           <textarea
             [formControl]="newMessage"
@@ -72,3 +74,4 @@
     </div>
   </div>
 </div>
+</body>

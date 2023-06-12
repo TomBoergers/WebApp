@@ -8,6 +8,7 @@ import {LoginuserService} from "../../services/loginuser.service";
 import {HttpClient} from "@angular/common/http";
 import {Client, Stomp} from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import {friendListService} from "../../services/friendlist.service";
 
 
 @Component({
@@ -26,18 +27,32 @@ export class ChatComponent implements OnInit, AfterViewInit {
   allUsers: User[] = [];
   selectedUser!: User;
 
-  constructor(private router: ActivatedRoute, private loginUserService: LoginuserService, private httpClient: HttpClient, private element: ElementRef) {
+
+  constructor(private router: ActivatedRoute, private loginUserService: LoginuserService, private httpClient: HttpClient, private element: ElementRef,
+              private friendlistService : friendListService) {
   }
 
   ngOnInit() {
     this.thisUser = JSON.parse(localStorage.getItem("user")!);
     this.userList();
-    this.element.nativeElement.querySelector("#chat").scrollIntoView();
+    // this.element.nativeElement.querySelector("#chat").scrollIntoView();
+    // this.getUserbyID(2)
+    this.selectUser(this.thisUser)
   }
 
   ngAfterViewInit() {
     this.scrollDown();
   }
+
+  // getUserbyID(ID: number) : User{
+  //   this.friendlistService.getUserbyID(ID).subscribe(data =>{
+  //     this.selectedUser = data;
+  //     console.log(this.selectedUser)
+  //   });
+  //   console.log(this.selectedUser)
+  //   return this.selectedUser
+  //
+  // }
 
   scrollDown() {
     var container = this.element.nativeElement.querySelector("#chat");

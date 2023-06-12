@@ -1,19 +1,25 @@
 .component {
   height: max-content;
   margin: 0;
-  background: #7f7fd5;
-  background: -webkit-linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
-  background: linear-gradient(to right, #91eae4, #86a8e7, #7f7fd5);
+
+
+}
+body{
+  background: #080710;
+
+
+
 }
 
 .chat {
   margin-top: auto;
   margin-bottom: auto;
 }
+
 .card {
   height: 725px;
   border-radius: 15px !important;
-  background-color: rgba(0, 0, 0, 0.4) !important;
+  background-color: black!important;
   text-align: center;
   top: 50%;
   left: 50%;
@@ -44,9 +50,9 @@
   outline: 0px !important;
 }
 .type_msg {
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  background-color: white !important;
   border: 0 !important;
-  color: white !important;
+  color: black !important;
   height: 60px !important;
   overflow-y: auto;
 }
@@ -56,14 +62,16 @@
 }
 .attach_btn {
   border-radius: 15px 0 0 15px !important;
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  font-size: 32px;
+  background-color: gray !important;
   border: 0 !important;
   color: white !important;
   cursor: pointer;
 }
 .send_btn {
   border-radius: 0 15px 15px 0 !important;
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  height: 60px;
+  background-color: gray !important;
   border: 0 !important;
   color: white !important;
   cursor: pointer;
@@ -81,6 +89,7 @@
 }
 .img_cont {
   position: relative;
+  border: 5px white;
   height: 70px;
   width: 70px;
 }
@@ -97,7 +106,12 @@
 .user_info {
   margin-top: auto;
   margin-bottom: auto;
-  margin-left: 15px;
+  background-color: #080710;
+  padding: 15px;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 10px;
 }
 .user_info span {
   font-size: 20px;
@@ -106,6 +120,11 @@
 .user_info p {
   font-size: 10px;
   color: rgba(255, 255, 255, 0.6);
+}
+
+.user_select {
+  color: white;
+  padding: 20px;
 }
 
 .msg_cotainer {

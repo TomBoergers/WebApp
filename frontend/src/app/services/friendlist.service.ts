@@ -33,11 +33,17 @@ export class friendListService {
     return this.httpClient.get<boolean>("http://localhost:8080/nutzer/getPrivacy/" + userId);
   }
 
-  getUserByEmail(email: string): Observable<User> {
-    return this.httpClient.get<User>("http://localhost:8080/nutzer/find/" + email);
+  setPrivacy(user: User): Observable<object> {
+    console.log('setPrivacy im Frontend')
+    console.log(user.email)
+    console.log(user.id)
+
+    return this.httpClient.put('http://localhost:8080/nutzer/togglePrivacy', user)
   }
-  setPrivacy(user: User){
-    this.httpClient.put('http://localhost:8080/nutzer/togglePrivacy', user)
+
+  getUserbyID(ID:number): Observable<User>{
+
+    return this.httpClient.get<User>("http://localhost:8080/nutzer/")
   }
 
 
