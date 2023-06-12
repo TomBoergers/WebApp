@@ -7,7 +7,8 @@ import {User} from "../classes/user";
   providedIn: 'root'
 })
 export class friendListService {
-  user!: object ;
+  user!: User ;
+  privacy: boolean =  true;
 
   private baseUrl = 'http://localhost:8080'
 
@@ -28,14 +29,15 @@ export class friendListService {
     return this.httpClient.put('http://localhost:8080/nutzer/deleteFriend',{friendEmail, ownEmail});
   }
 
-  getPrivacy(userEmail: String){
-    this.httpClient.get<object>('http://localhost:8080/nutzer/find/' + {userEmail}).subscribe(data =>{
-      this.user = data;
-      console.log(data)    })
+  getPrivacy(userId: Number){
+    return this.httpClient.get<boolean>("http://localhost:8080/nutzer/getPrivacy/" + userId);
   }
 
-  setPrivacy(){
-    this.httpClient.put('http://localhost:8080/nutzer/togglePrivacy', this.user)
+  getUserByEmail(email: string): Observable<User> {
+    return this.httpClient.get<User>("http://localhost:8080/nutzer/find/" + email);
+  }
+  setPrivacy(user: User){
+    this.httpClient.put('http://localhost:8080/nutzer/togglePrivacy', user)
   }
 
 

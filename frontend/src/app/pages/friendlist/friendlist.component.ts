@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+ import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {friendListService} from "../../services/friendlist.service";
+ import {User} from "../../classes/user";
 
 @Component({
   selector: 'app-friendlist',
@@ -14,11 +15,13 @@ export class FriendlistComponent {
   tableData: any[][] = [];
   filteredTableData: any[][] = [];
   searchTerm: String = "";
-  tableID!: number;
+  tableID: number = 0;
   favorites: any[] = [];
   userID!: number;
   email: string = "";
-  privacy: boolean = false;
+  privacy!: boolean;
+  user!: User;
+
 
   constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
   }
@@ -75,17 +78,33 @@ export class FriendlistComponent {
   setPrivacy(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
+    this.userID = userData.id;
     this.email = userData.email;
-    console.log(this.email);
-    this.friendlistService.getPrivacy(this.email)
-    // if(this.friendlistService.getPrivacy(this.email)){
-    //   this.friendlistService.setPrivacy()
-    //   alert('')
-    // }
-    // else {
-    //   this.friendlistService.setPrivacy()
-    //   alert('')
-    // }
+    console.log(userData)
+
+    this.friendlistService.setPrivacy(userData)
+    console.log(this.friendlistService.setPrivacy(userData))
+    /*this.friendlistService.getUserByEmail(this.email).subscribe(user =>{
+      this.user = user;
+      console.log(this.user)
+    })*/
+    this.friendlistService.getPrivacy(this.userID).subscribe(data => {
+      this.privacy = data;
+      if(this.privacy){
+
+        alert('true')
+
+      }
+      else {
+
+        this.friendlistService.setPrivacy(userData)
+        alert('false')
+
+      }
+    });
+
+
+
 
   }
 

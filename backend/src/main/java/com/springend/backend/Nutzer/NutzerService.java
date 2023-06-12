@@ -183,13 +183,21 @@ public class NutzerService {
 
     public void togglePrivacy(long ID){
         Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
-        if(nutzer.isPrivacy()){
+        System.out.println(nutzer.toString());
+        if(nutzer.isPrivacy() == true){
             nutzer.setPrivacy(false);
             nutzerRepo.save(nutzer);
+            System.out.println(nutzerRepo.findNutzerByID(ID));
         }
         else{
             nutzer.setPrivacy(true);
             nutzerRepo.save(nutzer);
+            System.out.println(nutzerRepo.findNutzerByID(ID));
         }
+    }
+
+    public Boolean getPrivacy (long ID){
+            Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
+            return nutzer.isPrivacy();
     }
 }

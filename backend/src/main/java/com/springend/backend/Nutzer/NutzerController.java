@@ -82,6 +82,16 @@ public class NutzerController {
             }
         }
 
+        @GetMapping("/getPrivacy/{ID}")
+        public Boolean getPrivacyByID(@PathVariable long ID){
+           try{
+               boolean privacy = nutzerService.getPrivacy(ID);
+               return privacy;
+           } catch(Exception e){
+               return null;
+           }
+        }
+
         @PostMapping("/zweiFaktor")
         public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
             String email = body.get("email");
