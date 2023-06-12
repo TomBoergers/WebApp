@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ChatService {
@@ -74,6 +75,23 @@ public class ChatService {
             System.out.println(chatRepo.save(newChat).getChatID());
             return chatRepo.save(newChat).getChatID();
         }
+    }
+
+    public void editMessage(Message message) {
+        Optional<Message> existingMessageOptional = messageRepo.findById(message.getMessageID());
+        if (existingMessageOptional.isPresent()) {
+            Message existingMessage = existingMessageOptional.get();
+            existingMessage.setContent(message.getContent());
+            messageRepo.save(existingMessage);
+        } else {
+            throw new RuntimeException("Message not found");
+        }
+    }
+
+    public void deleteMessage(Long messageId) {
+        // Führen Sie hier die Logik zum Löschen der Nachricht aus der Datenbank aus.
+        // Beispiel:
+        messageRepo.deleteById(messageId);
     }
 
     public String generateTimeStamp() {
