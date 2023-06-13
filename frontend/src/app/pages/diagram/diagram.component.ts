@@ -50,7 +50,7 @@ dataALL: any[][]= [];
         };
       }
     );
-console.log(this.getData(2));
+
   }
 
   getGenderCountWoman() {
@@ -103,9 +103,5 @@ console.log(this.getData(2));
     );
   }
 
-  getData(tableID:number){
-     return this.httpClient.get<any[][]>("http://localhost:8080/CSV/" + tableID).subscribe(data=>{
-      this.dataALL = data;
-    })
-  }
+
 }
