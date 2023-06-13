@@ -4,6 +4,7 @@ import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {friendListService} from "../../services/friendlist.service";
+import {User} from "../../classes/user";
 
 @Component({
   selector: 'app-friendlist',
@@ -18,7 +19,9 @@ export class FriendlistComponent {
   favorites: any[] = [];
   userID!: number;
   email: string = "";
-  privacy: boolean = false;
+  privacy!: boolean;
+  user!: User;
+
 
   constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
   }
@@ -26,8 +29,6 @@ export class FriendlistComponent {
   ngOnInit() {
     this.refreshTableData();
   }
-
-
 
   applyFilter() {
     if(this.searchTerm) {
@@ -38,9 +39,6 @@ export class FriendlistComponent {
       this.filteredTableData = this.tableData;
     }
   }
-
-
-
 
   private refreshTableData() {
     if (localStorage.getItem('user')) {
@@ -70,22 +68,40 @@ export class FriendlistComponent {
         )
     }
   }
+  showFriendslist(friendsID: number){
+    localStorage.setItem("friendsID",friendsID.toString());
+      this.router.navigate(['/friends-list/',friendsID]);
+  }
 
 
-  setPrivacy(){
+  setPrivate(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
+    this.user = userData;
+    this.userID = userData.id;
     this.email = userData.email;
     console.log(this.email);
-    this.friendlistService.getPrivacy(this.email)
-    // if(this.friendlistService.getPrivacy(this.email)){
-    //   this.friendlistService.setPrivacy()
-    //   alert('')
-    // }
-    // else {
-    //   this.friendlistService.setPrivacy()
-    //   alert('')
-    // }
+    console.log(this.userID)
+
+
+    this.friendlistService.getPrivacy(this.userID).subscribe(data => {
+      this.privacy = data;
+      console.log(this.privacy)
+      if(this.privacy){
+        this.friendlistService.setPrivacy(userData).subscribe()
+        alert('Niemand kann deine Freundesliste mehr sehen \n Setting: Privat')
+      }
+      else {
+        console.log(this.privacy)
+        this.friendlistService.setPrivacy(userData).subscribe()
+        alert('Jeder kann deine Freundesliste sehen \n Setting: Öffentlich')
+      }
+      }
+
+
+
+
+    )
 
   }
 

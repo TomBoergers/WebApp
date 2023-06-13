@@ -36,7 +36,7 @@ const routes: Routes = [
     {path: 'diagram', component: DiagramComponent},
     {path: 'friendAdd', component: FriendAddComponent},
     {path: 'geoData', component: GeoDataComponent},
-    {path: 'friends-list', component: FriendsTableComponent}
+    {path: 'friends-list/:id', component: FriendsTableComponent}
 
 
 

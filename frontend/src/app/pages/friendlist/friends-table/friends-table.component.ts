@@ -13,6 +13,7 @@ export class FriendsTableComponent {
   filteredTableData: any[][] = [];
   searchTerm: String = "";
   tableID!: number;
+  friendsID:String = "";
   favorites: any[] = [];
 
 
@@ -39,10 +40,10 @@ export class FriendsTableComponent {
 
 
   private refreshTableData() {
-    /*this.http.get<any[][]>("http://localhost:8080/nutzer/ownFriendlist").subscribe(data => {
+    this.http.get<any[][]>("http://localhost:8080/nutzer/getFriendlist/" + localStorage.getItem("friendsID")).subscribe(data => {
       this.tableData = data;
       this.filteredTableData = data;
-    });*/
+    });
   }
 
 

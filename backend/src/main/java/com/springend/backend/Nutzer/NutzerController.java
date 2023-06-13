@@ -82,6 +82,26 @@ public class NutzerController {
             }
         }
 
+        @GetMapping("/getPrivacy/{ID}")
+        public Boolean getPrivacyByID(@PathVariable long ID){
+           try{
+               boolean privacy = nutzerService.getPrivacy(ID);
+               return privacy;
+           } catch(Exception e){
+               return null;
+           }
+        }
+
+        @GetMapping("/getUser/{ID}")
+        public Nutzer getUserByID(@PathVariable long ID){
+            try{
+                Nutzer nutzer = nutzerService.getUserbyID(ID);
+                return nutzer;
+            } catch(Exception e){
+                return null;
+            }
+        }
+
         @PostMapping("/zweiFaktor")
         public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
             String email = body.get("email");
@@ -195,7 +215,8 @@ public class NutzerController {
         @PutMapping("/togglePrivacy")
         public ResponseEntity<Nutzer> togglePrivacy(@RequestBody Nutzer nutzer){
             try{
-                nutzerService.togglePrivacy(nutzer.getID());
+                System.out.println("Bei toggle");
+                nutzerService.togglePrivacy(nutzer.getEmail());
                 return new ResponseEntity<>(nutzer, HttpStatus.OK);
             } catch (Exception e) {
                 throw new RuntimeException();

@@ -8,6 +8,7 @@ import {LoginuserService} from "../../services/loginuser.service";
 import {HttpClient} from "@angular/common/http";
 import {Client, Stomp} from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import {friendListService} from "../../services/friendlist.service";
 
 
 @Component({
@@ -26,18 +27,32 @@ export class ChatComponent implements OnInit, AfterViewInit {
   allUsers: User[] = [];
   selectedUser!: User;
 
-  constructor(private router: ActivatedRoute, private loginUserService: LoginuserService, private httpClient: HttpClient, private element: ElementRef) {
+
+  constructor(private router: ActivatedRoute, private loginUserService: LoginuserService, private httpClient: HttpClient, private element: ElementRef,
+              private friendlistService : friendListService) {
   }
 
   ngOnInit() {
     this.thisUser = JSON.parse(localStorage.getItem("user")!);
     this.userList();
-    this.element.nativeElement.querySelector("#chat").scrollIntoView();
+    // this.element.nativeElement.querySelector("#chat").scrollIntoView();
+    // this.getUserbyID(2)
+    this.selectUser(this.thisUser)
   }
 
   ngAfterViewInit() {
     this.scrollDown();
   }
+
+  // getUserbyID(ID: number) : User{
+  //   this.friendlistService.getUserbyID(ID).subscribe(data =>{
+  //     this.selectedUser = data;
+  //     console.log(this.selectedUser)
+  //   });
+  //   console.log(this.selectedUser)
+  //   return this.selectedUser
+  //
+  // }
 
   scrollDown() {
     var container = this.element.nativeElement.querySelector("#chat");
@@ -113,6 +128,35 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
   }
 
+  editMessage(message: MessageIo) {
+    const url = this.url + '/editMessage';
+    const editedMessage = { id: message.messageID, content: 'Bearbeiteter Inhalt' };
+    this.httpClient.put(url, editedMessage).subscribe(
+      (response) => {
+        console.log('Message edited successfully:', response);
+      },
+      (error) => {
+        console.log('Error editing message:', error);
+      }
+    );
+    this.loadChat(this.channelName);
+    this.reloadChat();
+  }
+
+  deleteMessage(message: MessageIo) {
+    const url = this.url + '/deleteMessage/' + message.messageID;
+    this.httpClient.delete(url).subscribe(
+      (response) => {
+        console.log('Message deleted successfully:', response);
+      },
+      (error) => {
+        console.log('Error deleting message:', error);
+      }
+    );
+    this.loadChat(this.channelName);
+    this.reloadChat();
+  }
+
   userList() {
     this.loginUserService.getAllUsers().subscribe(
       (users: User[]) => {
@@ -122,6 +166,12 @@ export class ChatComponent implements OnInit, AfterViewInit {
         console.log("error", error);
       }
     );
+  }
+
+  reloadChat() {
+    if (this.selectedUser) {
+      this.loadChat(this.channelName);
+    }
   }
 
   whenWasItPublished(myTimeStamp: string) {
