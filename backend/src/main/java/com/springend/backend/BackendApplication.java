@@ -30,7 +30,7 @@ public class BackendApplication {
             nutzerRepo.save(new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", null, null, false));
             nutzerRepo.save(new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345", null, null, false));
             nutzerRepo.save(new Nutzer("Tom","Börgers","steamboy445@gmail.com", LocalDate.of(2003,3,2),"12345", null, null, false));
-            nutzerRepo.save(new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345", null, null, true));
+            nutzerRepo.save(new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345", null, null, false));
             sysAdminRepo.save(new SysAdmin("Test1","Name1","test1@gmail.com","123456"));
 
         };

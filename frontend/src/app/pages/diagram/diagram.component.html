@@ -1,8 +1,9 @@
 <body>
 <app-navbar></app-navbar>
 
-<div class="chart">
-  <button>Verhältnis der Geschlechter</button>
-  <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%' , height: '360px'}"></canvasjs-chart>
+
+<h2>PieChart</h2>
+<div class="pieChart" *ngIf="chartOptions">
+  <canvasjs-chart [options]="chartOptions"></canvasjs-chart>
 </div>
 </body>
