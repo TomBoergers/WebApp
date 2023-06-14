@@ -40,7 +40,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.userList();
     // this.element.nativeElement.querySelector("#chat").scrollIntoView();
     // this.getUserbyID(2)
-    this.selectUser(this.thisUser)
+    //this.selectUser(this.thisUser)
   }
 
   ngAfterViewInit() {
@@ -138,10 +138,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
   userList() {
     this.loginUserService.getAllUsers().subscribe(
       (users: User[]) => {
-        this.allUsers = users;
+        this.allUsers = users.filter(user => user.email !== this.thisUser.email);
       },
       (error) => {
-        console.log("error", error);
+        console.log("Fehler", error);
       }
     );
   }
