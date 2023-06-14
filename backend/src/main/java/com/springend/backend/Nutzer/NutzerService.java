@@ -83,6 +83,7 @@ public class NutzerService {
                 neueListe.remove(nutzerToDeny.getID());
                 nutzerFriendlist.setFriendrequests(neueListe);
                 nutzerRepo.save(nutzerFriendlist);
+
             } else {
                 throw new Exception("Nutzer ist bereits dein Freund!");
             }
@@ -106,7 +107,7 @@ public class NutzerService {
         if (nutzerFriendlist.getFriendlist().contains(nutzerToDelete.getID())) {
             //NutzerToDelete wird aus der eigenen Liste gelöscht
             nutzerFriendlist.getFriendlist().remove(nutzerToDelete.getID());
-            //Man selbst wird aus der Freundseliste von dem anderen auch gelöscht
+            //Man selbst wird aus der Freundseliste des anderen auch gelöscht
             nutzerToDelete.getFriendlist().remove(nutzerFriendlist.getID());
 
             nutzerRepo.save(nutzerFriendlist);
@@ -168,7 +169,6 @@ public class NutzerService {
     public void togglePrivacy(String email){
         System.out.println("In Service");
         Nutzer nutzer = nutzerRepo.findNutzerByEmail(email);
-        System.out.println(nutzer.toString());
         if(nutzer.isPrivacy()){
             nutzer.setPrivacy(false);
             nutzerRepo.save(nutzer);
@@ -176,7 +176,6 @@ public class NutzerService {
         else{
             nutzer.setPrivacy(true);
             nutzerRepo.save(nutzer);
-            System.out.println(nutzerRepo.findNutzerByEmail(email));
         }
     }
 
