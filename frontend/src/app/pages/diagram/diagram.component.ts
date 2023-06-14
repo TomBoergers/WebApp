@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 
@@ -12,46 +12,77 @@ export class DiagramComponent {
   genderWomen: any;
   genderMen: any;
   gender: string[][] = [];
-chartOptions:any;
-dataALL: any[][]= [];
-
+  chartOptions: any;
+  dataLabel: any[] = [];
+  dataValue: any[] = [];
+  @Input() pieData: { x: any, y: any}[] = [];
   constructor(private httpClient: HttpClient) {
 
   }
 
 
-
-
   ngOnInit() {
-    this.httpClient.get<string[][]>("http://localhost:8080/CSV/1").subscribe(
+  }
+  getDataPie(tableId: number): void {
+    this.httpClient.get<any[][]>("http://localhost:8080/CSV/" + tableId).subscribe(data => {
+      this.pieData = this.convertData2(data);
+      console.log(this.pieData);
+    });
+  }
+
+  convertData2(data: any[][]): { x: any, y: any }[] {
+    // Assuming the data array has two columns: [amount, value]
+    //return data.map(row => ({ x: row[0], y: row[1] }));
+    const convertedData = data.map(row => ({ x: row[0], y: row[1] }));
+    convertedData.shift();
+    convertedData.pop();
+
+    return convertedData;
+  }
+
+  drawPie(tableID: number) {
+
+    this.httpClient.get<string[][]>("http://localhost:8080/CSV/" + tableID).subscribe(
       (data: string[][]) => {
         this.gender = data;
-        this.genderMen = this.getGenderCountMan(); // Aufruf von getGenderCountMan() hier
-        this.genderWomen = this.getGenderCountWoman();
 
-        let percentW = parseFloat(((this.genderWomen / this.gender.length) * 100).toPrecision(2));
-        let percentM = parseFloat(((this.genderMen / this.gender.length) * 100).toPrecision(3));
-
-        this.chartOptions = {
-          animationEnabled: true,
-          title: {
-            text: "Verhältnis männlich und weiblich"
-          },
-          data: [{
-            type: "pie",
-            startAngle: -90,
-            indexLabel: "{name}: {y}",
-            yValueFormatString: "#,###.##'%'",
-            dataPoints: [
-              { y: percentW, name: "Women" },
-              { y: percentM, name: "Men" }
-            ]
-          }]
-        };
+        for (let i = 0; i < this.gender.length; i++) {
+          for (let j = 0; j < this.gender[i].length; j++) {
+            this.chartOptions = {
+              animationEnabled: true,
+              title: {
+                text: "Verhältnis männlich und weiblich"
+              },
+              data: [{
+                type: "pie",
+                startAngle: -90,
+                indexLabel: "{z}: {y}",
+                yValueFormatString: "#,###.##'%'",
+                dataPoints: [
+                  {y:1, z:2}
+                ]
+              }]
+            };
+          }
+        }
       }
     );
 
+
   }
+
+  getLabel() {
+    let label;
+    for (let i = 0; i < this.gender.length; i++) {
+      this.dataLabel[i] = this.gender[i][0];
+    }
+  }
+    getValue() {
+      let value;
+      for (let i = 0; i < this.gender.length; i++) {
+        this.dataValue[i] = this.gender[i][1];
+      }
+    }
 
   getGenderCountWoman() {
     let women = "w";
