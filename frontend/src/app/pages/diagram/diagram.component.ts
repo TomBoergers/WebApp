@@ -1,7 +1,6 @@
-import { Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-
-
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'diagram',
@@ -10,71 +9,99 @@ import {HttpClient} from "@angular/common/http";
 })
 export class DiagramComponent {
 
-
-  genderWomen:any = this.getGenderCountWoman();
-  genderMen: any = this.getGenderCountMan();
-  gender: any[][]=  [];
-
+  genderWomen: any;
+  genderMen: any;
+  gender: string[][] = [];
+chartOptions:any;
+dataALL: any[][]= [];
 
   constructor(private httpClient: HttpClient) {
 
   }
 
-  chartOptions = {
-    animationEnabled: true,
-    title: {
-      text: "Verhältnis männlich und weiblich"
-    },
-    data: [{
-      type: "pie",
-      startAngle: -90,
-      indexLabel: "{name}: {y}",
-      yValueFormatString: "#,###.##'%'",
-      dataPoints: [
-        {y: 30, name: "Women"},
-        {y: 20, name: "Men"}
-      ]
-    }]
-  }
+
+
 
   ngOnInit() {
+    this.httpClient.get<string[][]>("http://localhost:8080/CSV/1").subscribe(
+      (data: string[][]) => {
+        this.gender = data;
+        this.genderMen = this.getGenderCountMan(); // Aufruf von getGenderCountMan() hier
+        this.genderWomen = this.getGenderCountWoman();
+
+        let percentW = parseFloat(((this.genderWomen / this.gender.length) * 100).toPrecision(2));
+        let percentM = parseFloat(((this.genderMen / this.gender.length) * 100).toPrecision(3));
+
+        this.chartOptions = {
+          animationEnabled: true,
+          title: {
+            text: "Verhältnis männlich und weiblich"
+          },
+          data: [{
+            type: "pie",
+            startAngle: -90,
+            indexLabel: "{name}: {y}",
+            yValueFormatString: "#,###.##'%'",
+            dataPoints: [
+              { y: percentW, name: "Women" },
+              { y: percentM, name: "Men" }
+            ]
+          }]
+        };
+      }
+    );
 
   }
 
-
   getGenderCountWoman() {
-     this.httpClient.get<any[][]>("http://localhost:8080/CSV/1").subscribe(data => {
-       this.gender = data;
-     });
+    let women = "w";
+    let countW = 0;
+    if (this.gender && this.gender.length) {
+      for (let j = 0; j < this.gender.length; j++) {
 
-     let women = "w";
-     let countW= 0;
-     for(let j = 0; j < this.gender.length; j++){
-
-           if(this.gender[2][j] === women){
-             countW++;
-           }
-       }
+        if (this.gender[j][2]=== '"w"') {
+          countW++;
+        }
+      }
+    }
     return countW;
-     }
-
-
+  }
 
   getGenderCountMan() {
-    this.httpClient.get<any[][]>("http://localhost:8080/CSV/1").subscribe(data => {
-      this.gender = data;
-    });
-
-    //let women = "w";
     let men = "m";
-    //let countW= 0;
     let countM = 0;
-    for(let i = 0; i < this.gender.length; i++){
+    if (this.gender && this.gender.length) {
+      for (let j = 0; j < this.gender.length; j++) {
 
-          if(this.gender[2][i] === men){
-            countM++;
-          }
+        if (this.gender[j][2] === '"m"') {
+
+          countM++;
+        }
       }
-    return countM;
     }
+    return countM;
+  }
+
+
+  calculatePercentW():Observable<number> {
+    return this.httpClient.get<string[][]>("http://localhost:8080/CSV/1").pipe(
+      map((data: string[][]) => {
+        this.gender = data;
+        this.genderWomen = this.getGenderCountWoman();
+        return parseFloat(((this.genderWomen / this.gender.length) * 100).toPrecision(1));
+      })
+    );
+  }
+
+  calculatePercentM():Observable<number> {
+    return this.httpClient.get<string[][]>("http://localhost:8080/CSV/1").pipe(
+      map((data: string[][]) => {
+        this.gender = data;
+        this.genderMen = this.getGenderCountMan();
+        return parseFloat(((this.genderMen / this.gender.length) * 100).toPrecision(1));
+      })
+    );
+  }
+
+
 }
