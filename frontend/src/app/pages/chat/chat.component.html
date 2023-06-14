@@ -41,14 +41,20 @@
           <ng-template #thisUserMsg>
             <div class="d-flex justify-content-end mb-4">
               <div class="msg_cotainer_send">
-                {{ msg.content }}
-                <span class="msg_time_send">{{ whenWasItPublished(msg.timestamp) }}</span>
-                <i class="material-icons" (click)="editMessage(msg)">edit</i>
-                <i class="material-icons" (click)="deleteMessage(msg)">delete</i>
+                <div *ngIf="editingMessageId !== msg.messageID">
+                  {{ msg.content }}
+                  <span class="msg_time_send">{{ whenWasItPublished(msg.timestamp) }}</span>
+                  <i class="material-icons" (click)="editMode(msg.messageID)">edit</i>
+                  <i class="material-icons" (click)="deleteMessage(msg.messageID)">delete</i>
+                </div>
+                <div *ngIf="editingMessageId === msg.messageID">
+                  <textarea [(ngModel)]="editedMessageContent" class="form-control">{{ msg.content }}</textarea>
+                  <button (click)="saveEditedMessage()">Speichern</button>
+                </div>
               </div>
             </div>
           </ng-template>
-        </div>
+          </div>
         <!--messages - end-->
       </div>
       <div class="card-footer">

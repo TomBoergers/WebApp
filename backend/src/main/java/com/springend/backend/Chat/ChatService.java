@@ -83,15 +83,19 @@ public class ChatService {
             Message existingMessage = existingMessageOptional.get();
             existingMessage.setContent(message.getContent());
             messageRepo.save(existingMessage);
+            System.out.println("Edit:" + existingMessage.toString());
+            simpMessagingTemplate.convertAndSend("/topic/chat/update", "");
         } else {
             throw new RuntimeException("Message not found");
         }
     }
 
     public void deleteMessage(Long messageId) {
-        // Führen Sie hier die Logik zum Löschen der Nachricht aus der Datenbank aus.
-        // Beispiel:
+        Optional<Message> messageOptional = messageRepo.findById(messageId);
+        Message messageToDelete = messageOptional.get();
         messageRepo.deleteById(messageId);
+        System.out.println("delete: deleted");
+        simpMessagingTemplate.convertAndSend("/topic/chat/update", "");
     }
 
     public String generateTimeStamp() {

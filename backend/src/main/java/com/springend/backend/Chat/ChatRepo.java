@@ -9,5 +9,7 @@ import java.util.List;
 public interface ChatRepo extends JpaRepository<Chat, Long> {
     Chat findChatByChatName(String name);
 
+    String findChatNameByChatID(Long ID);
+
     List<Chat> findChatByPartecipants(String user);
 }

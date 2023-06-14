@@ -1,4 +1,4 @@
-import {AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {User} from "../../classes/user";
 import {FormControl} from "@angular/forms";
 import {Observable, of} from "rxjs";
@@ -26,6 +26,9 @@ export class ChatComponent implements OnInit, AfterViewInit {
   messages?: Observable<Array<MessageIo>>;
   allUsers: User[] = [];
   selectedUser!: User;
+
+  editingMessageId: number | null = null;
+  editedMessageContent: string = '';
 
 
   constructor(private router: ActivatedRoute, private loginUserService: LoginuserService, private httpClient: HttpClient, private element: ElementRef,
@@ -98,6 +101,10 @@ export class ChatComponent implements OnInit, AfterViewInit {
             this.loadChat(this.channelName);
           }
         );
+
+        this.stompClient?.subscribe('/topic/chat/update', (response) => {
+          this.loadChat(this.channelName);
+        });
       };
     }
   }
@@ -128,35 +135,6 @@ export class ChatComponent implements OnInit, AfterViewInit {
     }
   }
 
-  editMessage(message: MessageIo) {
-    const url = this.url + '/editMessage';
-    const editedMessage = { id: message.messageID, content: 'Bearbeiteter Inhalt' };
-    this.httpClient.put(url, editedMessage).subscribe(
-      (response) => {
-        console.log('Message edited successfully:', response);
-      },
-      (error) => {
-        console.log('Error editing message:', error);
-      }
-    );
-    this.loadChat(this.channelName);
-    this.reloadChat();
-  }
-
-  deleteMessage(message: MessageIo) {
-    const url = this.url + '/deleteMessage/' + message.messageID;
-    this.httpClient.delete(url).subscribe(
-      (response) => {
-        console.log('Message deleted successfully:', response);
-      },
-      (error) => {
-        console.log('Error deleting message:', error);
-      }
-    );
-    this.loadChat(this.channelName);
-    this.reloadChat();
-  }
-
   userList() {
     this.loginUserService.getAllUsers().subscribe(
       (users: User[]) => {
@@ -168,10 +146,50 @@ export class ChatComponent implements OnInit, AfterViewInit {
     );
   }
 
-  reloadChat() {
-    if (this.selectedUser) {
-      this.loadChat(this.channelName);
+  editMode(messageId: number) {
+    this.editingMessageId = messageId;
+    this.messages?.subscribe(data => {
+      const message = data.find(msg => msg.messageID === messageId);
+      if (message) {
+        this.editedMessageContent = message.content;
+      }
+    });
+  }
+
+  saveEditedMessage() {
+    if (this.editingMessageId !== null && this.editedMessageContent !== '') {
+      this.editMessage(this.editingMessageId, this.editedMessageContent);
+      this.editingMessageId = null;
+      this.editedMessageContent = '';
     }
+  }
+
+  editMessage(messageId: number, newContent: string) {
+    const editedMessage = {
+      messageID: messageId,
+      content: newContent,
+      channel: this.channelName
+    };
+
+    this.httpClient.post(this.url + '/editMessage', editedMessage).subscribe(
+      () => {
+        this.loadChat(this.channelName);
+      },
+      (error) => {
+        console.log('Fehler beim Bearbeiten der Nachricht', error);
+      }
+    );
+  }
+
+  deleteMessage(messageId: number) {
+    this.httpClient.delete(this.url + '/deleteMessage/' + messageId).subscribe(
+      () => {
+        this.loadChat(this.channelName);
+      },
+      (error) => {
+        console.log('Fehler beim Löschen der Nachricht', error);
+      }
+    );
   }
 
   whenWasItPublished(myTimeStamp: string) {
