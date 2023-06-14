@@ -60,8 +60,11 @@ export class FriendAddComponent {
 
   private refreshTableData() {
     this.http.get<any[][]>("http://localhost:8080/nutzer/allUsers").subscribe(data => {
-      this.tableData = data;
-      this.filteredTableData = data;
+      let userStore = localStorage.getItem('user');
+      let userData = userStore && JSON.parse(userStore);
+      this.email = userData.email;
+      this.tableData = data.filter(row => row[1] !== this.email);
+      this.filteredTableData = this.tableData;
     });
   }
 
