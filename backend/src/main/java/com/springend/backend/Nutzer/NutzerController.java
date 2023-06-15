@@ -193,6 +193,15 @@ public class NutzerController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
+        @GetMapping("/getOwnFriendlist/{ID}")
+        public ResponseEntity<String[][]> getOwnNutzersFriends(@PathVariable long ID) {
+            try {
+                String[][] friendlist = nutzerService.ownShowFriendlist(ID);
+                return new ResponseEntity<>(friendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
         @GetMapping("/getFriendRequests/{ID}")
         public ResponseEntity<String[][]> getNutzersRequests(@PathVariable long ID) {
             try {
