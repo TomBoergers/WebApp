@@ -147,6 +147,7 @@ public class NutzerService {
                 }
                 return friendlist;
             }
+
         public String[][] showOwnFriendlist(long ID) throws Exception {
             Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
             List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
@@ -177,7 +178,7 @@ public class NutzerService {
             }
             return friendrequests;
         }
-       /* public List<Nutzer> showOwnFriendlist(long ID) throws Exception {
+       public List<Nutzer> ownShowFriendlist(long ID) throws Exception {
         Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
         List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
         List<Nutzer> friendlist = new ArrayList<>();
@@ -186,7 +187,7 @@ public class NutzerService {
             friendlist.add(friend);
         }
         return friendlist;
-    }*/
+    }
 
     //Privacy Methods
     public Boolean getPrivacy (long ID){

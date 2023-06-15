@@ -26,6 +26,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
   messages?: Observable<Array<MessageIo>>;
   allUsers: User[] = [];
   selectedUser!: User;
+  chatFriend!: User;
 
   editingMessageId: number | null = null;
   editedMessageContent: string = '';
@@ -38,9 +39,14 @@ export class ChatComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.thisUser = JSON.parse(localStorage.getItem("user")!);
     this.friendsList();
-    // this.element.nativeElement.querySelector("#chat").scrollIntoView();
-    // this.getUserbyID(2)
-    //this.selectUser(this.thisUser)
+    // // this.element.nativeElement.querySelector("#chat").scrollIntoView();
+    // this.friendlistService.getUserbyID(1).subscribe(data => {
+    //   this.chatFriend = data
+    //   this.selectUser(this.chatFriend)
+    //
+    // })
+
+
   }
 
   ngAfterViewInit() {
@@ -146,6 +152,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
     );
   }
   friendsList() {
+    console.log(this.thisUser.id)
     this.friendlistService.getFriendslist(this.thisUser.id).subscribe(
       (users: User[]) => {
         this.allUsers = users; //Nur die Freunde werden angezeigt

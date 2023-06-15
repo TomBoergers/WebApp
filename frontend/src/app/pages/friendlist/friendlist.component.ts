@@ -23,7 +23,7 @@ export class FriendlistComponent {
   user!: User;
 
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
+  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService: friendListService) {
   }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class FriendlistComponent {
   }
 
   applyFilter() {
-    if(this.searchTerm) {
+    if (this.searchTerm) {
       this.filteredTableData = this.tableData.filter(row =>
         row.some(cell => cell.toString().toLowerCase().includes(this.searchTerm.toLowerCase()))
       );
@@ -51,13 +51,14 @@ export class FriendlistComponent {
       });
     }
   }
+
   deleteFriend(friendEmail: string) {
     if (localStorage.getItem('user')) {
       let userStore = localStorage.getItem('user');
       let userData = userStore && JSON.parse(userStore);
       this.email = userData.email;
       this.friendlistService.deleteFriend(friendEmail, this.email).subscribe(
-        (response: any)=>{
+        (response: any) => {
           alert('Freund wurde entfernt');
           this.refreshTableData();
         },
@@ -65,10 +66,11 @@ export class FriendlistComponent {
           console.log(error);
           alert('Fehler beim Löschen des Freundes');
         }
-        )
+      )
     }
   }
-  showFriendslist(friendsID: string, userId: string){
+
+  showFriendslist(friendsID: string, userId: string) {
     console.log(friendsID)
     console.log(parseInt(friendsID))
     console.log(userId)
@@ -86,11 +88,7 @@ export class FriendlistComponent {
   }
 
 
-
-
-
-
-  setPrivate(){
+  setPrivate() {
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
     this.user = userData;
@@ -101,17 +99,16 @@ export class FriendlistComponent {
 
 
     this.friendlistService.getPrivacy(this.userID).subscribe(data => {
-      this.privacy = data;
-      console.log(this.privacy)
-      if(this.privacy){
-        this.friendlistService.setPrivacy(userData).subscribe()
-        alert('Niemand kann deine Freundesliste mehr sehen \n Setting: Privat')
-      }
-      else {
+        this.privacy = data;
         console.log(this.privacy)
-        this.friendlistService.setPrivacy(userData).subscribe()
-        alert('Jeder kann deine Freundesliste sehen \n Setting: Öffentlich')
-      }
+        if (this.privacy) {
+          this.friendlistService.setPrivacy(userData).subscribe()
+          alert('Niemand kann deine Freundesliste mehr sehen \n Setting: Privat')
+        } else {
+          console.log(this.privacy)
+          this.friendlistService.setPrivacy(userData).subscribe()
+          alert('Jeder kann deine Freundesliste sehen \n Setting: Öffentlich')
+        }
       }
     )
 
@@ -121,10 +118,12 @@ export class FriendlistComponent {
     this.router.navigate(['/friendRequest']);
   }
 
-  toFriendAdd(){
+  toFriendAdd() {
     this.router.navigate(['/friendAdd']);
   }
-  openChat(){
+
+  openChat() {
     this.router.navigate(['/chat']);
   }
+
 }

@@ -157,11 +157,11 @@ public class NutzerController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
-        /*@GetMapping("/allFriends/{ID}")
+        @GetMapping("/allFriends/{ID}")
         public ResponseEntity<List<Nutzer>> getFriends(@PathVariable long ID) throws Exception {
             List<Nutzer> nutzers = nutzerService.ownShowFriendlist(ID);
             return new ResponseEntity<>(nutzers, HttpStatus.OK);
-        }*/
+        }
         @PutMapping  ("/sendRequest")
             public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Map<String, String> body) {
                 try{
