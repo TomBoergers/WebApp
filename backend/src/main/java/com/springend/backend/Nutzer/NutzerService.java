@@ -155,12 +155,13 @@ public class NutzerService {
 
     public String[][] getAllUsers() {
         List<Nutzer> nutzerList = nutzerRepo.findAll();
-        String[][] users = new String[nutzerList.size()][2];
+        String[][] users = new String[nutzerList.size()][3];
 
         for (int i = 0; i < nutzerList.size(); i++) {
             Nutzer nutzer = nutzerList.get(i);
             users[i][0] = nutzer.getVorname()+" "+nutzer.getNachname();
             users[i][1] = nutzer.getEmail();
+            users[i][2]= String.valueOf(nutzer.getID());
         }
 
         return users;

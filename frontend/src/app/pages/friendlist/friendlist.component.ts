@@ -68,7 +68,7 @@ export class FriendlistComponent {
         )
     }
   }
-  showFriendslist(friendsID: number){
+  showFriendslist(friendsID: string){
     localStorage.setItem("friendsID",friendsID.toString());
       this.router.navigate(['/friends-list/',friendsID]);
   }
@@ -97,10 +97,6 @@ export class FriendlistComponent {
         alert('Jeder kann deine Freundesliste sehen \n Setting: Öffentlich')
       }
       }
-
-
-
-
     )
 
   }
