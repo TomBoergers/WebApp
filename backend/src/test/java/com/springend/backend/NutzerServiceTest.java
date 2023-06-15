@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @ExtendWith(SpringExtension.class)
 @Transactional
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class NutzerServiceTesting {
+public class NutzerServiceTest {
     @Autowired NutzerService nutzerService;
     @Autowired NutzerRepo nutzerRepo;
     @Autowired NutzerController nutzerController;
