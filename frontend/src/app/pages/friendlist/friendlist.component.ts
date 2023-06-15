@@ -46,6 +46,7 @@ export class FriendlistComponent {
       let userData = userStore && JSON.parse(userStore);
       this.userID = userData.id;
       this.http.get<any[][]>("http://localhost:8080/nutzer/getOwnFriendlist/" + this.userID).subscribe(data => {
+        console.log(data);
         this.tableData = data;
         this.filteredTableData = data;
       });
@@ -78,7 +79,7 @@ export class FriendlistComponent {
       this.privacy = data;
       console.log(this.privacy)
       if (this.privacy) {
-        localStorage.setItem("friendsID", friendsID.toString());
+        localStorage.setItem("friendsID", userId.toString());
         this.router.navigate(['/friends-list/', friendsID]);
       } else {
         alert("Seine Freundesliste ist auf Privat")
