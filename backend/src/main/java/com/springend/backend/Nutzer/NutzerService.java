@@ -64,7 +64,8 @@ public class NutzerService {
     }
 
     public void acceptFriend(Nutzer nutzerToAdd, Nutzer nutzerFriendlist) throws Exception {
-        if (!nutzerFriendlist.getFriendlist().contains(nutzerToAdd.getID()) && nutzerFriendlist.getFriendrequests().contains(nutzerToAdd.getID())) {
+        if (!nutzerFriendlist.getFriendlist().contains(nutzerToAdd.getID()) &&
+                nutzerFriendlist.getFriendrequests().contains(nutzerToAdd.getID())) {
            //Freund wird in die eigene Freundesliste hinzugefügt
             List<Long> newFriendlist = nutzerFriendlist.getFriendlist();
             newFriendlist.add(nutzerToAdd.getID());
@@ -119,7 +120,7 @@ public class NutzerService {
         if (nutzerFriendlist.getFriendlist().contains(nutzerToDelete.getID())) {
             //NutzerToDelete wird aus der eigenen Liste gelöscht
             nutzerFriendlist.getFriendlist().remove(nutzerToDelete.getID());
-            //Man selbst wird aus der Freundseliste des anderen auch gelöscht
+            //Man selbst wird aus der Freundseliste des anderen gelöscht
             nutzerToDelete.getFriendlist().remove(nutzerFriendlist.getID());
 
             nutzerRepo.save(nutzerFriendlist);
@@ -129,7 +130,7 @@ public class NutzerService {
         }
     }
 
-    public String[][] showFriendlist(long ID) throws Exception {
+    public String[][] showForeignFriendlist(long ID) throws Exception {
         Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
         List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
         String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][5];
