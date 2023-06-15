@@ -1,6 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
+import { Chart, ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+
 
 @Component({
   selector: 'diagram',
@@ -8,6 +10,7 @@ import {map, Observable} from "rxjs";
   styleUrls: ['./diagram.component.scss']
 })
 export class DiagramComponent {
+  constructor(private httpClient:HttpClient) { }
 
   genderWomen: any;
   genderMen: any;
@@ -16,21 +19,19 @@ export class DiagramComponent {
   dataLabel: any[] = [];
   dataValue: any[] = [];
   @Input() pieData: { x: any, y: any}[] = [];
-  constructor(private httpClient: HttpClient) {
 
-  }
 
 
   ngOnInit() {
   }
-  getDataPie(tableId: number): void {
-    this.httpClient.get<any[][]>("http://localhost:8080/CSV/" + tableId).subscribe(data => {
+  getDataPie(): any {
+    return this.httpClient.get<any[][]>("http://localhost:8080/CSV/2").subscribe(data => {
       this.pieData = this.convertData2(data);
-      console.log(this.pieData);
+      console.log(this.pieData)
     });
   }
 
-  convertData2(data: any[][]): { x: any, y: any }[] {
+  convertData2(data: any[][]): { x: any, y: any}[] {
     // Assuming the data array has two columns: [amount, value]
     //return data.map(row => ({ x: row[0], y: row[1] }));
     const convertedData = data.map(row => ({ x: row[0], y: row[1] }));
@@ -40,14 +41,13 @@ export class DiagramComponent {
     return convertedData;
   }
 
-  drawPie(tableID: number) {
+  drawPie() {
 
-    this.httpClient.get<string[][]>("http://localhost:8080/CSV/" + tableID).subscribe(
+    this.httpClient.get<string[][]>("http://localhost:8080/CSV/2").subscribe(
       (data: string[][]) => {
         this.gender = data;
 
-        for (let i = 0; i < this.gender.length; i++) {
-          for (let j = 0; j < this.gender[i].length; j++) {
+        for (let i = 1; i < this.gender.length; i++) {
             this.chartOptions = {
               animationEnabled: true,
               title: {
@@ -56,15 +56,14 @@ export class DiagramComponent {
               data: [{
                 type: "pie",
                 startAngle: -90,
-                indexLabel: "{z}: {y}",
+                indexLabel: "{name}: {y}",
                 yValueFormatString: "#,###.##'%'",
                 dataPoints: [
-                  {y:1, z:2}
+                  this.gender[i][0], this.gender[i][1]
                 ]
               }]
             };
           }
-        }
       }
     );
 

@@ -17,7 +17,7 @@ import {ChatComponent} from "./pages/chat/chat.component";
 import {GeoDataComponent} from "./pages/geo-data/geo-data.component";
 import {DiagramComponent} from "./pages/diagram/diagram.component";
 import {FriendsTableComponent} from "./pages/friendlist/friends-table/friends-table.component";
-import {BarGraphComponent} from "./pages/bar-graph/bar-graph.component";
+import {TestBarGraphComponent} from "./pages/test-bar-graph/test-bar-graph.component";
 
 
 const routes: Routes = [
@@ -38,7 +38,7 @@ const routes: Routes = [
     {path: 'friendAdd', component: FriendAddComponent},
     {path: 'geoData', component: GeoDataComponent},
     {path: 'friends-list/:id', component: FriendsTableComponent},
-    {path: 'barGraph', component: BarGraphComponent}
+    {path: 'testBarGraph', component: TestBarGraphComponent}
 
 
 

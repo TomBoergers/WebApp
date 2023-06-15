@@ -1,10 +1,12 @@
 {
   "dependencies": {
-    "@angular/cli": "^15.2.8",
+    "@angular/cli": "^16.1.0",
+    "@angular/material": "^16.1.1",
     "@auth0/angular-jwt": "^5.1.2",
     "@canvasjs/charts": "^3.7.8",
     "@types/proj4": "^2.5.2",
     "canvasjs": "^1.8.3",
+    "chart.js": "^4.3.0",
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.4",
     "proj4": "^2.9.0",

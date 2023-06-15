@@ -24,6 +24,7 @@ import { GeoDataComponent } from './pages/geo-data/geo-data.component';
 import {DiagramComponent} from "./pages/diagram/diagram.component";
 import { FriendsTableComponent } from './pages/friendlist/friends-table/friends-table.component';
 import { BarGraphComponent } from './pages/bar-graph/bar-graph.component';
+import { TestBarGraphComponent } from './pages/test-bar-graph/test-bar-graph.component';
 
 
 
@@ -48,8 +49,8 @@ import { BarGraphComponent } from './pages/bar-graph/bar-graph.component';
     GeoDataComponent,
     DiagramComponent,
     FriendsTableComponent,
-    BarGraphComponent
-
+    BarGraphComponent,
+    TestBarGraphComponent
 
   ],
     imports: [
