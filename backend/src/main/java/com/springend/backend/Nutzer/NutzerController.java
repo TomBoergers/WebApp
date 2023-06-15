@@ -23,6 +23,52 @@ public class NutzerController {
         this.emailService = emailService;
     }
 
+
+
+
+
+        //Standard Methods
+        @GetMapping("/all")
+        public ResponseEntity<List<Nutzer>> getNutzers() {
+            List<Nutzer> nutzers = nutzerService.findAllNutzers();
+            return new ResponseEntity<>(nutzers, HttpStatus.OK);
+        }
+        @GetMapping("/get/{ID}")
+        public Nutzer getNutzerByID(@PathVariable long ID){
+            try{
+                Nutzer nutzer = nutzerService.getUserbyID(ID);
+                return nutzer;
+            } catch(Exception e){
+                return null;
+            }
+        }
+        @GetMapping("/findUser/{email}")
+        public Nutzer getNutzerByEmail(@RequestParam String email) {
+            try {
+                System.out.println("Controller: gefunden");
+                return nutzerService.findNutzerByEmail(email);
+            } catch (Exception e) {
+                System.out.println("error");
+                return null;
+            }
+        }
+        @PostMapping("/add")
+        public ResponseEntity<Nutzer> addNutzer(@RequestBody Nutzer nutzer) {
+            Nutzer newNutzer = nutzerService.addNutzer(nutzer);
+            return new ResponseEntity<>(newNutzer, HttpStatus.OK);
+        }
+        @PostMapping("/findUser")
+        public ResponseEntity<Object> findNutzer(@RequestBody Nutzer nutzer) {
+            try {
+                Nutzer foundNutzer = nutzerService.findNutzerByEmail(nutzer.getEmail());
+                return new ResponseEntity<>(foundNutzer, HttpStatus.OK);
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+
+
+        //Login and Register Methods
         @PostMapping("/login")
         public ResponseEntity<Object> login(@RequestBody Nutzer nutzer) {
             try {
@@ -36,7 +82,6 @@ public class NutzerController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
-
         @PostMapping("/register")
         public ResponseEntity<Object> register(@RequestBody Nutzer nutzer) {
             System.out.println(nutzer);
@@ -48,66 +93,7 @@ public class NutzerController {
             }
         }
 
-        @PostMapping("/findUser")
-        public ResponseEntity<Object> findNutzer(@RequestBody Nutzer nutzer) {
-            try {
-                Nutzer foundNutzer = nutzerService.findNutzerByEmail(nutzer.getEmail());
-                return new ResponseEntity<>(foundNutzer, HttpStatus.OK);
-            } catch (Exception e) {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-        }
-
-        @GetMapping("/all")
-        public ResponseEntity<List<Nutzer>> getNutzers() {
-            List<Nutzer> nutzers = nutzerService.findAllNutzers();
-            return new ResponseEntity<>(nutzers, HttpStatus.OK);
-        }
-        @GetMapping("/allFriends/{ID}")
-        public ResponseEntity<List<Nutzer>> getFriends(@PathVariable long ID) throws Exception {
-            List<Nutzer> nutzers = nutzerService.showOwnFriendlist(ID);
-            return new ResponseEntity<>(nutzers, HttpStatus.OK);
-        }
-
-
-
-    @PostMapping("/add")
-        public ResponseEntity<Nutzer> addNutzer(@RequestBody Nutzer nutzer) {
-            Nutzer newNutzer = nutzerService.addNutzer(nutzer);
-            return new ResponseEntity<>(newNutzer, HttpStatus.OK);
-        }
-
-        @GetMapping("/find/{email}")
-        public Nutzer findNutzerByEmail(@RequestParam String email) {
-            try {
-                System.out.println("Controller: gefunden");
-                return nutzerService.findNutzerByEmail(email);
-            } catch (Exception e) {
-                System.out.println("error");
-                return null;
-            }
-        }
-
-        @GetMapping("/getPrivacy/{ID}")
-        public Boolean getPrivacyByID(@PathVariable long ID){
-           try{
-               boolean privacy = nutzerService.getPrivacy(ID);
-               return privacy;
-           } catch(Exception e){
-               return null;
-           }
-        }
-
-        @GetMapping("/getUser/{ID}")
-        public Nutzer getUserByID(@PathVariable long ID){
-            try{
-                Nutzer nutzer = nutzerService.getUserbyID(ID);
-                return nutzer;
-            } catch(Exception e){
-                return null;
-            }
-        }
-
+        //Email Methods
         @PostMapping("/zweiFaktor")
         public ResponseEntity<Object> zweiFaktor(@RequestBody Map<String, String> body) {
             String email = body.get("email");
@@ -133,79 +119,15 @@ public class NutzerController {
             }
         }
 
-        @PutMapping("/acceptFriend")
-        public ResponseEntity<Nutzer> acceptFriend(@RequestBody Map<String, String> body){
-            try{
-                Nutzer nutzerToAdd = nutzerService.findNutzerByEmail(body.get("friendEmail"));
-                Nutzer nutzerFriendlist = nutzerService.findNutzerByEmail(body.get("ownEmail"));
-                nutzerService.acceptFriend(nutzerToAdd,nutzerFriendlist);
-                return new ResponseEntity<>(nutzerFriendlist, HttpStatus.OK);
-            } catch (Exception e){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-        }
 
-        @PutMapping("/denyFriend")
-        public ResponseEntity<Nutzer> denyFriend(@RequestBody Map<String, String> body){
-            try{
-                Nutzer nutzerToDeny = nutzerService.findNutzerByEmail(body.get("friendEmail"));
-                Nutzer nutzerFriendlist = nutzerService.findNutzerByEmail(body.get("ownEmail"));
-
-                nutzerService.denyFriend(nutzerToDeny, nutzerFriendlist);
-                return new ResponseEntity<>(nutzerFriendlist, HttpStatus.OK);
-            } catch (Exception e){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-        }
-
-        @PutMapping  ("/sendRequest")
-        public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Map<String, String> body) {
-            try{
-                Nutzer nutzerReceivingRequest = nutzerService.findNutzerByEmail(body.get("friendEmail"));
-                Nutzer nutzerSendingRequest = nutzerService.findNutzerByEmail(body.get("ownEmail"));
-
-                if (nutzerReceivingRequest != null) {
-                    nutzerService.sendRequest(nutzerSendingRequest,nutzerReceivingRequest);
-                    emailService.freundschaftsanfrageVerschicken(nutzerReceivingRequest.getEmail());
-                    return new ResponseEntity<>(nutzerReceivingRequest, HttpStatus.OK);
-                } else {
-                    System.out.println("Nutzer nicht gefunden");
-                    return ResponseEntity.notFound().build();
-                }
-            } catch (Exception e){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-        }
-
-
-        @PutMapping("/deleteFriend")
-        public ResponseEntity<Nutzer> deleteFriend(@RequestBody Map<String, String> body){
-            try{
-                Nutzer nutzerToDelete = nutzerService.findNutzerByEmail(body.get("friendEmail"));
-                Nutzer nutzerFriendList = nutzerService.findNutzerByEmail(body.get("ownEmail"));
-                nutzerService.deleteFriend(nutzerToDelete, nutzerFriendList);
-                return new ResponseEntity<>(nutzerFriendList, HttpStatus.OK);
-            }catch (Exception e){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-        }
-
-        @GetMapping("/getFriendlist/{ID}")
-        public ResponseEntity<String[][]> getNutzersFriends(@PathVariable long ID) {
+        //Friendlist and Requests Methods
+        @GetMapping("/allUsers")
+        public ResponseEntity<String[][]> getUsers() {
             try {
-                String[][] friendlist = nutzerService.showFriendlist(ID);
-                return new ResponseEntity<>(friendlist, HttpStatus.OK);
-                } catch (Exception e){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-        }
-        @GetMapping("/getOwnFriendlist/{ID}")
-        public ResponseEntity<String[][]> getOwnNutzersFriends(@PathVariable long ID) {
-            try {
-                String[][] friendlist = nutzerService.ownShowFriendlist(ID);
-                return new ResponseEntity<>(friendlist, HttpStatus.OK);
-            } catch (Exception e){
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                String[][] users = nutzerService.getAllUsers();
+                return new ResponseEntity<>(users, HttpStatus.OK);
+            } catch (Exception e) {
+                throw new RuntimeException();
             }
         }
         @GetMapping("/getFriendRequests/{ID}")
@@ -217,16 +139,83 @@ public class NutzerController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
-        @GetMapping("/allUsers")
-        public ResponseEntity<String[][]> getUsers() {
+        @GetMapping("/getOwnFriendlist/{ID}")
+        public ResponseEntity<String[][]> getOwnNutzersFriends(@PathVariable long ID) {
             try {
-                String[][] users = nutzerService.getAllUsers();
-                return new ResponseEntity<>(users, HttpStatus.OK);
-            } catch (Exception e) {
-                throw new RuntimeException();
+                String[][] friendlist = nutzerService.showOwnFriendlist(ID);
+                return new ResponseEntity<>(friendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
+        @GetMapping("/getFriendlist/{ID}")
+        public ResponseEntity<String[][]> getNutzersFriends(@PathVariable long ID) {
+            try {
+                String[][] friendlist = nutzerService.showFriendlist(ID);
+                return new ResponseEntity<>(friendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+        /*@GetMapping("/allFriends/{ID}")
+        public ResponseEntity<List<Nutzer>> getFriends(@PathVariable long ID) throws Exception {
+            List<Nutzer> nutzers = nutzerService.ownShowFriendlist(ID);
+            return new ResponseEntity<>(nutzers, HttpStatus.OK);
+        }*/
+        @PutMapping  ("/sendRequest")
+            public ResponseEntity<Nutzer> sendFriendrequest(@RequestBody Map<String, String> body) {
+                try{
+                    Nutzer nutzerReceivingRequest = nutzerService.findNutzerByEmail(body.get("friendEmail"));
+                    Nutzer nutzerSendingRequest = nutzerService.findNutzerByEmail(body.get("ownEmail"));
 
+                    if (nutzerReceivingRequest != null) {
+                        nutzerService.sendRequest(nutzerSendingRequest,nutzerReceivingRequest);
+                        emailService.freundschaftsanfrageVerschicken(nutzerReceivingRequest.getEmail());
+                        return new ResponseEntity<>(nutzerReceivingRequest, HttpStatus.OK);
+                    } else {
+                        System.out.println("Nutzer nicht gefunden");
+                        return ResponseEntity.notFound().build();
+                    }
+                } catch (Exception e){
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                }
+            }
+        @PutMapping("/acceptFriend")
+        public ResponseEntity<Nutzer> acceptFriend(@RequestBody Map<String, String> body){
+            try{
+                Nutzer nutzerToAdd = nutzerService.findNutzerByEmail(body.get("friendEmail"));
+                Nutzer nutzerFriendlist = nutzerService.findNutzerByEmail(body.get("ownEmail"));
+                nutzerService.acceptFriend(nutzerToAdd,nutzerFriendlist);
+                return new ResponseEntity<>(nutzerFriendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+        @PutMapping("/deleteFriend")
+        public ResponseEntity<Nutzer> deleteFriend(@RequestBody Map<String, String> body){
+            try{
+                Nutzer nutzerToDelete = nutzerService.findNutzerByEmail(body.get("friendEmail"));
+                Nutzer nutzerFriendList = nutzerService.findNutzerByEmail(body.get("ownEmail"));
+                nutzerService.deleteFriend(nutzerToDelete, nutzerFriendList);
+                return new ResponseEntity<>(nutzerFriendList, HttpStatus.OK);
+            }catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+        @PutMapping("/denyFriend")
+        public ResponseEntity<Nutzer> denyFriend(@RequestBody Map<String, String> body){
+            try{
+                Nutzer nutzerToDeny = nutzerService.findNutzerByEmail(body.get("friendEmail"));
+                Nutzer nutzerFriendlist = nutzerService.findNutzerByEmail(body.get("ownEmail"));
+
+                nutzerService.denyFriend(nutzerToDeny, nutzerFriendlist);
+                return new ResponseEntity<>(nutzerFriendlist, HttpStatus.OK);
+            } catch (Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+    }
+
+        //Privacy Methods
         @PutMapping("/togglePrivacy")
         public ResponseEntity<Nutzer> togglePrivacy(@RequestBody Nutzer nutzer){
             try{
@@ -237,8 +226,15 @@ public class NutzerController {
                 throw new RuntimeException();
             }
         }
-
-
+        @GetMapping("/getPrivacy/{ID}")
+        public Boolean getPrivacyByID(@PathVariable long ID){
+            try{
+                boolean privacy = nutzerService.getPrivacy(ID);
+                return privacy;
+            } catch(Exception e){
+                return null;
+            }
+        }
 
 }
 
