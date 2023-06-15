@@ -45,7 +45,7 @@ export class FriendlistComponent {
       let userStore = localStorage.getItem('user');
       let userData = userStore && JSON.parse(userStore);
       this.userID = userData.id;
-      this.http.get<any[][]>("http://localhost:8080/nutzer/getFriendlist/" + this.userID).subscribe(data => {
+      this.http.get<any[][]>("http://localhost:8080/nutzer/getOwnFriendlist/" + this.userID).subscribe(data => {
         this.tableData = data;
         this.filteredTableData = data;
       });
@@ -111,5 +111,8 @@ export class FriendlistComponent {
 
   toFriendAdd(){
     this.router.navigate(['/friendAdd']);
+  }
+  openChat(){
+    this.router.navigate(['/chat']);
   }
 }
