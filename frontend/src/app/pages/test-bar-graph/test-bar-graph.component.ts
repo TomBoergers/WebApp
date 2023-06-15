@@ -8,8 +8,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class TestBarGraphComponent implements OnInit{
   @Input() dataData: { label: any, y: any }[] = [];
-  chartOptions: any = {};
-
+chartData!:any[];
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
@@ -17,7 +16,7 @@ export class TestBarGraphComponent implements OnInit{
   }
 
   getDataForChart(tableId: number): any {
-    this.httpClient.get<any[]>("http://localhost:8080/CSV/" + tableId).subscribe(data => {
+    this.httpClient.get<any[][]>("http://localhost:8080/CSV/" + tableId).subscribe(data => {
       const chartData = data.map(item => ({
         label: item[0],
         y: item[1]
@@ -25,8 +24,12 @@ export class TestBarGraphComponent implements OnInit{
       chartData.shift();
      // chartData.push({ label: 'Total', y: 320 });
       console.log(chartData);
+    }
+    );
+    return this.chartData;
+  }
 
-      this.chartOptions = {
+      chartOptions = {
         title: {
           text: 'Total Impressions by Platforms'
         },
@@ -39,11 +42,11 @@ export class TestBarGraphComponent implements OnInit{
           type: 'bar',
           indexLabel: '{y}',
           yValueFormatString: '#,####',
-          dataPoints: chartData
+          dataPoints: this.getDataForChart(2)
         }]
       };
-    });
-  }
+
+
 
 
 
