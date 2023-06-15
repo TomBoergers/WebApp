@@ -68,10 +68,26 @@ export class FriendlistComponent {
         )
     }
   }
-  showFriendslist(friendsID: string){
-    localStorage.setItem("friendsID",friendsID.toString());
-      this.router.navigate(['/friends-list/',friendsID]);
+  showFriendslist(friendsID: string, userId: string){
+    console.log(friendsID)
+    console.log(parseInt(friendsID))
+    console.log(userId)
+    this.friendlistService.getPrivacy(parseInt(userId)).subscribe(data => {
+      this.privacy = data;
+      console.log(this.privacy)
+      if (this.privacy) {
+        localStorage.setItem("friendsID", friendsID.toString());
+        this.router.navigate(['/friends-list/', friendsID]);
+      } else {
+        alert("Seine Freundesliste ist auf Privat")
+      }
+
+    })
   }
+
+
+
+
 
 
   setPrivate(){

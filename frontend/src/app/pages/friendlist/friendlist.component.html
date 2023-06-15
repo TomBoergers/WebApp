@@ -34,7 +34,7 @@
         <button (click)="deleteFriend(row[4])">Delete Friend</button>
     </td>
     <td>
-      <button (click)="showFriendslist(row[0])">Open Friendlist</button>
+      <button (click)="showFriendslist(row[0],row[4])">Open Friendlist</button>
     </td>
   </tr>
   <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">

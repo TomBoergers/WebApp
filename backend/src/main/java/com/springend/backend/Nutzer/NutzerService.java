@@ -130,36 +130,33 @@ public class NutzerService {
         }
     }
 
-    public String[][] showForeignFriendlist(long ID) throws Exception {
+    public String[][] showFriendlist(long ID) throws Exception {
         Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
-        List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
         String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][5];
-        if (!nutzerFriendlist.isPrivacy()){
             for (int i = 0; i < nutzerFriendlist.getFriendlist().size(); i++) {
-                Nutzer friend = nutzerRepo.findNutzerByID(friendlistalt.get(i));
-                friendlist [i][0] = String.valueOf(friend.getID());
-                friendlist [i][1] = friend.getVorname();
-                friendlist [i][2] = friend.getNachname();
-                friendlist [i][3] = friend.getVorname()+ " " + friend.getNachname();
-                friendlist [i][4] = friend.getEmail();
+                friendlist [i][0] = String.valueOf(nutzerFriendlist.getID());
+                friendlist [i][1] = nutzerFriendlist.getVorname();
+                friendlist [i][2] = nutzerFriendlist.getNachname();
+                friendlist [i][3] = nutzerFriendlist.getVorname()+ " " + nutzerFriendlist.getNachname();
+                friendlist [i][4] = nutzerFriendlist.getEmail();
+
             }
+
             return friendlist;
         }
-        else {
-            throw new Exception("Der Nutzer hat seine Freundesliste auf privat gestellt.");
-        }
-    }
+
     public String[][] ownShowFriendlist(long ID) throws Exception {
         Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
         List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
         String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][5];
         for (int i = 0; i < nutzerFriendlist.getFriendlist().size(); i++) {
             Nutzer friend = nutzerRepo.findNutzerByID(friendlistalt.get(i));
-            friendlist[i][0] = String.valueOf(friend.getID());
+            friendlist[i][0] = String.valueOf(nutzerFriendlist.getID());
             friendlist[i][1] = friend.getVorname();
             friendlist[i][2] = friend.getNachname();
             friendlist[i][3] = friend.getVorname() + " " + friend.getNachname();
-            friendlist[i][4] = friend.getEmail();
+            friendlist[i][4] = String.valueOf(friend.getID());
+
         }
         return friendlist;
     }

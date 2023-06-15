@@ -78,7 +78,7 @@ public class NutzerController {
         }
 
         @GetMapping("/find/{email}")
-        public Nutzer getNutzerByEmail(@RequestParam String email) {
+        public Nutzer findNutzerByEmail(@RequestParam String email) {
             try {
                 System.out.println("Controller: gefunden");
                 return nutzerService.findNutzerByEmail(email);
@@ -193,7 +193,7 @@ public class NutzerController {
         @GetMapping("/getFriendlist/{ID}")
         public ResponseEntity<String[][]> getNutzersFriends(@PathVariable long ID) {
             try {
-                String[][] friendlist = nutzerService.showForeignFriendlist(ID);
+                String[][] friendlist = nutzerService.showFriendlist(ID);
                 return new ResponseEntity<>(friendlist, HttpStatus.OK);
                 } catch (Exception e){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
