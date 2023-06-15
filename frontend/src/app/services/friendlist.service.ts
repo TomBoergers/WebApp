@@ -32,6 +32,10 @@ export class friendListService {
   getPrivacy(userId: Number){
     return this.httpClient.get<boolean>("http://localhost:8080/nutzer/getPrivacy/" + userId);
   }
+  getFriendslist(userId: Number){
+    return this.httpClient.get<any>('http://localhost:8080/nutzer/allFriends/'+userId);
+
+  }
 
   setPrivacy(user: User): Observable<object> {
     console.log('setPrivacy im Frontend')

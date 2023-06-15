@@ -37,7 +37,7 @@ export class ChatComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.thisUser = JSON.parse(localStorage.getItem("user")!);
-    this.userList();
+    this.friendsList();
     // this.element.nativeElement.querySelector("#chat").scrollIntoView();
     // this.getUserbyID(2)
     //this.selectUser(this.thisUser)
@@ -139,6 +139,16 @@ export class ChatComponent implements OnInit, AfterViewInit {
     this.loginUserService.getAllUsers().subscribe(
       (users: User[]) => {
         this.allUsers = users.filter(user => user.email !== this.thisUser.email);
+      },
+      (error) => {
+        console.log("Fehler", error);
+      }
+    );
+  }
+  friendsList() {
+    this.friendlistService.getFriendslist(this.thisUser.id).subscribe(
+      (users: User[]) => {
+        this.allUsers = users; //Nur die Freunde werden angezeigt
       },
       (error) => {
         console.log("Fehler", error);

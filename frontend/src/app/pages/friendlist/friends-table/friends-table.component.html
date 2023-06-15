@@ -16,7 +16,6 @@
     <tr>
       <th>Friends</th>
 
-      <th>Options</th>
 
     </tr>
     </thead>
@@ -24,12 +23,6 @@
     <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
       <td>{{ row[3] }}</td>
 
-      <td>
-        <button>Add</button>
-      </td>
-      <td>
-        <button >Open Friendlist</button>
-      </td>
     </tr>
     <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">
       <td colspan="5">You have no friends right now :(</td>

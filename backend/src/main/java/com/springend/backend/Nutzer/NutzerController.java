@@ -63,9 +63,15 @@ public class NutzerController {
             List<Nutzer> nutzers = nutzerService.findAllNutzers();
             return new ResponseEntity<>(nutzers, HttpStatus.OK);
         }
+        @GetMapping("/allFriends/{ID}")
+        public ResponseEntity<List<Nutzer>> getFriends(@PathVariable long ID) throws Exception {
+            List<Nutzer> nutzers = nutzerService.showOwnFriendlist(ID);
+            return new ResponseEntity<>(nutzers, HttpStatus.OK);
+        }
 
 
-        @PostMapping("/add")
+
+    @PostMapping("/add")
         public ResponseEntity<Nutzer> addNutzer(@RequestBody Nutzer nutzer) {
             Nutzer newNutzer = nutzerService.addNutzer(nutzer);
             return new ResponseEntity<>(newNutzer, HttpStatus.OK);

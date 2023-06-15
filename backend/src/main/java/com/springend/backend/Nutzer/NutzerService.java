@@ -1,5 +1,7 @@
 package com.springend.backend.Nutzer;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +43,16 @@ public class NutzerService {
 
     public List<Nutzer> findAllNutzers() {
         return nutzerRepo.findAll();
+    }
+    public List<Nutzer> showOwnFriendlist(long ID) throws Exception {
+        Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
+        List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
+        List<Nutzer> friendlist = new ArrayList<>();
+        for (Long friendID : friendlistalt) {
+            Nutzer friend = nutzerRepo.findNutzerByID(friendID);
+            friendlist.add(friend);
+        }
+        return friendlist;
     }
 
     public Nutzer findNutzerByEmail(String email) {
