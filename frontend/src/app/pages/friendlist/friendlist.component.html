@@ -28,13 +28,13 @@
     <td>{{ row[3] }}</td>
 
     <td>
-      <button (click)="openChat()">Open Chat</button>
+      <button (click)="openChat(row[5])">Open Chat</button>
     </td>
     <td>
         <button (click)="deleteFriend(row[4])">Delete Friend</button>
     </td>
     <td>
-      <button (click)="showFriendslist(row[0],row[4])">Open Friendlist</button>
+      <button (click)="showFriendslist(row[0],row[5])">Open Friendlist</button>
     </td>
   </tr>
   <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">

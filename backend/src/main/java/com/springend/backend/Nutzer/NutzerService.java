@@ -123,12 +123,15 @@ public class NutzerService {
             }
         }
         public void deleteFriend(Nutzer nutzerToDelete, Nutzer nutzerFriendlist) throws Exception {
+            System.out.println("c1");
         if (nutzerFriendlist.getFriendlist().contains(nutzerToDelete.getID())) {
+            System.out.println("c2");
             //NutzerToDelete wird aus der eigenen Liste gelöscht
             nutzerFriendlist.getFriendlist().remove(nutzerToDelete.getID());
+            System.out.println("c3");
             //Man selbst wird aus der Freundseliste des anderen gelöscht
             nutzerToDelete.getFriendlist().remove(nutzerFriendlist.getID());
-
+            System.out.println("c4");
             nutzerRepo.save(nutzerFriendlist);
             nutzerRepo.save(nutzerToDelete);
         } else {
@@ -153,14 +156,16 @@ public class NutzerService {
         public String[][] showOwnFriendlist(long ID) throws Exception {
             Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
             List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
-            String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][5];
+            String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][6];
             for (int i = 0; i < nutzerFriendlist.getFriendlist().size(); i++) {
                 Nutzer friend = nutzerRepo.findNutzerByID(friendlistalt.get(i));
                 friendlist[i][0] = String.valueOf(nutzerFriendlist.getID());
                 friendlist[i][1] = friend.getVorname();
                 friendlist[i][2] = friend.getNachname();
                 friendlist[i][3] = friend.getVorname() + " " + friend.getNachname();
-                friendlist[i][4] = String.valueOf(friend.getID());
+                friendlist[i][4] = friend.getEmail();
+                friendlist[i][5] = String.valueOf(friend.getID());
+
 
             }
             return friendlist;
@@ -194,12 +199,11 @@ public class NutzerService {
     //Privacy Methods
     public Boolean getPrivacy (long ID){
             Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
-            System.out.println("getter");
             return nutzer.isPrivacy();
 
     }
     public void togglePrivacy(String email){
-        System.out.println("In Service");
+
         Nutzer nutzer = nutzerRepo.findNutzerByEmail(email);
         if(nutzer.isPrivacy()){
             nutzer.setPrivacy(false);

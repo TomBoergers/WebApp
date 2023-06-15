@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
-import {NgForm} from "@angular/forms";
 import {friendListService} from "../../services/friendlist.service";
 import {User} from "../../classes/user";
 
@@ -58,8 +57,11 @@ export class FriendlistComponent {
       let userStore = localStorage.getItem('user');
       let userData = userStore && JSON.parse(userStore);
       this.email = userData.email;
+
+
       this.friendlistService.deleteFriend(friendEmail, this.email).subscribe(
         (response: any) => {
+
           alert('Freund wurde entfernt');
           this.refreshTableData();
         },
@@ -72,9 +74,7 @@ export class FriendlistComponent {
   }
 
   showFriendslist(friendsID: string, userId: string) {
-    console.log(friendsID)
-    console.log(parseInt(friendsID))
-    console.log(userId)
+
     this.friendlistService.getPrivacy(parseInt(userId)).subscribe(data => {
       this.privacy = data;
       console.log(this.privacy)
@@ -123,7 +123,9 @@ export class FriendlistComponent {
     this.router.navigate(['/friendAdd']);
   }
 
-  openChat() {
+  openChat(chatFriendID: string) {
+
+    localStorage.setItem("chatFriendID", chatFriendID)
     this.router.navigate(['/chat']);
   }
 

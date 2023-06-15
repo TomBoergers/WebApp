@@ -194,9 +194,13 @@ public class NutzerController {
         @PutMapping("/deleteFriend")
         public ResponseEntity<Nutzer> deleteFriend(@RequestBody Map<String, String> body){
             try{
+                System.out.println("b1");
                 Nutzer nutzerToDelete = nutzerService.findNutzerByEmail(body.get("friendEmail"));
+                System.out.println("b2");
                 Nutzer nutzerFriendList = nutzerService.findNutzerByEmail(body.get("ownEmail"));
+                System.out.println("b3");
                 nutzerService.deleteFriend(nutzerToDelete, nutzerFriendList);
+                System.out.println("b4");
                 return new ResponseEntity<>(nutzerFriendList, HttpStatus.OK);
             }catch (Exception e){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
