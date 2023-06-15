@@ -67,6 +67,11 @@ export class FriendAddComponent {
       this.filteredTableData = this.tableData;
     });
   }
+  showFriendslist(friendsID: string){
+    console.log(friendsID)
+    localStorage.setItem("friendsID",friendsID.toString());
+    this.router.navigate(['/friends-list/',friendsID]);
+  }
 
 
 
