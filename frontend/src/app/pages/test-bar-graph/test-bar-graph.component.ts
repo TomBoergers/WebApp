@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { Chart } from 'chart.js';
 import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 @Component({
   selector: 'app-test-bar-graph',
   templateUrl: './test-bar-graph.component.html',
@@ -13,12 +14,39 @@ export class TestBarGraphComponent implements OnInit{
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-   console.log(this.getDataForChart(2));
+    this.getDataForChart(2).subscribe(data => {
+      this.chartData = data;
+      this.updateChartOptions();
+    });
   }
 
+  getDataForChart(tableId: number): Observable<{ label: any, y: any }[]> {
+    return this.httpClient.get<{ label: any, y: any }[]>("http://localhost:8080/CSV/" + tableId);
+  }
 
-  getDataForChart(tableId: number): any {
-const dArray: any[]=[];
+  updateChartOptions() {
+    this.chartOptions = {
+      title: {
+        text: 'Sterbefälle'
+      },
+      animationEnabled: true,
+      axisY: {
+        includeZero: true,
+        suffix: ''
+      },
+      data: [{
+        type: 'bar',
+        indexLabel: '{y}',
+        yValueFormatString: '#,###',
+        dataPoints: this.chartData
+      }]
+    };
+  }
+
+  chartOptions: any = {};
+
+  /*getDataForChart(tableId: number): any[][] {
+const dArray: any[][]=[];
     this.httpClient.get<any[][]>("http://localhost:8080/CSV/" + tableId).subscribe(data => {
       const chartData = data.map(item => ({
         label: item[0],
