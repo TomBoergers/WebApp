@@ -197,7 +197,7 @@ export class DiagramComponent {
     this.chartOptions = {
       animationEnabled: true,
       title: {
-        text: "Arbeitslose  Jan 2022"
+        text: "Arbeitslose  Jan 22"
       },
       data: [{
         type: "pie",
