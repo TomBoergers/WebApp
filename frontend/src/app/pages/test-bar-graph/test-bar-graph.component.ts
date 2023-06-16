@@ -7,31 +7,33 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./test-bar-graph.component.scss']
 })
 export class TestBarGraphComponent implements OnInit{
-  @Input() dataData: { label: any, y: any }[] = [];
-chartData!:any[];
+  @Input() chartData: { label: any, y: any }[] = [];
+
+
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.getDataForChart(2)
+   console.log(this.getDataForChart(2));
   }
 
+
   getDataForChart(tableId: number): any {
+const dArray: any[]=[];
     this.httpClient.get<any[][]>("http://localhost:8080/CSV/" + tableId).subscribe(data => {
       const chartData = data.map(item => ({
         label: item[0],
         y: item[1]
       }));
       chartData.shift();
-     // chartData.push({ label: 'Total', y: 320 });
-      console.log(chartData);
-    }
-    );
-    return this.chartData;
+     dArray.push(chartData);
+    });
+    return dArray;
   }
+
 
       chartOptions = {
         title: {
-          text: 'Total Impressions by Platforms'
+          text: 'Sterbefälle'
         },
         animationEnabled: true,
         axisY: {
@@ -41,18 +43,10 @@ chartData!:any[];
         data: [{
           type: 'bar',
           indexLabel: '{y}',
-          yValueFormatString: '#,####',
-          dataPoints: this.getDataForChart(2)
+          yValueFormatString: '#,###',
+          dataPoints: [this.getDataForChart(2)]
         }]
       };
-
-
-
-
-
-
-
-
 
 
 

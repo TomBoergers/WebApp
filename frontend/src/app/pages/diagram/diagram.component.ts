@@ -18,11 +18,12 @@ export class DiagramComponent {
   chartOptions: any;
   dataLabel: any[] = [];
   dataValue: any[] = [];
-  @Input() pieData: { x: any, y: any}[] = [];
+  @Input() pieData: { y: any, name: any}[] = [];
 
 
 
   ngOnInit() {
+this.drawPie();
   }
   getDataPie(): any {
     return this.httpClient.get<any[][]>("http://localhost:8080/CSV/2").subscribe(data => {
@@ -31,10 +32,10 @@ export class DiagramComponent {
     });
   }
 
-  convertData2(data: any[][]): { x: any, y: any}[] {
+  convertData2(data: any[][]): { y: any, name: any}[] {
     // Assuming the data array has two columns: [amount, value]
     //return data.map(row => ({ x: row[0], y: row[1] }));
-    const convertedData = data.map(row => ({ x: row[0], y: row[1] }));
+    const convertedData = data.map(row => ({ y: row[0], name: row[1] }));
     convertedData.shift();
     convertedData.pop();
 
