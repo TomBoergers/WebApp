@@ -2,21 +2,24 @@ body{
   background-color: #080710;
 }
 
-
-.chart{
-  margin-top: 30px;
-}
-
-.pieChart{
-  display:flex;
-  margin-left: 700px;
-}
-
-
-
 h2{
-  margin-left: 500px;
+  margin-left: 100px;
+  margin-bottom: 60px;
   margin-top: 20px;
   padding: 30px;
+  color: #f09819;
+}
+
+
+button{
+  transition: color 0.5s ease;
+  margin-top: 30px;
+  margin-left: 40px;
+  background-color: #f09819;
   color: white;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 20px;
+  border-color: white;
+  cursor: pointer;
 }

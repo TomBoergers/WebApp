@@ -2,9 +2,14 @@
 <app-navbar></app-navbar>
 
 
-<h2>PieChart</h2>
+<h2>Kuchendiagramm</h2>
+<div id="chartContainer" class="balkendiagramm">
 <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
 
-<button (click)="drawPie">datensatz2</button>
 
+<<button (click)="getPie2()">Sterbefälle</button>
+<button (click)="getPie5()">Geburten</button>
+<button (click)="getPie3()">Arbeitslose</button>
+<button (click)="getPie4()">Arbeitssuchende</button>
+</div>
 </body>
