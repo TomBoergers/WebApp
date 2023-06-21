@@ -25,6 +25,7 @@ import {DiagramComponent} from "./pages/diagram/diagram.component";
 import { FriendsTableComponent } from './pages/friendlist/friends-table/friends-table.component';
 import { BarGraphComponent } from './pages/bar-graph/bar-graph.component';
 import { TestBarGraphComponent } from './pages/test-bar-graph/test-bar-graph.component';
+import { DiskussionComponent } from './pages/diskussion/diskussion.component';
 
 
 
@@ -50,7 +51,8 @@ import { TestBarGraphComponent } from './pages/test-bar-graph/test-bar-graph.com
     DiagramComponent,
     FriendsTableComponent,
     BarGraphComponent,
-    TestBarGraphComponent
+    TestBarGraphComponent,
+    DiskussionComponent
 
   ],
     imports: [
