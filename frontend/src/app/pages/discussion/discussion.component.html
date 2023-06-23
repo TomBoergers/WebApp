@@ -1,0 +1,45 @@
+<body>
+<app-navbar></app-navbar>
+
+<div class="frame">
+  <h1>Discussion</h1>
+  <div class="container">
+    <div class="topnav">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (input)="applyFilter()">
+      <button (click)="createPost()">Create Post</button>
+
+
+    </div>
+  </div>
+
+
+  <table>
+    <thead>
+    <tr>
+      <th>Topic</th>
+      <th>Kategorie</th>
+      <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
+      <td>{{ row[0] }}</td>
+
+      <td>{{row[1]}}</td>
+
+      <td>
+        <button (click)="openPost()">Open Post</button>
+        <button>Open Discussion</button>
+      </td>
+      <td>
+        <button class="privacy-button">Favourite</button>
+      </td>
+    </tr>
+    <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">
+      <td colspan="5">No Discussions:(</td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
+</body>
