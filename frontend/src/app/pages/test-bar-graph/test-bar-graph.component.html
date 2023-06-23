@@ -1,21 +1,10 @@
+
 <body>
 <app-navbar></app-navbar>
-
-
-<h2>Kreisdiagramm und Balkendiagramm</h2>
 <div id="chartContainer" class="balkendiagramm">
+  <h2>Balkendiagramme</h2>
 <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
-
-
-<button (click)="getPie2()">Sterbefälle</button>
-<button (click)="getPie5()">Geburten</button>
-<button (click)="getPie3()">Arbeitslose</button>
-<button (click)="getPie4()">Arbeitssuchende</button>
-</div>
-
-
-<div id="chartContainer2" class="balkendiagramm">
-  <button (click)="getChart2()">Sterbefälle</button>
+<button (click)="getChart2()">Sterbefälle</button>
   <button (click)="getChart5()">Geburten</button>
   <button (click)="getChart3()">Arbeitslose</button>
   <button (click)="getChart4()">Arbeitssuchende</button>

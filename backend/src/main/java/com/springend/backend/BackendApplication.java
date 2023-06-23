@@ -40,14 +40,14 @@ public class BackendApplication {
     @Bean
     CommandLineRunner init2(CSVService csvService, XMLService xmlService) {
         return args -> {
-            csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/aachenvornamen2021-commasep-decimalpoint.csv", 4, ",", "Vornamen der Stadt Aachen", "2021");
-            csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/sterbefalle-monatlich-2015_2022.csv", 9, ",", "Sterbefälle", "2015-2022");
-            csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/anzahl-der-arbeitslosen-in-der-stadteregion-aachen22.csv", 5, ";", "Anzahl der Arbeitslosen", "2022");
-            csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/anzahl-der-arbeitssuchenden-in-der-stadteregion-aachen22.csv", 5, ";", "Anzahl der Arbeitssuchenden", "2022");
-            csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/geburten-monatlich-2015_2022.csv", 9, ",", "Geburten", "2015-2022");
-            csvService.addCSV("backend/src/main/java/com/springend/backend/Datentabellen/strassennamen.csv", 4, ",", "Strassenliste der Stadt Aachen", "2021");
-            xmlService.addXML("backend/src/main/java/com/springend/backend/Datentabellen/CDTest.xml", "CDTest", "2000");
-            xmlService.addXML("backend/src/main/java/com/springend/backend/Datentabellen/FoodMenuTest.xml", "Food Menu", "2000");
+            csvService.addCSV("usr/src/app/Datentabellen/aachenvornamen2021-commasep-decimalpoint.csv", 4, ",", "Vornamen der Stadt Aachen", "2021");
+            csvService.addCSV("usr/src/app/Datentabellen/sterbefalle-monatlich-2015_2022.csv", 9, ",", "Sterbefälle", "2015-2022");
+            csvService.addCSV("usr/src/app/Datentabellen/anzahl-der-arbeitslosen-in-der-stadteregion-aachen22.csv", 5, ";", "Anzahl der Arbeitslosen", "2022");
+            csvService.addCSV("usr/src/app/Datentabellen/anzahl-der-arbeitssuchenden-in-der-stadteregion-aachen22.csv", 5, ";", "Anzahl der Arbeitssuchenden", "2022");
+            csvService.addCSV("usr/src/app/Datentabellen/geburten-monatlich-2015_2022.csv", 9, ",", "Geburten", "2015-2022");
+            csvService.addCSV("usr/src/app/Datentabellen/strassennamen.csv", 4, ",", "Strassenliste der Stadt Aachen", "2021");
+            xmlService.addXML("usr/src/app/Datentabellen/CDTest.xml", "CDTest", "2000");
+            xmlService.addXML("usr/src/app/Datentabellen/FoodMenuTest.xml", "Food Menu", "2000");
         };
     }
 

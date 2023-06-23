@@ -7,6 +7,8 @@ COPY  package.json ./
 RUN npm install
 COPY . .
 RUN npm install -g @angular/cli
+RUN npm install leaflet
+RUN npm install proj4
 RUN npm install rxjs
 RUN ng build --configuration production --output-path=/dist/frontend
 

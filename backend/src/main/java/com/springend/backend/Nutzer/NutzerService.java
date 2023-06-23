@@ -181,7 +181,6 @@ public class NutzerService {
                 friendrequests [i][2] = friend.getNachname();
                 friendrequests [i][3] = friend.getVorname()+ " " + friend.getNachname();
                 friendrequests [i][4] = friend.getEmail();
-
             }
             return friendrequests;
         }

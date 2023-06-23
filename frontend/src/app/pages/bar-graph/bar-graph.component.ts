@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import { Chart } from 'chart.js';
 @Component({
   selector: 'app-bar-graph',
   templateUrl: './bar-graph.component.html',
@@ -7,23 +8,25 @@ import {HttpClient} from "@angular/common/http";
 })
 export class BarGraphComponent implements OnInit {
   @Input() graphData: { x: any, y: any}[] = [];
-dataALL!:any[][];
 chartOptions:any;
-  chart: any;
+
     constructor(private httpClient: HttpClient) {
     }
   ngOnInit(): void {
+      this.getData3u4(3);
+      this.initializeChart();
   }
 
-  getData(tableId: number): void {
-    this.httpClient.get<any[][]>("http://localhost:8080/CSV/" + tableId).subscribe(data => {
+
+ getData3u4(tableId:number): void {
+    this.httpClient.get<any[][]>("http://localhost:8080/CSV/"+tableId).subscribe(data => {
       this.graphData = this.convertData(data);
       console.log(this.graphData);
       this.initializeChart();
     });
   }
 
-  convertData(data: any[][]): { x: any, y: any }[] {
+  convertData(data: any[][]): { x: string, y: number }[] {
     // Assuming the data array has two columns: [amount, value]
     //return data.map(row => ({ x: row[0], y: row[1] }));
     const convertedData = data.map(row => ({ x: row[0], y: row[1] }));
@@ -33,25 +36,30 @@ chartOptions:any;
     return convertedData;
   }
 
-  initializeChart(): void {
-    this.chartOptions = {
-      title: {
-        text: "Angular Column Chart"
-      },
-      animationEnabled: false,
-      data: [{
-        type: "column",
-        dataPoints: [this.graphData]
-      }]
-    };
-    this.chart.render();
+  initializeChart(): any {
+
+    this.httpClient.get<any[][]>("http://localhost:8080/CSV/3").subscribe(data => {
+      this.graphData = this.convertData(data);
+      this.chartOptions = {
+        title: {
+          text: "Sterbefälle"
+        },
+        animationEnabled: true,
+        data: [{
+          type: "column",
+          dataPoints: [{x: 10, y: 71},
+            {x: 20, y: 55},
+            {x: 30, y: 50}]
+        }]
+      };
+    });
   }
 
 
 
 
-
-     /* this.chartOptions = {
+/*
+      this.chartOptions = {
         title: {
           text: "Angular Column Chart"
         },
@@ -74,7 +82,6 @@ chartOptions:any;
     }
 
   chart: any;
-
   chartOptions = {
     title:{
       text: "Angular Column Chart"
@@ -102,6 +109,5 @@ chartOptions:any;
      console.log(this.dataALL);
     })
   }
-
-  */
+*/
 }
