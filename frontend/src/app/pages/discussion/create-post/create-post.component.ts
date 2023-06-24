@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-create-post',
@@ -6,13 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent {
-  post: { title: string, content: string } = { title: '', content: '' };
+
+  post: { title: string, content: string, category: string } = { title: '', content: '', category: 'Datentabellen' };
+
+  constructor(private httpClient: HttpClient) {
+  }
 
   onSubmit() {
     // Perform actions when the form is submitted
     console.log('New post:', this.post);
-    // You can implement logic here to save the post or perform other operations
-    // For this example, we'll just clear the form fields
-    this.post = { title: '', content: '' };
+
+    this.httpClient.post("http://localhost:8080/discussion/add", this.post).subscribe(response => {
+      console.log(response);
+      this.post = { title: '', content: '', category: 'Datentabellen' };
+    }, error => {
+      console.log("Error");
+    });
   }
 }

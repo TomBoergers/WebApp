@@ -40,16 +40,11 @@ export class DiscussionComponent {
   }
 
   private refreshTableData() {
-    if (localStorage.getItem('user')) {
-      let userStore = localStorage.getItem('user');
-      let userData = userStore && JSON.parse(userStore);
-      this.userID = userData.id;
-      this.http.get<any[][]>("http://localhost:8080/nutzer/all").subscribe(data => {
-        console.log(data);
-        this.tableData = data;
-        this.filteredTableData = data;
-      });
-    }
+    this.http.get<any[][]>("http://localhost:8080/discussion/getDiscussions").subscribe(data => {
+      this.tableData = data;
+      this.filteredTableData = data;
+      console.log(this.tableData);
+    });
   }
 
   createPost(){
