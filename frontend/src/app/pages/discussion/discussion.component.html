@@ -7,29 +7,22 @@
     <div class="topnav">
       <input type="text" [(ngModel)]="searchTerm" placeholder="Search..." (input)="applyFilter()">
       <button (click)="createPost()">Create Post</button>
-
-
     </div>
   </div>
-
-
   <table>
     <thead>
     <tr>
       <th>Topic</th>
-      <th>Kategorie</th>
+      <th>Category</th>
       <th>Options</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
       <td>{{ row[0] }}</td>
-
-      <td>{{row[1]}}</td>
-
+      <td>{{ row[2] }}</td>
       <td>
-        <button (click)="openPost()">Open Post</button>
-        <button>Open Discussion</button>
+        <button (click)="openPost(row[3])">Open Post</button>
       </td>
       <td>
         <button class="privacy-button">Favourite</button>
@@ -40,6 +33,5 @@
     </tr>
     </tbody>
   </table>
-
 </div>
 </body>

@@ -35,4 +35,14 @@ public class DiscussionController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+    @GetMapping("/getById/{ID}")
+    public ResponseEntity<Discussion> getById(@PathVariable Long Id) {
+        try {
+            Discussion discussion = discussionService.getById(Id);
+            return new ResponseEntity<>(discussion, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }

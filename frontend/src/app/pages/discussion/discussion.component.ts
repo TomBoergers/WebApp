@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {friendListService} from "../../services/friendlist.service";
+import {PostsComponent} from "./posts/posts.component";
 
 @Component({
   selector: 'app-discussion',
@@ -22,7 +23,7 @@ export class DiscussionComponent {
   user!: User;
 
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService: friendListService) {
+  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private postsComponent: PostsComponent) {
   }
 
   ngOnInit() {
@@ -51,8 +52,9 @@ export class DiscussionComponent {
     this.router.navigate(['/createPost'])
   }
 
-  openPost(){
+  openPost(id: number){
     this.router.navigate(['/posts'])
+    this.postsComponent.loadPost(id);
   }
 
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-posts',
@@ -7,10 +8,16 @@ import { Component } from '@angular/core';
 })
 export class PostsComponent {
 
-  posts: { title: string, content: string }[] = [
-    { title: 'von: Phong, date: 23.06.2023  ', content: 'Ja hab gehört Aachen soll mies langweilig sein, aber immerhin schön.' },
+  post: Object = { title: '', content: '', category: '', id: 0 };
 
-  ];
+  constructor(private httpClient: HttpClient) {
+  }
 
-
+  loadPost(id: number) {
+    this.httpClient.get("http://localhost:8080/discussion/getById/" + id).subscribe(response => {
+      this.post = response;
+    }, error => {
+      console.log("Error")
+    });
+  }
 }

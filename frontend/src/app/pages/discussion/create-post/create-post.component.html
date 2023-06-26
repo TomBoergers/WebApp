@@ -10,8 +10,14 @@
       <input type="text" id="title" name="title" [(ngModel)]="post.title" required>
     </div>
     <div class="form-group">
-      <label for="content">Category</label>
-      <select id="category" name="category" [(ngModel)]="post.content" required></select>
+      <label for="category">Category</label>
+      <select id="category" name="category" [(ngModel)]="post.category" required>
+        <option value=" "></option>
+        <option value="Datentabellen">Datentabellen</option>
+        <option value="Profil">Profil</option>
+        <option value="Geodaten">Geodaten</option>
+        <option value="Chat">Chat</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="content">Content</label>
