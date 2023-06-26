@@ -1,0 +1,16 @@
+<body>
+<app-navbar></app-navbar>
+<div class="chatbot-container">
+  <div class="chatbot-messages">
+    <div *ngFor="let message of messages" class="chatbot-message">
+      {{ message }}
+    </div>
+  </div>
+  <div class="chatbot-input">
+    <input type="text" [(ngModel)]="userInput" placeholder="Type your message..." />
+    <button (click)="sendMessage()">Send</button>
+  </div>
+</div>
+
+</body>
+
