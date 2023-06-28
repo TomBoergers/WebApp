@@ -3,8 +3,7 @@ import {User} from "../../classes/user";
 import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
-import {friendListService} from "../../services/friendlist.service";
-import {PostsComponent} from "./posts/posts.component";
+import {DiscussionService} from "../../services/discussion.service";
 
 @Component({
   selector: 'app-discussion',
@@ -16,14 +15,11 @@ export class DiscussionComponent {
   filteredTableData: any[][] = [];
   searchTerm: String = "";
   tableID!: number;
-  favorites: any[] = [];
-  userID!: number;
   email: string = "";
-  privacy!: boolean;
   user!: User;
 
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private postsComponent: PostsComponent) {
+  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private discussionService: DiscussionService) {
   }
 
   ngOnInit() {
@@ -54,10 +50,8 @@ export class DiscussionComponent {
 
   openPost(id: number){
     this.router.navigate(['/posts'])
-    this.postsComponent.loadPost(id);
+    this.discussionService.loadPost(id);
   }
-
-
 }
 
 
