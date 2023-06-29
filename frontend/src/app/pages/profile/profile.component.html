@@ -42,6 +42,30 @@
       </tbody>
     </table>
   </div>
+
+  <div class="diagrammAnsicht">
+    <div id="chartContainer" class="balkendiagramm">
+      <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+
+
+      <button (click)="getSterbefaelleP()">Sterbefälle</button>
+      <button (click)="getGeburtenP()">Geburten</button>
+      <button (click)="getArbeitsloseP()">Arbeitslose</button>
+      <button (click)="getArbeitssuchendeP()">Arbeitssuchende</button>
+    </div>
+
+
+    <!--<div id="chartContainer2" class="balkendiagramm">
+      <button (click)="getSterbefaelleChart()">Sterbefälle</button>
+      <button (click)="getGeburtenChart()">Geburten</button>
+      <button (click)="getArbeitsloseChart()">Arbeitslose</button>
+      <button (click)="getArbeitssuchendeChart()">Arbeitssuchende</button>
+    </div>-->
+
+
+  </div>
+
+
 </body>
 
 
