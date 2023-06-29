@@ -23,6 +23,7 @@ import {PostsComponent} from "./pages/discussion/posts/posts.component";
 import {CreatePostComponent} from "./pages/discussion/create-post/create-post.component";
 import {TestBarGraphComponent} from "./pages/test-bar-graph/test-bar-graph.component";
 import {ChatBotComponent} from "./pages/chat-bot/chat-bot.component";
+import {OtherProfileComponent} from "./pages/profile/other-profile/other-profile.component";
 
 
 const routes: Routes = [
@@ -48,7 +49,8 @@ const routes: Routes = [
     {path: 'posts', component: PostsComponent},
     {path: 'createPost', component: CreatePostComponent},
     {path: 'testBarGraph', component: TestBarGraphComponent},
-    {path: 'chatBot', component: ChatBotComponent}
+    {path: 'chatBot', component: ChatBotComponent},
+    {path: 'otherProfile', component: OtherProfileComponent}
 
 
 

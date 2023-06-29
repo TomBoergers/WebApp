@@ -1,0 +1,47 @@
+<body>
+<app-navbar></app-navbar>
+<div class="section" id="profilblockTitel"    >
+  <div class="upper-card">
+    <img [src]="profileImageUrl" class="profilePicture"  height="100px" width="auto"*ngIf="menuType==='user'">
+    <h1 class="name-header"> {{userVorname +" " + userNachname}} </h1>
+  </div>
+</div>
+
+<div class="section" id="profilblock">
+  <div class="profile-input">
+    <p class="prompt">Email:</p>
+    <p class="displayed-input" id="email">{{email}}</p>
+  </div>
+  <div class="profile-input" *ngIf="menuType==='user'">
+    <p class="prompt">Geburtsdatum:</p>
+    <p class="displayed-input" id="birthdate">{{dateOfBirth}}</p>
+  </div>
+</div>
+
+<div
+  class="section" id="favDatensatzTitel" >
+  <h4> Mein Lieblingsdatensatz: </h4>
+</div>
+<div class="section" id="favDatensatzBlock">
+  <table>
+    <thead>
+    <tr>
+      <th>Tabellenname</th>
+      <th>Jahr</th>
+      <th>Options</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>{{ tableData[0] }}</td>
+      <td>{{ tableData[1] }}</td>
+      <td>
+        <button (click)="openTable(tableData[2], tableData[3])">Open</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+
+
