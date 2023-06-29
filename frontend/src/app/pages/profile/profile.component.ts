@@ -5,7 +5,7 @@ import {LoginuserService} from "../../services/loginuser.service";
 import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
-
+import {DiagramService} from "../../services/diagram.service";
 
 
 @Component({
@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   dateOfBirth: string = '';
   userVorname: string = '';
   userNachname: string = '';
-
+chartOptions:any;
   tableData: any[] = []
   tableID!: number;
   identifier!: string;
@@ -26,11 +26,15 @@ export class ProfileComponent implements OnInit {
   profileImageUrl!: string;
 
 
-  constructor(private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
+  constructor(private diagramService: DiagramService, private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
   }
 
 
   ngOnInit() {
+
+
+
+
     if(localStorage.getItem('admin')){
       this.menuType ="admin"
     }
@@ -130,5 +134,21 @@ export class ProfileComponent implements OnInit {
 
   protected readonly onselect = onselect;
   user: any;
+
+  getSterbefaelleP(){
+    this.diagramService.getSterbefaellePie();
+  }
+
+  getGeburtenP(){
+    this.diagramService.getGeburtenPie();
+  }
+
+  getArbeitssuchendeP(){
+    this.diagramService.getArbeitssuchendePie();
+  }
+
+  getArbeitsloseP(){
+    this.diagramService.getArbeitslosePie();
+  }
 
 }
