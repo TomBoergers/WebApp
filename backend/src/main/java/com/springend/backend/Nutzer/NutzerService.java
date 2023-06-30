@@ -138,7 +138,7 @@ public class NutzerService {
             throw new Exception("Dieser Nutzer ist nicht dein Freund!");
             }
         }
-        public String[][] showFriendlist(long ID) throws Exception {
+        public String[][] showFriendlist(long ID) {
             Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
             List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
             String[][] friendlist = new String[friendlistalt.size()][5];
@@ -153,7 +153,7 @@ public class NutzerService {
             return friendlist;
         }
 
-        public String[][] showOwnFriendlist(long ID) throws Exception {
+        public String[][] showOwnFriendlist(long ID) {
             Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
             List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
             String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][6];
@@ -170,7 +170,7 @@ public class NutzerService {
             }
             return friendlist;
         }
-        public String[][] showFriendrequests(long ID) throws Exception {
+        public String[][] showFriendrequests(long ID) {
             Nutzer nutzerFriendRequest = nutzerRepo.findNutzerByID(ID);
             List<Long> friendrequestalt = nutzerFriendRequest.getFriendrequests();
             String[][] friendrequests = new String[nutzerFriendRequest.getFriendrequests().size()][5];
@@ -184,7 +184,7 @@ public class NutzerService {
             }
             return friendrequests;
         }
-       public List<Nutzer> ownShowFriendlist(long ID) throws Exception {
+       public List<Nutzer> ownShowFriendlist(long ID) {
         Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
         List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
         List<Nutzer> friendlist = new ArrayList<>();

@@ -23,7 +23,7 @@ public class Nutzer {
     private LocalDate geburtsdatum;
 
     private String password;
-
+    private Long favTableID;
     @ElementCollection
     private List<Long> friendrequests;
     @ElementCollection
@@ -117,6 +117,14 @@ public class Nutzer {
 
     public void setFriendrequests(List<Long> friendrequests) {
         this.friendrequests = friendrequests;
+    }
+
+    public Long getFavTableID() {
+        return favTableID;
+    }
+
+    public void setFavTableID(Long favTableID) {
+        this.favTableID = favTableID;
     }
 
     @Override
