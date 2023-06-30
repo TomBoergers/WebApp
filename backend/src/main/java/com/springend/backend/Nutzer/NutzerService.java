@@ -42,6 +42,17 @@ public class NutzerService {
             return nutzerRepo.save(nutzer);
     }
 
+        public Long getFavTable(long ID){
+            Long favTableID = nutzerRepo.findNutzerByID(ID).getFavTableID();
+            return favTableID;
+        }
+
+        public void setFavTableID(long nutzerID, long favTableID){
+            Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
+            nutzer.setFavTableID(favTableID);
+            nutzerRepo.save(nutzer);
+        }
+
         //Login and Register Methods
         public Nutzer authenticateNutzer(String email, String password) throws Exception {
 

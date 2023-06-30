@@ -52,6 +52,25 @@ public class NutzerController {
                 return null;
             }
         }
+        @GetMapping("/getFavTable/{ID}")
+        public ResponseEntity<Long> getFavTableID(@PathVariable long ID) {
+        try{
+            Long favTableID = nutzerService.getFavTable(ID);
+            return new ResponseEntity<>(favTableID, HttpStatus.OK);
+        } catch (Exception e) {
+            ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return null;
+        }
+        }
+        @PutMapping("/setFavTable")
+        public ResponseEntity<Nutzer> setFavTableID(@RequestBody Nutzer nutzer, @RequestBody long favTableID){
+        try{
+            nutzerService.setFavTableID(nutzer.getID(),favTableID);
+            return new ResponseEntity<>(nutzer, HttpStatus.OK);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        }
         @PostMapping("/add")
         public ResponseEntity<Nutzer> addNutzer(@RequestBody Nutzer nutzer) {
             Nutzer newNutzer = nutzerService.addNutzer(nutzer);
