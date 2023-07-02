@@ -19,11 +19,19 @@ export class DiscussionComponent {
   user!: User;
 
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private discussionService: DiscussionService) {
+  constructor(private httpClient: HttpClient, private tableService: TableService, private router: Router, private discussionService: DiscussionService) {
   }
 
   ngOnInit() {
     this.refreshTableData();
+  }
+
+  refreshTableData() {
+    this.httpClient.get<any[][]>("http://localhost:8080/discussion/getDiscussions").subscribe(data => {
+      this.tableData = data;
+      this.filteredTableData = data;
+      console.log(this.tableData);
+    });
   }
 
   applyFilter() {
@@ -36,21 +44,13 @@ export class DiscussionComponent {
     }
   }
 
-  private refreshTableData() {
-    this.http.get<any[][]>("http://localhost:8080/discussion/getDiscussions").subscribe(data => {
-      this.tableData = data;
-      this.filteredTableData = data;
-      console.log(this.tableData);
-    });
-  }
-
   createPost(){
     this.router.navigate(['/createPost'])
   }
 
   openPost(id: number){
-    this.router.navigate(['/posts'])
     this.discussionService.loadPost(id);
+    this.router.navigate(['/posts'])
   }
 }
 

@@ -11,8 +11,11 @@ public class DiscussionService {
 
     private final DiscussionRepo discussionRepo;
 
-    public DiscussionService(DiscussionRepo discussionRepo) {
+    private final CommentRepo commentRepo;
+
+    public DiscussionService(DiscussionRepo discussionRepo, CommentRepo commentRepo) {
         this.discussionRepo = discussionRepo;
+        this.commentRepo = commentRepo;
     }
 
     public void addDiscussion(Discussion post) {
@@ -40,6 +43,19 @@ public class DiscussionService {
     public Discussion getById(Long Id) {
         Optional<Discussion> optionalDiscussion = discussionRepo.findById(Id);
         Discussion discussion = optionalDiscussion.get();
+        System.out.println("Service");
         return discussion;
+    }
+
+    public void addComment(Comment comment, Long discussionId) {
+        Optional<Discussion> optionalDiscussion = discussionRepo.findById(discussionId);
+        Discussion discussion = optionalDiscussion.get();
+        Comment newComment = new Comment();
+        newComment.setDiscussion(discussion);
+        commentRepo.save(newComment);
+    }
+
+    public String[] getComments(Long ID) {
+        return null;
     }
 }

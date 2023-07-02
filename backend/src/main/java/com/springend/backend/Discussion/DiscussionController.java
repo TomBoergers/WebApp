@@ -16,11 +16,11 @@ public class DiscussionController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<String> addDiscussion(@RequestBody Discussion post) {
+    public ResponseEntity<Discussion> addDiscussion(@RequestBody Discussion post) {
         try {
             System.out.println(post);
             discussionService.addDiscussion(post);
-            return ResponseEntity.ok("Post added successfully");
+            return new ResponseEntity<>(post, HttpStatus.OK);
         }catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -37,12 +37,32 @@ public class DiscussionController {
     }
 
     @GetMapping("/getById/{ID}")
-    public ResponseEntity<Discussion> getById(@PathVariable Long Id) {
+    public ResponseEntity<Discussion> getById(@PathVariable long ID) {
         try {
-            Discussion discussion = discussionService.getById(Id);
+            Discussion discussion = discussionService.getById(ID);
+            System.out.println("Controller");
             return new ResponseEntity<>(discussion, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @PutMapping("/addComment/{ID}")
+    public void addComment(@RequestParam Comment comment, @PathVariable Long ID) {
+        try {
+          this.discussionService.addComment(comment, ID);
+        } catch (Exception e) {
+            throw new RuntimeException();
+        }
+    }
+
+    @GetMapping("/getComments/{ID}")
+    public ResponseEntity<Comment> getComments(@PathVariable Long ID) {
+        try {
+
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException();
         }
     }
 }
