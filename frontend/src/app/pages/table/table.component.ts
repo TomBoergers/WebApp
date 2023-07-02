@@ -3,6 +3,7 @@ import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
+import {User} from "../../classes/user";
 
 @Component({
   selector: 'app-table',
@@ -95,24 +96,57 @@ export class TableComponent implements OnInit {
     });
   }
 
-  addToFavorites(tableId: number, identifier: string) {
-    if (!localStorage.getItem('favoriteTable')) {
-      localStorage.setItem('favoriteTable', tableId.toString());
-      localStorage.setItem("favoriteTableIdentifier", identifier);
-      this.favorites = [tableId];
-    } else {
-      let favoriteTable = JSON.parse(localStorage.getItem('favoriteTable')!) as number[];
-      if (favoriteTable.length === 1) {
-        alert('Es kann nur ein Favorit gespeichert werden.');
-      } else {
-        localStorage.setItem('favoriteTable', JSON.stringify(favoriteTable));
-        localStorage.setItem("favoriteTableIdentifier", identifier);
-        this.favorites = favoriteTable;
-      }
-    }
+  addToFavorites(favTableId: number, identifier: string) {
+    let userStore = localStorage.getItem("user");
+    let userData = userStore && JSON.parse(userStore);
+
+    this.http.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(data => {
+      this.tableService.setFavTable(favTableId, data)
+      // Ich brauche noch den Set Ident
+      this.tableService.setIdent(identifier, data)
+      console.log(favTableId)
+    })
+
+
+
+
+
+
+
+
+    // if (!localStorage.getItem('favoriteTable')) {
+    //   localStorage.setItem('favoriteTable', tableId.toString());
+    //   localStorage.setItem("favoriteTableIdentifier", identifier);
+    //
+    //
+    //
+    //
+    //   this.favorites = [tableId];
+    //   console.log("hi")
+    // } else {
+    //   let favoriteTable = JSON.parse(localStorage.getItem('favoriteTable')!) as number[];
+    //   if (favoriteTable.length === 1) {
+    //     alert('Es kann nur ein Favorit gespeichert werden.');
+    //     console.log("bye")
+    //   } else {
+    //     localStorage.setItem('favoriteTable', JSON.stringify(favoriteTable));
+    //     localStorage.setItem("favoriteTableIdentifier", identifier);
+    //     this.favorites = favoriteTable;
+    //   }
+    // }
   }
 
   removeFavorites() {
+    let userStore = localStorage.getItem("user");
+    let userData = userStore && JSON.parse(userStore);
+
+    this.http.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(data => {
+      this.tableService.setFavTable(0, data)
+      // Ich brauche noch den Set Ident
+      this.tableService.setIdent("", data)
+      console.log(0)
+    })
+
     localStorage.removeItem('favoriteTable');
     localStorage.removeItem('favoriteTableIdentifier')
   }

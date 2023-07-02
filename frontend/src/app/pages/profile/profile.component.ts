@@ -98,20 +98,56 @@ chartOptions:any;
   }
 
   favoriteTable() {
-    this.tableID = parseInt(localStorage.getItem("favoriteTable") || "0");
-    if(localStorage.getItem("favoriteTableIdentifier") === "csv") {
-      return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
-        console.log(data);
-        this.tableData = data;
-      });
-    } else if(localStorage.getItem("favoriteTableIdentifier") === "xml") {
-      return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
-        console.log(data);
-        this.tableData = data;
-      });
-    } else {
-      return console.log("Tabelle nicht gefunden");
-    }
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result =>{
+      this.tableID = result.favTableID;
+
+      // Hier muss noch statt emaiöl der Ident rein!!!!
+      if(result.email == "csv") {
+        return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
+          console.log(data);
+          this.tableData = data;
+        });
+      } else if(result.email == "xml") {
+        return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
+          console.log(data);
+          this.tableData = data;
+        });
+      } else {
+        return console.log("Tabelle nicht gefunden");
+      }
+
+
+
+
+    })
+
+
+
+
+
+
+
+    // this.tableID = parseInt(localStorage.getItem("favoriteTable") || "0");
+//     let userStore = localStorage.getItem("user");
+//     let userData = userStore && JSON.parse(userStore);
+//     this.tableID = userData.favTableID;
+//
+// // Hier genauso wie bei other Profile
+//     if(localStorage.getItem("favoriteTableIdentifier") === "csv") {
+//       return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
+//         console.log(data);
+//         this.tableData = data;
+//       });
+//     } else if(localStorage.getItem("favoriteTableIdentifier") === "xml") {
+//       return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
+//         console.log(data);
+//         this.tableData = data;
+//       });
+//     } else {
+//       return console.log("Tabelle nicht gefunden");
+//     }
   }
 
   openTable(tableId: number, identifier: string) {

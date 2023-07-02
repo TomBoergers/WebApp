@@ -80,7 +80,7 @@ export class FriendAddComponent {
         let userStore = this.user;
         let userString = JSON.stringify(userStore)
         localStorage.setItem("profileUser", userString)
-
+        this.router.navigate(["/otherProfile"])
       })
 
 
