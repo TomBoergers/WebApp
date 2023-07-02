@@ -224,4 +224,21 @@ public class NutzerService {
             nutzerRepo.save(nutzer);
         }
     }
+    public Boolean getProfilePrivacy (long ID){
+        Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
+        return nutzer.isProfilePrivacy();
+
+    }
+    public void toggleProfilePrivacy(String email){
+
+        Nutzer nutzer = nutzerRepo.findNutzerByEmail(email);
+        if(nutzer.isProfilePrivacy()){
+            nutzer.setProfilePrivacy(false);
+            nutzerRepo.save(nutzer);
+        }
+        else{
+            nutzer.setProfilePrivacy(true);
+            nutzerRepo.save(nutzer);
+        }
+    }
 }

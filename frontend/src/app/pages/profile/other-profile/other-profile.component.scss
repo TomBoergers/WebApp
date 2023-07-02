@@ -7,8 +7,33 @@ body {
 
 }
 
+.profile-header{
+
+  justify-content: space-between;
+}
+
+.profile-header h1 button {
+ margin-left: 60%;
+  background-color: black;
+  border-radius: 15px;
+
+
+}
+.profile-header h1{
+  padding: 15px;
+  color: white;
+  background-color: #f09819;
+  font-weight: 500;
+  font-size: 30px;
+
+
+}
+
+
+
 .section {
-  background-color: rgba(255,255,255,0.13);
+  background-color: black;
+  margin-top: 80px;
   position: absolute;
   transform: translate(-50%,-50%);
   border-radius: 10px;

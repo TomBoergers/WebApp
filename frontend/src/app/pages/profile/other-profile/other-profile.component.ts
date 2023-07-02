@@ -56,13 +56,20 @@ export class OtherProfileComponent {
   }
 
   favoriteTable() {
-    this.tableID = parseInt(localStorage.getItem("favoriteTable") || "0");
-    if(localStorage.getItem("favoriteTableIdentifier") === "csv") {
+    // this.tableID = parseInt(localStorage.getItem("favoriteTable") || "0");
+
+    let userStore = localStorage.getItem('profileUser');
+    let userData = userStore && JSON.parse(userStore);
+    this.tableID = userData.favTableID
+
+
+    // Hier muss noch statt favTable ID der Ident rein!!!!
+    if(userData.favTableID == "csv") {
       return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
         console.log(data);
         this.tableData = data;
       });
-    } else if(localStorage.getItem("favoriteTableIdentifier") === "xml") {
+    } else if(userData.favTableID == "xml") {
       return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
         console.log(data);
         this.tableData = data;
@@ -70,6 +77,22 @@ export class OtherProfileComponent {
     } else {
       return console.log("Tabelle nicht gefunden");
     }
+
+
+
+    // if(localStorage.getItem("favoriteTableIdentifier") === "csv") {
+    //   return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
+    //     console.log(data);
+    //     this.tableData = data;
+    //   });
+    // } else if(localStorage.getItem("favoriteTableIdentifier") === "xml") {
+    //   return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
+    //     console.log(data);
+    //     this.tableData = data;
+    //   });
+    // } else {
+    //   return console.log("Tabelle nicht gefunden");
+    // }
   }
 
   openTable(tableId: number, identifier: string) {
@@ -88,6 +111,10 @@ export class OtherProfileComponent {
     } else {
       this.profileImageUrl = "frontend/src/assets/profile/WhatsApp-Profilbild-mit-Fliege.png";
     }
+  }
+
+  toFriendAdd() {
+    this.router.navigate(['/friendAdd']);
   }
 
   protected readonly onselect = onselect;

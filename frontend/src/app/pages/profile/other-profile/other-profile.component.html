@@ -1,11 +1,19 @@
 <body>
 <app-navbar></app-navbar>
+
+<div class="profile-header">
+  <h1 >Profile of: {{userVorname +" " + userNachname}}
+    <button class="test" (click)="toFriendAdd()"> Back to Friendlist</button>
+  </h1>
+
+</div>
 <div class="section" id="profilblockTitel"    >
   <div class="upper-card">
-    <img [src]="profileImageUrl" class="profilePicture"  height="100px" width="auto"*ngIf="menuType==='user'">
+    <img [src]="profileImageUrl" class="profilePicture"  height="100px" width="auto" *ngIf="menuType==='user'">
     <h1 class="name-header"> {{userVorname +" " + userNachname}} </h1>
   </div>
 </div>
+
 
 <div class="section" id="profilblock">
   <div class="profile-input">
