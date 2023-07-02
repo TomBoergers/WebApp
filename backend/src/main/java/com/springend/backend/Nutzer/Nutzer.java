@@ -31,11 +31,13 @@ public class Nutzer {
 
     private boolean privacy;
 
+    private boolean profilePrivacy;
+
     public Nutzer(){
 
     }
 
-    public Nutzer(String vorname, String nachname, String email, LocalDate geburtsdatum, String password, List<Long> friendlist, List<Long> friendrequests, boolean privacy) {
+    public Nutzer(String vorname, String nachname, String email, LocalDate geburtsdatum, String password, List<Long> friendlist, List<Long> friendrequests, boolean privacy, boolean profilePrivacy) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.email = email;
@@ -44,6 +46,7 @@ public class Nutzer {
         this.friendlist = friendlist;
         this.privacy = privacy;
         this.friendrequests = friendrequests;
+        this.profilePrivacy = profilePrivacy;
     }
 
     public long getID() {
@@ -125,6 +128,14 @@ public class Nutzer {
 
     public void setFavTableID(Long favTableID) {
         this.favTableID = favTableID;
+    }
+
+    public boolean isProfilePrivacy() {
+        return profilePrivacy;
+    }
+
+    public void setProfilePrivacy(boolean profilePrivacy) {
+        this.profilePrivacy = profilePrivacy;
     }
 
     @Override

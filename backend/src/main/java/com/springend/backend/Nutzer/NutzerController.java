@@ -242,7 +242,6 @@ public class NutzerController {
         @PutMapping("/togglePrivacy")
         public ResponseEntity<Nutzer> togglePrivacy(@RequestBody Nutzer nutzer){
             try{
-                System.out.println("Bei toggle");
                 nutzerService.togglePrivacy(nutzer.getEmail());
                 return new ResponseEntity<>(nutzer, HttpStatus.OK);
             } catch (Exception e) {
@@ -258,6 +257,25 @@ public class NutzerController {
                 return null;
             }
         }
+
+        @PutMapping("/toggleProfilePrivacy")
+        public ResponseEntity<Nutzer> toggleProfilePrivacy(@RequestBody Nutzer nutzer){
+            try{
+                nutzerService.toggleProfilePrivacy(nutzer.getEmail());
+                return new ResponseEntity<>(nutzer, HttpStatus.OK);
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
+        }
+        @GetMapping("/getProfilePrivacy/{ID}")
+        public Boolean getProfilePrivacyByID(@PathVariable long ID){
+            try{
+                boolean privacy = nutzerService.getProfilePrivacy(ID);
+                return privacy;
+            } catch(Exception e){
+                return null;
+            }
+    }
 
 }
 
