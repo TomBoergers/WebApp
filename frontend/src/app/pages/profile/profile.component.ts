@@ -179,19 +179,19 @@ chartOptions:any;
   user: any;
 
   getSterbefaelleP(){
-    this.diagramService.getSterbefaellePie();
+    this.chartOptions = this.diagramService.getSterbefaellePie();
   }
 
   getGeburtenP(){
-    this.diagramService.getGeburtenPie();
+    this.chartOptions =this.diagramService.getGeburtenPie();
   }
 
   getArbeitssuchendeP(){
-    this.diagramService.getArbeitssuchendePie();
+    this.chartOptions = this.diagramService.getArbeitssuchendePie();
   }
 
   getArbeitsloseP(){
-    this.diagramService.getArbeitslosePie();
+    this.chartOptions= this.diagramService.getArbeitslosePie();
   }
 
 }

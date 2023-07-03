@@ -8,7 +8,7 @@ export class DiagramService {
   constructor() { }
 
   getSterbefaellePie() {
-    this.chartOptions = {
+    return this.chartOptions = {
       animationEnabled: true,
       title: {
         text: "Sterbefälle 2015"
@@ -38,7 +38,7 @@ export class DiagramService {
 
     getGeburtenPie()
     {
-      this.chartOptions = {
+     return this.chartOptions = {
         animationEnabled: true,
         title: {
           text: "Geburten 2015"
@@ -68,7 +68,7 @@ export class DiagramService {
 
     getArbeitslosePie()
     {
-      this.chartOptions = {
+     return this.chartOptions = {
         animationEnabled: true,
         title: {
           text: "Arbeitslose  Jan 22"
@@ -99,7 +99,7 @@ export class DiagramService {
 
     getArbeitssuchendePie()
     {
-      this.chartOptions = {
+      return this.chartOptions = {
         animationEnabled: true,
         title: {
           text: "Arbeitssuchende Jan 22"
