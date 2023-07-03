@@ -42,7 +42,7 @@ public class NutzerService {
             return nutzerRepo.save(nutzer);
     }
 
-        public Long getFavTable(long ID){
+        public Long getFavTableID(long ID){
             Long favTableID = nutzerRepo.findNutzerByID(ID).getFavTableID();
             return favTableID;
         }
@@ -51,6 +51,17 @@ public class NutzerService {
             Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
             nutzer.setFavTableID(favTableID);
             nutzerRepo.save(nutzer);
+        }
+
+        public void setFavTable(long nutzerID, String favTable){
+            Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
+            nutzer.setFavTable(favTable);
+            nutzerRepo.save(nutzer);
+        }
+
+        public String getFavTable(long ID){
+            String favTable = nutzerRepo.findNutzerByID(ID).getFavTable();
+            return favTable;
         }
 
         //Login and Register Methods
@@ -176,8 +187,6 @@ public class NutzerService {
                 friendlist[i][3] = friend.getVorname() + " " + friend.getNachname();
                 friendlist[i][4] = friend.getEmail();
                 friendlist[i][5] = String.valueOf(friend.getID());
-
-
             }
             return friendlist;
         }

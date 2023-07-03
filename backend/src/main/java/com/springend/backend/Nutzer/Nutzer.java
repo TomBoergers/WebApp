@@ -24,6 +24,8 @@ public class Nutzer {
 
     private String password;
     private Long favTableID;
+
+    private String favTable;
     @ElementCollection
     private List<Long> friendrequests;
     @ElementCollection
@@ -136,6 +138,14 @@ public class Nutzer {
 
     public void setProfilePrivacy(boolean profilePrivacy) {
         this.profilePrivacy = profilePrivacy;
+    }
+
+    public String getFavTable() {
+        return favTable;
+    }
+
+    public void setFavTable(String favTable) {
+        this.favTable = favTable;
     }
 
     @Override
