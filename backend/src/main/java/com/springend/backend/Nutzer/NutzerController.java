@@ -72,8 +72,8 @@ public class NutzerController {
         }
         }
 
-        @GetMapping("/getFavTable/{ID}")
-        public ResponseEntity<String> getFavTable(@PathVariable long ID) {
+        @GetMapping("/getFavTableIdent/{ID}")
+        public ResponseEntity<String> getFavTableIdent(@PathVariable long ID) {
             try{
                 String favTable = nutzerService.getFavTable(ID);
                 return new ResponseEntity<>(favTable, HttpStatus.OK);
@@ -83,8 +83,8 @@ public class NutzerController {
             }
         }
 
-        @PutMapping("/setFavTable/{ID}")
-        public ResponseEntity<Nutzer> setFavTable(@PathVariable long nutzerID, @RequestBody String favTable){
+        @PutMapping("/setFavTableIdent/{ID}")
+        public ResponseEntity<Nutzer> setFavTableIdent(@PathVariable long nutzerID, @RequestBody String favTable){
             try{
                 nutzerService.setFavTable(nutzerID,favTable);
                 return new ResponseEntity<>(nutzerService.getUserbyID(nutzerID), HttpStatus.OK);
