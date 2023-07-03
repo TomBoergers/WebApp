@@ -29,6 +29,7 @@ import { ChatBotComponent } from './pages/chat-bot/chat-bot.component';
 import { DiscussionComponent } from './pages/discussion/discussion.component';
 import { PostsComponent } from './pages/discussion/posts/posts.component';
 import { CreatePostComponent } from './pages/discussion/create-post/create-post.component';
+import { OtherProfileComponent } from './pages/profile/other-profile/other-profile.component';
 
 
 
@@ -61,7 +62,8 @@ import { CreatePostComponent } from './pages/discussion/create-post/create-post.
 
     BarGraphComponent,
     TestBarGraphComponent,
-    ChatBotComponent
+    ChatBotComponent,
+    OtherProfileComponent
 
   ],
     imports: [

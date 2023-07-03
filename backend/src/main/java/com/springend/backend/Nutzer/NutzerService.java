@@ -42,6 +42,28 @@ public class NutzerService {
             return nutzerRepo.save(nutzer);
     }
 
+        public Long getFavTableID(long ID){
+            Long favTableID = nutzerRepo.findNutzerByID(ID).getFavTableID();
+            return favTableID;
+        }
+
+        public void setFavTableID(long nutzerID, long favTableID){
+            Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
+            nutzer.setFavTableID(favTableID);
+            nutzerRepo.save(nutzer);
+        }
+
+        public void setFavTable(long nutzerID, String favTable){
+            Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
+            nutzer.setFavTable(favTable);
+            nutzerRepo.save(nutzer);
+        }
+
+        public String getFavTable(long ID){
+            String favTable = nutzerRepo.findNutzerByID(ID).getFavTable();
+            return favTable;
+        }
+
         //Login and Register Methods
         public Nutzer authenticateNutzer(String email, String password) throws Exception {
 
@@ -138,7 +160,7 @@ public class NutzerService {
             throw new Exception("Dieser Nutzer ist nicht dein Freund!");
             }
         }
-        public String[][] showFriendlist(long ID) throws Exception {
+        public String[][] showFriendlist(long ID) {
             Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
             List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
             String[][] friendlist = new String[friendlistalt.size()][5];
@@ -153,7 +175,7 @@ public class NutzerService {
             return friendlist;
         }
 
-        public String[][] showOwnFriendlist(long ID) throws Exception {
+        public String[][] showOwnFriendlist(long ID) {
             Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
             List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
             String[][] friendlist = new String[nutzerFriendlist.getFriendlist().size()][6];
@@ -165,12 +187,10 @@ public class NutzerService {
                 friendlist[i][3] = friend.getVorname() + " " + friend.getNachname();
                 friendlist[i][4] = friend.getEmail();
                 friendlist[i][5] = String.valueOf(friend.getID());
-
-
             }
             return friendlist;
         }
-        public String[][] showFriendrequests(long ID) throws Exception {
+        public String[][] showFriendrequests(long ID) {
             Nutzer nutzerFriendRequest = nutzerRepo.findNutzerByID(ID);
             List<Long> friendrequestalt = nutzerFriendRequest.getFriendrequests();
             String[][] friendrequests = new String[nutzerFriendRequest.getFriendrequests().size()][5];
@@ -184,7 +204,7 @@ public class NutzerService {
             }
             return friendrequests;
         }
-       public List<Nutzer> ownShowFriendlist(long ID) throws Exception {
+       public List<Nutzer> ownShowFriendlist(long ID) {
         Nutzer nutzerFriendlist = nutzerRepo.findNutzerByID(ID);
         List<Long> friendlistalt = nutzerFriendlist.getFriendlist();
         List<Nutzer> friendlist = new ArrayList<>();
@@ -210,6 +230,23 @@ public class NutzerService {
         }
         else{
             nutzer.setPrivacy(true);
+            nutzerRepo.save(nutzer);
+        }
+    }
+    public Boolean getProfilePrivacy (long ID){
+        Nutzer nutzer = nutzerRepo.findNutzerByID(ID);
+        return nutzer.isProfilePrivacy();
+
+    }
+    public void toggleProfilePrivacy(String email){
+
+        Nutzer nutzer = nutzerRepo.findNutzerByEmail(email);
+        if(nutzer.isProfilePrivacy()){
+            nutzer.setProfilePrivacy(false);
+            nutzerRepo.save(nutzer);
+        }
+        else{
+            nutzer.setProfilePrivacy(true);
             nutzerRepo.save(nutzer);
         }
     }

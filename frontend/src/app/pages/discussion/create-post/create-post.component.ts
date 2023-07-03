@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {DiscussionService} from "../../../services/discussion.service";
 
 @Component({
   selector: 'app-create-post',
@@ -11,7 +12,7 @@ export class CreatePostComponent {
 
   post: { title: string, content: string, category: string } = { title: '', content: '', category: '' };
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient, private router: Router, private discussionService: DiscussionService) {
   }
 
   onSubmit() {
@@ -19,10 +20,10 @@ export class CreatePostComponent {
     console.log('New post:', this.post);
 
     this.httpClient.post("http://localhost:8080/discussion/add", this.post).subscribe(response => {
-      console.log(response);
       this.post = { title: '', content: '', category: '' };
+      console.log("OK");
     }, error => {
-      console.log("Error");
+      console.log("Error", error);
     });
 
     this.router.navigate(['/discussion']);

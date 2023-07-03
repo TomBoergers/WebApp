@@ -23,7 +23,9 @@ public class Nutzer {
     private LocalDate geburtsdatum;
 
     private String password;
+    private Long favTableID;
 
+    private String favTable;
     @ElementCollection
     private List<Long> friendrequests;
     @ElementCollection
@@ -31,11 +33,13 @@ public class Nutzer {
 
     private boolean privacy;
 
+    private boolean profilePrivacy;
+
     public Nutzer(){
 
     }
 
-    public Nutzer(String vorname, String nachname, String email, LocalDate geburtsdatum, String password, List<Long> friendlist, List<Long> friendrequests, boolean privacy) {
+    public Nutzer(String vorname, String nachname, String email, LocalDate geburtsdatum, String password, List<Long> friendlist, List<Long> friendrequests, boolean privacy, boolean profilePrivacy) {
         this.vorname = vorname;
         this.nachname = nachname;
         this.email = email;
@@ -44,6 +48,7 @@ public class Nutzer {
         this.friendlist = friendlist;
         this.privacy = privacy;
         this.friendrequests = friendrequests;
+        this.profilePrivacy = profilePrivacy;
     }
 
     public long getID() {
@@ -117,6 +122,30 @@ public class Nutzer {
 
     public void setFriendrequests(List<Long> friendrequests) {
         this.friendrequests = friendrequests;
+    }
+
+    public Long getFavTableID() {
+        return favTableID;
+    }
+
+    public void setFavTableID(Long favTableID) {
+        this.favTableID = favTableID;
+    }
+
+    public boolean isProfilePrivacy() {
+        return profilePrivacy;
+    }
+
+    public void setProfilePrivacy(boolean profilePrivacy) {
+        this.profilePrivacy = profilePrivacy;
+    }
+
+    public String getFavTable() {
+        return favTable;
+    }
+
+    public void setFavTable(String favTable) {
+        this.favTable = favTable;
     }
 
     @Override

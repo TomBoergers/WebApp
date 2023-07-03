@@ -27,11 +27,15 @@
       <td>{{ row[0] }} </td>
 
       <td>
+        <button (click)="showProfile(row[2])">See Profile</button>
+      </td>
+      <td>
         <button (click)="addFriend(row[1])">Add</button>
       </td>
       <td>
           <button (click)="showFriendslist(row[2])" >See Friendlist</button>
       </td>
+
 
     </tr>
     <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">

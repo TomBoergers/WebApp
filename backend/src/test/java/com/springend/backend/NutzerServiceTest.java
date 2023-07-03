@@ -35,9 +35,9 @@ public class NutzerServiceTest {
     @Test
     @DisplayName("Test should pass when 2 people are added to request list")
     void shouldAdd2Request() throws Exception {
-        Nutzer test1 = new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", new ArrayList<Long>(), new ArrayList<Long>(), false);
-        Nutzer test2 = new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false);
-        Nutzer test3 = new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false);
+        Nutzer test1 = new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", new ArrayList<Long>(), new ArrayList<Long>(), false, true);
+        Nutzer test2 = new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false, true);
+        Nutzer test3 = new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false, true);
         nutzerService.addNutzer(test1);
         nutzerService.addNutzer(test2);
         nutzerService.addNutzer(test3);
@@ -49,9 +49,9 @@ public class NutzerServiceTest {
     @Test
     @DisplayName("Test should pass when a friend is deleted from the request list")
     void shouldDenyFriend() throws Exception {
-        Nutzer test1 = new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", new ArrayList<Long>(), new ArrayList<Long>(), false);
-        Nutzer test2 = new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false);
-        Nutzer test3 = new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false);
+        Nutzer test1 = new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", new ArrayList<Long>(), new ArrayList<Long>(), false, true);
+        Nutzer test2 = new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false, true);
+        Nutzer test3 = new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false, true);
         nutzerService.addNutzer(test1);
         nutzerService.addNutzer(test2);
         nutzerService.addNutzer(test3);
@@ -64,9 +64,9 @@ public class NutzerServiceTest {
     @Test
     @DisplayName("Test should pass when two friend are added two the friendlist")
     void shouldAcceptFriends() throws Exception {
-        Nutzer test1 = new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", new ArrayList<Long>(), new ArrayList<Long>(), false);
-        Nutzer test2 = new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false);
-        Nutzer test3 = new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false);
+        Nutzer test1 = new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", new ArrayList<Long>(), new ArrayList<Long>(), false, true);
+        Nutzer test2 = new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false, true);
+        Nutzer test3 = new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false, true);
         nutzerService.addNutzer(test1);
         nutzerService.addNutzer(test2);
         nutzerService.addNutzer(test3);
@@ -80,9 +80,9 @@ public class NutzerServiceTest {
     @Test
     @DisplayName ("Test should pass when friend is deleted from both friendlists")
     void shouldDeleteFriend() throws Exception {
-        Nutzer test1 = new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", new ArrayList<Long>(), new ArrayList<Long>(), false);
-        Nutzer test2 = new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false);
-        Nutzer test3 = new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false);
+        Nutzer test1 = new Nutzer("Simon","Lenk","slenk01@outlook.de", LocalDate.of(2003,5,26),"12345", new ArrayList<Long>(), new ArrayList<Long>(), false, true);
+        Nutzer test2 = new Nutzer("Phong","Nguyen","ritoisgeil2202@gmail.com", LocalDate.of(2002,8,22),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false, true);
+        Nutzer test3 = new Nutzer("Janice","Chiam","janiceyeewen@gmail.com", LocalDate.of(2000,2,2),"12345",  new ArrayList<Long>(),  new ArrayList<Long>(), false, true);
         nutzerService.addNutzer(test1);
         nutzerService.addNutzer(test2);
         nutzerService.addNutzer(test3);

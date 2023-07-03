@@ -52,6 +52,47 @@ public class NutzerController {
                 return null;
             }
         }
+        @GetMapping("/getFavTable/{ID}")
+        public ResponseEntity<Long> getFavTableID(@PathVariable long ID) {
+        try{
+            Long favTableID = nutzerService.getFavTableID(ID);
+            return new ResponseEntity<>(favTableID, HttpStatus.OK);
+        } catch (Exception e) {
+            ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return null;
+        }
+        }
+        @PutMapping("/setFavTable/{ID}")
+        public ResponseEntity<Nutzer> setFavTableID(@PathVariable long nutzerID, @RequestBody long favTableID){
+        try{
+            nutzerService.setFavTableID(nutzerID,favTableID);
+            return new ResponseEntity<>(nutzerService.getUserbyID(nutzerID), HttpStatus.OK);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        }
+
+        @GetMapping("/getFavTableIdent/{ID}")
+        public ResponseEntity<String> getFavTableIdent(@PathVariable long ID) {
+            try{
+                String favTable = nutzerService.getFavTable(ID);
+                return new ResponseEntity<>(favTable, HttpStatus.OK);
+            } catch (Exception e) {
+                ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                return null;
+            }
+        }
+
+        @PutMapping("/setFavTableIdent/{ID}")
+        public ResponseEntity<Nutzer> setFavTableIdent(@PathVariable long nutzerID, @RequestBody String favTable){
+            try{
+                nutzerService.setFavTable(nutzerID,favTable);
+                return new ResponseEntity<>(nutzerService.getUserbyID(nutzerID), HttpStatus.OK);
+            }catch(Exception e){
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+
         @PostMapping("/add")
         public ResponseEntity<Nutzer> addNutzer(@RequestBody Nutzer nutzer) {
             Nutzer newNutzer = nutzerService.addNutzer(nutzer);
@@ -223,7 +264,6 @@ public class NutzerController {
         @PutMapping("/togglePrivacy")
         public ResponseEntity<Nutzer> togglePrivacy(@RequestBody Nutzer nutzer){
             try{
-                System.out.println("Bei toggle");
                 nutzerService.togglePrivacy(nutzer.getEmail());
                 return new ResponseEntity<>(nutzer, HttpStatus.OK);
             } catch (Exception e) {
@@ -239,6 +279,25 @@ public class NutzerController {
                 return null;
             }
         }
+
+        @PutMapping("/toggleProfilePrivacy")
+        public ResponseEntity<Nutzer> toggleProfilePrivacy(@RequestBody Nutzer nutzer){
+            try{
+                nutzerService.toggleProfilePrivacy(nutzer.getEmail());
+                return new ResponseEntity<>(nutzer, HttpStatus.OK);
+            } catch (Exception e) {
+                throw new RuntimeException();
+            }
+        }
+        @GetMapping("/getProfilePrivacy/{ID}")
+        public Boolean getProfilePrivacyByID(@PathVariable long ID){
+            try{
+                boolean privacy = nutzerService.getProfilePrivacy(ID);
+                return privacy;
+            } catch(Exception e){
+                return null;
+            }
+    }
 
 }
 

@@ -20,6 +20,7 @@ export class FriendAddComponent {
   tableID!: number;
   favorites: any[] = [];
 
+
   constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendlistService : friendListService) {
 
   }
@@ -72,6 +73,19 @@ export class FriendAddComponent {
     localStorage.setItem("friendsID",friendsID.toString());
     this.router.navigate(['/friends-list/',friendsID]);
   }
+
+  showProfile(userID: string){
+      this.http.get<User>("http://localhost:8080/nutzer/get/" + userID).subscribe(result =>{
+        this.user = result;
+        let userStore = this.user;
+        let userString = JSON.stringify(userStore)
+        localStorage.setItem("profileUser", userString)
+        this.router.navigate(["/otherProfile"])
+      })
+
+
+  }
+
 
 
 

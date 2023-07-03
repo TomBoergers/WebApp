@@ -1,8 +1,8 @@
 package com.springend.backend.Discussion;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Discussion {
@@ -15,6 +15,9 @@ public class Discussion {
     private String content;
 
     private String category;
+
+    @OneToMany(mappedBy = "discussion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comment> comments;
 
     public Discussion() {
     }
@@ -55,5 +58,13 @@ public class Discussion {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

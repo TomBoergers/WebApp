@@ -1,0 +1,214 @@
+body {
+  background-color: #080710;
+  background-repeat: no-repeat;
+  height: 100%;
+  overflow: hidden;
+  background-size: cover;
+
+}
+
+.profile-header{
+
+  justify-content: space-between;
+}
+
+.profile-header h1 button {
+ margin-left: 60%;
+  background-color: black;
+  border-radius: 15px;
+
+
+}
+.profile-header h1{
+  padding: 15px;
+  color: white;
+  background-color: #f09819;
+  font-weight: 500;
+  font-size: 30px;
+
+
+}
+
+
+
+.section {
+  background-color: black;
+  margin-top: 80px;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  border-radius: 10px;
+  backdrop-filter: blur(50px);
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+}
+
+.section * {
+  font-family: 'Poppins',sans-serif;
+  color: black;
+  letter-spacing: 0.5px;
+  outline: none;
+  border: none;
+}
+
+.section .name-header{
+  color: orange;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.section h1 {
+
+}
+thead tr th {
+  color: orange;
+  padding: 10px;
+
+  border: 10px #f09819;
+
+}
+
+tbody tr td {
+
+  color: orange;
+
+  padding: 10px;
+
+}
+
+
+.section h4 {
+  text-align: left;
+  color: orange;
+}
+
+
+.upper-card{
+  display: flex;
+
+
+}
+
+#profilblockTitel {
+  height: 155px;
+  width: 800px;
+  top: 20%;
+  left: 25%;
+  padding: 15px 35px;
+  border-radius: 10px 10px 0 0;
+}
+
+#profilblock {
+  height: 120px;
+  width: 800px;
+  top: 33%;
+  left: 25%;
+  padding: 25px 0 0 0;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#favDatensatzTitel {
+  height: 50px;
+  width: 600px;
+  top: 15%;
+  left: 70%;
+  padding: 7px 35px;
+  border-radius: 10px 10px 0 0;
+}
+
+#favDatensatzBlock {
+  height: 157px;
+  width: 600px;
+  top: 25%;
+  left: 70%;
+  padding: 25px 35px;
+  border-radius: 0 0 10px 10px;
+}
+
+.profilePicture{
+  border-radius: 2%;
+  padding: 2px;
+  background-color: orange;
+
+
+}
+.profile-input {
+  display: flex;
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.prompt {
+  margin-right: 100px;
+  margin-bottom: 10px;
+  width: 180px;
+  text-align: left;
+}
+
+.displayed-input {
+  margin-right: 20px;
+  width: 200px;
+  text-align: left;
+
+}
+
+.edit-button {
+  background-color: #f09819;
+  border: #080710 medium;
+  border-radius: 8px;
+
+  padding: 3px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button {
+  background-color: #f09819;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.custom-file-upload {
+
+  padding: 10px;
+  background-color: orange;
+  border-radius: 7px;
+  text-align: center;
+  width: 15%;
+  height: 10%;
+  margin-right: 70px;
+  margin-left: 10px;
+  margin-top: 2%;
+
+}
+
+.custom-file-upload:hover {
+  background-color: #fff;
+  text-decoration: underline;
+  cursor: crosshair;
+}
+
+.section .prompt {
+  color: orange;
+}
+
+.section .prompt {
+  color: orange;
+}
+
+.section .displayed-input {
+  color: orange;
+}
+
+
+
