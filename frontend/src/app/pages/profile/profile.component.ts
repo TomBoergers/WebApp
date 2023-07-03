@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { User } from 'src/app/classes/user';
 import {HttpClient} from "@angular/common/http";
 import {LoginuserService} from "../../services/loginuser.service";
@@ -6,6 +6,7 @@ import {TableService} from "../../services/table.service";
 import {Router} from "@angular/router";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
 import {DiagramService} from "../../services/diagram.service";
+import {CanvasJS} from "@canvasjs/angular-charts";
 
 
 @Component({
@@ -13,7 +14,7 @@ import {DiagramService} from "../../services/diagram.service";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, AfterViewInit {
   email: string = '';
   dateOfBirth: string = '';
   userVorname: string = '';
@@ -29,11 +30,17 @@ chartOptions:any;
   constructor(private diagramService: DiagramService, private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
   }
 
+  ngAfterViewInit(): void {
+    // Call the method to render the chart after the view has been initialized
+    this.renderChart();
+  }
+
+  private renderChart(): void {
+    const chart = new CanvasJS.Chart('chartContainer', this.diagramService.chartOptions);
+    chart.render();
+  }
 
   ngOnInit() {
-
-
-
 
     if(localStorage.getItem('admin')){
       this.menuType ="admin"
