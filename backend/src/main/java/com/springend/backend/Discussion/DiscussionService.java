@@ -3,6 +3,7 @@ package com.springend.backend.Discussion;
 import com.springend.backend.Reader.CSVReader.CSVFile;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,17 +52,34 @@ public class DiscussionService {
         Optional<Discussion> optionalDiscussion = discussionRepo.findById(discussionId);
         Discussion discussion = optionalDiscussion.get();
 
+        System.out.println(comment.getName());
+
         Comment newComment = new Comment();
-        comment.setComment(comment.getComment());
-        comment.setName(comment.getName());
-        comment.setDiscussion(discussion);
+        newComment.setComment(comment.getComment());
+        newComment.setName(comment.getName());
+        newComment.setDiscussion(discussion);
 
         discussion.getComments().add(newComment);
 
         discussionRepo.save(discussion);
     }
 
-    public String[] getComments(Long ID) {
-        return null;
+    public List<String[]> getCommentsByDiscussionId(Long discussionId) {
+        List<String[]> result = new ArrayList<>();
+
+        Optional<Discussion> optionalDiscussion = discussionRepo.findById(discussionId);
+        if (optionalDiscussion.isPresent()) {
+            Discussion discussion = optionalDiscussion.get();
+            List<Comment> comments = discussion.getComments();
+
+            for (Comment comment : comments) {
+                String[] commentData = new String[2];
+                commentData[0] = comment.getComment();
+                commentData[1] = comment.getName();
+                result.add(commentData);
+            }
+        }
+
+        return result;
     }
 }

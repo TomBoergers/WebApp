@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component} from '@angular/core';
 import {DiscussionService} from "../../../services/discussion.service";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../../classes/user";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-posts',
@@ -10,12 +11,13 @@ import {User} from "../../../classes/user";
 })
 export class PostsComponent {
   post: { discussionId: number, title: string, content: string, category: string } = { discussionId: 0, title: '', content: '', category: '' };
-  postLoaded!: boolean;
+  postId!: number;
 
   newComment: string = '';
   comments: string[] = [];
 
   user!: User;
+  commentUser: { comment: string, name: string } = { comment: '', name: ''};
 
 
   constructor(private discussionService: DiscussionService, private httpClient: HttpClient, private changeDetectorRef: ChangeDetectorRef) {
@@ -44,11 +46,18 @@ export class PostsComponent {
   }
 
   addComment() {
-    console.log(this.newComment);
+    this.postId = this.discussionService.postId;
+    this.commentUser.comment = this.newComment;
+    this.commentUser.name = this.user.vorname;
     if (this.newComment.trim() !== '') {
-      this.httpClient.put("http://localhost:8080/discussion/addComment" + this.discussionService.postId, [this.newComment, this.user.vorname]);
+      this.httpClient.put("http://localhost:8080/discussion/addComment/" + this.postId, this.commentUser).subscribe(response => {
+        console.log("OK");
+      }, error => {
+        console.log("Error");
+      });
       //this.comments.push(this.newComment); // Hinzufügen des Kommentars zur lokalen Liste
       this.newComment = ''; // Zurücksetzen des Eingabefelds
+      this.commentUser = { comment: '', name: ''};
     }
   }
 }

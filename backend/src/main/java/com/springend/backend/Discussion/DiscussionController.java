@@ -3,7 +3,9 @@ package com.springend.backend.Discussion;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/discussion")
@@ -48,24 +50,24 @@ public class DiscussionController {
     }
 
     @PutMapping("/addComment/{ID}")
-    public void addComment(@RequestParam String comment, @RequestParam String name, @PathVariable Long ID) {
+    public ResponseEntity addComment(@PathVariable Long ID, @RequestBody Comment comment){
         try {
-            Comment newComment = new Comment();
-            newComment.setComment(comment);
-            newComment.setName(name);
-          this.discussionService.addComment(newComment, ID);
+            System.out.println(comment.getName());
+            discussionService.addComment(comment, ID);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            throw new RuntimeException();
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
 
     @GetMapping("/getComments/{ID}")
-    public ResponseEntity<Comment> getComments(@PathVariable Long ID) {
+    public ResponseEntity<List<String[]>> getComments(@PathVariable Long ID) {
         try {
-
-            return null;
+            List<String[]> comments;
+            comments = discussionService.getCommentsByDiscussionId(ID);
+            return new ResponseEntity<>(comments, HttpStatus.OK);
         } catch (Exception e) {
-            throw new RuntimeException();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 }
