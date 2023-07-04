@@ -50,9 +50,15 @@ public class DiscussionService {
     public void addComment(Comment comment, Long discussionId) {
         Optional<Discussion> optionalDiscussion = discussionRepo.findById(discussionId);
         Discussion discussion = optionalDiscussion.get();
+
         Comment newComment = new Comment();
-        newComment.setDiscussion(discussion);
-        commentRepo.save(newComment);
+        comment.setComment(comment.getComment());
+        comment.setName(comment.getName());
+        comment.setDiscussion(discussion);
+
+        discussion.getComments().add(newComment);
+
+        discussionRepo.save(discussion);
     }
 
     public String[] getComments(Long ID) {

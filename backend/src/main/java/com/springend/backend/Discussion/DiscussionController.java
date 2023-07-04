@@ -48,9 +48,12 @@ public class DiscussionController {
     }
 
     @PutMapping("/addComment/{ID}")
-    public void addComment(@RequestParam Comment comment, @PathVariable Long ID) {
+    public void addComment(@RequestParam String comment, @RequestParam String name, @PathVariable Long ID) {
         try {
-          this.discussionService.addComment(comment, ID);
+            Comment newComment = new Comment();
+            newComment.setComment(comment);
+            newComment.setName(name);
+          this.discussionService.addComment(newComment, ID);
         } catch (Exception e) {
             throw new RuntimeException();
         }
