@@ -4,6 +4,7 @@ import com.springend.backend.Nutzer.Nutzer;
 import com.springend.backend.Nutzer.NutzerController;
 import com.springend.backend.Nutzer.NutzerService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import static org.mockito.Mockito.when;
 public class NutzerControllerTest {
 
     @Test
+    @DisplayName("Test should pass when user is found by email")
     void getNutzerByEmail() {
         NutzerService nutzerService = Mockito.mock(NutzerService.class);
         NutzerController nutzerController = new NutzerController(nutzerService, null);

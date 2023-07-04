@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import { Chart, ChartDataSets, ChartOptions, ChartType } from 'chart.js';
+import {DiagramService} from "../../services/diagram.service";
 
 
 @Component({
@@ -10,7 +11,7 @@ import { Chart, ChartDataSets, ChartOptions, ChartType } from 'chart.js';
   styleUrls: ['./diagram.component.scss']
 })
 export class DiagramComponent {
-  constructor(private httpClient:HttpClient) { }
+  constructor(private httpClient:HttpClient, private diagramService: DiagramService) { }
 
   genderWomen: any;
   genderMen: any;
