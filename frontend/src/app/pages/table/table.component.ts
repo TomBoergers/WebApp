@@ -101,9 +101,9 @@ export class TableComponent implements OnInit {
     let userData = userStore && JSON.parse(userStore);
 
     this.http.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(data => {
-      this.tableService.setFavTable(favTableId, data)
+      this.tableService.setFavTable(favTableId, data).subscribe()
       // Ich brauche noch den Set Ident
-      this.tableService.setIdent(identifier, data)
+      this.tableService.setIdent(identifier, data).subscribe()
       console.log(favTableId)
     })
 

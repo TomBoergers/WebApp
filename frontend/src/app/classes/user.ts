@@ -6,6 +6,7 @@ export class User {
     nachname!: string;
     geburtsdatum!: Date;
     favTableID!: number;
+    favTable!:string;
     friendrequests!: number[];
     friendlist!: number[];
     privacy!: boolean;

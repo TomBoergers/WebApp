@@ -47,14 +47,14 @@ public class NutzerService {
             return favTableID;
         }
 
-        public void setFavTableID(long nutzerID, long favTableID){
-            Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
+        public void setFavTableID(Nutzer nutzer, long favTableID){
+//            Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
             nutzer.setFavTableID(favTableID);
             nutzerRepo.save(nutzer);
         }
 
-        public void setFavTable(long nutzerID, String favTable){
-            Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
+        public void setFavTable(Nutzer nutzer, String favTable){
+//            Nutzer nutzer = nutzerRepo.findNutzerByID(nutzerID);
             nutzer.setFavTable(favTable);
             nutzerRepo.save(nutzer);
         }

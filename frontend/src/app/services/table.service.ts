@@ -12,13 +12,13 @@ export class TableService {
   }
 
   setFavTable(tableId: number , user: User){
-    this.http.put("http://localhost:8080/setFavTable", tableId)
+    return this.http.put("http://localhost:8080/nutzer/setFavTable/" + tableId, user);
 
 
   }
 
   setIdent(ident: string, user: User){
-
+    return this.http.put("http://localhost:8080/nutzer/setFavTableIdent/" + ident, user);
   }
 
 

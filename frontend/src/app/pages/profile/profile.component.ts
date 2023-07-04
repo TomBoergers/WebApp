@@ -25,6 +25,8 @@ chartOptions:any;
   identifier!: string;
   menuType : string ='default';
   profileImageUrl!: string;
+  favTableID!: number;
+  favTableIdent!: string;
 
 
   constructor(private diagramService: DiagramService, private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
@@ -110,13 +112,13 @@ chartOptions:any;
     this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result =>{
       this.tableID = result.favTableID;
 
-      // Hier muss noch statt emaiöl der Ident rein!!!!
-      if(result.email == "csv") {
+      // Hier muss noch statt email der Ident rein!!!!
+      if(result.favTable == "csv") {
         return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
           console.log(data);
           this.tableData = data;
         });
-      } else if(result.email == "xml") {
+      } else if(result.favTable == "xml") {
         return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
           console.log(data);
           this.tableData = data;
