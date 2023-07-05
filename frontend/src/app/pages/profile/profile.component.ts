@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
 import {DiagramService} from "../../services/diagram.service";
 import {CanvasJS} from "@canvasjs/angular-charts";
+import {ProfileService} from "../../services/profile.service";
 
 
 @Component({
@@ -27,9 +28,11 @@ chartOptions:any;
   profileImageUrl!: string;
   favTableID!: number;
   favTableIdent!: string;
+  profilePrivacy!: boolean;
 
 
-  constructor(private diagramService: DiagramService, private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
+  constructor(private diagramService: DiagramService, private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router,
+              private profileService: ProfileService) {
   }
 
   ngAfterViewInit(): void {
@@ -195,5 +198,29 @@ chartOptions:any;
   getArbeitsloseP(){
     this.chartOptions= this.diagramService.getArbeitslosePie();
   }
+
+  setPrivate() {
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.user = userData;
+
+
+
+    this.profileService.getPrivacy(userData.id).subscribe(data => {
+        this.profilePrivacy = data;
+        if (this.profilePrivacy) {
+          this.profileService.setPrivacy(userData).subscribe()
+          alert('Niemand kann dein Profil mehr sehen \n Setting: Privat')
+        } else {
+
+          this.profileService.setPrivacy(userData).subscribe()
+          alert('Jeder kann dein Profil sehen \n Setting: Öffentlich')
+        }
+      }
+    )
+  }
+
+
+
 
 }

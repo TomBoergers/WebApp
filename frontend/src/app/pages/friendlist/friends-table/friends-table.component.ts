@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {TableService} from "../../../services/table.service";
 import {Router} from "@angular/router";
+import {User} from "../../../classes/user";
 
 @Component({
   selector: 'app-friends-table',
@@ -15,6 +16,7 @@ export class FriendsTableComponent {
   tableID!: number;
   friendsID:String = "";
   favorites: any[] = [];
+  user!: User;
 
 
   constructor(private http: HttpClient, private tableService: TableService, private router: Router) {
@@ -51,4 +53,25 @@ export class FriendsTableComponent {
   toHome(){
     this.router.navigate(['/friendList']);
   }
+
+  showProfile(userID: string){
+    this.http.get<User>("http://localhost:8080/nutzer/get/" + userID).subscribe(result =>{
+      if(result.profilePrivacy){
+        this.user = result;
+        let userStore = this.user;
+        let userString = JSON.stringify(userStore)
+        localStorage.setItem("profileUser", userString)
+        this.router.navigate(["/otherProfile"])
+      }
+      else {
+
+        alert("Profil ist Privat")
+      }
+
+
+    })
+
+
+  }
+
 }

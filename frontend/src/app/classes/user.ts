@@ -10,6 +10,7 @@ export class User {
     friendrequests!: number[];
     friendlist!: number[];
     privacy!: boolean;
+    profilePrivacy!: boolean;
 
 }
 
