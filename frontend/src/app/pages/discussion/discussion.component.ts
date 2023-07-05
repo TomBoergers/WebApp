@@ -49,6 +49,7 @@ export class DiscussionComponent {
   }
 
   openPost(id: number){
+    localStorage.setItem('postId', JSON.stringify(id));
     this.discussionService.loadPost(id);
     this.router.navigate(['/posts'])
   }

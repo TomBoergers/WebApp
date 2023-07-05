@@ -46,4 +46,13 @@ public class Comment {
     public void setDiscussion(Discussion discussion) {
         this.discussion = discussion;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId=" + commentId +
+                ", comment='" + comment + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

@@ -20,7 +20,6 @@ public class DiscussionService {
     }
 
     public void addDiscussion(Discussion post) {
-        System.out.println(post);
         discussionRepo.save(post);
     }
 
@@ -37,14 +36,12 @@ public class DiscussionService {
             discussions[i][2] = discussion.getCategory();
             discussions[i][3] = String.valueOf(discussion.getDiscussionId());
         }
-        System.out.println(discussions.toString());
         return discussions;
     }
 
     public Discussion getById(Long Id) {
         Optional<Discussion> optionalDiscussion = discussionRepo.findById(Id);
         Discussion discussion = optionalDiscussion.get();
-        System.out.println("Service");
         return discussion;
     }
 
@@ -52,7 +49,6 @@ public class DiscussionService {
         Optional<Discussion> optionalDiscussion = discussionRepo.findById(discussionId);
         Discussion discussion = optionalDiscussion.get();
 
-        System.out.println(comment.getName());
 
         Comment newComment = new Comment();
         newComment.setComment(comment.getComment());

@@ -20,7 +20,6 @@ public class DiscussionController {
     @PostMapping("/add")
     public ResponseEntity<Discussion> addDiscussion(@RequestBody Discussion post) {
         try {
-            System.out.println(post);
             discussionService.addDiscussion(post);
             return new ResponseEntity<>(post, HttpStatus.OK);
         }catch (Exception e) {
@@ -42,7 +41,6 @@ public class DiscussionController {
     public ResponseEntity<Discussion> getById(@PathVariable long ID) {
         try {
             Discussion discussion = discussionService.getById(ID);
-            System.out.println("Controller");
             return new ResponseEntity<>(discussion, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -52,11 +50,10 @@ public class DiscussionController {
     @PutMapping("/addComment/{ID}")
     public ResponseEntity addComment(@PathVariable Long ID, @RequestBody Comment comment){
         try {
-            System.out.println(comment.getName());
             discussionService.addComment(comment, ID);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
 
