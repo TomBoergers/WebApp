@@ -7,6 +7,8 @@
     "@types/proj4": "^2.5.2",
     "canvasjs": "^1.8.3",
     "chart.js": "^4.3.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.29",
     "jwt-decode": "^3.1.2",
     "leaflet": "^1.9.4",
     "proj4": "^2.9.0",

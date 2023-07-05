@@ -37,8 +37,12 @@
             </form>
           </ng-container>
         </td>
+
         <td>
           <button (click)="addToFavorites(row[2], row[3])">Favorit</button>
+        </td>
+        <td>
+          <button (click)="downloadPDF(row[0],row[1],row[2],row[3])">Download</button>
         </td>
       </tr>
       <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">

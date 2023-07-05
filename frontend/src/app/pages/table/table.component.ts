@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {NgForm} from "@angular/forms";
 import {User} from "../../classes/user";
+import jsPDF from 'jspdf';
+import {PdfService} from "../../services/pdf.service";
 
 @Component({
   selector: 'app-table',
@@ -17,7 +19,7 @@ export class TableComponent implements OnInit {
   tableID!: number;
   favorites: any[] = [];
 
-  constructor(private http: HttpClient, private tableService: TableService, private router: Router) {
+  constructor(private http: HttpClient, private tableService: TableService, private router: Router, private pdfService: PdfService) {
   }
 
   ngOnInit() {
@@ -149,5 +151,10 @@ export class TableComponent implements OnInit {
 
     localStorage.removeItem('favoriteTable');
     localStorage.removeItem('favoriteTableIdentifier')
+  }
+  downloadPDF(title:string, year:string, id: string, identifier: string){
+
+    this.pdfService.generatePdf(title,year, id , identifier);
+
   }
 }
