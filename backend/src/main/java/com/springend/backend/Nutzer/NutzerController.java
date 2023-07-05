@@ -62,11 +62,11 @@ public class NutzerController {
             return null;
         }
         }
-        @PutMapping("/setFavTable/{ID}")
-        public ResponseEntity<Nutzer> setFavTableID(@PathVariable long nutzerID, @RequestBody long favTableID){
+        @PutMapping("/setFavTable/{favTableID}")
+        public ResponseEntity<Nutzer> setFavTableID(@PathVariable long favTableID, @RequestBody Nutzer nutzer){
         try{
-            nutzerService.setFavTableID(nutzerID,favTableID);
-            return new ResponseEntity<>(nutzerService.getUserbyID(nutzerID), HttpStatus.OK);
+            nutzerService.setFavTableID(nutzer,favTableID);
+            return new ResponseEntity<>(nutzerService.getUserbyID(nutzer.getID()), HttpStatus.OK);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -83,11 +83,11 @@ public class NutzerController {
             }
         }
 
-        @PutMapping("/setFavTableIdent/{ID}")
-        public ResponseEntity<Nutzer> setFavTableIdent(@PathVariable long nutzerID, @RequestBody String favTable){
+        @PutMapping("/setFavTableIdent/{favTable}")
+        public ResponseEntity<Nutzer> setFavTableIdent(@PathVariable String favTable, @RequestBody Nutzer nutzer){
             try{
-                nutzerService.setFavTable(nutzerID,favTable);
-                return new ResponseEntity<>(nutzerService.getUserbyID(nutzerID), HttpStatus.OK);
+                nutzerService.setFavTable(nutzer,favTable);
+                return new ResponseEntity<>(nutzerService.getUserbyID(nutzer.getID()), HttpStatus.OK);
             }catch(Exception e){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }

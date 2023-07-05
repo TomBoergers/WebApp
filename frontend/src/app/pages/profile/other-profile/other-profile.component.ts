@@ -57,21 +57,18 @@ export class OtherProfileComponent {
 
   favoriteTable() {
     // this.tableID = parseInt(localStorage.getItem("favoriteTable") || "0");
-
     let userStore = localStorage.getItem('profileUser');
     let userData = userStore && JSON.parse(userStore);
     this.tableID = userData.favTableID
 
 
     // Hier muss noch statt favTable ID der Ident rein!!!!
-    if(userData.favTableID == "csv") {
+    if(userData.favTable == "csv") {
       return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
-        console.log(data);
         this.tableData = data;
       });
-    } else if(userData.favTableID == "xml") {
+    } else if(userData.favTable == "xml") {
       return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
-        console.log(data);
         this.tableData = data;
       });
     } else {

@@ -22,6 +22,9 @@
     <tbody>
     <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
       <td>{{ row[3] }}</td>
+      <td>
+        <button (click)="showProfile(row[2])">See Profile</button>
+      </td>
 
     </tr>
     <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">

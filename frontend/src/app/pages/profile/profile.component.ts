@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {parseJson} from "@angular/cli/src/utilities/json-file";
 import {DiagramService} from "../../services/diagram.service";
 import {CanvasJS} from "@canvasjs/angular-charts";
+import {ProfileService} from "../../services/profile.service";
 
 
 @Component({
@@ -25,9 +26,13 @@ chartOptions:any;
   identifier!: string;
   menuType : string ='default';
   profileImageUrl!: string;
+  favTableID!: number;
+  favTableIdent!: string;
+  profilePrivacy!: boolean;
 
 
-  constructor(private diagramService: DiagramService, private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
+  constructor(private diagramService: DiagramService, private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router,
+              private profileService: ProfileService) {
   }
 
   ngAfterViewInit(): void {
@@ -110,13 +115,13 @@ chartOptions:any;
     this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result =>{
       this.tableID = result.favTableID;
 
-      // Hier muss noch statt emaiöl der Ident rein!!!!
-      if(result.email == "csv") {
+      // Hier muss noch statt email der Ident rein!!!!
+      if(result.favTable == "csv") {
         return this.httpClient.get<any[]>(`http://localhost:8080/CSV/nameAndYear/${this.tableID}`).subscribe(data => {
           console.log(data);
           this.tableData = data;
         });
-      } else if(result.email == "xml") {
+      } else if(result.favTable == "xml") {
         return this.httpClient.get<any[]>(`http://localhost:8080/XML/nameAndYear/${this.tableID}`).subscribe(data => {
           console.log(data);
           this.tableData = data;
@@ -193,5 +198,29 @@ chartOptions:any;
   getArbeitsloseP(){
     this.chartOptions= this.diagramService.getArbeitslosePie();
   }
+
+  setPrivate() {
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.user = userData;
+
+
+
+    this.profileService.getPrivacy(userData.id).subscribe(data => {
+        this.profilePrivacy = data;
+        if (this.profilePrivacy) {
+          this.profileService.setPrivacy(userData).subscribe()
+          alert('Niemand kann dein Profil mehr sehen \n Setting: Privat')
+        } else {
+
+          this.profileService.setPrivacy(userData).subscribe()
+          alert('Jeder kann dein Profil sehen \n Setting: Öffentlich')
+        }
+      }
+    )
+  }
+
+
+
 
 }

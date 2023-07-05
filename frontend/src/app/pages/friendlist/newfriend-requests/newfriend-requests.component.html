@@ -25,6 +25,9 @@
     <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
       <td>{{ row[3] }}</td>
       <td>
+        <button (click)="showProfile(row[0])">See Profile</button>
+      </td>
+      <td>
         <button (click)="acceptFriend(row[4])" >Accept</button >
       </td>
       <td>

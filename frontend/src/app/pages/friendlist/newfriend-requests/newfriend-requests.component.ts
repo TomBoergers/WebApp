@@ -4,6 +4,7 @@ import {TableService} from "../../../services/table.service";
 import {Router} from "@angular/router";
 import {NgForm} from "@angular/forms";
 import {friendListService} from "../../../services/friendlist.service";
+import {User} from "../../../classes/user";
 
 @Component({
   selector: 'app-newfriend-requests',
@@ -18,6 +19,7 @@ export class NewfriendRequestsComponent {
   favorites: any[] = [];
   userID!: number;
   email: string = "";
+  user!: User;
 
 
   constructor(private http: HttpClient, private tableService: TableService, private router: Router, private friendListService: friendListService) {
@@ -84,6 +86,26 @@ export class NewfriendRequestsComponent {
           alert('Fehler beim Ablehnen der Freundschaftsanfrage');
         })
     }
+  }
+
+  showProfile(userID: string){
+    this.http.get<User>("http://localhost:8080/nutzer/get/" + userID).subscribe(result =>{
+      if(result.profilePrivacy){
+        this.user = result;
+        let userStore = this.user;
+        let userString = JSON.stringify(userStore)
+        localStorage.setItem("profileUser", userString)
+        this.router.navigate(["/otherProfile"])
+      }
+      else {
+
+        alert("Profil ist Privat")
+      }
+
+
+    })
+
+
   }
 
   toFriendList() {
