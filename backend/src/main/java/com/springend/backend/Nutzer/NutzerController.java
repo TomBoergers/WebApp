@@ -66,7 +66,7 @@ public class NutzerController {
         public ResponseEntity<Nutzer> setFavTableID(@PathVariable long favTableID, @RequestBody Nutzer nutzer){
         try{
             nutzerService.setFavTableID(nutzer,favTableID);
-            return new ResponseEntity<>(nutzerService.getUserbyID(nutzer.getID()), HttpStatus.OK);
+            return new ResponseEntity<>(nutzer, HttpStatus.OK);
         }catch(Exception e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
@@ -87,7 +87,7 @@ public class NutzerController {
         public ResponseEntity<Nutzer> setFavTableIdent(@PathVariable String favTable, @RequestBody Nutzer nutzer){
             try{
                 nutzerService.setFavTable(nutzer,favTable);
-                return new ResponseEntity<>(nutzerService.getUserbyID(nutzer.getID()), HttpStatus.OK);
+                return new ResponseEntity<>(nutzer, HttpStatus.OK);
             }catch(Exception e){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
@@ -104,6 +104,16 @@ public class NutzerController {
                 Nutzer foundNutzer = nutzerService.findNutzerByEmail(nutzer.getEmail());
                 return new ResponseEntity<>(foundNutzer, HttpStatus.OK);
             } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+        }
+
+        @PutMapping ("/setProfileTable/{tableID}")
+        public ResponseEntity<Nutzer> setProfileTable (@PathVariable Long tableID, @RequestBody Nutzer nutzer){
+            try{
+                nutzerService.setProfileTable(nutzer, tableID);
+                return new ResponseEntity<>(nutzer, HttpStatus.OK);
+            } catch (Exception e){
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
