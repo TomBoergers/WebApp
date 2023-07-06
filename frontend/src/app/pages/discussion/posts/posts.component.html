@@ -1,4 +1,3 @@
-
 <body>
 <app-navbar></app-navbar>
 <div class="post-list">
@@ -7,6 +6,7 @@
     <li>
       <h3>{{ post.category }}</h3>
       <p>{{ post.content }}</p>
+      <button (click)="deletePost()">Delete Post</button> <!-- Schaltfläche zum Löschen des Posts -->
     </li>
   </ul>
 </div>
@@ -20,6 +20,7 @@
     <ul>
       <li *ngFor="let comment of comments">
         <p>{{ comment }}</p>
+        <button (click)="deleteComment()">Delete Comment</button> <!-- Schaltfläche zum Löschen des Kommentars -->
       </li>
     </ul>
   </div>
