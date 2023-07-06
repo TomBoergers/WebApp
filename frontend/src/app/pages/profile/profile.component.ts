@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
       this.dateOfBirth = userData.geburtsdatum;
       this.user = this.loginuserService.user
       this.showImage();
-
+      this.getChart();
       this.favoriteTable();
     }
     if(localStorage.getItem('admin')){
@@ -69,6 +69,8 @@ export class ProfileComponent implements OnInit {
       this.dateOfBirth = adminData.geburtsdatum;
 
       this.user = this.loginuserService.user
+      this.getChart();
+
       this.showImage();
       this.favoriteTable();
 
@@ -222,7 +224,8 @@ export class ProfileComponent implements OnInit {
   }
 
   getSterbefaelleC(){
-    this.chartOptions = this.diagramService.getSterbefaelleChart();
+
+    //this.chartOptions = this.diagramService.getSterbefaelleChart();
   }
 
   setPrivate() {
@@ -246,6 +249,29 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  getChart(){
+    let userStore = localStorage.getItem('profileUser');
+    let userData = userStore && JSON.parse(userStore);
+
+    if(userData.profileTable=== 1){
+      this.getSterbefaelleP()
+    }
+    else  if(userData.profileTable=== 2){
+      this.getGeburtenP()
+    }
+    else  if(userData.profileTable=== 3){
+      this.getArbeitssuchendeP()
+
+    }
+    else  if(userData.profileTable=== 4){
+      this.getArbeitsloseP()
+    }
+    else{
+
+
+    }
+
+  }
 
 
 
