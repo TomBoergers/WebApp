@@ -35,6 +35,8 @@ public class Nutzer {
 
     private boolean profilePrivacy;
 
+    private long profileTable;
+
     public Nutzer(){
 
     }
@@ -146,6 +148,14 @@ public class Nutzer {
 
     public void setFavTable(String favTable) {
         this.favTable = favTable;
+    }
+
+    public long getProfileTable() {
+        return profileTable;
+    }
+
+    public void setProfileTable(long profileTable) {
+        this.profileTable = profileTable;
     }
 
     @Override
