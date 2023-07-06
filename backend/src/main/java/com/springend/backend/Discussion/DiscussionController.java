@@ -82,7 +82,7 @@ public class DiscussionController {
     @DeleteMapping("/deleteComment/{ID}")
     public ResponseEntity<String> deleteComment(@PathVariable long ID) {
         try {
-            discussionService.deletePost(ID);
+            discussionService.deleteComment(ID);
             return ResponseEntity.ok("Post deleted successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete post");

@@ -64,9 +64,10 @@ public class DiscussionService {
         List<Comment> comments = commentRepo.findCommentsByDiscussionId(discussionId);
 
         for (Comment comment : comments) {
-            String[] commentData = new String[2];
+            String[] commentData = new String[3];
             commentData[0] = comment.getComment();
             commentData[1] = comment.getName();
+            commentData[2] = String.valueOf(comment.getCommentId());
             result.add(commentData);
         }
 
@@ -78,6 +79,16 @@ public class DiscussionService {
         if (optionalDiscussion.isPresent()) {
             Discussion discussion = optionalDiscussion.get();
             discussionRepo.delete(discussion);
+        } else {
+            throw new IllegalArgumentException("Post not found");
+        }
+    }
+
+    public void deleteComment(Long commentId) {
+        Optional<Comment> commentOptional = commentRepo.findById(commentId);
+        if (commentOptional.isPresent()) {
+            Comment comment = commentOptional.get();
+            commentRepo.delete(comment);
         } else {
             throw new IllegalArgumentException("Post not found");
         }

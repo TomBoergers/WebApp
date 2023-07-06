@@ -18,9 +18,9 @@
   </div>
   <div class="comment-list">
     <ul>
-      <li *ngFor="let comment of comments">
+      <li *ngFor="let comment of comments; let i = index;">
         <p>{{ comment }}</p>
-        <button (click)="deleteComment()">Delete Comment</button> <!-- Schaltfläche zum Löschen des Kommentars -->
+        <button (click)="deleteComment(comment[2][0])">Delete Comment</button> <!-- Schaltfläche zum Löschen des Kommentars -->
       </li>
     </ul>
   </div>

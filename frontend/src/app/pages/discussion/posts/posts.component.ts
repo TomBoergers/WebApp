@@ -15,6 +15,7 @@ export class PostsComponent {
 
   newComment: string = '';
   comments: string[] = [];
+  commentId!: number;
 
   user!: User;
   commentUser: { comment: string, name: string } = { comment: '', name: ''};
@@ -66,23 +67,36 @@ export class PostsComponent {
   }
 
   deletePost() {
-    this.httpClient.delete("http://localhost:8080/discussion/deletePost/" + this.postId).subscribe(response => {
-      console.log("Post deleted successfully");
-      this.router.navigate(['/discussion']);
-      // Führen Sie die gewünschten Aktionen nach dem Löschen des Posts aus
-    }, error => {
-      this.router.navigate(['/discussion']);
-      console.log("Failed to delete post");
-    });
+    if(!localStorage.getItem('admin')) {
+      alert("Keine Berechtigung");
+    } else {
+      this.httpClient.delete("http://localhost:8080/discussion/deletePost/" + this.postId).subscribe(response => {
+        console.log("Post deleted successfully");
+        this.router.navigate(['/discussion']);
+        // Führen Sie die gewünschten Aktionen nach dem Löschen des Posts aus
+      }, error => {
+        this.router.navigate(['/discussion']);
+        console.log("Failed to delete post");
+      });
+    }
   }
 
-  deleteComment() {
-    this.httpClient.delete("http://localhost:8080/discussion/deleteComment/" + this.postId).subscribe(response => {
-      console.log("Comment deleted successfully");
-      // Führen Sie die gewünschten Aktionen nach dem Löschen des Kommentars aus
-    }, error => {
-      console.log("Failed to delete comment");
-    });
+  deleteComment(id: string) {
+    if (!localStorage.getItem('admin')) {
+      alert("Keine Bereichtigung");
+    } else {
+      console.log(id);
+      this.commentId = parseInt(id);
+      console.log(this.commentId);
+      this.httpClient.delete("http://localhost:8080/discussion/deleteComment/" + this.commentId).subscribe(response => {
+        console.log("Comment deleted successfully");
+        this.loadComments();
+        // Führen Sie die gewünschten Aktionen nach dem Löschen des Kommentars aus
+      }, error => {
+        console.log("Failed to delete comment");
+        this.loadComments();
+      });
+    }
   }
 }
 
