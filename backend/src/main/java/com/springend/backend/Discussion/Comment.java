@@ -8,12 +8,12 @@ public class Comment {
     @GeneratedValue
     private Long commentId;
 
+    private Long discussionId;
+
     private String comment;
 
     private String name;
 
-    @ManyToOne
-    private Discussion discussion;
 
     public void setCommentId(Long commentId) {
         this.commentId = commentId;
@@ -27,6 +27,14 @@ public class Comment {
         return comment;
     }
 
+    public Long getDiscussionId() {
+        return discussionId;
+    }
+
+    public void setDiscussionId(Long discussionId) {
+        this.discussionId = discussionId;
+    }
+
     public void setComment(String comment) {
         this.comment = comment;
     }
@@ -37,14 +45,6 @@ public class Comment {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Discussion getDiscussion() {
-        return discussion;
-    }
-
-    public void setDiscussion(Discussion discussion) {
-        this.discussion = discussion;
     }
 
     @Override

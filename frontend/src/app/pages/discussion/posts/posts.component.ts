@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component} from '@angular/core';
 import {DiscussionService} from "../../../services/discussion.service";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../../classes/user";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-posts',
@@ -20,7 +20,7 @@ export class PostsComponent {
   commentUser: { comment: string, name: string } = { comment: '', name: ''};
 
 
-  constructor(private discussionService: DiscussionService, private httpClient: HttpClient) {
+  constructor(private discussionService: DiscussionService, private httpClient: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
@@ -63,6 +63,26 @@ export class PostsComponent {
       this.newComment = ''; // Zurücksetzen des Eingabefelds
       this.commentUser = { comment: '', name: ''};
     }
+  }
+
+  deletePost() {
+    this.httpClient.delete("http://localhost:8080/discussion/deletePost/" + this.postId).subscribe(response => {
+      console.log("Post deleted successfully");
+      this.router.navigate(['/discussion']);
+      // Führen Sie die gewünschten Aktionen nach dem Löschen des Posts aus
+    }, error => {
+      this.router.navigate(['/discussion']);
+      console.log("Failed to delete post");
+    });
+  }
+
+  deleteComment() {
+    this.httpClient.delete("http://localhost:8080/discussion/deleteComment/" + this.postId).subscribe(response => {
+      console.log("Comment deleted successfully");
+      // Führen Sie die gewünschten Aktionen nach dem Löschen des Kommentars aus
+    }, error => {
+      console.log("Failed to delete comment");
+    });
   }
 }
 
