@@ -20,6 +20,9 @@ public class Discussion {
     @OneToMany(mappedBy = "discussion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
+    @ElementCollection
+    private List<Long> favouriteUsers = new ArrayList<>();
+
     public Discussion() {
     }
 
@@ -67,6 +70,14 @@ public class Discussion {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public List<Long> getFavouriteUsers() {
+        return favouriteUsers;
+    }
+
+    public void setFavouriteUsers(List<Long> favouriteUsers) {
+        this.favouriteUsers = favouriteUsers;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.springend.backend.Discussion;
 
+import com.springend.backend.Nutzer.Nutzer;
 import com.springend.backend.Reader.CSVReader.CSVFile;
 import org.springframework.stereotype.Service;
 
@@ -77,5 +78,26 @@ public class DiscussionService {
         }
 
         return result;
+    }
+
+    public void addFavourite (Discussion discussion, long nutzerID){
+
+        List<Long> newFavourites = discussion.getFavouriteUsers();
+        newFavourites.add(nutzerID);
+        discussion.setFavouriteUsers(newFavourites);
+        discussionRepo.save(discussion);
+
+    }
+
+    public void deleteFavourite (Discussion discussion, long nutzerID) throws Exception{
+        if(discussion.getFavouriteUsers().contains(nutzerID)) {
+            List<Long> newFavourites = discussion.getFavouriteUsers();
+            newFavourites.remove(nutzerID);
+            discussion.setFavouriteUsers(newFavourites);
+            discussionRepo.save(discussion);
+        } else {
+            throw new Exception("Der Nutzer hat die Diskussion nicht favorisiert.");
+        }
+
     }
 }

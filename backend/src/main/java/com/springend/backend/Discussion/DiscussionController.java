@@ -1,5 +1,6 @@
 package com.springend.backend.Discussion;
 
+import com.springend.backend.Nutzer.Nutzer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +65,28 @@ public class DiscussionController {
             comments = discussionService.getCommentsByDiscussionId(ID);
             return new ResponseEntity<>(comments, HttpStatus.OK);
         } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @PutMapping("/addFavourite/{discussionID}")
+    public ResponseEntity<Discussion> addFavourite(@PathVariable Long discussionID, @RequestBody Nutzer nutzer){
+        try {
+            Discussion discussion = discussionService.getById(discussionID);
+            discussionService.addFavourite(discussion, nutzer.getID());
+            return new ResponseEntity<>(discussion, HttpStatus.OK);
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @PutMapping("/deleteFavourite/{discussionID}")
+    public ResponseEntity<Discussion> deleteFavourite(@PathVariable Long discussionID, @RequestBody Nutzer nutzer){
+        try {
+            Discussion discussion = discussionService.getById(discussionID);
+            discussionService.deleteFavourite(discussion, nutzer.getID());
+            return new ResponseEntity<>(discussion, HttpStatus.OK);
+        } catch (Exception e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }

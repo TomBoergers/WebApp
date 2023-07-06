@@ -25,7 +25,7 @@
         <button (click)="openPost(row[3])">Open Post</button>
       </td>
       <td>
-        <button class="privacy-button">Favourite</button>
+        <button (click)="addFavorite(row[3])">Favorite</button>
       </td>
     </tr>
     <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">

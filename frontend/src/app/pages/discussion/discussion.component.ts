@@ -24,6 +24,7 @@ export class DiscussionComponent {
 
   ngOnInit() {
     this.refreshTableData();
+    this.user = JSON.parse(localStorage.getItem('user')!);
   }
 
   refreshTableData() {
@@ -52,6 +53,10 @@ export class DiscussionComponent {
     localStorage.setItem('postId', JSON.stringify(id));
     this.discussionService.loadPost(id);
     this.router.navigate(['/posts'])
+  }
+
+  addFavorite(id: number) {
+    this.httpClient.put("http://localhost:8080/discussion/addFavourite/" + id, this.user);
   }
 }
 
