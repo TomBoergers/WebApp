@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiagramService {
   chartOptions: any;
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   getSterbefaellePie() {
     return {
@@ -127,9 +128,9 @@ export class DiagramService {
     }
 
 
-    getSterbefalleChart()
+    getSterbefaelleChart()
     {
-      this.chartOptions = {
+      return{
         title: {
           text: "Sterbefälle 2015"
         },
@@ -164,7 +165,7 @@ export class DiagramService {
 
     getGeburtenChart()
     {
-      this.chartOptions = {
+      return {
         title: {
           text: "Geburten 2015"
         },
@@ -198,7 +199,7 @@ export class DiagramService {
 
     getArbeitsloseChart()
     {
-      this.chartOptions = {
+      return {
         title: {
           text: "Arbeitslose Jan 22"
         },
@@ -230,7 +231,7 @@ export class DiagramService {
     }
 
     getArbeitssuchendeChart(){
-      this.chartOptions = {
+      return {
         title: {
           text: "Arbeitssuchende Jan 22"
         },
@@ -260,6 +261,21 @@ export class DiagramService {
       }
     }
 
+
+
+  saveDiagram(diagramData:any){
+    const url = 'http://diagramm/api/saveDiagramm';
+    const body = { diagram: diagramData };
+
+    this.httpClient.post(url, body).subscribe(
+      () => {
+        console.log('Diagram saved successfully!');
+      },
+      (error) => {
+        console.error('Error saving diagram:', error);
+      }
+    );
+  }
 
 }
 
