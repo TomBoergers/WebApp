@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {LoginuserService} from "../../../services/loginuser.service";
 import {TableService} from "../../../services/table.service";
 import {Router} from "@angular/router";
+import {DiagramService} from "../../../services/diagram.service";
 
 @Component({
   selector: 'app-other-profile',
@@ -14,6 +15,7 @@ export class OtherProfileComponent {
   dateOfBirth: string = '';
   userVorname: string = '';
   userNachname: string = '';
+  chartOptions:any;
 
   tableData: any[] = []
   tableID!: number;
@@ -22,7 +24,8 @@ export class OtherProfileComponent {
   profileImageUrl!: string;
 
 
-  constructor(private httpClient: HttpClient, private loginuserService: LoginuserService, private tableService: TableService, private router: Router) {
+  constructor(private httpClient: HttpClient, private loginuserService: LoginuserService,
+              private tableService: TableService, private router: Router, private diagramService: DiagramService) {
   }
 
 
@@ -30,6 +33,7 @@ export class OtherProfileComponent {
     this.menuType = "user";
       let userStore = localStorage.getItem('profileUser');
       let userData = userStore && JSON.parse(userStore);
+      this.getChart();
       this.userVorname = userData.vorname;
       this.userNachname = userData.nachname;
       this.email = userData.email;
@@ -113,6 +117,47 @@ export class OtherProfileComponent {
   toFriendAdd() {
     this.router.navigate(['/friendAdd']);
   }
+
+  getSterbefaelleP(){
+    this.chartOptions = this.diagramService.getSterbefaellePie();
+  }
+
+  getGeburtenP(){
+    this.chartOptions =this.diagramService.getGeburtenPie();
+  }
+
+  getArbeitssuchendeP(){
+    this.chartOptions = this.diagramService.getArbeitssuchendePie();
+  }
+
+  getArbeitsloseP(){
+    this.chartOptions= this.diagramService.getArbeitslosePie();
+  }
+
+  getChart(){
+    let userStore = localStorage.getItem('profileUser');
+    let userData = userStore && JSON.parse(userStore);
+
+    if(userData.profileTable=== 1){
+      this.getSterbefaelleP()
+    }
+    else  if(userData.profileTable=== 2){
+      this.getGeburtenP()
+    }
+    else  if(userData.profileTable=== 3){
+      this.getArbeitssuchendeP()
+
+    }
+    else  if(userData.profileTable=== 4){
+      this.getArbeitsloseP()
+    }
+    else{
+
+
+    }
+
+  }
+
 
   protected readonly onselect = onselect;
   user: any;

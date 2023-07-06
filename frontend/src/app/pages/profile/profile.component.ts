@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit, AfterViewInit {
   dateOfBirth: string = '';
   userVorname: string = '';
   userNachname: string = '';
-chartOptions:any;
+  chartOptions:any;
   tableData: any[] = []
   tableID!: number;
   identifier!: string;
@@ -184,19 +184,36 @@ chartOptions:any;
   user: any;
 
   getSterbefaelleP(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.diagramService.setSterbeFälle(userData)
     this.chartOptions = this.diagramService.getSterbefaellePie();
+
+
   }
 
   getGeburtenP(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.diagramService.setGeburten(userData)
     this.chartOptions =this.diagramService.getGeburtenPie();
+
   }
 
   getArbeitssuchendeP(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.diagramService.setArbeitssuchende(userData)
     this.chartOptions = this.diagramService.getArbeitssuchendePie();
+
   }
 
   getArbeitsloseP(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.diagramService.setArbeitslose(userData)
     this.chartOptions= this.diagramService.getArbeitslosePie();
+
   }
 
   setPrivate() {
