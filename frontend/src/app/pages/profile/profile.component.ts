@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit {
       this.dateOfBirth = userData.geburtsdatum;
       this.user = this.loginuserService.user
       this.showImage();
+      this.getPie();
       this.getChart();
       this.favoriteTable();
     }
@@ -69,6 +70,7 @@ export class ProfileComponent implements OnInit {
       this.dateOfBirth = adminData.geburtsdatum;
 
       this.user = this.loginuserService.user
+      this.getPie();
       this.getChart();
 
       this.showImage();
@@ -260,12 +262,13 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  getChart(){
+  getPie(){
     let userStore = localStorage.getItem('profileUser');
     let userData = userStore && JSON.parse(userStore);
 
     if(userData.profileTable=== 1){
       this.getSterbefaelleP()
+      //this.getSterbefaelleC()
     }
     else  if(userData.profileTable=== 2){
       this.getGeburtenP()
@@ -284,6 +287,27 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  getChart(){
+    let userStore = localStorage.getItem('profileUser');
+    let userData = userStore && JSON.parse(userStore);
+
+    if(userData.profileTable=== 1){
+      this.getSterbefaelleC()
+    }
+    else  if(userData.profileTable=== 2){
+      this.getGeburtenC()
+    }
+    else  if(userData.profileTable=== 3){
+      this.getArbeitssuchendeC()
+
+    }
+    else  if(userData.profileTable=== 4){
+      this.getArbeitsloseC()
+    }
+    else{
+
+
+    }}
 
 
 }
