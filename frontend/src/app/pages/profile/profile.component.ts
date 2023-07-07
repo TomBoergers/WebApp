@@ -180,7 +180,7 @@ export class ProfileComponent implements OnInit {
   getSterbefaelleP(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setSterbeFälle(userData)
+    this.diagramService.setSterbefaelle(userData)
     this.chartOptions = this.diagramService.getSterbefaellePie();
 
 
@@ -203,14 +203,23 @@ export class ProfileComponent implements OnInit {
   }
 
   getGeburtenC(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.diagramService.setGeburten(userData)
     this.chartOptions =this.diagramService.getGeburtenChart();
   }
 
   getArbeitssuchendeC(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.diagramService.setArbeitssuchende(userData)
     this.chartOptions = this.diagramService.getArbeitssuchendeChart();
   }
 
   getArbeitsloseC(){
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.diagramService.setArbeitslose(userData)
     this.chartOptions= this.diagramService.getArbeitsloseChart();
   }
 
@@ -224,8 +233,10 @@ export class ProfileComponent implements OnInit {
   }
 
   getSterbefaelleC(){
-
-    //this.chartOptions = this.diagramService.getSterbefaelleChart();
+    let userStore = localStorage.getItem('user');
+    let userData = userStore && JSON.parse(userStore);
+    this.diagramService.setSterbefaelle(userData)
+    this.chartOptions = this.diagramService.getSterbefaelleChart();
   }
 
   setPrivate() {
