@@ -74,13 +74,11 @@ public class DiscussionService {
         return result;
     }
 
-    public void addFavourite (Discussion discussion, long nutzerID){
-
+    public void addFavourite(Discussion discussion, long nutzerID) {
         List<Long> newFavourites = discussion.getFavouriteUsers();
         newFavourites.add(nutzerID);
         discussion.setFavouriteUsers(newFavourites);
         discussionRepo.save(discussion);
-
     }
 
     public void deletePost(Long postId) {

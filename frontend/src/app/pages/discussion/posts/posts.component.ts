@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {DiscussionService} from "../../../services/discussion.service";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../../../classes/user";

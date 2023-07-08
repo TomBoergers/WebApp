@@ -56,7 +56,7 @@ export class DiscussionComponent {
   }
 
   addFavorite(id: number) {
-    this.httpClient.put("http://localhost:8080/discussion/addFavourite/" + id, this.user);
+    this.httpClient.put("http://localhost:8080/discussion/addFavourite/" + id, this.user).subscribe();
   }
 }
 
