@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {User} from "../classes/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiagramService {
   chartOptions: any;
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getSterbefaellePie() {
     return {
@@ -127,9 +129,9 @@ export class DiagramService {
     }
 
 
-    getSterbefalleChart()
+    getSterbefaelleChart()
     {
-      this.chartOptions = {
+      return {
         title: {
           text: "Sterbefälle 2015"
         },
@@ -164,7 +166,7 @@ export class DiagramService {
 
     getGeburtenChart()
     {
-      this.chartOptions = {
+      return {
         title: {
           text: "Geburten 2015"
         },
@@ -198,7 +200,7 @@ export class DiagramService {
 
     getArbeitsloseChart()
     {
-      this.chartOptions = {
+      return {
         title: {
           text: "Arbeitslose Jan 22"
         },
@@ -230,7 +232,7 @@ export class DiagramService {
     }
 
     getArbeitssuchendeChart(){
-      this.chartOptions = {
+      return {
         title: {
           text: "Arbeitssuchende Jan 22"
         },
@@ -260,6 +262,19 @@ export class DiagramService {
       }
     }
 
+
+    setSterbefaelle(user: User){
+      this.http.put("http://localhost:8080/nutzer/setProfileTable/1", user  ).subscribe()
+    }
+  setGeburten(user: User){
+    this.http.put("http://localhost:8080/nutzer/setProfileTable/2", user  ).subscribe()
+  }
+  setArbeitssuchende(user: User){
+    this.http.put("http://localhost:8080/nutzer/setProfileTable/3", user  ).subscribe()
+  }
+  setArbeitslose(user: User){
+    this.http.put("http://localhost:8080/nutzer/setProfileTable/4", user  ).subscribe()
+  }
 
 }
 

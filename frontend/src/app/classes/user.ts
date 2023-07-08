@@ -11,6 +11,7 @@ export class User {
     friendlist!: number[];
     privacy!: boolean;
     profilePrivacy!: boolean;
+    profileTable!: number;
 
 }
 
