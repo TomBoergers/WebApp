@@ -41,6 +41,7 @@ public class DiscussionController {
     public ResponseEntity<Discussion> getById(@PathVariable long ID) {
         try {
             Discussion discussion = discussionService.getById(ID);
+            System.out.println("Controller" + discussion);
             return new ResponseEntity<>(discussion, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -65,6 +66,26 @@ public class DiscussionController {
             return new ResponseEntity<>(comments, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @DeleteMapping("/deletePost/{ID}")
+    public ResponseEntity<String> deletePost(@PathVariable long ID) {
+        try {
+            discussionService.deletePost(ID);
+            return ResponseEntity.ok("Post deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete post");
+        }
+    }
+
+    @DeleteMapping("/deleteComment/{ID}")
+    public ResponseEntity<String> deleteComment(@PathVariable long ID) {
+        try {
+            discussionService.deleteComment(ID);
+            return ResponseEntity.ok("Post deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete post");
         }
     }
 }

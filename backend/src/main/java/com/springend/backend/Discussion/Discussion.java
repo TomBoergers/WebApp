@@ -17,8 +17,6 @@ public class Discussion {
 
     private String category;
 
-    @OneToMany(mappedBy = "discussion", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
 
     public Discussion() {
     }
@@ -59,14 +57,6 @@ public class Discussion {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     @Override

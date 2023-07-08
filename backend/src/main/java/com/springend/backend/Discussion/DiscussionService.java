@@ -42,6 +42,7 @@ public class DiscussionService {
     public Discussion getById(Long Id) {
         Optional<Discussion> optionalDiscussion = discussionRepo.findById(Id);
         Discussion discussion = optionalDiscussion.get();
+        System.out.println("Service" + discussion);
         return discussion;
     }
 
@@ -53,29 +54,43 @@ public class DiscussionService {
         Comment newComment = new Comment();
         newComment.setComment(comment.getComment());
         newComment.setName(comment.getName());
-        newComment.setDiscussion(discussion);
+        newComment.setDiscussionId(discussion.getDiscussionId());
 
-        discussion.getComments().add(newComment);
-
-        discussionRepo.save(discussion);
+        commentRepo.save(newComment);
     }
 
     public List<String[]> getCommentsByDiscussionId(Long discussionId) {
         List<String[]> result = new ArrayList<>();
+        List<Comment> comments = commentRepo.findCommentsByDiscussionId(discussionId);
 
-        Optional<Discussion> optionalDiscussion = discussionRepo.findById(discussionId);
-        if (optionalDiscussion.isPresent()) {
-            Discussion discussion = optionalDiscussion.get();
-            List<Comment> comments = discussion.getComments();
-
-            for (Comment comment : comments) {
-                String[] commentData = new String[2];
-                commentData[0] = comment.getComment();
-                commentData[1] = comment.getName();
-                result.add(commentData);
-            }
+        for (Comment comment : comments) {
+            String[] commentData = new String[3];
+            commentData[0] = comment.getComment();
+            commentData[1] = comment.getName();
+            commentData[2] = String.valueOf(comment.getCommentId());
+            result.add(commentData);
         }
 
         return result;
+    }
+
+    public void deletePost(Long postId) {
+        Optional<Discussion> optionalDiscussion = discussionRepo.findById(postId);
+        if (optionalDiscussion.isPresent()) {
+            Discussion discussion = optionalDiscussion.get();
+            discussionRepo.delete(discussion);
+        } else {
+            throw new IllegalArgumentException("Post not found");
+        }
+    }
+
+    public void deleteComment(Long commentId) {
+        Optional<Comment> commentOptional = commentRepo.findById(commentId);
+        if (commentOptional.isPresent()) {
+            Comment comment = commentOptional.get();
+            commentRepo.delete(comment);
+        } else {
+            throw new IllegalArgumentException("Post not found");
+        }
     }
 }

@@ -2,6 +2,8 @@
 body {
 
   background-color: #080710;
+  background-repeat: repeat;
+  background-size: cover;
 }
 
 .post-list {
@@ -43,6 +45,22 @@ button {
 
   }
 
+
+}
+
+.button-delete {
+  padding: 2px;
+  width: 150px;
+  background-color: white;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.text-comment {
+  margin-left: 20px;
+  margin-top: 20px;
+  width: 500px;
+  border-radius: 5px;
 
 }
 
