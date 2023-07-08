@@ -23,3 +23,17 @@ button{
   border-color: white;
   cursor: pointer;
 }
+.button-pdf{
+  transition: color 0.5s ease;
+
+  width: 180px;
+  background-color: #080710;
+  color: white;
+
+  font-size: 18px;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-right: 20px;
+
+}

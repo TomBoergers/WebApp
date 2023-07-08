@@ -1,8 +1,11 @@
 import {Component, Input} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {generate, map, Observable} from "rxjs";
 import { Chart, ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import {DiagramService} from "../../services/diagram.service";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import autoTable from "jspdf-autotable";
 
 
 @Component({
@@ -20,8 +23,10 @@ export class DiagramComponent {
   dataLabel: any[] = [];
   dataValue: any[] = [];
   @Input() pieData: { y: any, name: any}[] = [];
-
-
+  tableID: string="";
+  tableData: any[][] = [];
+  imgWidth:any ;
+  imgHeight:any ;
 
   ngOnInit() {
   }
@@ -137,6 +142,7 @@ export class DiagramComponent {
 //start
 
   getPie2(){
+    this.tableID="2";
     this.chartOptions = {
       animationEnabled: true,
       title: {
@@ -166,6 +172,7 @@ export class DiagramComponent {
   }
 
   getPie5(){
+    this.tableID="5";
     this.chartOptions = {
       animationEnabled: true,
       title: {
@@ -195,6 +202,7 @@ export class DiagramComponent {
   }
 
   getPie3() {
+    this.tableID="3";
     this.chartOptions = {
       animationEnabled: true,
       title: {
@@ -226,6 +234,7 @@ export class DiagramComponent {
 
 
   getPie4(){
+    this.tableID="4";
     this.chartOptions = {
       animationEnabled: true,
       title: {
@@ -257,6 +266,7 @@ export class DiagramComponent {
 
 
   getChart2(){
+    this.tableID="2";
     this.chartOptions = {
       title:{
         text: "Sterbefälle 2015"
@@ -290,6 +300,7 @@ export class DiagramComponent {
 
 
   getChart5(){
+    this.tableID="5";
     this.chartOptions = {
       title:{
         text: "Geburten 2015"
@@ -322,6 +333,7 @@ export class DiagramComponent {
     }}
 
   getChart3(){
+    this.tableID="3";
     this.chartOptions = {
       title:{
         text: "Arbeitslose Jan 22"
@@ -353,6 +365,7 @@ export class DiagramComponent {
     }}
 
   getChart4(){
+    this.tableID="4";
     this.chartOptions = {
       title:{
         text: "Arbeitssuchende Jan 22"
@@ -381,4 +394,59 @@ export class DiagramComponent {
         ]
       }]
     }}
+
+  generatePDF() {
+    const doc = new jsPDF();
+
+    // Exportdatum erstellen
+    const exportDate = new Date().toLocaleDateString();
+    this.httpClient.get<any[][]>('http://localhost:8080/CSV/' + this.tableID).subscribe(data => {
+      this.tableData = data;
+      this.httpClient.get<any[][]>("http://localhost:8080/CSV/nameAndYear/"+this.tableID).subscribe(data => {
+        const nameAndYear=data;
+
+        // Titel hinzufügen
+        doc.setFontSize(20);
+        doc.text(nameAndYear[0], 10, 10);
+        // Exportdatum hinzufügen
+        doc.setFontSize(8);
+        doc.text(`Exportdatum: ${exportDate}`, 10, 20);
+
+        // Chart-Container-Element erfassen
+        const chartContainer = document.getElementById("chart");
+        // Überprüfen, ob das Chart-Container-Element gefunden wurde
+        if (chartContainer) {
+          // Das Chart-Element als Bild erfassen
+          html2canvas(chartContainer).then((canvas) => {
+            // Das Bilddaten-URL des Charts erhalten
+            const imageData = canvas.toDataURL("image/png");
+            this.imgWidth = 180;
+            this.imgHeight =(canvas.height*this.imgWidth)/canvas.width;
+            console.log(this.chartOptions.data[0].type);
+            if(this.chartOptions.data[0].type=="pie"){
+              this.imgHeight = this.imgHeight*2
+              doc.addImage(imageData, "PNG", -80, 30, 180*2, this.imgHeight);
+            }
+            else{
+              this.imgHeight = this.imgHeight*1.5;
+              doc.addImage(imageData, "PNG", 10, 30, 180, this.imgHeight);
+            }// Anpassen der Position und Größe des Bildes
+
+            autoTable(doc, {
+              head: [this.tableData[0]],
+              body: this.tableData.slice(1),
+              startY: 40+this.imgHeight,
+              headStyles: {
+                fillColor: [255, 165, 0]
+              }
+            })
+            // Die PDF-Datei speichern oder anzeigen
+            doc.save(nameAndYear[0]+".pdf");
+          })}
+      });
+
+        });
+    }
+
+
 }
