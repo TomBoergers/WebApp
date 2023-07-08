@@ -13,14 +13,14 @@
 <div class="post-comments">
   <h3>Comments</h3>
   <div class="comment-input">
-    <input type="text" [(ngModel)]="newComment" placeholder="Write a comment">
-    <button (click)="addComment()">Add Comment</button>
+    <input class="text-comment" type="text" [(ngModel)]="newComment" placeholder="Write a comment">
+    <button class="button-add"(click)="addComment()">Add Comment</button>
   </div>
   <div class="comment-list">
     <ul>
       <li *ngFor="let comment of comments; let i = index;">
         <p>{{ comment }}</p>
-        <button (click)="deleteComment(comment[2][0])">Delete Comment</button> <!-- Schaltfläche zum Löschen des Kommentars -->
+        <button class="button-delete" (click)="deleteComment(comment[2][0])">Delete Comment</button> <!-- Schaltfläche zum Löschen des Kommentars -->
       </li>
     </ul>
   </div>
