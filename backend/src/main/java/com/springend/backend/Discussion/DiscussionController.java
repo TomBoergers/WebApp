@@ -69,6 +69,26 @@ public class DiscussionController {
         }
     }
 
+    @DeleteMapping("/deletePost/{ID}")
+    public ResponseEntity<String> deletePost(@PathVariable long ID) {
+        try {
+            discussionService.deletePost(ID);
+            return ResponseEntity.ok("Post deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete post");
+        }
+    }
+
+    @DeleteMapping("/deleteComment/{ID}")
+    public ResponseEntity<String> deleteComment(@PathVariable long ID) {
+        try {
+            discussionService.deleteComment(ID);
+            return ResponseEntity.ok("Post deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete post");
+        }
+    }
+
     @PutMapping("/addFavourite/{discussionID}")
     public ResponseEntity<Discussion> addFavourite(@PathVariable Long discussionID, @RequestBody Nutzer nutzer){
         try {
