@@ -56,7 +56,7 @@ export class DiscussionComponent {
   }
 
   addFavorite(id: number) {
-    if(localStorage.getItem('favorite_' + id) === 'true') {
+    if(sessionStorage.getItem('favorite_' + id) === 'true') {
       alert("You already favorited this post");
     } else {
       this.httpClient.put("http://localhost:8080/discussion/addFavourite/" + id, this.user).subscribe(response => {
@@ -64,13 +64,13 @@ export class DiscussionComponent {
       }, error => {
         alert("Couldn't add to Favorite");
       });
-      localStorage.setItem('favorite_' + id, 'true');
+      sessionStorage.setItem('favorite_' + id, 'true');
     }
   }
 
   addLike(row: any[]){
     const id = row[3];
-    if(localStorage.getItem('likedPost_' + id) === 'true') {
+    if(sessionStorage.getItem('likedPost_' + id) === 'true') {
       alert("You already liked this post");
     } else {
       this.httpClient.put("http://localhost:8080/discussion/addLike/" + id, {}).subscribe(response => {
@@ -80,7 +80,7 @@ export class DiscussionComponent {
         console.log("Error");
         this.refreshDiscussionTable();
       });
-      localStorage.setItem('likedPost_' + id, 'true');
+      sessionStorage.setItem('likedPost_' + id, 'true');
     }
   }
 }
