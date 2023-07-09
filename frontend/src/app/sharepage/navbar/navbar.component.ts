@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
     localStorage.removeItem('table')
     localStorage.removeItem('favoriteTable');
     localStorage.removeItem('favoriteTableIdentifier')
+    sessionStorage.clear();
     this.router.navigate([''])
   }
 }
