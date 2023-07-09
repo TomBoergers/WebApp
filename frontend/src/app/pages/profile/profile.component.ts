@@ -384,10 +384,11 @@ export class ProfileComponent implements OnInit {
       this.showGeburtenC()
     }
     else  if(userdata.profileTable=== 7){
-      this.showArbeitsloseC()
+      this.showArbeitssuchendeC()
+
     }
     else  if(userdata.profileTable=== 8){
-      this.showArbeitssuchendeC()
+      this.showArbeitsloseC()
 
     }
 

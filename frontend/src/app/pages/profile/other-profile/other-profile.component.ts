@@ -176,11 +176,12 @@ export class OtherProfileComponent {
       this.getGeburtenC()
     }
     else  if(userData.profileTable=== 7){
-      this.getArbeitsloseC()
+      this.getArbeitssuchendeC()
+
     }
     else  if(userData.profileTable=== 8){
-      this.getArbeitssuchendeC()
-      console.log("hier")
+      this.getArbeitsloseC()
+
     }
     else{
 
