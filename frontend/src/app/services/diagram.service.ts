@@ -275,6 +275,20 @@ export class DiagramService {
   setArbeitslose(user: User){
     this.http.put("http://localhost:8080/nutzer/setProfileTable/4", user  ).subscribe()
   }
+  setSterbefaelleB(user: User){
+    this.http.put("http://localhost:8080/nutzer/setProfileTable/5", user  ).subscribe()
+  }
+
+  setGeburtenB(user: User){
+    this.http.put("http://localhost:8080/nutzer/setProfileTable/6", user  ).subscribe()
+  }
+  setArbeitssuchendeB(user: User){
+    this.http.put("http://localhost:8080/nutzer/setProfileTable/7", user  ).subscribe()
+  }
+  setArbeitsloseB(user: User){
+    this.http.put("http://localhost:8080/nutzer/setProfileTable/8", user  ).subscribe()
+  }
+
 
 }
 

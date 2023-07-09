@@ -134,6 +134,24 @@ export class OtherProfileComponent {
     this.chartOptions= this.diagramService.getArbeitslosePie();
   }
 
+  getSterbefaelleC(){
+    this.chartOptions = this.diagramService.getSterbefaelleChart();
+  }
+
+  getGeburtenC(){
+    this.chartOptions =this.diagramService.getGeburtenChart();
+  }
+  getArbeitssuchendeC(){
+    this.chartOptions = this.diagramService.getArbeitssuchendeChart();
+  }
+
+  getArbeitsloseC(){
+    this.chartOptions= this.diagramService.getArbeitsloseChart();
+  }
+
+
+
+
   getChart(){
     let userStore = localStorage.getItem('profileUser');
     let userData = userStore && JSON.parse(userStore);
@@ -150,6 +168,19 @@ export class OtherProfileComponent {
     }
     else  if(userData.profileTable=== 4){
       this.getArbeitsloseP()
+    }
+    else  if(userData.profileTable=== 5){
+      this.getSterbefaelleC()
+    }
+    else  if(userData.profileTable=== 6){
+      this.getGeburtenC()
+    }
+    else  if(userData.profileTable=== 7){
+      this.getArbeitsloseC()
+    }
+    else  if(userData.profileTable=== 8){
+      this.getArbeitssuchendeC()
+      console.log("hier")
     }
     else{
 

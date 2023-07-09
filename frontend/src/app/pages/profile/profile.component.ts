@@ -57,8 +57,8 @@ export class ProfileComponent implements OnInit {
       this.dateOfBirth = userData.geburtsdatum;
       this.user = this.loginuserService.user
       this.showImage();
-      this.getPie();
-      this.getChart();
+      // this.getPie();
+
       this.favoriteTable();
     }
     if(localStorage.getItem('admin')){
@@ -70,13 +70,14 @@ export class ProfileComponent implements OnInit {
       this.dateOfBirth = adminData.geburtsdatum;
 
       this.user = this.loginuserService.user
-      this.getPie();
-      this.getChart();
+      // this.getPie();
+
 
       this.showImage();
       this.favoriteTable();
 
     }
+    this.getChart();
   }
 
   editEmail(): void {
@@ -108,6 +109,8 @@ export class ProfileComponent implements OnInit {
   favoriteTable() {
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
+
+
     this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result =>{
       this.tableID = result.favTableID;
 
@@ -182,63 +185,92 @@ export class ProfileComponent implements OnInit {
   getSterbefaelleP(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setSterbefaelle(userData)
-    this.chartOptions = this.diagramService.getSterbefaellePie();
 
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result => {
+      this.diagramService.setSterbefaelle(result)
+      this.chartOptions = this.diagramService.getSterbefaellePie();
 
+    })
   }
 
   getGeburtenP(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setGeburten(userData)
-    this.chartOptions =this.diagramService.getGeburtenPie();
 
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result => {
+      this.diagramService.setGeburten(result)
+      this.chartOptions = this.diagramService.getGeburtenPie();
+    })
   }
 
   getArbeitssuchendeP(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setArbeitssuchende(userData)
-    this.chartOptions = this.diagramService.getArbeitssuchendePie();
+
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result => {
+      this.diagramService.setArbeitssuchende(result)
+      this.chartOptions = this.diagramService.getArbeitssuchendePie();
+
+
+    })
+
+
 
   }
 
   getGeburtenC(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setGeburten(userData)
-    this.chartOptions =this.diagramService.getGeburtenChart();
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result => {
+      this.diagramService.setGeburtenB(result)
+      this.chartOptions =this.diagramService.getGeburtenChart();
+    })
+
   }
 
   getArbeitssuchendeC(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setArbeitssuchende(userData)
-    this.chartOptions = this.diagramService.getArbeitssuchendeChart();
+
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result => {
+      this.diagramService.setArbeitssuchendeB(result)
+      this.chartOptions = this.diagramService.getArbeitssuchendeChart();
+    })
+
   }
 
   getArbeitsloseC(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setArbeitslose(userData)
-    this.chartOptions= this.diagramService.getArbeitsloseChart();
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result => {
+      this.diagramService.setArbeitsloseB(result)
+      this.chartOptions= this.diagramService.getArbeitsloseChart();
+    })
+
   }
 
 
   getArbeitsloseP(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setArbeitslose(userData)
-    this.chartOptions= this.diagramService.getArbeitslosePie();
+
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result => {
+      this.diagramService.setArbeitslose(result)
+      this.chartOptions= this.diagramService.getArbeitslosePie();
+    })
+
 
   }
 
   getSterbefaelleC(){
     let userStore = localStorage.getItem('user');
     let userData = userStore && JSON.parse(userStore);
-    this.diagramService.setSterbefaelle(userData)
-    this.chartOptions = this.diagramService.getSterbefaelleChart();
+
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userData.id).subscribe(result => {
+      this.diagramService.setSterbefaelleB(result)
+      this.chartOptions = this.diagramService.getSterbefaelleChart();
+    })
+
   }
 
   setPrivate() {
@@ -262,52 +294,106 @@ export class ProfileComponent implements OnInit {
     )
   }
 
-  getPie(){
-    let userStore = localStorage.getItem('profileUser');
-    let userData = userStore && JSON.parse(userStore);
-
-    if(userData.profileTable=== 1){
-      this.getSterbefaelleP()
-      //this.getSterbefaelleC()
-    }
-    else  if(userData.profileTable=== 2){
-      this.getGeburtenP()
-    }
-    else  if(userData.profileTable=== 3){
-      this.getArbeitssuchendeP()
-
-    }
-    else  if(userData.profileTable=== 4){
-      this.getArbeitsloseP()
-    }
-    else{
-
-
-    }
-
+  // getPie(){
+  //   let userStore = localStorage.getItem('profileUser');
+  //   let userData = userStore && JSON.parse(userStore);
+  //
+  //   if(userData.profileTable=== 1){
+  //     this.getSterbefaelleP()
+  //     //this.getSterbefaelleC()
+  //   }
+  //   else  if(userData.profileTable=== 2){
+  //     this.getGeburtenP()
+  //   }
+  //   else  if(userData.profileTable=== 3){
+  //     this.getArbeitssuchendeP()
+  //
+  //   }
+  //   else  if(userData.profileTable=== 4){
+  //     this.getArbeitsloseP()
+  //   }
+  //   else{
+  //
+  //
+  //   }
+  //
+  // }
+  showSterbefaelleP(){
+    this.chartOptions = this.diagramService.getSterbefaellePie();
   }
 
+  showGeburtenP(){
+    this.chartOptions =this.diagramService.getGeburtenPie();
+  }
+
+  showArbeitssuchendeP(){
+    this.chartOptions = this.diagramService.getArbeitssuchendePie();
+  }
+
+  showArbeitsloseP(){
+    this.chartOptions= this.diagramService.getArbeitslosePie();
+  }
+
+  showSterbefaelleC(){
+    this.chartOptions = this.diagramService.getSterbefaelleChart();
+  }
+
+  showGeburtenC(){
+    this.chartOptions =this.diagramService.getGeburtenChart();
+  }
+  showArbeitssuchendeC(){
+    this.chartOptions = this.diagramService.getArbeitssuchendeChart();
+  }
+
+  showArbeitsloseC(){
+    this.chartOptions= this.diagramService.getArbeitsloseChart();
+  }
+
+
   getChart(){
-    let userStore = localStorage.getItem('profileUser');
-    let userData = userStore && JSON.parse(userStore);
+    let userSto = localStorage.getItem('user');
+    let userda = userSto && JSON.parse(userSto);
+    this.httpClient.get<User>("http://localhost:8080/nutzer/get/" + userda.id).subscribe(result => {
+      localStorage.setItem('user', JSON.stringify(result))
 
-    if(userData.profileTable=== 1){
-      this.getSterbefaelleC()
-    }
-    else  if(userData.profileTable=== 2){
-      this.getGeburtenC()
-    }
-    else  if(userData.profileTable=== 3){
-      this.getArbeitssuchendeC()
+      console.log(userdata.profileTable)
+    })
+    let userStore = localStorage.getItem('user');
+    let userdata = userStore && JSON.parse(userStore);
 
-    }
-    else  if(userData.profileTable=== 4){
-      this.getArbeitsloseC()
-    }
-    else{
+    console.log(userdata.id)
 
 
-    }}
+    if(userdata.profileTable=== 1){
+      this.showSterbefaelleP()
+    }
+    else  if(userdata.profileTable=== 2){
+      this.showGeburtenP()
+    }
+    else  if(userdata.profileTable=== 3){
+      this.showArbeitssuchendeP()
+
+    }
+    else  if(userdata.profileTable=== 4){
+      this.showArbeitsloseP()
+    }
+    else  if(userdata.profileTable=== 5){
+      this.showSterbefaelleC()
+    }
+    else  if(userdata.profileTable=== 6){
+      this.showGeburtenC()
+    }
+    else  if(userdata.profileTable=== 7){
+      this.showArbeitsloseC()
+    }
+    else  if(userdata.profileTable=== 8){
+      this.showArbeitssuchendeC()
+
+    }
+
+
+
+}
 
 
 }
