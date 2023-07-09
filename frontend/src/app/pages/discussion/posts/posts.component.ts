@@ -47,7 +47,7 @@ export class PostsComponent {
       this.comments = response.map(comment => ({
         comment: comment[0],
         name: comment[1],
-        commentId: comment[3]
+        commentId: comment[2]
       }));
       console.log(this.comments);
     });
