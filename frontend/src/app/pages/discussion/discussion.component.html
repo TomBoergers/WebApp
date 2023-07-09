@@ -14,21 +14,26 @@
     <tr>
       <th>Topic</th>
       <th>Category</th>
+      <th>Likes</th>
       <th>Options</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let row of (searchTerm ? filteredTableData : tableData)">
+    <tr *ngFor="let row of (searchTerm ? filteredDiscussionTable : discussionTable)">
       <td>{{ row[0] }}</td>
       <td>{{ row[2] }}</td>
+      <td>{{ row[4] }}</td>
       <td>
         <button (click)="openPost(row[3])">Open Post</button>
       </td>
       <td>
         <button (click)="addFavorite(row[3])">Favorite</button>
       </td>
+      <td>
+        <button (click)="addLike(row)">Like</button>
+      </td>
     </tr>
-    <tr *ngIf="(searchTerm ? filteredTableData : tableData)?.length === 0">
+    <tr *ngIf="(searchTerm ? filteredDiscussionTable : discussionTable)?.length === 0">
       <td colspan="5">No Discussions:(</td>
     </tr>
     </tbody>

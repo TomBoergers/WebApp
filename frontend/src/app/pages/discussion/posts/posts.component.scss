@@ -81,8 +81,21 @@ li {
   margin-bottom: 1rem;
 }
 
-h3 {
+.comment-bubble {
+  background-color: #f0f0f0;
+  color: #080710;
+  padding: 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.comment-content {
   margin: 0;
+}
+
+.comment-name {
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 p {

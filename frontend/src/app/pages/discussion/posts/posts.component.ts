@@ -14,7 +14,7 @@ export class PostsComponent {
   postId: number = 0;
 
   newComment: string = '';
-  comments: string[] = [];
+  comments: { comment: string, name: string, commentId: number }[] = [];
   commentId!: number;
 
   user!: User;
@@ -44,7 +44,11 @@ export class PostsComponent {
   loadComments() {
     this.postId = JSON.parse(localStorage.getItem('postId') || '0');
     this.httpClient.get<any[]>("http://localhost:8080/discussion/getComments/" + this.postId).subscribe(response => {
-      this.comments = response;
+      this.comments = response.map(comment => ({
+        comment: comment[0],
+        name: comment[1],
+        commentId: comment[3]
+      }));
       console.log(this.comments);
     });
   }
@@ -81,12 +85,12 @@ export class PostsComponent {
     }
   }
 
-  deleteComment(id: string) {
+  deleteComment(id: number) {
     if (!localStorage.getItem('admin')) {
       alert("Keine Bereichtigung");
     } else {
       console.log(id);
-      this.commentId = parseInt(id);
+      this.commentId = id;
       console.log(this.commentId);
       this.httpClient.delete("http://localhost:8080/discussion/deleteComment/" + this.commentId).subscribe(response => {
         console.log("Comment deleted successfully");

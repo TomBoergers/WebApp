@@ -110,4 +110,15 @@ public class DiscussionController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+    @PutMapping("/addLike/{ID}")
+    public ResponseEntity<String> addLike(@PathVariable Long ID) {
+        try {
+            discussionService.addLike(ID);
+            String response = "Worked";
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }

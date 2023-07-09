@@ -28,7 +28,7 @@ public class DiscussionService {
         List<Discussion> discussionList = discussionRepo.findAll();
         Discussion discussion;
 
-        String[][] discussions = new String[discussionList.size()][4];
+        String[][] discussions = new String[discussionList.size()][5];
         for (int i = 0; i < discussionList.size(); i++) {
             discussion = discussionList.get(i);
 
@@ -36,6 +36,7 @@ public class DiscussionService {
             discussions[i][1] = discussion.getContent();
             discussions[i][2] = discussion.getCategory();
             discussions[i][3] = String.valueOf(discussion.getDiscussionId());
+            discussions[i][4] = String.valueOf(discussion.getLikes());
         }
         return discussions;
     }
@@ -110,6 +111,15 @@ public class DiscussionService {
         } else {
             throw new Exception("Der Nutzer hat die Diskussion nicht favorisiert.");
         }
+    }
 
+    public void addLike(Long ID) {
+        Optional<Discussion> optionalDiscussion = discussionRepo.findById(ID);
+        Discussion discussion = optionalDiscussion.get();
+
+        Integer likes = discussion.getLikes();
+        likes++;
+        discussion.setLikes(likes);
+        discussionRepo.save(discussion);
     }
 }

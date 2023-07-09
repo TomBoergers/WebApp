@@ -17,6 +17,8 @@ public class Discussion {
 
     private String category;
 
+    private int likes = 0;
+
     @ElementCollection
     private List<Long> favouriteUsers = new ArrayList<>();
 
@@ -67,6 +69,14 @@ public class Discussion {
 
     public void setFavouriteUsers(List<Long> favouriteUsers) {
         this.favouriteUsers = favouriteUsers;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     @Override

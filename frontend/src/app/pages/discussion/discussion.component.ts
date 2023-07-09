@@ -11,8 +11,8 @@ import {DiscussionService} from "../../services/discussion.service";
   styleUrls: ['./discussion.component.scss']
 })
 export class DiscussionComponent {
-  tableData: any[][] = [];
-  filteredTableData: any[][] = [];
+  discussionTable: any[][] = [];
+  filteredDiscussionTable: any[][] = [];
   searchTerm: String = "";
   tableID!: number;
   email: string = "";
@@ -23,25 +23,25 @@ export class DiscussionComponent {
   }
 
   ngOnInit() {
-    this.refreshTableData();
+    this.refreshDiscussionTable();
     this.user = JSON.parse(localStorage.getItem('user')!);
   }
 
-  refreshTableData() {
+  refreshDiscussionTable() {
     this.httpClient.get<any[][]>("http://localhost:8080/discussion/getDiscussions").subscribe(data => {
-      this.tableData = data;
-      this.filteredTableData = data;
-      console.log(this.tableData);
+      this.discussionTable = data;
+      this.filteredDiscussionTable = data;
+      console.log(this.discussionTable);
     });
   }
 
   applyFilter() {
     if (this.searchTerm) {
-      this.filteredTableData = this.tableData.filter(row =>
+      this.filteredDiscussionTable = this.discussionTable.filter(row =>
         row.some(cell => cell.toString().toLowerCase().includes(this.searchTerm.toLowerCase()))
       );
     } else {
-      this.filteredTableData = this.tableData;
+      this.filteredDiscussionTable = this.discussionTable;
     }
   }
 
@@ -56,7 +56,22 @@ export class DiscussionComponent {
   }
 
   addFavorite(id: number) {
-    this.httpClient.put("http://localhost:8080/discussion/addFavourite/" + id, this.user).subscribe();
+    this.httpClient.put("http://localhost:8080/discussion/addFavourite/" + id, this.user).subscribe(response => {
+      alert("Added to Favorite");
+    }, error => {
+      alert("Couldn't add to Favorite");
+    });
+  }
+
+  addLike(row: any[]){
+    const id = row[3];
+    this.httpClient.put("http://localhost:8080/discussion/addLike/" + id, {}).subscribe(response => {
+      console.log("OK");
+      this.refreshDiscussionTable();
+    }, error => {
+      console.log("Error");
+      this.refreshDiscussionTable();
+    });
   }
 }
 
