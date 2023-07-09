@@ -56,22 +56,32 @@ export class DiscussionComponent {
   }
 
   addFavorite(id: number) {
-    this.httpClient.put("http://localhost:8080/discussion/addFavourite/" + id, this.user).subscribe(response => {
-      alert("Added to Favorite");
-    }, error => {
-      alert("Couldn't add to Favorite");
-    });
+    if(localStorage.getItem('favorite_' + id) === 'true') {
+      alert("You already favorited this post");
+    } else {
+      this.httpClient.put("http://localhost:8080/discussion/addFavourite/" + id, this.user).subscribe(response => {
+        alert("Added to Favorite");
+      }, error => {
+        alert("Couldn't add to Favorite");
+      });
+      localStorage.setItem('favorite_' + id, 'true');
+    }
   }
 
   addLike(row: any[]){
     const id = row[3];
-    this.httpClient.put("http://localhost:8080/discussion/addLike/" + id, {}).subscribe(response => {
-      console.log("OK");
-      this.refreshDiscussionTable();
-    }, error => {
-      console.log("Error");
-      this.refreshDiscussionTable();
-    });
+    if(localStorage.getItem('likedPost_' + id) === 'true') {
+      alert("You already liked this post");
+    } else {
+      this.httpClient.put("http://localhost:8080/discussion/addLike/" + id, {}).subscribe(response => {
+        console.log("OK");
+        this.refreshDiscussionTable();
+      }, error => {
+        console.log("Error");
+        this.refreshDiscussionTable();
+      });
+      localStorage.setItem('likedPost_' + id, 'true');
+    }
   }
 }
 
