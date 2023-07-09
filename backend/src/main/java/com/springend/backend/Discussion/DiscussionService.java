@@ -1,7 +1,9 @@
 package com.springend.backend.Discussion;
 
 import com.springend.backend.Nutzer.Nutzer;
+import com.springend.backend.Nutzer.NutzerRepo;
 import com.springend.backend.Reader.CSVReader.CSVFile;
+import com.springend.backend.ZweiFaktor.EmailService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,12 +14,14 @@ import java.util.Optional;
 public class DiscussionService {
 
     private final DiscussionRepo discussionRepo;
-
+    private NutzerRepo nutzerRepo;
     private final CommentRepo commentRepo;
-
-    public DiscussionService(DiscussionRepo discussionRepo, CommentRepo commentRepo) {
+    private EmailService emailService;
+    public DiscussionService(DiscussionRepo discussionRepo, CommentRepo commentRepo, NutzerRepo nutzerRepo, EmailService emailService) {
         this.discussionRepo = discussionRepo;
         this.commentRepo = commentRepo;
+        this.nutzerRepo = nutzerRepo;
+        this.emailService = emailService;
     }
 
     public void addDiscussion(Discussion post) {
@@ -47,7 +51,7 @@ public class DiscussionService {
         return discussion;
     }
 
-    public void addComment(Comment comment, Long discussionId) {
+    public void addComment(Comment comment, Long discussionId) throws Exception{
         Optional<Discussion> optionalDiscussion = discussionRepo.findById(discussionId);
         Discussion discussion = optionalDiscussion.get();
 
@@ -56,6 +60,12 @@ public class DiscussionService {
         newComment.setComment(comment.getComment());
         newComment.setName(comment.getName());
         newComment.setDiscussionId(discussion.getDiscussionId());
+
+        List<Long> favouriteUsers = optionalDiscussion.get().getFavouriteUsers();
+        for(Long userId : favouriteUsers){
+            Nutzer currentUser = nutzerRepo.findNutzerByID(userId);
+            this.emailService.diskussionNeuerComment(currentUser.getEmail());
+        }
 
         commentRepo.save(newComment);
     }
@@ -82,9 +92,14 @@ public class DiscussionService {
         discussionRepo.save(discussion);
     }
 
-    public void deletePost(Long postId) {
+    public void deletePost(Long postId) throws Exception{
         Optional<Discussion> optionalDiscussion = discussionRepo.findById(postId);
         if (optionalDiscussion.isPresent()) {
+            List<Long> favouriteUsers = optionalDiscussion.get().getFavouriteUsers();
+            for(Long userId : favouriteUsers){
+                Nutzer currentUser = nutzerRepo.findNutzerByID(userId);
+                this.emailService.deletedPost(currentUser.getEmail());
+            }
             Discussion discussion = optionalDiscussion.get();
             discussionRepo.delete(discussion);
         } else {
@@ -92,11 +107,19 @@ public class DiscussionService {
         }
     }
 
-    public void deleteComment(Long commentId) {
+    public void deleteComment(Long commentId) throws Exception{
         Optional<Comment> commentOptional = commentRepo.findById(commentId);
         if (commentOptional.isPresent()) {
+            Long discussionID = commentOptional.get().getDiscussionId();
+            Optional<Discussion> optionalDiscussion = discussionRepo.findById(discussionID);
+            List<Long> favouriteUsers = optionalDiscussion.get().getFavouriteUsers();
+            for(Long userId : favouriteUsers){
+                Nutzer currentUser = nutzerRepo.findNutzerByID(userId);
+                this.emailService.deletedComment(currentUser.getEmail());
+            }
             Comment comment = commentOptional.get();
             commentRepo.delete(comment);
+
         } else {
             throw new IllegalArgumentException("Post not found");
         }
