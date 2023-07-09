@@ -35,5 +35,41 @@ public class EmailService {
 
         mailSender.send(message);
     }
+
+    public void diskussionNeuerComment(String email) throws MessagingException{
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setFrom("your-email@example.com");
+        helper.setTo(email);
+        helper.setSubject("Neuer Kommentar");
+        helper.setText("Es gibt eine Änderung in einem von Ihnen favorisiertem Diskussionsthema");
+
+        mailSender.send(message);
+    }
+    public void deletedComment(String email) throws MessagingException{
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setFrom("your-email@example.com");
+        helper.setTo(email);
+        helper.setSubject("Änderung im Diskussionforum");
+        helper.setText("Ein Kommentar wurde in einem von Ihnen favorisiertem Diskussionsthema gelöscht");
+
+        mailSender.send(message);
+    }
+
+    public void deletedPost(String email) throws MessagingException{
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, true);
+
+        helper.setFrom("your-email@example.com");
+        helper.setTo(email);
+        helper.setSubject("Änderung im Diskussionforum");
+        helper.setText("Das Diskussionthema wurde gelöscht");
+
+        mailSender.send(message);
+    }
+
 }
 

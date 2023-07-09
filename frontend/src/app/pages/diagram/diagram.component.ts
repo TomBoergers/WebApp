@@ -400,6 +400,9 @@ export class DiagramComponent {
 
     // Exportdatum erstellen
     const exportDate = new Date().toLocaleDateString();
+    if(!this.tableID){
+      alert("Kein Diagramm ausgewählt")
+    }
     this.httpClient.get<any[][]>('http://localhost:8080/CSV/' + this.tableID).subscribe(data => {
       this.tableData = data;
       this.httpClient.get<any[][]>("http://localhost:8080/CSV/nameAndYear/"+this.tableID).subscribe(data => {
