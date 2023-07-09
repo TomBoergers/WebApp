@@ -100,7 +100,7 @@ public class DiscussionController {
         }
     }
 
-    @PutMapping("/deleteFavourite/{discussionID}")
+    @DeleteMapping("/deleteFavourite/{discussionID}")
     public ResponseEntity<Discussion> deleteFavourite(@PathVariable Long discussionID, @RequestBody Nutzer nutzer){
         try {
             Discussion discussion = discussionService.getById(discussionID);
