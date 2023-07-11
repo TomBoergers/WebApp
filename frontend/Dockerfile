@@ -11,6 +11,7 @@ RUN npm install leaflet
 RUN npm install proj4
 RUN npm install chartjs
 RUN npm install jspdf
+RUN npm install jspdf-autotable
 RUN npm install rxjs
 RUN ng build --configuration production --output-path=/dist/frontend
 
